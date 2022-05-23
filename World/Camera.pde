@@ -21,6 +21,6 @@ public class Camera {
     }
     updatePixels();
   }
-  void addObject(Mesh obj) {
+  void addObject(Obj obj) {
   }
 }
