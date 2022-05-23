@@ -1,5 +1,5 @@
 public class Obj {
-  ArrayList<PVector> points;
+  public ArrayList<PVector> points;
   PVector center;
   public Obj () {
     this(new ArrayList<PVector>());

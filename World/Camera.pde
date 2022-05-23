@@ -22,5 +22,8 @@ public class Camera {
     updatePixels();
   }
   void addObject(Obj obj) {
+    for (PVector point : obj.points) {
+      screen[(int)point.x][(int)point.y] = color(0);
+    }
   }
 }
