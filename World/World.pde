@@ -8,7 +8,12 @@ void setup() {
   p.add(new PVector(220,20,20));
   p.add(new PVector(20,220,20));
   p.add(new PVector(220,220,20));
+  p.add(new PVector(20,20,220));
+  p.add(new PVector(220,20,220));
+  p.add(new PVector(20,220,220));
+  p.add(new PVector(220,220,220));
   objs.add(new Obj(p));
+  objs.get(0).rotateX(30);
 }
 void draw() {
   c.resetScreen();

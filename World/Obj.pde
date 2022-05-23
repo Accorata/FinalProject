@@ -16,7 +16,10 @@ public class Obj {
     cent.div(points.size());
     return cent;
   }
-  //void rotate(float deg){
-
-  //}
+  void rotateX(float deg){
+    for (PVector point : points){
+      point.x = point.mag() * cos(radians(deg));
+      point.y = point.mag() * sin(radians(deg));
+    }
+  }
 }
