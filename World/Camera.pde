@@ -1,20 +1,9 @@
 public class Camera {
-  color[][] screen;
+  color[][] screen = new color[height][width];
   PVector loc;
   public Camera() {
-    screen = initScreen();
     resetScreen();
-    //println(screen);
     loc = new PVector(0, 0, 0);
-  }
-  color[][] initScreen() {
-    return new color[height][width];
-    /*
-    for (int i = 0; i<height; i++){
-      screen[0] = new color[width];
-    }
-    
-    return screen;*/
   }
   void resetScreen() {
     for (int i = 0; i<screen.length; i++) {
@@ -25,8 +14,8 @@ public class Camera {
   }
   void display () {
     loadPixels();
-    for(int i = 0; i<width; i++){
-      for(int j = 0; j<height; j++){
+    for (int i = 0; i<width; i++) {
+      for (int j = 0; j<height; j++) {
         pixels[i*width+j] = screen[i][j];
       }
     }

@@ -1,9 +1,9 @@
 public class Mesh {
   ArrayList<PVector> points;
-  public Mesh (){
+  public Mesh () {
     points = new ArrayList<PVector>();
   }
-  public Mesh (ArrayList<PVector> points_){
+  public Mesh (ArrayList<PVector> points_) {
     points = points_;
   }
 }
