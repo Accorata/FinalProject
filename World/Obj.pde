@@ -30,7 +30,7 @@ public class Obj { //<>//
   }
   void rotateOnX(float deg) {
     float rad = radians(deg);
-    PVector xaxis = new PVector(1,0,0);
+    PVector xaxis = new PVector(1, 0, 0);
     PVector xyCenter = new PVector(center.x, center.y, 0);
     for (PVector point : points) {
       point.sub(xyCenter);

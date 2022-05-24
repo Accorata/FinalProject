@@ -25,7 +25,8 @@ public class Camera {
     for (PVector point : obj.points) {
       try {
         screen[(int)point.x][(int)point.y] = color(0);
-      } catch (ArrayIndexOutOfBoundsException e) {
+      } 
+      catch (ArrayIndexOutOfBoundsException e) {
         e.printStackTrace();
       }
     }
