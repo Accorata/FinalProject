@@ -26,7 +26,7 @@ public class Camera {
       try {
         screen[(int)point.x][(int)point.y] = color(0);
       } catch (ArrayIndexOutOfBoundsException e) {
-        //e.printStackTrace();
+        e.printStackTrace();
       }
     }
   }

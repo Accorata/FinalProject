@@ -1,4 +1,4 @@
-public class Obj {
+public class Obj { //<>//
   public ArrayList<PVector> points;
   PVector center;
   public Obj () {
@@ -16,10 +16,10 @@ public class Obj {
     cent.div(points.size());
     return cent;
   }
-  void rotateX(float deg){
+  void rotateX(float deg) {
     float rad = radians(deg);
-    PVector xaxis = new PVector(1,0,0);
-    for (PVector point : points){
+    PVector xaxis = new PVector(1, 0, 0);
+    for (PVector point : points) {
       PVector xy = new PVector(point.x, point.y, 0);
       float angle = PVector.angleBetween(xy, xaxis) + rad;
       point.x = xy.mag() * cos(angle);
@@ -28,16 +28,17 @@ public class Obj {
       println(xy.mag() + " " + xy2.mag());
     }
   }
-  void rotateOnX(float deg){
+  void rotateOnX(float deg) {
     float rad = radians(deg);
     //PVector xaxis = new PVector(1,0,0);
-    for (PVector point : points){
+    PVector xyCenter = new PVector(center.x, center.y, 0);
+    for (PVector point : points) {
       PVector xy = new PVector(point.x, point.y, 0);
-      float angle = PVector.angleBetween(xy, center) + rad;
+
+      float angle = PVector.angleBetween(xy, xyCenter) + rad;
+      xy.sub(xyCenter);
       point.x = xy.mag() * cos(angle);
       point.y = xy.mag() * sin(angle);
-      PVector xy2 = new PVector(point.x, point.y, 0);
-      println(xy.mag() + " " + xy2.mag());
     }
   }
 }
