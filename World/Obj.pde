@@ -28,4 +28,16 @@ public class Obj {
       println(xy.mag() + " " + xy2.mag());
     }
   }
+  void rotateOnX(float deg){
+    float rad = radians(deg);
+    //PVector xaxis = new PVector(1,0,0);
+    for (PVector point : points){
+      PVector xy = new PVector(point.x, point.y, 0);
+      float angle = PVector.angleBetween(xy, center) + rad;
+      point.x = xy.mag() * cos(angle);
+      point.y = xy.mag() * sin(angle);
+      PVector xy2 = new PVector(point.x, point.y, 0);
+      println(xy.mag() + " " + xy2.mag());
+    }
+  }
 }
