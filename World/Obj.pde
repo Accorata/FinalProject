@@ -18,10 +18,12 @@ public class Obj {
   }
   void rotateX(float deg){
     float rad = radians(deg);
+    PVector xaxis = new PVector(1,0,0);
     for (PVector point : points){
       PVector xy = new PVector(point.x, point.y, 0);
-      point.x = xy.mag() * cos(rad);
-      point.y = xy.mag() * sin(rad);
+      float angle = PVector.angleBetween(xy, xaxis) + rad;
+      point.x = xy.mag() * cos(angle);
+      point.y = xy.mag() * sin(angle);
       PVector xy2 = new PVector(point.x, point.y, 0);
       println(xy.mag() + " " + xy2.mag());
     }

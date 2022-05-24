@@ -13,8 +13,8 @@ void setup() {
   p.add(new PVector(120,320,220));
   p.add(new PVector(320,320,220));
   objs.add(new Obj(p));
-  objs.get(0).rotateX(0.00001);
-  //objs.get(0).rotateX(-30);
+  objs.get(0).rotateX(30);
+  objs.get(0).rotateX(-30);
 }
 void draw() {
   c.resetScreen();
