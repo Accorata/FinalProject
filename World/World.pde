@@ -15,10 +15,11 @@ void setup() {
   objs.add(new Obj(p));
   //objs.get(0).rotateX(30);
   //objs.get(0).rotateX(-30);
-  objs.get(0).rotateOnX(30);
+  objs.get(0).rotateOnX(0);
   //objs.get(0).rotateOnX(-30);
 }
 void draw() {
+  
   //objs.get(0).rotateOnX(10);
   //objs.get(0).rotateX(1);
   // --Screen--

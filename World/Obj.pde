@@ -30,15 +30,20 @@ public class Obj { //<>//
   }
   void rotateOnX(float deg) {
     float rad = radians(deg);
-    //PVector xaxis = new PVector(1,0,0);
+    PVector xaxis = new PVector(1,0,0);
     PVector xyCenter = new PVector(center.x, center.y, 0);
     for (PVector point : points) {
+      point.sub(xyCenter);
       PVector xy = new PVector(point.x, point.y, 0);
-
-      float angle = PVector.angleBetween(xy, xyCenter) + rad;
-      xy.sub(xyCenter);
+      float m = xy.mag();
+      //xy.sub(xyCenter);
+      float angle = PVector.angleBetween(xy, xaxis) + rad;
       point.x = xy.mag() * cos(angle);
       point.y = xy.mag() * sin(angle);
+      
+      PVector xy2 = new PVector(point.x, point.y, 0);
+      println(m + " " + xy2.mag() + "   " + degrees(angle));
+      point.add(xyCenter);
     }
   }
 }
