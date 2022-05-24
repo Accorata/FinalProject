@@ -21,4 +21,14 @@ public class Camera {
     }
     updatePixels();
   }
+  void addObject(Obj obj) {
+    for (PVector point : obj.points) {
+      try {
+        screen[(int)point.x][(int)point.y] = color(0);
+      } 
+      catch (ArrayIndexOutOfBoundsException e) {
+        e.printStackTrace();
+      }
+    }
+  }
 }
