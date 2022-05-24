@@ -17,9 +17,13 @@ public class Obj {
     return cent;
   }
   void rotateX(float deg){
+    float rad = radians(deg);
     for (PVector point : points){
-      point.x = point.mag() * cos(radians(deg));
-      point.y = point.mag() * sin(radians(deg));
+      PVector xy = new PVector(point.x, point.y, 0);
+      point.x = xy.mag() * cos(rad);
+      point.y = xy.mag() * sin(rad);
+      PVector xy2 = new PVector(point.x, point.y, 0);
+      println(xy.mag() + " " + xy2.mag());
     }
   }
 }
