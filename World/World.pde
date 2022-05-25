@@ -1,3 +1,4 @@
+
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 void setup() {
