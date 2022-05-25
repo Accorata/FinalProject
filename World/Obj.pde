@@ -1,12 +1,12 @@
-public class Obj { //<>//
+public class Obj { //<>// //<>//
   ArrayList<PVector> points;
   PVector center;
   public Obj () {
-    this(new ArrayList<PVector>());
+    this(new ArrayList<PVector>(), new PVector (0, 0, 0));
   }
-  public Obj (ArrayList<PVector> points_) {
+  public Obj (ArrayList<PVector> points_, PVector center_) {
     points = new ArrayList<PVector>();
-    center = calcCenter();
+    center = center_;
     for (PVector point : points_){
       points.add(point.sub(center));
     }
