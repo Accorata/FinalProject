@@ -1,4 +1,4 @@
-
+final PVector xaxis = new PVector(1, 0, 0);
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 void setup() {

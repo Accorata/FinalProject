@@ -27,7 +27,6 @@ public class Obj { //<>//
   }
   void rotateX(float deg) {
     float rad = radians(deg);
-    PVector xaxis = new PVector(1, 0, 0);
     for (PVector point : points) {
       PVector xy = new PVector(point.x, point.y, 0);
       float angle = PVector.angleBetween(xy, xaxis) + rad;
@@ -39,7 +38,6 @@ public class Obj { //<>//
   }
   void rotateOnX(float deg) {
     float rad = radians(deg);
-    PVector xaxis = new PVector(1, 0, 0);
     //PVector xyCenter = new PVector(center.x, center.y, 0);
     for (PVector point : points) {
       //point.sub(xyCenter);
