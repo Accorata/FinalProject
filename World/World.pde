@@ -1,8 +1,9 @@
 final PVector xaxis = new PVector(1, 0, 0);
+final float fromScreen = 25;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 void setup() {
-  size(400, 400);
+  size(1000, 600);
   c = new Camera();
   ArrayList<PVector> p = new ArrayList<PVector>();
 
