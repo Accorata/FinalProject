@@ -6,6 +6,7 @@ void setup() {
   c = new Camera();
   ArrayList<PVector> p = new ArrayList<PVector>();
 <<<<<<< HEAD
+<<<<<<< HEAD
   p.add(new PVector(100, 100, 100));
   p.add(new PVector(-100, 100, 100));
   p.add(new PVector(-100, -100, 100));
@@ -15,6 +16,9 @@ void setup() {
   //objs.get(0).rotateX(-30);
   //objs.get(0).rotateOnX(0);
 =======
+=======
+
+>>>>>>> Raymond
   p.add(new PVector(-100, 100, 100));
   p.add(new PVector(-100, -100, 100));
   p.add(new PVector(-100, -100, -100));
@@ -27,6 +31,10 @@ void setup() {
   //objs.get(0).rotateX(30);
   //objs.get(0).rotateX(-30);
   objs.get(0).rotateOnZ(45);
+<<<<<<< HEAD
+>>>>>>> Raymond
+=======
+
 >>>>>>> Raymond
   //objs.get(0).rotateOnX(-30);
 }

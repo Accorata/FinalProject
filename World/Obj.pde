@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Obj { //<>// //<>// //<>//
   ArrayList<PVector> points;
 =======
@@ -18,10 +19,23 @@ public class Obj { //<>//
       points.add(point.sub(center));
     }
 =======
+=======
+
+public class Obj { //<>//
+  public ArrayList<PVector> points;
+  public ArrayList<Triangle> triangles;
+
+  PVector center;
+  
+
+>>>>>>> Raymond
   public Obj (ArrayList<PVector> points_) {
     //center = new PVector(0, 0, 0);
     points = points_;
     center = calcCenter();
+<<<<<<< HEAD
+>>>>>>> Raymond
+=======
 >>>>>>> Raymond
   }
   PVector calcCenter () {
@@ -50,7 +64,11 @@ public class Obj { //<>//
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> Raymond
   void rotateOnX(float deg) {
     float rad = radians(deg);
     PVector xyCenter = new PVector(center.x, center.y, center.z);
@@ -87,5 +105,9 @@ public class Obj { //<>//
       point.add(xyCenter);
     }
   }
+<<<<<<< HEAD
+>>>>>>> Raymond
+=======
+
 >>>>>>> Raymond
 }

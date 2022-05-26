@@ -33,10 +33,15 @@ public class Camera {
     for (PVector point : obj.getPoints()) {
       try {
 <<<<<<< HEAD
+<<<<<<< HEAD
         point.add(obj.getCenter());
         screen[(int)point.x][(int)point.y] = color(0);
 =======
         screen[(int)point.y + height/2][(int)point.x + width/2] = color(0);
+>>>>>>> Raymond
+=======
+        screen[(int)point.y + height/2][(int)point.x + width/2] = color(0);
+
 >>>>>>> Raymond
       } 
       catch (ArrayIndexOutOfBoundsException e) {
