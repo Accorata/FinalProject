@@ -1,12 +1,14 @@
 public class Obj { //<>//
   public ArrayList<PVector> points;
+  public ArrayList<Triangle> triangles;
   PVector center;
   public Obj () {
     this(new ArrayList<PVector>());
   }
   public Obj (ArrayList<PVector> points_) {
+    center = new PVector(0, 0, 0);
     points = points_;
-    center = calcCenter();
+    //center = calcCenter();
   }
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
