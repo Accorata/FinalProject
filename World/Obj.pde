@@ -4,9 +4,7 @@ public class Obj { //<>//
   public ArrayList<Triangle> triangles;
 
   PVector center;
-  public Obj () {
-    this(new ArrayList<PVector>(), new PVector (0, 0, 0));
-  }
+  
 
   public Obj (ArrayList<PVector> points_) {
     //center = new PVector(0, 0, 0);
