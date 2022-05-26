@@ -18,6 +18,12 @@ public class Obj { //<>//
     cent.div(points.size());
     return cent;
   }
+  void setCenter(PVector v) {
+    center = v;
+  }
+  void setCenter() {
+    center = calcCenter();
+  }
   ArrayList<PVector> getPoints() {
     return points;
   }
@@ -73,7 +79,7 @@ public class Obj { //<>//
     }
   }
   void translate(PVector a) {
-    a.x *= -1;
+
     a.y *= -1;
     for (PVector point : points) {
       point.add(a);

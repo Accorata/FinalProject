@@ -17,9 +17,8 @@ void setup() {
   p.add(new PVector(-100, 100, -100));
   objs.add(new Obj(p));
   //objs.get(0).rotateX(30);
-   objs.get(0).rotateOnX(45);
   objs.get(0).translate(new PVector(0, 0, 200));
-  objs.get(0).translate(new PVector(0, 200, 0));
+  //objs.get(0).translate(new PVector(0, 200, 0));
   
   //for (PVector v : objs.get(0).getPoints()) {
     //intln(v);
@@ -40,4 +39,54 @@ void draw() {
   }
   
   c.display();
+}
+
+void keyPressed() {
+  switch (key) {
+    case 'l':
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, 0));
+        obj.rotateOnY(10);
+      }
+      break;
+    case 'j':
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, 0));
+        obj.rotateOnY(-10);
+      }
+      break;
+    case 'i':
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, 0));
+        obj.rotateOnX(10);
+      }
+      break;
+    case 'k':
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, 0));
+        obj.rotateOnX(-10);
+      }
+      break;
+    case 'w':
+      for (Obj obj : objs) {
+        obj.translate(new PVector(0, 0, -10));
+      }
+      break;
+    case 's':
+      for (Obj obj : objs) {
+        obj.translate(new PVector(0, 0, 10));
+      }
+      break;
+    case 'a':
+      for (Obj obj : objs) {
+        obj.translate(new PVector(10, 0, 0));
+      }
+      break;
+    case 'd':
+      for (Obj obj : objs) {
+        obj.translate(new PVector(-10, 0, 0));
+      }
+      break;
+  }
+  
 }
