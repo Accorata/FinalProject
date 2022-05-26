@@ -4,8 +4,7 @@ public class Obj { //<>//
   public ArrayList<Triangle> triangles;
 
   PVector center;
-  
-
+ 
   public Obj (ArrayList<PVector> points_) {
     //center = new PVector(0, 0, 0);
     points = points_;
@@ -73,5 +72,9 @@ public class Obj { //<>//
       point.add(xyCenter);
     }
   }
-
+  void translate(PVector a) {
+    for (PVector point : points) {
+      point.add(a);
+    }
+  }
 }
