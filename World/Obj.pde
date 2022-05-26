@@ -35,13 +35,13 @@ public class Obj { //<>//
     for (PVector point : points) {
       point.sub(xyCenter);
       PVector xy = new PVector(point.x, point.y, 0);
-      //float m = xy.mag();
+      float m = xy.mag();
       //xy.sub(xyCenter);
       float angle = PVector.angleBetween(xy, xaxis) + rad;
       point.x = xy.mag() * cos(angle);
       point.y = xy.mag() * sin(angle);
-      //PVector xy2 = new PVector(point.x, point.y, 0);
-      //println(m + " " + xy2.mag() + "   " + degrees(angle));
+      PVector xy2 = new PVector(point.x, point.y, 0);
+      println(m + " " + xy2.mag() + "   " + degrees(angle));
       point.add(xyCenter);
     }
   }
