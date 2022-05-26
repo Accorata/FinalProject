@@ -15,7 +15,7 @@ void setup() {
   objs.add(new Obj(p));
   //objs.get(0).rotateX(30);
   //objs.get(0).rotateX(-30);
-  objs.get(0).rotateOnY(45);
+  objs.get(0).rotateOnZ(45);
   //objs.get(0).rotateOnX(-30);
 }
 void draw() {
@@ -27,5 +27,6 @@ void draw() {
   for (Obj obj : objs) {
     c.addObject(obj);
   }
+  
   c.display();
 }

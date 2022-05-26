@@ -54,4 +54,16 @@ public class Obj { //<>//
       point.add(xyCenter);
     }
   }
+  void rotateOnZ(float deg) {
+    float rad = radians(deg);
+    PVector xyCenter = new PVector(center.x, center.y, center.z);
+    for (PVector point : points) {
+      point.sub(xyCenter);
+      PVector temp = new PVector(point.x, point.y);
+      temp.rotate(rad);
+      point.x = temp.x;
+      point.y = temp.y;
+      point.add(xyCenter);
+    }
+  }
 }
