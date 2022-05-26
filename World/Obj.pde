@@ -73,8 +73,11 @@ public class Obj { //<>//
     }
   }
   void translate(PVector a) {
+    a.x *= -1;
+    a.y *= -1;
     for (PVector point : points) {
       point.add(a);
     }
+    center = calcCenter();
   }
 }
