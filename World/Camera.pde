@@ -30,9 +30,10 @@ public class Camera {
     updatePixels();
   }
   void addObject(Obj obj) {
-    for (PVector point : obj.points) {
+    for (PVector point : obj.getPoints()) {
       try {
         screen[(int)point.y + height/2][(int)point.x + width/2] = color(0);
+
       } 
       catch (ArrayIndexOutOfBoundsException e) {
         e.printStackTrace();
