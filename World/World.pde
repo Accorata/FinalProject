@@ -45,25 +45,25 @@ void keyPressed() {
   switch (key) {
     case 'l':
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, 0));
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
         obj.rotateOnY(10);
       }
       break;
     case 'j':
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, 0));
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
         obj.rotateOnY(-10);
       }
       break;
     case 'i':
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, 0));
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
         obj.rotateOnX(10);
       }
       break;
     case 'k':
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, 0));
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
         obj.rotateOnX(-10);
       }
       break;
