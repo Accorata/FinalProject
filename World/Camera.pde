@@ -22,8 +22,9 @@ public class Camera {
     updatePixels();
   }
   void addObject(Obj obj) {
-    for (PVector point : obj.points) {
+    for (PVector point : obj.getPoints()) {
       try {
+        point.add(obj.getCenter());
         screen[(int)point.x][(int)point.y] = color(0);
       } 
       catch (ArrayIndexOutOfBoundsException e) {
