@@ -2,6 +2,7 @@ final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 40;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
+PVector mouse = new PVector(500, 300);
 void setup() {
   size(1000, 600);
   c = new Camera();
@@ -27,7 +28,7 @@ void setup() {
   //p.add(new PVector(-100, 100, -100));
   //p.add(new PVector(100, -100, -100));
   //p.add(new PVector(100, 100, -100));
-  objs.add(new Obj(p, new PVector(200,200,0)));
+  objs.add(new Obj(p, new PVector(200, 200, 0)));
   //objs.get(0).rotateX(30);
   //objs.get(0).rotateX(-30);
   //objs.get(0).rotateOnX(0);
@@ -37,6 +38,16 @@ void setup() {
   //objs.get(0).rotateOnX(-30);
 }
 void draw() {
+  for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnY(mouseX-mouse.x);
+  }
+  for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnX(mouse.y-mouseY);
+  }
+  mouse.x = mouseX;
+  mouse.y = mouseY;
   //objs.get(0).rotateOnX(10);
   //objs.get(0).rotateX(1);
   // --Screen--
