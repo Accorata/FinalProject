@@ -16,6 +16,7 @@ public class Triangle {
     //start with lines
     PVector a_to_b = b.sub(a);
     float abLen = a_to_b.mag();
+    println(abLen);
     PVector a_to_c = c.sub(a);
     float acLen = a_to_c.mag();
     PVector b_to_c = b.sub(c);
