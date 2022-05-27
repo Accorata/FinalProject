@@ -18,15 +18,15 @@ public class Obj { //<>// //<>// //<>//
   private ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
     ArrayList<PVector> p = new ArrayList<PVector>();
     for (Triangle tri : t) {
-      if (!VinP(tri.a, p)) p.add(tri.a);
-      if (!VinP(tri.b, p)) p.add(tri.b);
-      if (!VinP(tri.c, p)) p.add(tri.c);
+      for (PVector point : tri.points) {
+        if (!VinP(point, p)) p.add(point);
+      }
     }
     return p;
   }
   private boolean VinP(PVector V, ArrayList<PVector> P) {
     for (PVector p : P) {
-      if (V.equals(p)) return true;
+      if (V == p) return true;
     }
     return false;
   }

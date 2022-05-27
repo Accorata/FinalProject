@@ -1,13 +1,13 @@
 public class Triangle implements Comparable<Triangle> {
-  PVector a, b, c;
+  PVector[] points = new PVector[3];
   color clr;
   float light;
   float close;
   PVector center;
   public Triangle (PVector a_, PVector b_, PVector c_, color clr_) {
-    a = a_;
-    b = b_;
-    c = c_;
+    points[0] = a_;
+    points[1] = b_;
+    points[2]= c_;
     clr = clr_;
     
   }
@@ -23,9 +23,9 @@ public class Triangle implements Comparable<Triangle> {
   }
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
-    cent.add(a);
-    cent.add(b);
-    cent.add(c);
+    for (PVector point : points) {
+      cent.add(point);
+    }
     cent.div(3);
     return cent;
   }
