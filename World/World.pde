@@ -40,7 +40,7 @@ void setup() {
 
 
   objs.get(0).rotateOnZ(45);
-  p.add(new PVector(100, 100, 100));
+  //p.add(new PVector(100, 100, 100));
 
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
@@ -55,20 +55,21 @@ void setup() {
 }
 
 void draw() {
-  //for (Obj obj : objs) {
-  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnY(mouseX-mouse.x);
-  //}
-  //for (Obj obj : objs) {
-  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnX(mouse.y-mouseY);
-  //}
+  for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnY(mouseX-mouse.x);
+  }
+  for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnX(mouse.y-mouseY);
+  }
   mouse.x = mouseX;
   mouse.y = mouseY;
   // --Screen--
   //c.resetScreen();
   background(255);
   for (Obj obj : objs) {
+    obj.translate(dir);
     c.addObject(obj);
   }
   //c.display();
