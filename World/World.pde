@@ -17,18 +17,18 @@ void setup() {
   PVector v7 = new PVector(-100, 100, -100);
   PVector v8 = new PVector(-100, -100, 100);
   ArrayList<Triangle> t = new ArrayList<Triangle>();
-  t.add(new Triangle(v6, v7, v2));
-  t.add(new Triangle(v2, v3, v6));
-  t.add(new Triangle(v3, v2, v1));
-  t.add(new Triangle(v1, v4, v3));
-  t.add(new Triangle(v4, v1, v5));
-  t.add(new Triangle(v5, v8, v4));
-  t.add(new Triangle(v8, v5, v7));
-  t.add(new Triangle(v7, v8, v6));
-  t.add(new Triangle(v7, v5, v1));
-  t.add(new Triangle(v1, v2, v7));
-  t.add(new Triangle(v8, v6, v3));
-  t.add(new Triangle(v3, v8, v4));
+  t.add(new Triangle(v6, v7, v2, color(255, 153, 153)));
+  t.add(new Triangle(v2, v3, v6, color(255, 153, 153)));
+  t.add(new Triangle(v3, v2, v1, color(102, 255, 178)));
+  t.add(new Triangle(v1, v4, v3, color(102, 255, 178)));
+  t.add(new Triangle(v4, v1, v5, color(255, 204, 229)));
+  t.add(new Triangle(v5, v8, v4, color(255, 204, 229)));
+  t.add(new Triangle(v8, v5, v7, color(204, 229, 255)));
+  t.add(new Triangle(v7, v8, v6, color(204, 229, 255)));
+  t.add(new Triangle(v7, v5, v1, color(255, 229, 204)));
+  t.add(new Triangle(v1, v2, v7, color(255, 229, 204)));
+  t.add(new Triangle(v8, v6, v3, color(204, 229, 255)));
+  t.add(new Triangle(v3, v8, v4, color(204, 229, 255)));
                                                                                                                                                
   objs.add(new Obj(t));
 

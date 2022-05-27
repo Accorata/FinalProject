@@ -31,6 +31,10 @@ public class Camera {
   }
   void addObject(Obj obj) {
     for (Triangle t : obj.triangles) {
+      t.update_close();
+    }
+    Collections.sort(obj.triangles);
+    for (Triangle t : obj.triangles) {
       float[][] pT = new float[3][2];
       int count = 0;
       for (PVector point : t.points) {
@@ -46,7 +50,7 @@ public class Camera {
          break;
       }
       }
-      //fill(t.clr);
+      fill(t.clr);
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
      
     }

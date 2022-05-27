@@ -30,8 +30,8 @@ public class Triangle implements Comparable<Triangle> {
     return cent;
   }
   int compareTo(Triangle obj) {
-    if (this.close > obj.close) return 1;
-    if (this.close < obj.close) return -1;
+    if (this.close > obj.close) return -1;
+    if (this.close < obj.close) return 1;
     return 0;
   }
 }
