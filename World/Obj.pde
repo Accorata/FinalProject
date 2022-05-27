@@ -11,6 +11,7 @@ public class Obj { //<>// //<>// //<>//
   }
   public Obj(ArrayList<Triangle> t) {
     points = calcPoints(t);
+    print(points);
     triangles = t;
     setCenter();
   }

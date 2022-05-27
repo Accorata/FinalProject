@@ -35,8 +35,8 @@ public class Camera {
       int count = 0;
       for (PVector point : t.points) {
       try {
-        float scY = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-        float scX = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+        float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+        float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
         //screen[scX][scY] = color(0);
         pT[count][0] = scX;
         pT[count][1] = scY;
@@ -46,7 +46,7 @@ public class Camera {
          break;
       }
       }
-      fill(t.clr);
+      //fill(t.clr);
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
      
     }

@@ -45,6 +45,7 @@ void draw() {
   // --Screen--
 
   //c.resetScreen();
+  background(255);
   for (Obj obj : objs) {
     c.addObject(obj);
   }
