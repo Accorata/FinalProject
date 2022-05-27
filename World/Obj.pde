@@ -1,16 +1,35 @@
-public class Obj { //<>// //<>// //<>//
+public class Obj { //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
-  public Obj () {
-    this(new ArrayList<PVector>(), new PVector (0, 0, 0));
+  
+
+  public Obj(ArrayList<Triangle> t, PVector center) {
+    points = calcPoints(t);
+    triangles = t;
+    this.center = center;
   }
-  public Obj (ArrayList<PVector> points_, PVector center_) {
-    points = new ArrayList<PVector>();
-    center = center_;
-    for (PVector point : points_) {
-      points.add(point.sub(center));
+  public Obj(ArrayList<Triangle> t) {
+    points = calcPoints(t);
+    print(points);
+    triangles = t;
+    setCenter();
+  }
+
+  private ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
+    ArrayList<PVector> p = new ArrayList<PVector>();
+    for (Triangle tri : t) {
+      for (PVector point : tri.points) {
+        if (!VinP(point, p)) p.add(point);
+      }
     }
+    return p;
+  }
+  private boolean VinP(PVector V, ArrayList<PVector> P) {
+    for (PVector p : P) {
+      if (V == p) return true;
+    }
+    return false;
   }
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);

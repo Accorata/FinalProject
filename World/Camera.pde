@@ -30,15 +30,30 @@ public class Camera {
     updatePixels();
   }
   void addObject(Obj obj) {
-    for (PVector point : obj.getPoints()) {
+    for (Triangle t : obj.triangles) {
+      t.update_close();
+    }
+    Collections.sort(obj.triangles);
+    for (Triangle t : obj.triangles) {
+      float[][] pT = new float[3][2];
+      int count = 0;
+      for (PVector point : t.points) {
       try {
-        float scX = (fromScreen * point.x) / (point.z + fromScreen);
-        float scY = (fromScreen * point.y) / (point.z + fromScreen);
-        screen[(int)scY + height/2][(int)scX + width/2] = color(0);
+        if (point.z < -1 * fromScreen) throw new Exception("behind you");
+        float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+        float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+        //screen[scX][scY] = color(0);
+        pT[count][0] = scX;
+        pT[count][1] = scY;
+        count++;
       } 
-      catch (ArrayIndexOutOfBoundsException e) {
-        e.printStackTrace();
+      catch (Exception e) {
+         break;
       }
+      }
+      fill(t.clr);
+      triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
+     
     }
   }
 }
