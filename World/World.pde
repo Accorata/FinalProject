@@ -24,7 +24,8 @@ void setup() {
   //println(coords);
   stroke(0);
   for (PVector coord : coords) {
-    circle(coord.x, coord.y,5);
+    point(coord.x, coord.y);
+    //circle(coord.x, coord.y,5);
   }
   PVector test = new PVector (100,0,0);
   println(test.setMag(25)); 
