@@ -32,7 +32,6 @@ public class Camera {
   void addObject(Obj obj) {
     for (PVector point : obj.getPoints()) {
       try {
-        //screen[(int)point.y + height/2][(int)point.x + width/2] = color(0);
         float scX = (fromScreen * point.x) / (point.z + fromScreen);
         float scY = (fromScreen * point.y) / (point.z + fromScreen);
         screen[(int)scY + height/2][(int)scX + width/2] = color(0);
