@@ -25,9 +25,11 @@ void setup() {
   t.add(new PVector(100, 200));
   test = new Triangle(t.get(0), t.get(1), t.get(2));
   ArrayList<PVector> coords = test.getCoords();
+  println(coords);
   stroke(0);
-  for (PVector coord : coords) {
-    point(coord.x, coord.y);
+  for (int i = 0; i<coords.size(); i++) {
+    PVector coord = coords.get(i);
+    circle(coord.x, coord.y,5);
   }
 }
 
@@ -45,11 +47,11 @@ void draw() {
   //objs.get(0).rotateOnX(10);
   //objs.get(0).rotateX(1);
   // --Screen--
-  c.resetScreen();
-  for (Obj obj : objs) {
-    obj.translate(dir);
-    c.addObject(obj);
-  }
+  //c.resetScreen();
+  //for (Obj obj : objs) {
+  //  obj.translate(dir);
+  //  c.addObject(obj);
+  //}
   //c.display();
 }
 
