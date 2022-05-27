@@ -1,6 +1,6 @@
-public class Obj { //<>// //<>// //<>// //<>//
-  public ArrayList<PVector> points;
-  public ArrayList<Triangle> triangles;
+public class Obj { //<>// //<>// //<>//
+  ArrayList<PVector> points;
+  ArrayList<Triangle> triangles;
   PVector center;
   public Obj () {
     this(new ArrayList<PVector>(), new PVector (0, 0, 0));
@@ -80,7 +80,6 @@ public class Obj { //<>// //<>// //<>// //<>//
     }
   }
   void translate(PVector a) {
-
     a.y *= -1;
     for (PVector point : points) {
       point.add(a);
