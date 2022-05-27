@@ -23,6 +23,10 @@ void setup() {
   p.add(new PVector(-100, 100, 100));
   p.add(new PVector(100, -100, 100));
   p.add(new PVector(100, 100, 100));
+  //p.add(new PVector(-100, -100, -100));
+  //p.add(new PVector(-100, 100, -100));
+  //p.add(new PVector(100, -100, -100));
+  //p.add(new PVector(100, 100, -100));
   objs.add(new Obj(p, new PVector(200,200,0)));
   //objs.get(0).rotateX(30);
   //objs.get(0).rotateX(-30);
