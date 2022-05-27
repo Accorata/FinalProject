@@ -25,10 +25,9 @@ void setup() {
   t.add(new PVector(100, 200));
   test = new Triangle(t.get(0), t.get(1), t.get(2));
   ArrayList<PVector> coords = test.getCoords();
-  println(coords);
+  //println(coords);
   stroke(0);
   for (PVector coord : coords) {
-    //PVector coord = coords.get(i);
     circle(coord.x, coord.y,5);
   }
 }
