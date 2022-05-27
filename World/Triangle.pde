@@ -13,10 +13,21 @@ public class Triangle {
   }
   ArrayList<PVector> getCoords () {
     ArrayList<PVector> coords = new ArrayList<PVector>();
-    for (float i = a.x; i<b.x; i++) {
-      for (float j = b.y; j<c.y; j++) {
-        //coords.add(new PVector(i,j,a.z+
-      }
+    //start with lines
+    PVector a_to_b = b.sub(a);
+    float abLen = a_to_b.mag();
+    PVector a_to_c = c.sub(a);
+    float acLen = a_to_c.mag();
+    PVector b_to_c = b.sub(c);
+    float bcLen = b_to_c.mag();
+    for (int i = 1; i<abLen; i++) {
+      coords.add(a_to_b.setMag(i));
+    }
+    for (int i = 1; i<acLen; i++) {
+      coords.add(a_to_c.setMag(i));
+    }
+    for (int i = 1; i<bcLen; i++) {
+      coords.add(b_to_c.setMag(i));
     }
     return coords;
   }
