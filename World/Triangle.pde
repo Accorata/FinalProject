@@ -11,4 +11,13 @@ public class Triangle {
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
   }
+  ArrayList<PVector> getCoords () {
+    ArrayList<PVector> coords = new ArrayList<PVector>();
+    for (float i = a.x; i<b.x; i++) {
+      for (float j = b.y; j<c.y; j++) {
+        //coords.add(new PVector(i,j,a.z+
+      }
+    }
+    return coords;
+  }
 }
