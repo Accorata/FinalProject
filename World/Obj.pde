@@ -1,4 +1,4 @@
-public class Obj { //<>// //<>// //<>// //<>//
+public class Obj { //<>// //<>// //<>//
   public ArrayList<PVector> points;
   public ArrayList<Triangle> triangles;
   PVector center;
