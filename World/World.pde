@@ -27,8 +27,8 @@ void setup() {
   ArrayList<PVector> coords = test.getCoords();
   println(coords);
   stroke(0);
-  for (int i = 0; i<coords.size(); i++) {
-    PVector coord = coords.get(i);
+  for (PVector coord : coords) {
+    //PVector coord = coords.get(i);
     circle(coord.x, coord.y,5);
   }
 }
