@@ -5,6 +5,7 @@ Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 
 final float speed = 5;
+PVector pos = new PVector(0, 0, 0);
 PVector dir = new PVector(0, 0, 0);
 PVector mouse = new PVector(500, 300);
 Triangle test;
@@ -55,19 +56,28 @@ void setup() {
 }
 
 void draw() {
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnY(mouseX-mouse.x);
-  }
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX(mouse.y-mouseY);
-  }
+  //for (Obj obj : objs) {
+  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+  //  obj.rotateOnY(mouseX-mouse.x);
+  //}
+  //for (Obj obj : objs) {
+  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+  //  obj.rotateOnX(mouse.y-mouseY);
+  //}
   mouse.x = mouseX;
   mouse.y = mouseY;
   // --Screen--
   //c.resetScreen();
   background(255);
+  pos.add(dir);
+  dir.y -= speed/100;
+  if (pos.y <= 0){
+    for (Obj obj : objs) {
+      obj.translate(new PVector(0,-pos.y,0));
+    }
+    pos.y = 0;
+    dir.y = 0;
+  }
   for (Obj obj : objs) {
     obj.translate(dir);
     c.addObject(obj);
@@ -112,6 +122,9 @@ void keyPressed() {
     break;
   case 'd':
     dir.x = -speed;
+    break;
+  case ' ':
+    dir.y = speed;
     break;
   }
 }
