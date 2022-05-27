@@ -8,7 +8,7 @@ public class Obj { //<>// //<>// //<>//
   public Obj (ArrayList<PVector> points_, PVector center_) {
     points = new ArrayList<PVector>();
     center = center_;
-    for (PVector point : points_){
+    for (PVector point : points_) {
       points.add(point.sub(center));
     }
   }
