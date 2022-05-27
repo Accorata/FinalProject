@@ -1,14 +1,16 @@
-
-public class Obj { //<>//
+public class Obj { //<>// //<>// //<>// //<>//
   public ArrayList<PVector> points;
   public ArrayList<Triangle> triangles;
-
   PVector center;
- 
-  public Obj (ArrayList<PVector> points_) {
-    //center = new PVector(0, 0, 0);
-    points = points_;
-    center = calcCenter();
+  public Obj () {
+    this(new ArrayList<PVector>(), new PVector (0, 0, 0));
+  }
+  public Obj (ArrayList<PVector> points_, PVector center_) {
+    points = new ArrayList<PVector>();
+    center = center_;
+    for (PVector point : points_) {
+      points.add(point.sub(center));
+    }
   }
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
@@ -41,7 +43,6 @@ public class Obj { //<>//
       println(xy.mag() + " " + xy2.mag());
     }
   }
-
   void rotateOnX(float deg) {
     float rad = radians(deg);
     PVector xyCenter = new PVector(center.x, center.y, center.z);
