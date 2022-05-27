@@ -2,6 +2,8 @@ final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 40;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
+final float speed = 5;
+PVector dir = new PVector(0, 0, 0);
 PVector mouse = new PVector(500, 300);
 void setup() {
   size(1000, 600);
@@ -28,9 +30,12 @@ void draw() {
   //}
   mouse.x = mouseX;
   mouse.y = mouseY;
+  //objs.get(0).rotateOnX(10);
+  //objs.get(0).rotateX(1);
   // --Screen--
   c.resetScreen();
   for (Obj obj : objs) {
+    obj.translate(dir);
     c.addObject(obj);
   }
   c.display();
@@ -63,24 +68,32 @@ void keyPressed() {
     }
     break;
   case 'w':
-    for (Obj obj : objs) {
-      obj.translate(new PVector(0, 0, -10));
-    }
+    dir.z = -speed;
     break;
   case 's':
-    for (Obj obj : objs) {
-      obj.translate(new PVector(0, 0, 10));
-    }
+    dir.z = speed;
     break;
   case 'a':
-    for (Obj obj : objs) {
-      obj.translate(new PVector(10, 0, 0));
-    }
+    dir.x = speed;
     break;
   case 'd':
-    for (Obj obj : objs) {
-      obj.translate(new PVector(-10, 0, 0));
-    }
+    dir.x = -speed;
+    break;
+  }
+}
+void keyReleased() {
+  switch (key) {
+  case 'w':
+    dir.z = 0;
+    break;
+  case 's':
+    dir.z = 0;
+    break;
+  case 'a':
+    dir.x = 0;
+    break;
+  case 'd':
+    dir.x = 0;
     break;
   }
 }

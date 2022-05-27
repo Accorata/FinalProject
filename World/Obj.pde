@@ -77,7 +77,6 @@ public class Obj { //<>//
     }
   }
   void translate(PVector a) {
-    a.y *= -1;
     for (PVector point : points) {
       point.add(a);
     }
