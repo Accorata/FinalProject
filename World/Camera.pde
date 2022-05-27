@@ -39,6 +39,7 @@ public class Camera {
       int count = 0;
       for (PVector point : t.points) {
       try {
+        if (point.z < -1 * fromScreen) throw new Exception("behind you");
         float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
         float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
         //screen[scX][scY] = color(0);
@@ -46,7 +47,7 @@ public class Camera {
         pT[count][1] = scY;
         count++;
       } 
-      catch (ArrayIndexOutOfBoundsException e) {
+      catch (Exception e) {
          break;
       }
       }
