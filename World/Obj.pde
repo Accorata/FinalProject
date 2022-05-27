@@ -5,12 +5,13 @@ public class Obj { //<>// //<>// //<>//
   public Obj () {
     this(new ArrayList<PVector>(), new PVector (0, 0, 0));
   }
+  public Obj(ArrayList<PVector>() points_) {
+     points = points_;
+     center = calcCenter();
+  }
   public Obj (ArrayList<PVector> points_, PVector center_) {
-    points = new ArrayList<PVector>();
+    points = points_;
     center = center_;
-    for (PVector point : points_) {
-      points.add(point.sub(center));
-    }
   }
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
