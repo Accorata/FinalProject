@@ -34,4 +34,29 @@ public class Triangle implements Comparable<Triangle> {
     if (this.close < obj.close) return 1;
     return 0;
   }
+  //ArrayList<PVector> getCoords () {
+  //  ArrayList<PVector> coords = new ArrayList<PVector>();
+  //  //start with lines
+  //  PVector ab = b.sub(a);
+  //  float abLen = ab.mag();
+  //  //println(ab + " " + abLen);
+  //  PVector ac = c.sub(a);
+  //  float acLen = ac.mag();
+  //  PVector bc = c.sub(b);
+  //  float bcLen = bc.mag();
+  //  for (int i = 1; i<abLen; i++) {
+  //    coords.add(partVec(ab, a, i));
+  //  }
+  //  for (int i = 1; i<acLen; i++) {
+  //    coords.add(partVec(ac, a, i));
+  //  }
+  //  for (int i = 1; i<bcLen; i++) {
+  //    coords.add(partVec(bc, b, i));
+  //  }
+  //  return coords;
+  //}
+  private PVector partVec (PVector ab, PVector a, int mag) {
+    PVector ans = new PVector(ab.x, ab.y, ab.z);
+    return ans.setMag(mag).add(a);
+  }
 }

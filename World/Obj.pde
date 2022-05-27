@@ -31,7 +31,7 @@ public class Obj { //<>//
     }
     return false;
   }
-  PVector calcCenter () {
+  private PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
     for (PVector vec : points) {
       cent.add(vec);
@@ -64,42 +64,38 @@ public class Obj { //<>//
   }
   void rotateOnX(float deg) {
     float rad = radians(deg);
-    PVector xyCenter = new PVector(center.x, center.y, center.z);
     for (PVector point : points) {
-      point.sub(xyCenter);
+      point.sub(center);
       PVector temp = new PVector(point.z, point.y);
       temp.rotate(rad);
       point.y = temp.y;
       point.z = temp.x;
-      point.add(xyCenter);
+      point.add(center);
     }
   }
   void rotateOnY(float deg) {
     float rad = radians(deg);
-    PVector xyCenter = new PVector(center.x, center.y, center.z);
     for (PVector point : points) {
-      point.sub(xyCenter);
+      point.sub(center);
       PVector temp = new PVector(point.x, point.z);
       temp.rotate(rad);
       point.x = temp.x;
       point.z = temp.y;
-      point.add(xyCenter);
+      point.add(center);
     }
   }
   void rotateOnZ(float deg) {
     float rad = radians(deg);
-    PVector xyCenter = new PVector(center.x, center.y, center.z);
     for (PVector point : points) {
-      point.sub(xyCenter);
+      point.sub(center);
       PVector temp = new PVector(point.x, point.y);
       temp.rotate(rad);
       point.x = temp.x;
       point.y = temp.y;
-      point.add(xyCenter);
+      point.add(center);
     }
   }
   void translate(PVector a) {
-    a.y *= -1;
     for (PVector point : points) {
       point.add(a);
     }
