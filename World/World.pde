@@ -70,7 +70,7 @@ void draw() {
   //c.resetScreen();
   background(255);
   pos.add(dir);
-  dir.y -= speed/100;
+  dir.y -= speed/20;
   if (pos.y <= 0){
     for (Obj obj : objs) {
       obj.translate(new PVector(0,-pos.y,0));
@@ -124,7 +124,9 @@ void keyPressed() {
     dir.x = -speed;
     break;
   case ' ':
-    dir.y = speed;
+  if (pos.y == 0) {
+    dir.y = speed*2;
+  }
     break;
   }
 }
