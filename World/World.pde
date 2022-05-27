@@ -19,17 +19,15 @@ void setup() {
   //p.add(new PVector(100, -100, -100));
   //p.add(new PVector(100, 100, -100));
   objs.add(new Obj(p, new PVector(200, 200, 0)));
-  ArrayList<PVector> t = new ArrayList<PVector>();
-  t.add(new PVector(100, 100));
-  t.add(new PVector(200, 100));
-  t.add(new PVector(100, 200));
-  test = new Triangle(t.get(0), t.get(1), t.get(2));
+  test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   ArrayList<PVector> coords = test.getCoords();
   //println(coords);
   stroke(0);
   for (PVector coord : coords) {
     circle(coord.x, coord.y,5);
   }
+  PVector test = new PVector (100,0,0);
+  println(test.setMag(25)); 
 }
 
 void draw() {

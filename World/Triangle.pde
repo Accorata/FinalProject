@@ -33,7 +33,8 @@ public class Triangle {
     return coords;
   }
   private PVector partVec (PVector ab, PVector a, int mag) {
-    ab.setMag(mag).add(a);
-    return new PVector(ab.x, ab.y, ab.z);
+    ab.setMag(mag);//.add(a);
+    //ab.add(a);
+    return new PVector(ab.x+a.x, ab.y+a.y, ab.z+a.y);
   }
 }
