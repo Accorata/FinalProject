@@ -1,7 +1,10 @@
+
+import java.util.Collections;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 40;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
+
 void setup() {
   size(1000, 600);
   c = new Camera();
@@ -10,10 +13,11 @@ void setup() {
   p.add(new PVector(100, 100, 100));
   p.add(new PVector(-100, 100, 100));
   p.add(new PVector(-100, -100, 100));
-  p.add(new PVector(100, 100, 100));
-  p.add(new PVector(100, 100, 100));
-  p.add(new PVector(100, 100, 100));
-  p.add(new PVector(100, 100, 100));
+  p.add(new PVector(100, -100, 100));
+  p.add(new PVector(100, 100, -100));
+  p.add(new PVector(-100, -100, -100));
+  p.add(new PVector(100, -100, -100));
+  p.add(new PVector(-100, 100, -100));
   objs.add(new Obj(p));
   //objs.get(0).rotateX(30);
   objs.get(0).translate(new PVector(0, 0, 200));
@@ -25,7 +29,7 @@ void setup() {
   objs.get(0).rotateOnZ(45);
 }
 void draw() {
-
+  
   //objs.get(0).rotateOnX(10);
   //objs.get(0).rotateX(1);
   // --Screen--
