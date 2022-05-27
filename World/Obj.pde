@@ -8,7 +8,7 @@ public class Obj { //<>// //<>// //<>//
   public Obj (ArrayList<PVector> points_, PVector center_) {
     points = new ArrayList<PVector>();
     center = center_;
-    for (PVector point : points_){
+    for (PVector point : points_) {
       points.add(point.sub(center));
     }
   }
@@ -19,6 +19,12 @@ public class Obj { //<>// //<>// //<>//
     }
     cent.div(points.size());
     return cent;
+  }
+  void setCenter(PVector v) {
+    center = v;
+  }
+  void setCenter() {
+    center = calcCenter();
   }
   ArrayList<PVector> getPoints() {
     return points;
@@ -72,5 +78,12 @@ public class Obj { //<>// //<>// //<>//
       point.y = temp.y;
       point.add(xyCenter);
     }
+  }
+  void translate(PVector a) {
+    a.y *= -1;
+    for (PVector point : points) {
+      point.add(a);
+    }
+    center = calcCenter();
   }
 }
