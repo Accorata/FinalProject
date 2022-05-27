@@ -17,10 +17,10 @@ public class Obj { //<>//
     setCenter();
   }
 
-  void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_, PVector center_) {
+  void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     points = points_;
     triangles = triangles_;
-    center = center_;
+    setCenter();
   }
   private ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
     ArrayList<PVector> p = new ArrayList<PVector>();
