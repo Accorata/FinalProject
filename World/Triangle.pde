@@ -34,7 +34,7 @@ public class Triangle implements Comparable<Triangle> {
     return 0;
   }
   @Override
-  String toString() {
+    String toString() {
     return points[0] + "  " + points[1] + "  " + points[2];
   }
   //ArrayList<PVector> getCoords () {

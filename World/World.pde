@@ -39,7 +39,7 @@ void setup() {
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
   objs.add(new Rect(p, 200));
-  objs.add(new Rect(p2, l, color(255,0,0)));
+  objs.add(new Rect(p2, l, color(255, 0, 0)));
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
