@@ -2,8 +2,9 @@ public class Obj { //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
-  
 
+  public Obj() {
+  }
   public Obj(ArrayList<Triangle> t, PVector center) {
     points = calcPoints(t);
     triangles = t;
@@ -11,11 +12,15 @@ public class Obj { //<>//
   }
   public Obj(ArrayList<Triangle> t) {
     points = calcPoints(t);
-    print(points);
     triangles = t;
     setCenter();
   }
 
+  void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
+    points = points_;
+    triangles = triangles_;
+    setCenter();
+  }
   private ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
     ArrayList<PVector> p = new ArrayList<PVector>();
     for (Triangle tri : t) {

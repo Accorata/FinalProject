@@ -9,7 +9,6 @@ public class Triangle implements Comparable<Triangle> {
     points[1] = b_;
     points[2]= c_;
     clr = clr_;
-    
   }
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
@@ -33,6 +32,10 @@ public class Triangle implements Comparable<Triangle> {
     if (this.close > obj.close) return -1;
     if (this.close < obj.close) return 1;
     return 0;
+  }
+  @Override
+    String toString() {
+    return points[0] + "  " + points[1] + "  " + points[2];
   }
   //ArrayList<PVector> getCoords () {
   //  ArrayList<PVector> coords = new ArrayList<PVector>();
