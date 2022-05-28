@@ -2,7 +2,7 @@ public class Obj { //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
-  
+
   public Obj() {
   }
   public Obj(ArrayList<Triangle> t, PVector center) {

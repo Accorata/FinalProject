@@ -34,8 +34,8 @@ void setup() {
   //t.add(new Triangle(v8, v6, v3, color(204, 229, 255)));
   //t.add(new Triangle(v3, v8, v4, color(204, 229, 255)));
   //objs.add(new Obj(t));
-  PVector p = new PVector (-100,-100,-100);
-  PVector l = new PVector (200,200,200);
+  PVector p = new PVector (-100, -100, -100);
+  PVector l = new PVector (200, 200, 200);
   objs.add(new Rect(p, l));
 
   //objs.get(0).rotateX(30);
@@ -54,7 +54,7 @@ void setup() {
   //  //circle(coord.x, coord.y,5);
   //}
   //PVector test = new PVector (100,0,0);
-  //println(test.setMag(25)); 
+  //println(test.setMag(25));
 }
 
 void draw() {
@@ -73,9 +73,9 @@ void draw() {
   background(255);
   pos.add(dir);
   dir.y -= speed/20;
-  if (pos.y <= 0){
+  if (pos.y <= 0) {
     for (Obj obj : objs) {
-      obj.translate(new PVector(0,-pos.y,0));
+      obj.translate(new PVector(0, -pos.y, 0));
     }
     pos.y = 0;
     dir.y = 0;
@@ -126,9 +126,9 @@ void keyPressed() {
     dir.x = -speed;
     break;
   case ' ':
-  if (pos.y == 0) {
-    dir.y = speed*2;
-  }
+    if (pos.y == 0) {
+      dir.y = speed*2;
+    }
     break;
   }
 }

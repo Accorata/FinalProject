@@ -45,4 +45,16 @@ public class Rect extends Obj {
     t.add(new Triangle(points.get(2), points.get(7), points.get(3), color(204, 229, 255)));
     return t;
   }
+  //t.add(new Triangle(v6, v7, v2, color(255, 153, 153)));
+  //t.add(new Triangle(v2, v3, v6, color(255, 153, 153)));
+  //t.add(new Triangle(v3, v2, v1, color(102, 255, 178)));
+  //t.add(new Triangle(v1, v4, v3, color(102, 255, 178)));
+  //t.add(new Triangle(v4, v1, v5, color(255, 204, 229)));
+  //t.add(new Triangle(v5, v8, v4, color(255, 204, 229)));
+  //t.add(new Triangle(v8, v5, v7, color(204, 229, 255)));
+  //t.add(new Triangle(v7, v8, v6, color(204, 229, 255)));
+  //t.add(new Triangle(v7, v5, v1, color(255, 229, 204)));
+  //t.add(new Triangle(v1, v2, v7, color(255, 229, 204)));
+  //t.add(new Triangle(v8, v6, v3, color(204, 229, 255)));
+  //t.add(new Triangle(v3, v8, v4, color(204, 229, 255)));
 }

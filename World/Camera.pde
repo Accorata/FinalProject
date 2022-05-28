@@ -38,23 +38,22 @@ public class Camera {
       float[][] pT = new float[3][2];
       int count = 0;
       for (PVector point : t.points) {
-      try {
-        if (point.z < -1 * fromScreen) throw new Exception("behind you");
-        float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-        float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
-        //screen[scX][scY] = color(0);
-        pT[count][0] = scX;
-        pT[count][1] = scY;
-        count++;
-      } 
-      catch (Exception e) {
-         break;
-      }
+        try {
+          if (point.z < -1 * fromScreen) throw new Exception("behind you");
+          float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+          float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+          //screen[scX][scY] = color(0);
+          pT[count][0] = scX;
+          pT[count][1] = scY;
+          count++;
+        } 
+        catch (Exception e) {
+          break;
+        }
       }
       fill(t.clr);
       if (!dense) noStroke();
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
-     
     }
   }
 }
