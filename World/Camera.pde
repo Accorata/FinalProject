@@ -39,13 +39,22 @@ public class Camera {
       int count = 0;
       for (PVector point : t.points) {
       try {
-        if (point.z < -1 * fromScreen) throw new Exception("behind you");
-        float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-        float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+        float scX, scY;
+        if (point.z <= -1 * fromScreen) {
+
+          scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
+          scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
+    
+        } else {      
+          scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+          scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+        }
+        
         //screen[scX][scY] = color(0);
         pT[count][0] = scX;
         pT[count][1] = scY;
         count++;
+        
       } 
       catch (Exception e) {
          break;
