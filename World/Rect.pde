@@ -1,9 +1,12 @@
-public class Cube extends Obj {
-  public Cube (PVector pos, PVector size) {
+public class Rect extends Obj {
+  public Rect (PVector pos, PVector size) {
     super();
     ArrayList<PVector> p = calcPoints(pos, size);
     ArrayList<Triangle> t = calcTriangles(p);
     setObj(p, t);
+  }
+  public Rect (PVector pos, float len) {
+    this (pos, new PVector(len, len, len));
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
