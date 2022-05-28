@@ -33,6 +33,10 @@ public class Triangle implements Comparable<Triangle> {
     if (this.close < obj.close) return 1;
     return 0;
   }
+  @Override
+  String toString() {
+    return points[0] + "  " + points[1] + "  " + points[2];
+  }
   //ArrayList<PVector> getCoords () {
   //  ArrayList<PVector> coords = new ArrayList<PVector>();
   //  //start with lines
