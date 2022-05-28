@@ -1,8 +1,11 @@
 public class Rect extends Obj {
   public Rect (PVector pos, PVector size) {
+    this(pos, size, color(0));
+  }
+  public Rect (PVector pos, PVector size, color c) {
     super();
     ArrayList<PVector> p = calcPoints(pos, size);
-    ArrayList<Triangle> t = calcTriangles(p);
+    ArrayList<Triangle> t = calcTriangles(p, c);
     setObj(p, t);
   }
   public Rect (PVector pos, float len) {
@@ -29,7 +32,7 @@ public class Rect extends Obj {
   //PVector v6 = new PVector(-100, -100, -100);
   //PVector v7 = new PVector(-100, 100, -100);
   //PVector v8 = new PVector(-100, -100, 100);
-  private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points) {
+  private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points, color c) {
     ArrayList<Triangle> t = new ArrayList<Triangle>();
     t.add(new Triangle(points.get(5), points.get(6), points.get(1), color(255, 153, 153)));
     t.add(new Triangle(points.get(1), points.get(2), points.get(5), color(255, 153, 153)));

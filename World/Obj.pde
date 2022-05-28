@@ -12,13 +12,14 @@ public class Obj { //<>//
   }
   public Obj(ArrayList<Triangle> t) {
     points = calcPoints(t);
-    //print(points);
+    print(points + "\n\n\n\n");
     triangles = t;
     setCenter();
   }
 
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     points = points_;
+    print(points);
     triangles = triangles_;
     setCenter();
   }
