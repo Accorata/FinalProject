@@ -12,7 +12,11 @@ public class Obj { //<>//
   }
   public Obj(ArrayList<Triangle> t) {
     points = calcPoints(t);
-    println(points + "\n\n\n\n");
+    println(points);
+    for (Triangle t_ : t) {
+      println(t_);
+    }
+    println();
     triangles = t;
     setCenter();
   }
