@@ -11,16 +11,24 @@ public class Rect extends Obj {
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
     p.add(pos);
-    p.add(new PVector(pos.x, pos.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
     p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z+size.z));
-    p.add(new PVector(pos.x, pos.y+size.y, pos.z));
-    p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
-    p.add(new PVector(pos.x, pos.y, pos.z+size.z));
+    p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
+    p.add(new PVector(pos.x+size.x, pos.y, pos.z));
     p.add(new PVector(pos.x+size.x, pos.y, pos.z+size.z));
+    p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
+    p.add(new PVector(pos.x, pos.y, pos.z));   
+    p.add(new PVector(pos.x, pos.y+size.y, pos.z));
+    p.add(new PVector(pos.x, pos.y, pos.z+size.z));
     return p;
   }
+  //PVector v1 = new PVector(100, 100, 100);
+  //PVector v2 = new PVector(100, 100, -100);
+  //PVector v3 = new PVector(100, -100, -100);
+  //PVector v4 = new PVector(100, -100, 100);
+  //PVector v5 = new PVector(-100, 100, 100);
+  //PVector v6 = new PVector(-100, -100, -100);
+  //PVector v7 = new PVector(-100, 100, -100);
+  //PVector v8 = new PVector(-100, -100, 100);
   private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points) {
     ArrayList<Triangle> t = new ArrayList<Triangle>();
     t.add(new Triangle(points.get(5), points.get(6), points.get(1), color(255, 153, 153)));
