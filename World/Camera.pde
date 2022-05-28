@@ -5,7 +5,7 @@ public class Camera {
   public Camera() {
     resetScreen();
     loc = new PVector(0, 0, 0);
-    dense = true;
+    dense = false;
   }
   void resetScreen() {
     for (int i = 0; i<screen.length; i++) {
@@ -52,7 +52,7 @@ public class Camera {
       }
       }
       fill(t.clr);
-      if (dense) noStroke();
+      if (!dense) noStroke();
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
      
     }

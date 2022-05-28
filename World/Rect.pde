@@ -23,6 +23,18 @@ public class Rect extends Obj {
   }
   private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points) {
     ArrayList<Triangle> t = new ArrayList<Triangle>();
+    t.add(new Triangle(points.get(5), points.get(6), points.get(1), color(255, 153, 153)));
+    t.add(new Triangle(points.get(1), points.get(2), points.get(5), color(255, 153, 153)));
+    t.add(new Triangle(points.get(2), points.get(1), points.get(0), color(102, 255, 178)));
+    t.add(new Triangle(points.get(0), points.get(3), points.get(2), color(102, 255, 178)));
+    t.add(new Triangle(points.get(3), points.get(0), points.get(4), color(255, 204, 229)));
+    t.add(new Triangle(points.get(4), points.get(7), points.get(3), color(255, 204, 229)));
+    t.add(new Triangle(points.get(7), points.get(4), points.get(6), color(204, 229, 255)));
+    t.add(new Triangle(points.get(6), points.get(7), points.get(5), color(204, 229, 255)));
+    t.add(new Triangle(points.get(6), points.get(4), points.get(0), color(255, 229, 204)));
+    t.add(new Triangle(points.get(0), points.get(1), points.get(6), color(255, 229, 204)));
+    t.add(new Triangle(points.get(7), points.get(5), points.get(2), color(204, 229, 255)));
+    t.add(new Triangle(points.get(2), points.get(7), points.get(3), color(204, 229, 255)));
     return t;
   }
 }
