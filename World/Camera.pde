@@ -34,23 +34,33 @@ public class Camera {
       t.update_close();
     }
     Collections.sort(obj.triangles);
+    boolean render = true;
     for (Triangle t : obj.triangles) {
       float[][] pT = new float[3][2];
       int count = 0;
+      int noRender = 0;
       for (PVector point : t.points) {
       try {
-        float scX, scY;
-        if (point.z <= -1 * fromScreen) {
-
-          scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
-          scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
-    
+        float scX = 0;
+        float scY = 0;
+        if (point.z < -1 * fromScreen) {
+          if ((point.x > (-1 * (width/2)) && point.x < width/2) && (point.y > (-1 * height/2) && point.y < height/2)) {
+            noRender++;
+            println("x: " + point.x + " ;  y: " + point.y + " ; " + point.z + " ; " + noRender);
+          } 
+            scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
+            scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
+        
         } else {      
           scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
           scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
         }
         
         //screen[scX][scY] = color(0);
+        if (noRender >= 3) {
+          render = false;  
+          println("/nsdff/n");
+        }
         pT[count][0] = scX;
         pT[count][1] = scY;
         count++;
@@ -60,9 +70,10 @@ public class Camera {
          break;
       }
       }
+      if (render) {
       fill(t.clr);
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
-     
+      }
     }
   }
 }
