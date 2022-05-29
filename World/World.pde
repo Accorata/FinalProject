@@ -6,8 +6,6 @@ ArrayList<Obj> objs = new ArrayList<Obj>();
 final float speed = 5;
 PVector pos = new PVector(0, 0, 0);
 PVector dir = new PVector(0, 0, 0);
-PVector mouse = new PVector(500, 300);
-PVector mouseOld = new PVector(500, 300);
 final float sensitivity = 20;
 boolean test = true;
 void setup() {
@@ -70,20 +68,7 @@ float dist(PVector a, PVector b) {
 
 void draw() {
   // --Mouse Control--
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnY((mouse.x-width/2)*1/sensitivity);
-  }
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
-  }
-  mouse.x -= (mouse.x-width/2)/20;
-  mouse.y -= (mouse.y-height/2)/20;
-  mouse.x += mouseX-mouseOld.x;
-  mouse.y += mouseY-mouseOld.y;
-  mouseOld.x = mouseX;
-  mouseOld.y = mouseY;
+  c.rotateByMouse();
   // --Update World--
   pos.add(dir);
   dir.y -= speed/30;

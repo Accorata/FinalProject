@@ -3,6 +3,8 @@ public class Camera {
   PVector loc;
   boolean dense;
   ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
+  PVector mouse = new PVector(width/2, height/2);
+  PVector mouseOld = new PVector(width/2, height/2);
   public Camera() {
     resetScreen();
     loc = new PVector(0, 0, 0);
@@ -48,7 +50,6 @@ public class Camera {
         triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
       }
     }
-   
   }
 
   void addObject(Obj obj) {
@@ -56,5 +57,21 @@ public class Camera {
     for (Triangle t : obj.triangles) {
       Triangles.add(t);
     }
+  }
+  void rotateByMouse() {
+    for (Obj obj : objs) {
+      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnY((mouse.x-width/2)*1/sensitivity);
+    }
+    for (Obj obj : objs) {
+      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
+    }
+    mouse.x -= (mouse.x-width/2)/20;
+    mouse.y -= (mouse.y-height/2)/20;
+    mouse.x += mouseX-mouseOld.x;
+    mouse.y += mouseY-mouseOld.y;
+    mouseOld.x = mouseX;
+    mouseOld.y = mouseY;
   }
 }
