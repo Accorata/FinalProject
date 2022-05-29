@@ -43,13 +43,20 @@ public class Obj { //<>//
       PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
       PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
       PVector crV = v1.cross(v2);
+      float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-1 * t2.z));
+      /*
       float z = ((crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)))/crV.z + t2.z;
       float x = ((crV.z * (-1 * t2.z)) + (crV.y * (-1 * t2.y)))/crV.x + t2.x;
       float y = ((crV.x * (-1 * t2.x)) + (crV.z * (-1 * t2.z)))/crV.y + t2.y;
-      float aw = 10;
-      println(x + " " + y + " " + z);
-      if (x >= -1 * aw && x <= aw && y >= -1 * aw && y <= aw && z >= -1 * aw && z<= aw) {
-        println(x + " " + y + " " + z);
+      boolean op1 = ((x >= -1 * aw && x <= aw) || (y >= -1 * aw && y <= aw)) && (z >= -1 * aw && z<= aw);
+      boolean op2 = ((x >= -1 * aw && x <= aw) && ((y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw)));
+      boolean op3 = (y >= -1 * aw && y <= aw) && ((x >= -1 * aw && x <= aw) ||  (z >= -1 * aw && z<= aw));
+      */
+      float aw = 2;
+      boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
+      
+      if (within) {
+        println(n);
         breached = true;
  
       }
