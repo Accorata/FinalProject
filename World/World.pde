@@ -8,6 +8,7 @@ final float speed = 5;
 PVector pos = new PVector(0, 0, 0);
 PVector dir = new PVector(0, 0, 0);
 PVector mouse = new PVector(500, 300);
+PVector mouseOld = new PVector(500, 300);
 Triangle test;
 void setup() {
   size(1000, 600);
@@ -99,6 +100,7 @@ void draw() {
     obj.translate(dir);
     c.addObject(obj);
   }
+  circle(mouse.x, mouse.y, 20);
   //c.display();
 }
 
