@@ -9,6 +9,7 @@ PVector pos = new PVector(0, 0, 0);
 PVector dir = new PVector(0, 0, 0);
 PVector mouse = new PVector(500, 300);
 PVector mouseOld = new PVector(500, 300);
+final float sensitivity = 10;
 Triangle test;
 void setup() {
   size(1000, 600);
@@ -67,32 +68,35 @@ float dist(PVector a, PVector b) {
 }
 
 void draw() {
-  //for (Obj obj : objs) {
-  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnY((mouseX-mouse.x)/7);
-  //}
-  //for (Obj obj : objs) {
-  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnX((mouse.y-mouseY)/7);
-  //}
-  
   for (Obj obj : objs) {
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnY((mouseX-width/2)/40);
+    obj.rotateOnY((mouse.x-width/2)/sensitivity);
   }
   for (Obj obj : objs) {
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX((height/2-mouseY)/40);
+    obj.rotateOnX((height/2-mouse.y)/sensitivity);
   }
 
-  mouse.x = mouseX;
-  mouse.y = mouseY;
+  //for (Obj obj : objs) {
+  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+  //  obj.rotateOnY((mouseX-width/2)/40);
+  //}
+  //for (Obj obj : objs) {
+  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+  //  obj.rotateOnX((height/2-mouseY)/40);
+  //}
+  mouse.x -= (mouse.x-width/2)/20;
+  mouse.y -= (mouse.y-height/2)/20;
+  mouse.x += mouseX-mouseOld.x;
+  mouse.y += mouseY-mouseOld.y;
+  mouseOld.x = mouseX;
+  mouseOld.y = mouseY;
   // --Screen--
   //c.resetScreen();
   background(255);
   pos.add(dir);
   dir.y -= speed/30;
-  
+
   if (pos.y <= 0) {
     for (Obj obj : objs) {
       obj.translate(new PVector(0, -pos.y, 0));
@@ -100,22 +104,24 @@ void draw() {
     pos.y = 0;
     dir.y = 0;
   }
-  
+
   for (Obj obj : objs) {
     obj.translate(dir);
     c.display();
   }
+  fill(100);
+  //circle(width/2, height/2, 20);
   circle(mouse.x, mouse.y, 20);
   //c.display();
 }
 
 /*
 void draw() {
-  background(255);
-  c.display();
-  
-}
-*/
+ background(255);
+ c.display();
+ 
+ }
+ */
 void keyPressed() {
   switch (key) {
   case 'l':
