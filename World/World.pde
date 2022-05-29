@@ -1,7 +1,7 @@
 
 import java.util.Collections;
 final PVector xaxis = new PVector(1, 0, 0);
-final float fromScreen = 200;
+final float fromScreen = 300;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 
