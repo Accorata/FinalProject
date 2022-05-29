@@ -4,7 +4,6 @@ final float fromScreen = 300;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 final float speed = 5;
-PVector pos = new PVector(0, 0, 0);
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
@@ -68,17 +67,9 @@ float dist(PVector a, PVector b) {
 
 void draw() {
   // --Mouse Control--
-  c.rotateByMouse();
+  if (!test) c.rotateByMouse();
   // --Update World--
-  pos.add(dir);
-  dir.y -= speed/30;
-  if (pos.y <= 0) {
-    for (Obj obj : objs) {
-      obj.translate(new PVector(0, -pos.y, 0));
-    }
-    pos.y = 0;
-    dir.y = 0;
-  }
+  c.updatePos(dir);
   // --Screen--
   background(255);
   for (Obj obj : objs) {
@@ -138,7 +129,7 @@ void keyPressed() {
     dir.x = -speed;
     break;
   case ' ':
-    if (pos.y == 0) {
+    if (c.getLoc().y == 0) {
       dir.y = speed*2;
     }
     break;

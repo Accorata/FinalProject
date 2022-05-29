@@ -10,6 +10,9 @@ public class Camera {
     loc = new PVector(0, 0, 0);
     dense = false;
   }
+  PVector getLoc() {
+    return loc;
+  }
   void resetScreen() {
     for (int i = 0; i<screen.length; i++) {
       for (int j = 0; j<screen[0].length; j++) {
@@ -51,7 +54,6 @@ public class Camera {
       }
     }
   }
-
   void addObject(Obj obj) {
     objs.add(obj);
     for (Triangle t : obj.triangles) {
@@ -73,5 +75,16 @@ public class Camera {
     mouse.y += mouseY-mouseOld.y;
     mouseOld.x = mouseX;
     mouseOld.y = mouseY;
+  }
+  void updatePos(PVector dir) {
+    loc.add(dir);
+    dir.y -= speed/30;
+    if (loc.y < 0) {
+      for (Obj obj : objs) {
+        obj.translate(new PVector(0, -loc.y, 0));
+      }
+      loc.y = 0;
+      dir.y = 0;
+    }
   }
 }
