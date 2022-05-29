@@ -14,47 +14,41 @@ public class Camera {
       }
     }
   }
-  void display () {
-    loadPixels();
-    for (int i = 0; i<height; i++) {
-      for (int j = 0; j<width; j++) {
-        pixels[i*width+j] = screen[i][j];
-        if (dense && i > 0 && i < height-1 && j >0 && j < width-1 && screen[i][j] != color(255)) {
-          pixels[i*width+j+1] = screen[i][j];
-          pixels[i*width+j-1] = screen[i][j];
-          pixels[i*width+j+width] = screen[i][j];
-          pixels[i*width+j-width] = screen[i][j];
-        }
-      }
-    }
-    updatePixels();
-  }
+  //void display () {
+  //  loadPixels();
+  //  for (int i = 0; i<height; i++) {
+  //    for (int j = 0; j<width; j++) {
+  //      pixels[i*width+j] = screen[i][j];
+  //      if (dense && i > 0 && i < height-1 && j >0 && j < width-1 && screen[i][j] != color(255)) {
+  //        pixels[i*width+j+1] = screen[i][j];
+  //        pixels[i*width+j-1] = screen[i][j];
+  //        pixels[i*width+j+width] = screen[i][j];
+  //        pixels[i*width+j-width] = screen[i][j];
+  //      }
+  //    }
+  //  }
+  //  updatePixels();
+  //}
   void addObject(Obj obj) {
     for (Triangle t : obj.triangles) {
       t.update_close();
     }
     Collections.sort(obj.triangles);
-
     for (Triangle t : obj.triangles) {
       if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
         float[][] pT = new float[3][2];
         int count = 0;
-
         for (PVector point : t.points) {
           try {
             float scX = 0;
             float scY = 0;
             if (point.z <= -1 * fromScreen) {
-
               scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
               scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
             } else {      
               scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
               scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
             }
-
-            //screen[scX][scY] = color(0);
-
             pT[count][0] = scX;
             pT[count][1] = scY;
             count++;
@@ -63,7 +57,6 @@ public class Camera {
             break;
           }
         }
-
         fill(t.clr);
         if (!dense) noStroke();
         triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);

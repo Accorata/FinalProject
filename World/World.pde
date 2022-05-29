@@ -40,6 +40,7 @@ void setup() {
   PVector l = new PVector (200, 200, 200);
   objs.add(new Rect(p, 200));
   objs.add(new Rect(p2, l, color(255, 0, 0)));
+  objs.add(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
@@ -66,12 +67,20 @@ float dist(PVector a, PVector b) {
 void draw() {
   //for (Obj obj : objs) {
   //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnY(mouseX-mouse.x);
+  //  obj.rotateOnY((mouseX-mouse.x)/7);
   //}
   //for (Obj obj : objs) {
   //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnX(mouse.y-mouseY);
+  //  obj.rotateOnX((mouse.y-mouseY)/7);
   //}
+  for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnY((mouseX-width/2)/40);
+  }
+  for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnX((height/2-mouseY)/40);
+  }
   mouse.x = mouseX;
   mouse.y = mouseY;
   // --Screen--
