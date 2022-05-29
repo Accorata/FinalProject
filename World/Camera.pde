@@ -2,6 +2,7 @@ public class Camera {
   color[][] screen = new color[height][width];
   PVector loc;
   boolean dense;
+  ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
   public Camera() {
     resetScreen();
     loc = new PVector(0, 0, 0);
@@ -14,27 +15,12 @@ public class Camera {
       }
     }
   }
-  //void display () {
-  //  loadPixels();
-  //  for (int i = 0; i<height; i++) {
-  //    for (int j = 0; j<width; j++) {
-  //      pixels[i*width+j] = screen[i][j];
-  //      if (dense && i > 0 && i < height-1 && j >0 && j < width-1 && screen[i][j] != color(255)) {
-  //        pixels[i*width+j+1] = screen[i][j];
-  //        pixels[i*width+j-1] = screen[i][j];
-  //        pixels[i*width+j+width] = screen[i][j];
-  //        pixels[i*width+j-width] = screen[i][j];
-  //      }
-  //    }
-  //  }
-  //  updatePixels();
-  //}
-  void addObject(Obj obj) {
-    for (Triangle t : obj.triangles) {
+  void display() {
+    for (Triangle t : Triangles) {
       t.update_close();
     }
-    Collections.sort(obj.triangles);
-    for (Triangle t : obj.triangles) {
+    Collections.sort(Triangles);
+    for (Triangle t : Triangles) {
       if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
         float[][] pT = new float[3][2];
         int count = 0;
@@ -61,6 +47,14 @@ public class Camera {
         if (!dense) noStroke();
         triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
       }
+    }
+   
+  }
+
+  void addObject(Obj obj) {
+    objs.add(obj);
+    for (Triangle t : obj.triangles) {
+      Triangles.add(t);
     }
   }
 }

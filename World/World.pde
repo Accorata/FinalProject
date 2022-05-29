@@ -38,9 +38,9 @@ void setup() {
   PVector p = new PVector (-100, -100, -100);
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
-  objs.add(new Rect(p, 200));
-  objs.add(new Rect(p2, l, color(255, 0, 0)));
-  objs.add(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
+  c.addObject(new Rect(p, 200));
+  c.addObject(new Rect(p2, l, color(255, 0, 0)));
+  c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
@@ -64,6 +64,7 @@ void setup() {
 float dist(PVector a, PVector b) {
   return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
 }
+
 void draw() {
   //for (Obj obj : objs) {
   //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
@@ -73,6 +74,7 @@ void draw() {
   //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
   //  obj.rotateOnX((mouse.y-mouseY)/7);
   //}
+  
   for (Obj obj : objs) {
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnY((mouseX-width/2)/40);
@@ -81,13 +83,15 @@ void draw() {
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX((height/2-mouseY)/40);
   }
+
   mouse.x = mouseX;
   mouse.y = mouseY;
   // --Screen--
   //c.resetScreen();
   background(255);
   pos.add(dir);
-  dir.y -= speed/20;
+  dir.y -= speed/30;
+  
   if (pos.y <= 0) {
     for (Obj obj : objs) {
       obj.translate(new PVector(0, -pos.y, 0));
@@ -95,13 +99,23 @@ void draw() {
     pos.y = 0;
     dir.y = 0;
   }
+  
   for (Obj obj : objs) {
     obj.translate(dir);
-    c.addObject(obj);
+    c.display();
   }
+  
+  
   //c.display();
 }
 
+/*
+void draw() {
+  background(255);
+  c.display();
+  
+}
+*/
 void keyPressed() {
   switch (key) {
   case 'l':
