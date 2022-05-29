@@ -39,8 +39,8 @@ void setup() {
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
   c.addObject(new Rect(p, 200));
-  c.addObject(new Rect(p2, l, color(255, 0, 0)));
-  c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
+  //c.addObject(new Rect(p2, l, color(255, 0, 0)));
+  //c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
@@ -99,14 +99,18 @@ void draw() {
     pos.y = 0;
     dir.y = 0;
   }
-  
+  boolean breached = false;
   for (Obj obj : objs) {
     obj.translate(dir);
-    c.display();
+    if (obj.breached()) breached = true;  
   }
+  if (breached) {
+    for (Obj obj : objs) {
+      obj.translate(PVector.mult(dir, -1));
+    }
+  }
+  c.display();
   
-  
-  //c.display();
 }
 
 /*

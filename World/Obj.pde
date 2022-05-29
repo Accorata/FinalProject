@@ -2,7 +2,7 @@ public class Obj { //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
-
+  
   public Obj() {
   }
   public Obj(ArrayList<Triangle> t, PVector center) {
@@ -32,6 +32,29 @@ public class Obj { //<>//
   }
   PVector getCenter () {
     return center;
+  }
+  boolean breached() {
+    boolean breached = false;
+    for (Triangle t : triangles) {
+      PVector t1 = t.points[0];
+      PVector t2 = t.points[1];
+      PVector t3 = t.points[2];
+
+      PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
+      PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
+      PVector crV = v1.cross(v2);
+      float z = ((crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)))/crV.z + t2.z;
+      float x = ((crV.z * (-1 * t2.z)) + (crV.y * (-1 * t2.y)))/crV.x + t2.x;
+      float y = ((crV.x * (-1 * t2.x)) + (crV.z * (-1 * t2.z)))/crV.y + t2.y;
+      float aw = 10;
+      println(x + " " + y + " " + z);
+      if (x >= -1 * aw && x <= aw && y >= -1 * aw && y <= aw && z >= -1 * aw && z<= aw) {
+        println(x + " " + y + " " + z);
+        breached = true;
+ 
+      }
+    }
+    return breached;
   }
   void rotateOnX(float deg) {
     float rad = radians(deg);
