@@ -9,7 +9,7 @@ public class Rect extends Obj {
     setObj(p, t);
   }
   public Rect (PVector pos, float len) {
-    this (pos, new PVector(len, len, len));
+    this(pos, new PVector(len, len, len));
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();

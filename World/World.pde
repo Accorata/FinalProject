@@ -3,14 +3,13 @@ final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
-
 final float speed = 5;
-PVector pos = new PVector(0, 0, 0);
 PVector dir = new PVector(0, 0, 0);
-PVector mouse = new PVector(500, 300);
-Triangle test;
+final float sensitivity = 20;
+boolean test = true;
 void setup() {
   size(1000, 600);
+  if (!test) noCursor();
   c = new Camera();
   //PVector v1 = new PVector(100, 100, 100);
   //PVector v2 = new PVector(100, 100, -100);
@@ -62,60 +61,35 @@ void setup() {
   //objs.get(0).rotateOnZ(45);
 }
 float dist(PVector a, PVector b) {
+  //return a.sub(b).mag();
   return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
 }
 
 void draw() {
-  //for (Obj obj : objs) {
-  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnY((mouseX-mouse.x)/7);
-  //}
-  //for (Obj obj : objs) {
-  //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-  //  obj.rotateOnX((mouse.y-mouseY)/7);
-  //}
-  
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnY((mouseX-width/2)/40);
-  }
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX((height/2-mouseY)/40);
-  }
-
-  mouse.x = mouseX;
-  mouse.y = mouseY;
+  // --Mouse Control--
+  if (!test) c.rotateByMouse();
+  // --Update World--
+  c.updatePos(dir);
   // --Screen--
-  //c.resetScreen();
   background(255);
-  pos.add(dir);
-  dir.y -= speed/30;
-  
-  if (pos.y <= 0) {
-    for (Obj obj : objs) {
-      obj.translate(new PVector(0, -pos.y, 0));
-    }
-    pos.y = 0;
-    dir.y = 0;
-  }
-  
   for (Obj obj : objs) {
     obj.translate(dir);
     c.display();
   }
-  
-  
-  //c.display();
+  stroke(75);
+  strokeWeight(2);
+  line(width/2-10, height/2, width/2+10, height/2);
+  line(width/2, height/2-10, width/2, height/2+10);
+  strokeWeight(1);
 }
 
 /*
 void draw() {
-  background(255);
-  c.display();
-  
-}
-*/
+ background(255);
+ c.display();
+ 
+ }
+ */
 void keyPressed() {
   switch (key) {
   case 'l':
@@ -155,7 +129,7 @@ void keyPressed() {
     dir.x = -speed;
     break;
   case ' ':
-    if (pos.y == 0) {
+    if (c.getLoc().y == 0) {
       dir.y = speed*2;
     }
     break;
