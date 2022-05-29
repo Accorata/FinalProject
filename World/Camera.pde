@@ -34,26 +34,40 @@ public class Camera {
       t.update_close();
     }
     Collections.sort(obj.triangles);
+
     for (Triangle t : obj.triangles) {
-      float[][] pT = new float[3][2];
-      int count = 0;
-      for (PVector point : t.points) {
-        try {
-          if (point.z < -1 * fromScreen) throw new Exception("behind you");
-          float scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-          float scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
-          //screen[scX][scY] = color(0);
-          pT[count][0] = scX;
-          pT[count][1] = scY;
-          count++;
-        } 
-        catch (Exception e) {
-          break;
+      if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
+        float[][] pT = new float[3][2];
+        int count = 0;
+
+        for (PVector point : t.points) {
+          try {
+            float scX = 0;
+            float scY = 0;
+            if (point.z <= -1 * fromScreen) {
+
+              scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
+              scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
+            } else {      
+              scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+              scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+            }
+
+            //screen[scX][scY] = color(0);
+
+            pT[count][0] = scX;
+            pT[count][1] = scY;
+            count++;
+          } 
+          catch (Exception e) {
+            break;
+          }
         }
+
+        fill(t.clr);
+        if (!dense) noStroke();
+        triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
       }
-      fill(t.clr);
-      if (!dense) noStroke();
-      triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
     }
   }
 }

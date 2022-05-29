@@ -17,9 +17,7 @@ public class Triangle implements Comparable<Triangle> {
     this.center = calcCenter();
     this.close = dist(center, new PVector(0, 0, -1 * fromScreen));
   }
-  private float dist(PVector a, PVector b) {
-    return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
-  }
+ 
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
     for (PVector point : points) {

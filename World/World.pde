@@ -1,6 +1,6 @@
 import java.util.Collections;
 final PVector xaxis = new PVector(1, 0, 0);
-final float fromScreen = 40;
+final float fromScreen = 300;
 Camera c;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 
@@ -47,7 +47,6 @@ void setup() {
     obj.rotateOnZ(45);
   }
   //p.add(new PVector(100, 100, 100));
-
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
   ////println(coords);
@@ -58,8 +57,12 @@ void setup() {
   //}
   //PVector test = new PVector (100,0,0);
   //println(test.setMag(25));
-}
 
+  //objs.get(0).rotateOnZ(45);
+}
+float dist(PVector a, PVector b) {
+  return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
+}
 void draw() {
   //for (Obj obj : objs) {
   //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
@@ -131,6 +134,15 @@ void keyPressed() {
   case ' ':
     if (pos.y == 0) {
       dir.y = speed*2;
+    }
+    break;
+
+  case 'p':
+    for (Obj obj : objs) {
+      println("------------");
+      for (PVector p : obj.getPoints()) {
+        println(p);
+      }
     }
     break;
   }
