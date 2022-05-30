@@ -8,4 +8,7 @@ public class Light extends Obj{
     super(t);
     this.intensity = intensity;
   }
+  void shine(ArrayList<Obj> o) {
+    
+  }
 }

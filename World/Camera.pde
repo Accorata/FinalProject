@@ -56,7 +56,7 @@ public class Camera {
   }
   void addObject(Obj obj) {
     objs.add(obj);
-    for (Triangle t : obj.triangles) {
+    for (Triangle t : obj.getTriangles()) {
       Triangles.add(t);
     }
   }
