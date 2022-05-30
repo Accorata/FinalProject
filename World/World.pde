@@ -15,10 +15,10 @@ void setup() {
   PVector l = new PVector (100, 250, 100);
   for (int i = 0; i<5; i++) {
     Rect one = new Rect(new PVector (-450, -200, 100+200*i), l);
+    one.rotateOnY(i*5);
     Rect two = new Rect(new PVector (350, -200, 100+200*i), l);
-    //PVector p2 = ;
-    //c.addObject(new Rect(p, l));
-    //c.addObject(new Rect(p2, l));
+    c.addObject(one);
+    c.addObject(two);
   }
   Rect centCube = new Rect(new PVector(-50, -400, 600), new PVector(100,100,100), color(255,100,100));
   centCube.rotateOnZ(45);
