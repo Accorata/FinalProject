@@ -7,7 +7,7 @@ final float speed = 5;
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
-Rect centCube = new Rect(new PVector(-50, -400, 600), new PVector(100,100,100), color(255,100,100));
+Rect centCube = new Rect(new PVector(-50, -400, 600), new PVector(100, 100, 100), color(255, 100, 100));
 void setup() {
   size(1000, 600);
   c = new Camera();
@@ -44,7 +44,7 @@ void draw() {
   boolean breached = false;
   for (Obj obj : objs) {
     obj.translate(dir);
-    if (obj.breached()) breached = true;  
+    if (obj.breached()) breached = true;
   }
   if (breached) {
     for (Obj obj : objs) {
