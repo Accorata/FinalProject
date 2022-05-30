@@ -1,4 +1,4 @@
-public class Obj { //<>//
+public class Obj { //<>// //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
@@ -96,6 +96,11 @@ public class Obj { //<>//
       point.x = temp.x;
       point.y = temp.y;
       point.add(center);
+    }
+  }
+  void addTriangles(ArrayList<Triangle> tris) {
+    for (Triangle t : tris) {
+      triangles.add(t);
     }
   }
   void translate(PVector a) {
