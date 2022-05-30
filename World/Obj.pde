@@ -1,10 +1,16 @@
-public class Obj { //<>//
+public class Obj { //<>// //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
   
-  public Obj() {
+  public Obj(PVector center) {
+    this.center = center;
+    ArrayList<Triangle> ts = new ArrayList<Triangle>();
+    ts.add(new Triangle(center.copy(), center.copy(), center.copy()));
+    this.triangles = ts;
+    this.points = calcPoints(ts);
   }
+  public Obj() {}
   public Obj(ArrayList<Triangle> t, PVector center) {
     this.points = calcPoints(t);
     this.triangles = t;
@@ -29,6 +35,9 @@ public class Obj { //<>//
   }
   ArrayList<PVector> getPoints() {
     return points;
+  }
+  ArrayList<Triangle> getTriangles() {
+    return triangles;
   }
   PVector getCenter () {
     return center;
