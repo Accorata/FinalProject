@@ -6,10 +6,10 @@ ArrayList<Obj> objs = new ArrayList<Obj>();
 final float speed = 5;
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
-boolean test = false;
+boolean test = true;
+Rect centCube = new Rect(new PVector(-50, -400, 600), new PVector(100,100,100), color(255,100,100));
 void setup() {
   size(1000, 600);
-  if (!test) noCursor();
   c = new Camera();
   // ---Initializing World---
   PVector l = new PVector (100, 250, 100);
@@ -21,7 +21,6 @@ void setup() {
     c.addObject(one);
     c.addObject(two);
   }
-  Rect centCube = new Rect(new PVector(-50, -400, 600), new PVector(100,100,100), color(255,100,100));
   centCube.rotateOnZ(45);
   c.addObject(centCube);
 }
@@ -31,10 +30,16 @@ float dist(PVector a, PVector b) {
 }
 
 void draw() {
+  if (!test) noCursor();
+  if (test) cursor();
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
   c.updatePos(dir);
+  centCube.setCenter();
+  centCube.rotateOnX(1);
+  centCube.rotateOnY(1);
+  centCube.rotateOnZ(1);
   // --Screen--
   boolean breached = false;
   for (Obj obj : objs) {
@@ -123,4 +128,7 @@ void keyReleased() {
     dir.x = 0;
     break;
   }
+}
+void mouseClicked() {
+  test = !test;
 }
