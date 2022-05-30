@@ -1,4 +1,5 @@
 import java.util.Collections;
+import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
 Camera c;
@@ -7,6 +8,34 @@ final float speed = 5;
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
+String print2D(float[][] f) {
+  String s = "";
+ for (int i = 0; i < f.length; i++) {
+   s += Arrays.toString(f[i]);
+   s += "\n";
+ }
+ return s;
+}
+void setup() {
+ size(1000, 600);
+ double[][] test = new double[600][1000];
+ for (int i = 0; i < test.length; i++) {
+    for (int j = 0; j < test[i].length; j++) {
+       test[i][j] = 0;
+    }
+ }
+ Light l = new Light(new PVector(0, 0, 0), 10);
+ l.plot(100, 100, 200, 150, 50, 200, test, 1);
+ display(test);
+}
+void display(double[][] test) {
+ for (int i = 0; i < test.length; i++) {
+    for (int j = 0; j < test[i].length; j++) {
+       if (test[i][j] != 0) point(j, i); 
+    }
+ }
+}
+/*
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -158,4 +187,9 @@ void keyReleased() {
     dir.x = 0;
     break;
   }
+}
+*/
+float dist(PVector a, PVector b) {
+  //return a.sub(b).mag();
+  return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
 }

@@ -4,12 +4,22 @@ public class Triangle implements Comparable<Triangle> {
   float light;
   float close;
   PVector center;
+  double ID;
+  Triangle copyOf() {
+    Triangle t = new Triangle(points[0], points[1], points[2], clr);
+    t.light = this.light;
+    t.close = this.close;
+    t.ID = this.ID;
+    return t;
+  }
   public Triangle (PVector a_, PVector b_, PVector c_, color clr_) {
     points[0] = a_;
     points[1] = b_;
     points[2]= c_;
     clr = clr_;
+    this.center = calcCenter();
     this.light = 0;
+    this.ID = Math.random();
   }
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
