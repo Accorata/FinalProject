@@ -31,6 +31,17 @@ public class Triangle implements Comparable<Triangle> {
     if (this.close < obj.close) return 1;
     return 0;
   }
+  ArrayList<Triangle> splitTriangle() {
+    ArrayList<Triangle> smallTris = new ArrayList<Triangle>();
+    PVector mid01 = points[0].sub(points[1]).div(2).add(points[0]);
+    PVector mid12 = points[1].sub(points[2]).div(2).add(points[1]);
+    PVector mid20 = points[2].sub(points[0]).div(2).add(points[2]);
+    smallTris.add(new Triangle(points[0], mid01, mid20));
+    smallTris.add(new Triangle(points[1], mid01, mid12));
+    smallTris.add(new Triangle(points[2], mid12, mid20));
+    smallTris.add(new Triangle(mid01, mid12, mid20));
+    return smallTris;
+  }
   @Override
     String toString() {
     return points[0] + "  " + points[1] + "  " + points[2];
