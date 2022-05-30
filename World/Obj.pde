@@ -58,7 +58,7 @@ public class Obj { //<>//
       boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
       
       boolean within = wx && wy && wz;
-      if (within && n < 10000) {
+      if (within && n < 25000) {
         breached = true;
  
       }
