@@ -6,7 +6,7 @@ ArrayList<Obj> objs = new ArrayList<Obj>();
 final float speed = 5;
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
-boolean test = true;
+boolean test = false;
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -15,8 +15,9 @@ void setup() {
   PVector l = new PVector (100, 250, 100);
   for (int i = 0; i<5; i++) {
     Rect one = new Rect(new PVector (-450, -200, 100+200*i), l);
-    one.rotateOnY(i*5);
+    one.rotateOnY(i*10);
     Rect two = new Rect(new PVector (350, -200, 100+200*i), l);
+    two.rotateOnY(-i*10);
     c.addObject(one);
     c.addObject(two);
   }
