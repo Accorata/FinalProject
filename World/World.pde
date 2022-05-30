@@ -71,25 +71,24 @@ void draw() {
   // --Update World--
   c.updatePos(dir);
   // --Screen--
-  background(255);
+  boolean breached = false;
   for (Obj obj : objs) {
     obj.translate(dir);
-    c.display();
+    if (obj.breached()) breached = true;  
   }
+  if (breached) {
+    for (Obj obj : objs) {
+      obj.translate(PVector.mult(dir, -1));
+    }
+  }
+  background(255);
+  c.display();
   stroke(75);
   strokeWeight(2);
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
 }
-
-/*
-void draw() {
- background(255);
- c.display();
- 
- }
- */
 void keyPressed() {
   switch (key) {
   case 'l':

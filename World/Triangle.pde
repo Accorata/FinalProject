@@ -17,7 +17,7 @@ public class Triangle implements Comparable<Triangle> {
     this.center = calcCenter();
     this.close = dist(center, new PVector(0, 0, -1 * fromScreen));
   }
- 
+
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
     for (PVector point : points) {
