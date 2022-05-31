@@ -1,4 +1,4 @@
-public class Obj { //<>//
+public class Obj { //<>// //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
@@ -24,6 +24,11 @@ public class Obj { //<>//
 
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
+    this.triangles = triangles_;
+    setCenter();
+  }
+  void setObj (ArrayList<Triangle> triangles_) {
+    this.points = calcPoints(triangles_);
     this.triangles = triangles_;
     setCenter();
   }

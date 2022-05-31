@@ -82,6 +82,7 @@ void setup() {
     obj.translate(new PVector(0, 0, 200));
     obj.rotateOnZ(45);
   }
+  c.addObject(new Plane(100, color(0), 1000, 1000));
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
