@@ -16,6 +16,7 @@ void setup() {
   PVector p2 = new PVector (400, 100, 100);
   PVector l = new PVector (200, 200, 200);
   testTris.add(new Triangle(p, p2, l));
+  testTris = testTris.get(0).splitTriangle();
   //Rect one = new Rect(p, 200, true);
   //c.addObject(one);
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
@@ -68,7 +69,8 @@ void draw() {
   //line(width/2-10, height/2, width/2+10, height/2);
   //line(width/2, height/2-10, width/2, height/2+10);
   //strokeWeight(1);
-  background(0);
+  background(100);
+  fill(255,50);
   for (Triangle t : testTris) {
     PVector[] points = t.getPoints();
     triangle(points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y); 
