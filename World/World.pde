@@ -9,7 +9,7 @@ final float speed = 5;
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
-String print2D(double[][] f) {
+String print2D(float[][] f) {
   String s = "";
  for (int i = 0; i < f.length; i++) {
    s += Arrays.toString(f[i]);
