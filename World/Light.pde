@@ -262,10 +262,11 @@ public class Light extends Obj{
      float s1x = (x2-x1);
      float s1y = (y2-y1);
      for (int i = 0; i <= s1x; i++) {
-       int x = (int)(y1 + (i * s1y/s1x));
-       int y = (int)(x1 + i);
-       //if (x > 
-       scr[x][y] = ID;
+       int y = (int)(y1 + (i * s1y/s1x));
+       int x = (int)(x1 + i);
+       if (x > scr.length) break;
+       if (
+       scr[y][x] = ID;
        
      }
      for (int i = 0; i >= s1x; i--) {
