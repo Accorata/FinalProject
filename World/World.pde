@@ -84,7 +84,7 @@ void setup() {
     obj.translate(new PVector(0, 0, 200));
     obj.rotateOnZ(45);
   }
-  c.addObject(new Plane(100, color(0), 1000, 1000));
+  c.addObject(new Plane(100, color(0), 5000, 5000));
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
@@ -123,9 +123,11 @@ void draw() {
   }
   if (breached) {
     for (Obj obj : objs) {
-
+      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX(-xAng);
       obj.translate(PVector.mult(dir, -1));
-
+      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX(xAng);
     }
   }
   background(255);
