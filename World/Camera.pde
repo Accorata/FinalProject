@@ -7,8 +7,8 @@ public class Camera {
   PVector mouseOld = new PVector(width/2, height/2);
   public Camera() {
     resetScreen();
-    loc = new PVector(0, 0, 0);
-    dense = true;
+    this.loc = new PVector(0, 0, 0);
+    this.dense = true;
   }
   PVector getLoc() {
     return loc;
@@ -77,13 +77,13 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
-    loc.add(dir);
+    this.loc.add(dir);
     dir.y -= speed/30;
     if (loc.y < 0) {
       for (Obj obj : objs) {
         obj.translate(new PVector(0, -loc.y, 0));
       }
-      loc.y = 0;
+      this.loc.y = 0;
       dir.y = 0;
     }
   }

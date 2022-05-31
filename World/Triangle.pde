@@ -13,10 +13,10 @@ public class Triangle implements Comparable<Triangle> {
     return t;
   }
   public Triangle (PVector a_, PVector b_, PVector c_, color clr_) {
-    points[0] = a_;
-    points[1] = b_;
-    points[2]= c_;
-    clr = clr_;
+    this.points[0] = a_;
+    this.points[1] = b_;
+    this.points[2]= c_;
+    this.clr = clr_;
     this.center = calcCenter();
     this.light = 0;
     this.ID = Math.random();
@@ -81,30 +81,5 @@ public class Triangle implements Comparable<Triangle> {
   @Override
     String toString() {
     return points[0] + "  " + points[1] + "  " + points[2];
-  }
-  //ArrayList<PVector> getCoords () {
-  //  ArrayList<PVector> coords = new ArrayList<PVector>();
-  //  //start with lines
-  //  PVector ab = b.sub(a);
-  //  float abLen = ab.mag();
-  //  //println(ab + " " + abLen);
-  //  PVector ac = c.sub(a);
-  //  float acLen = ac.mag();
-  //  PVector bc = c.sub(b);
-  //  float bcLen = bc.mag();
-  //  for (int i = 1; i<abLen; i++) {
-  //    coords.add(partVec(ab, a, i));
-  //  }
-  //  for (int i = 1; i<acLen; i++) {
-  //    coords.add(partVec(ac, a, i));
-  //  }
-  //  for (int i = 1; i<bcLen; i++) {
-  //    coords.add(partVec(bc, b, i));
-  //  }
-  //  return coords;
-  //}
-  private PVector partVec (PVector ab, PVector a, int mag) {
-    PVector ans = new PVector(ab.x, ab.y, ab.z);
-    return ans.setMag(mag).add(a);
   }
 }

@@ -1,4 +1,4 @@
-public class Light extends Obj{
+public class Light extends Obj {
   float intensity;
   int mag;
   public Light(PVector loc, float intensity) {
@@ -189,7 +189,7 @@ public class Light extends Obj{
     }
     Collections.sort(Triangles);
     for (Triangle t : Triangles) {
-      
+
       if (!(t.points[0].z > 0 && t.points[1].z > 0 && t.points[2].z > 0)) {
         float[][] pT = new float[3][2];
         int count = 0;
@@ -249,78 +249,107 @@ public class Light extends Obj{
             break;
           }
         }
-       
+
         plot(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1], s, t.ID);
       }
     }
     return s;
   }
   void plot(float x1, float y1, float x2, float y2, float x3, float y3, double[][] scr, double ID) {
-     x1--;x2--;x3--;y1--;y2--;y3--;
+    x1--;
+    x2--;
+    x3--;
+    y1--;
+    y2--;
+    y3--;
 
-     float s1x = (x2-x1);
-     float s1y = (y2-y1);
-     for (int i = 0; i <= s1x; i++) {
-       int y = (int)(y1 + (i * s1y/s1x));
-       int x = (int)(x1 + i);
-       if (x > scr.length) break;
-       if (x < 0) i = (int) -x1 -1;
-       try {scr[y][x] = ID;} catch (Exception e) {}
-     }
-     for (int i = 0; i >= s1x; i--) {
-       int y = (int)(y1 + (i * s1y/s1x));
-       int x = (int)(x1 + i);
-       if (x < 0) break;
-       if (x > scr.length) i = (int) (scr.length - x1);
-       try {scr[y][x] = ID;} catch (Exception e) {}
-     }
-     float s2x = (x2-x3);
-     float s2y = (y2-y3);
-     for (int i = 0; i <= s2x; i++) {
-       int y = (int)(y3 + (i * s2y/s2x));
-       int x = (int)(x3 + i);
-       if (x > scr.length) break;
-       if (x < 0) i = (int) -x3 -1;
-       try {scr[y][x] = ID;} catch (Exception e) {}
-     }
-     for (int i = 0; i >= s2x; i--) {
-       int y = (int)(y3 + (i * s2y/s2x));
-       int x = (int)(x3 + i);
-       if (x < 0) break;
-       if (x > scr.length) i = (int) (scr.length - x3);
-       try {scr[y][x] = ID;} catch (Exception e) {}
-     }
-     float s3x = (x3-x1);
-     float s3y = (y3-y1);
-     for (int i = 0; i <= s3x; i++) {
-       int y = (int)(y1 + (i * s3y/s3x));
-       int x = (int)(x1 + i);
-       if (x > scr.length) break;
-       if (x < 0) i = (int) -x1 -1;
-       try {scr[y][x] = ID;} catch (Exception e) {}
-     }
-     for (int i = 0; i >= s3x; i--) {
-       int y = (int)(y1 + (i * s3y/s3x));
-       int x = (int)(x1 + i);
-       if (x < 0) break;
-       if (x > scr.length) i = (int) (scr.length - x1);
-       try {scr[y][x] = ID;} catch (Exception e) {}
-     }
-     
-     for (float i = 0; i < mag; i++) {
-       boolean place = false;
-       int c  = 0;
-       for (float j = 0; j < mag; j++) {
-         if (scr[(int)j][(int)i] == ID) {
-           place = true;
-           c++;
-           if (c >= 2) break;
-         } else if (place) {
-           if (scr[(int)j][(int)i] == ID) break;
-           scr[(int)j][(int)i] = ID;
-         }
-       }
-     }
+    float s1x = (x2-x1);
+    float s1y = (y2-y1);
+    for (int i = 0; i <= s1x; i++) {
+      int y = (int)(y1 + (i * s1y/s1x));
+      int x = (int)(x1 + i);
+      if (x > scr.length) break;
+      if (x < 0) i = (int) -x1 -1;
+      try {
+        scr[y][x] = ID;
+      } 
+      catch (Exception e) {
+      }
+    }
+    for (int i = 0; i >= s1x; i--) {
+      int y = (int)(y1 + (i * s1y/s1x));
+      int x = (int)(x1 + i);
+      if (x < 0) break;
+      if (x > scr.length) i = (int) (scr.length - x1);
+      try {
+        scr[y][x] = ID;
+      } 
+      catch (Exception e) {
+      }
+    }
+    float s2x = (x2-x3);
+    float s2y = (y2-y3);
+    for (int i = 0; i <= s2x; i++) {
+      int y = (int)(y3 + (i * s2y/s2x));
+      int x = (int)(x3 + i);
+      if (x > scr.length) break;
+      if (x < 0) i = (int) -x3 -1;
+      try {
+        scr[y][x] = ID;
+      } 
+      catch (Exception e) {
+      }
+    }
+    for (int i = 0; i >= s2x; i--) {
+      int y = (int)(y3 + (i * s2y/s2x));
+      int x = (int)(x3 + i);
+      if (x < 0) break;
+      if (x > scr.length) i = (int) (scr.length - x3);
+      try {
+        scr[y][x] = ID;
+      } 
+      catch (Exception e) {
+      }
+    }
+    float s3x = (x3-x1);
+    float s3y = (y3-y1);
+    for (int i = 0; i <= s3x; i++) {
+      int y = (int)(y1 + (i * s3y/s3x));
+      int x = (int)(x1 + i);
+      if (x > scr.length) break;
+      if (x < 0) i = (int) -x1 -1;
+      try {
+        scr[y][x] = ID;
+      } 
+      catch (Exception e) {
+      }
+    }
+    for (int i = 0; i >= s3x; i--) {
+      int y = (int)(y1 + (i * s3y/s3x));
+      int x = (int)(x1 + i);
+      if (x < 0) break;
+      if (x > scr.length) i = (int) (scr.length - x1);
+      try {
+        scr[y][x] = ID;
+      } 
+      catch (Exception e) {
+      }
+    }
+
+    for (float i = 0; i < mag; i++) {
+      boolean place = false;
+      int c  = 0;
+      for (float j = 0; j < mag; j++) {
+        if (scr[(int)j][(int)i] == ID) {
+          place = true;
+          c++;
+          if (c >= 2) break;
+        } else if (place) {
+          if (scr[(int)j][(int)i] == ID) break;
+          scr[(int)j][(int)i] = ID;
+        }
+      }
+    }
   }
   ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
     ArrayList<Triangle> tsc = new ArrayList<Triangle>();
