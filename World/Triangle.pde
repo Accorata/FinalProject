@@ -42,6 +42,9 @@ public class Triangle implements Comparable<Triangle> {
     PVector mid12 = p1.add(points[2]).div(2);
     PVector p2 = points[2].copy();
     PVector mid20 = p2.add(points[0]).div(2);
+    object.addPoint(mid01);
+    object.addPoint(mid12);
+    object.addPoint(mid20);
     smallTris.add(new Triangle(points[0], mid01, mid20));
     smallTris.add(new Triangle(points[1], mid01, mid12));
     smallTris.add(new Triangle(points[2], mid12, mid20));
