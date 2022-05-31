@@ -41,7 +41,7 @@ void setup() {
   size(1000, 600);
   if (!test) noCursor();
   c = new Camera();
-  l = new Light(new PVector(500, 500, 500), 10);
+  //l = new Light(new PVector(500, 500, 500), 10);
   //PVector v1 = new PVector(100, 100, 100);
   //PVector v2 = new PVector(100, 100, -100);
   //PVector v3 = new PVector(100, -100, -100);
