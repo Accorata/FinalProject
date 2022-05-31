@@ -15,7 +15,7 @@ String print2D(float[][] f) {
    s += "\n";
  }
  return s;
-}
+}/*
 void setup() {
  size(1000, 600);
  double[][] test = new double[600][1000];
@@ -27,7 +27,7 @@ void setup() {
  Light l = new Light(new PVector(0, 0, 0), 10);
  l.plot(100, 100, 200, 150, 50, 200, test, 1);
  display(test);
-}
+}*/
 void display(double[][] test) {
  for (int i = 0; i < test.length; i++) {
     for (int j = 0; j < test[i].length; j++) {
@@ -35,7 +35,7 @@ void display(double[][] test) {
     }
  }
 }
-/*
+
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -187,9 +187,4 @@ void keyReleased() {
     dir.x = 0;
     break;
   }
-}
-*/
-float dist(PVector a, PVector b) {
-  //return a.sub(b).mag();
-  return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
 }

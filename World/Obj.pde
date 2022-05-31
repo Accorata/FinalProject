@@ -1,4 +1,4 @@
-public class Obj { //<>// //<>//
+public class Obj { //<>// //<>// //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
@@ -113,7 +113,7 @@ public class Obj { //<>// //<>//
     }
     center = calcCenter();
   }
-  private ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
+  ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
     ArrayList<PVector> p = new ArrayList<PVector>();
     for (Triangle tri : t) {
       for (PVector point : tri.points) {

@@ -6,7 +6,7 @@ public class Triangle implements Comparable<Triangle> {
   PVector center;
   double ID;
   Triangle copyOf() {
-    Triangle t = new Triangle(points[0], points[1], points[2], clr);
+    Triangle t = new Triangle(points[0].copy(), points[1].copy(), points[2].copy(), clr);
     t.light = this.light;
     t.close = this.close;
     t.ID = this.ID;
@@ -28,7 +28,7 @@ public class Triangle implements Comparable<Triangle> {
     this.center = calcCenter();
     this.close = dist(center, new PVector(0, 0, -1 * fromScreen));
   }
-
+ 
   PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
     for (PVector point : points) {
