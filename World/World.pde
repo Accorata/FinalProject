@@ -17,7 +17,7 @@ void setup() {
   PVector l = new PVector (200, 200, 200);
   //testTris.add(new Triangle(p, p2, l));
   //testTris = testTris.get(0).splitTriangle(new Obj());
-  Rect one = new Rect(p, 200, 3); //Max 3 resolution
+  Rect one = new Rect(p, 200, 2); //Max 3 resolution
   c.addObject(one);
   c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
@@ -26,6 +26,7 @@ void setup() {
   for (Obj obj : objs) {
     obj.translate(new PVector(0, 0, 200));
     obj.rotateOnZ(45);
+    obj.rotateOnY(135);
   }
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
