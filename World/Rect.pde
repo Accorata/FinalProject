@@ -12,8 +12,11 @@ public class Rect extends Obj {
     super();
     PVector size = new PVector(len, len, len);
     ArrayList<PVector> p = calcPoints(pos, size);
-    ArrayList<Triangle> t = calcTriangles(p, color(0));
-    setObj(p, t);
+    setObj(p, new ArrayList<Triangle>());
+    ArrayList<Triangle> tris = calcTriangles(p, color(0));
+    for (Triangle t : tris) {
+      addTriangles(t.splitTriangle());
+    }
   }
   public Rect (PVector pos, float len) {
     this(pos, new PVector(len, len, len));
