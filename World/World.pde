@@ -11,17 +11,17 @@ void setup() {
   size(1000, 600);
   if (!test) noCursor();
   c = new Camera();
-  PVector p = new PVector (-100, -100, -100);
+  PVector p = new PVector (0,0,0);
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
   Rect one = new Rect(p, 200, true);
   c.addObject(one);
-  c.addObject(new Rect(p2, l, color(255, 0, 0)));
-  c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
+  //c.addObject(new Rect(p2, l, color(255, 0, 0)));
+  //c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
-    obj.translate(new PVector(0, 0, 200));
+    obj.translate(new PVector(0, 0, 10000));
     obj.rotateOnZ(45);
   }
   //p.add(new PVector(100, 100, 100));
