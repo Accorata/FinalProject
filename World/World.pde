@@ -2,7 +2,7 @@ import java.util.Collections;
 import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
-
+Plane sc = new Plane(100, color(0), 1000, 1000);
 float xAng = 0;
 Camera c;
 Light l;
@@ -77,14 +77,14 @@ void setup() {
   Rect one = new Rect(p, 200, 2);
   //c.addObject(one);
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
-  c.addObject(new Rect(new PVector(0, -200, 200), l, color(0, 255, 0)));
+  c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
     obj.translate(new PVector(0, 0, 200));
     obj.rotateOnZ(45);
   }
-  c.addObject(new Plane(100, color(0), 5000, 5000));
+  c.addObject(sc);
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
@@ -109,10 +109,14 @@ void draw() {
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
+
   c.updatePos(dir);
   // --Screen--
   boolean breached = false;
+  println(sc.ps);
   for (Obj obj : objs) {
+    
+    
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(-xAng);
     obj.translate(dir);
@@ -120,6 +124,7 @@ void draw() {
     obj.rotateOnX(xAng);
     
     if (obj.breached()) breached = true;  
+    //}
   }
   if (breached) {
     for (Obj obj : objs) {
@@ -165,18 +170,25 @@ void keyPressed() {
     }
     break;
   case 'i':
+ 
     xAng += 10;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(10);
     }
+    
+   
     break;
+    
   case 'k':
+   
     xAng -= 10;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-10);
     }
+    
+    
     break;
   case 'w':
     dir.z = -speed;
