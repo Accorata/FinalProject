@@ -34,14 +34,14 @@ public class Triangle implements Comparable<Triangle> {
     if (this.close < obj.close) return 1;
     return 0;
   }
-  ArrayList<Triangle> splitTriangle() {
+  ArrayList<Triangle> splitTriangle(Obj object) {
     ArrayList<Triangle> smallTris = new ArrayList<Triangle>();
     PVector p0 = points[0].copy();
-    PVector mid01 = p0.add(points[1]).div(2);//.add(points[0]);
+    PVector mid01 = p0.add(points[1]).div(2);
     PVector p1 = points[1].copy();
-    PVector mid12 = p1.add(points[2]).div(2);//.add(points[1]);
+    PVector mid12 = p1.add(points[2]).div(2);
     PVector p2 = points[2].copy();
-    PVector mid20 = p2.add(points[0]).div(2);//.add(points[2]);
+    PVector mid20 = p2.add(points[0]).div(2);
     smallTris.add(new Triangle(points[0], mid01, mid20));
     smallTris.add(new Triangle(points[1], mid01, mid12));
     smallTris.add(new Triangle(points[2], mid12, mid20));

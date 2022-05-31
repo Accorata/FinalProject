@@ -16,7 +16,7 @@ void setup() {
   PVector p2 = new PVector (400, 100, 100);
   PVector l = new PVector (200, 200, 200);
   testTris.add(new Triangle(p, p2, l));
-  testTris = testTris.get(0).splitTriangle();
+  testTris = testTris.get(0).splitTriangle(new Obj());
   //Rect one = new Rect(p, 200, true);
   //c.addObject(one);
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
