@@ -56,6 +56,9 @@ public class Triangle implements Comparable<Triangle> {
       smallTris.add(tri4);
     } else {
       combTriLists(smallTris, tri1.splitTriangle(object, num-1));
+      combTriLists(smallTris, tri2.splitTriangle(object, num-1));
+      combTriLists(smallTris, tri3.splitTriangle(object, num-1));
+      combTriLists(smallTris, tri4.splitTriangle(object, num-1));
     }
     return smallTris;
   }
