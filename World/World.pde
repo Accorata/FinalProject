@@ -14,9 +14,12 @@ void setup() {
   // ---Initializing World---
   PVector l = new PVector (100, 250, 100);
   for (int i = 0; i<5; i++) {
-    Rect one = new Rect(new PVector (-450, -200, 100+200*i), l);
+    int c1 = (int) (Math.random()*256);
+    int c2 = (int) (Math.random()*256);
+    int c3 = (int) (Math.random()*256);
+    Rect one = new Rect(new PVector (-450, -200, 100+200*i), l, color(c1, c2, c3));
     one.rotateOnY(i*10);
-    Rect two = new Rect(new PVector (350, -200, 100+200*i), l);
+    Rect two = new Rect(new PVector (350, -200, 100+200*i), l, color(c1, c2, c3));
     two.rotateOnY(-i*10);
     c.addObject(one);
     c.addObject(two);
