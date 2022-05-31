@@ -26,7 +26,7 @@ void setup() {
   for (Obj obj : objs) {
     obj.translate(new PVector(0, 0, 200));
     obj.rotateOnZ(45);
-    obj.rotateOnY(135);
+    //obj.rotateOnY(135);
   }
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));

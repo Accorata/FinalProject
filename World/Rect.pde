@@ -40,8 +40,7 @@ public class Rect extends Obj {
     t.add(new Triangle(points.get(3), points.get(2), points.get(4), c));
     t.add(new Triangle(points.get(4), points.get(5), points.get(3), c));
     t.add(new Triangle(points.get(5), points.get(4), points.get(6), c));
-    //Error here
-    t.add(new Triangle(points.get(6), points.get(7), points.get(3), c));
+    t.add(new Triangle(points.get(6), points.get(7), points.get(5), c));
     t.add(new Triangle(points.get(7), points.get(6), points.get(1), c));
     t.add(new Triangle(points.get(1), points.get(7), points.get(0), c));
     t.add(new Triangle(points.get(1), points.get(6), points.get(4), c));
