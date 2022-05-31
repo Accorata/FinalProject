@@ -46,18 +46,23 @@ public class Triangle implements Comparable<Triangle> {
     object.addPoint(mid12);
     object.addPoint(mid20);
     Triangle tri1 = new Triangle(points[0], mid01, mid20);
-    Triangle tri2 = new Triangle(points[1], mid01, mid12)
-    //Triangle tri3 = new Triangle(points[0], mid01, mid20);
+    Triangle tri2 = new Triangle(points[1], mid01, mid12);
+    Triangle tri3 = new Triangle(points[2], mid12, mid20);
+    Triangle tri4 = new Triangle(mid01, mid12, mid20);
     if (num <= 0) {
       smallTris.add(tri1);
       smallTris.add(tri2);
-      smallTris.add(new Triangle(points[2], mid12, mid20));
-      smallTris.add(new Triangle(mid01, mid12, mid20));
+      smallTris.add(tri3);
+      smallTris.add(tri4);
+    } else {
+      combTriLists(smallTris, tri1.splitTriangle(object, num-1));
     }
-    //} else {
-    //  smallTris.add(splitTriangle(object, num-1))
-    //}
     return smallTris;
+  }
+  private void combTriLists(ArrayList<Triangle> arr, ArrayList<Triangle> add) {
+    for (Triangle t : add) {
+      arr.add(t);
+    }
   }
   @Override
     String toString() {
