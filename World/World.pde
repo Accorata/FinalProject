@@ -97,7 +97,7 @@ float dist(PVector a, PVector b) {
 }
 
 void draw() {
-  l.shine(c.Triangles);
+  //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--

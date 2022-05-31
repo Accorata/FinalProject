@@ -249,8 +249,7 @@ public class Light extends Obj{
             break;
           }
         }
-        println(t);
-        println(print2D(pT));
+       
         plot(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1], s, t.ID);
       }
     }
@@ -265,49 +264,53 @@ public class Light extends Obj{
        int y = (int)(y1 + (i * s1y/s1x));
        int x = (int)(x1 + i);
        if (x > scr.length) break;
-       if (
-       scr[y][x] = ID;
-       
+       if (x < 0) i = (int) -x1 -1;
+       try {scr[y][x] = ID;} catch (Exception e) {}
      }
      for (int i = 0; i >= s1x; i--) {
-       int x = (int)(y1 + (i * s1y/s1x));
-       int y = (int)(x1 + i);
-
-       scr[x][y] = ID;
+       int y = (int)(y1 + (i * s1y/s1x));
+       int x = (int)(x1 + i);
+       if (x < 0) break;
+       if (x > scr.length) i = (int) (scr.length - x1);
+       try {scr[y][x] = ID;} catch (Exception e) {}
      }
      float s2x = (x2-x3);
      float s2y = (y2-y3);
      for (int i = 0; i <= s2x; i++) {
-       int x = (int)(y3 + (i * s2y/s2x));
-       int y = (int)(x3 + i);
-   
-       scr[x][y] = ID;
+       int y = (int)(y3 + (i * s2y/s2x));
+       int x = (int)(x3 + i);
+       if (x > scr.length) break;
+       if (x < 0) i = (int) -x3 -1;
+       try {scr[y][x] = ID;} catch (Exception e) {}
      }
      for (int i = 0; i >= s2x; i--) {
-       int x = (int)(y3 + (i * s2y/s2x));
-       int y = (int)(x3 + i);
-
-       scr[x][y] = ID;
+       int y = (int)(y3 + (i * s2y/s2x));
+       int x = (int)(x3 + i);
+       if (x < 0) break;
+       if (x > scr.length) i = (int) (scr.length - x3);
+       try {scr[y][x] = ID;} catch (Exception e) {}
      }
      float s3x = (x3-x1);
      float s3y = (y3-y1);
      for (int i = 0; i <= s3x; i++) {
-       int x = (int)(y1 + (i * s3y/s3x));
-       int y = (int)(x1 + i);
-
-       scr[x][y] = ID;
+       int y = (int)(y1 + (i * s3y/s3x));
+       int x = (int)(x1 + i);
+       if (x > scr.length) break;
+       if (x < 0) i = (int) -x1 -1;
+       try {scr[y][x] = ID;} catch (Exception e) {}
      }
      for (int i = 0; i >= s3x; i--) {
-       int x = (int)(y1 + (i * s3y/s3x));
-       int y = (int)(x1 + i);
-   
-       scr[x][y] = ID;
+       int y = (int)(y1 + (i * s3y/s3x));
+       int x = (int)(x1 + i);
+       if (x < 0) break;
+       if (x > scr.length) i = (int) (scr.length - x1);
+       try {scr[y][x] = ID;} catch (Exception e) {}
      }
      
-     for (float i = Math.min(Math.min(x1, x2), x3); i < Math.max(Math.max(x1, x2), x3); i++) {
+     for (float i = 0; i < mag; i++) {
        boolean place = false;
        int c  = 0;
-       for (float j = Math.min(Math.min(y1, y2), y3); j < Math.max(Math.max(y1, y2), y3); j++) {
+       for (float j = 0; j < mag; j++) {
          if (scr[(int)j][(int)i] == ID) {
            place = true;
            c++;
