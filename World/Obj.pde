@@ -28,6 +28,11 @@ public class Obj { //<>//
     this.triangles = triangles_;
     setCenter();
   }
+  void setObj (ArrayList<Triangle> triangles_) {
+    this.points = calcPoints(triangles_);
+    this.triangles = triangles_;
+    setCenter();
+  }
   void setCenter(PVector v) {
     this.center = v;
   }

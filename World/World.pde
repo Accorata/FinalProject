@@ -2,6 +2,8 @@ import java.util.Collections;
 import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
+
+float xAng = 0;
 Camera c;
 Light l;
 ArrayList<Obj> objs = new ArrayList<Obj>();
@@ -36,13 +38,27 @@ void setup() {
   c.addObject(one);
   c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
-
+  c.addObject(new Rect(new PVector(0, -200, 200), l, color(0, 255, 0)));
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
     obj.translate(new PVector(0, 0, 200));
     obj.rotateOnZ(45);
     //obj.rotateOnY(135);
   }
+  c.addObject(new Plane(100, color(0), 1000, 1000));
+  //p.add(new PVector(100, 100, 100));
+  //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
+  //ArrayList<PVector> coords = test.getCoords();
+  ////println(coords);
+  //stroke(0);
+  //for (PVector coord : coords) {
+  //  point(coord.x, coord.y);
+  //  //circle(coord.x, coord.y,5);
+  //}
+  //PVector test = new PVector (100,0,0);
+  //println(test.setMag(25));
+
+  //objs.get(0).rotateOnZ(45);
 }
 void draw() {
   //l.shine(c.Triangles);
@@ -53,12 +69,19 @@ void draw() {
   // --Screen--
   boolean breached = false;
   for (Obj obj : objs) {
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnX(-xAng);
     obj.translate(dir);
+    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    obj.rotateOnX(xAng);
+    
     if (obj.breached()) breached = true;  
   }
   if (breached) {
     for (Obj obj : objs) {
+
       obj.translate(PVector.mult(dir, -1));
+
     }
   }
   background(255);
@@ -72,24 +95,32 @@ void draw() {
 void keyPressed() {
   switch (key) {
   case 'l':
+  
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
+      obj.rotateOnX(xAng);
     }
     break;
   case 'j':
+    
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
+      obj.rotateOnX(xAng);
     }
     break;
   case 'i':
+    xAng += 10;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(10);
     }
     break;
   case 'k':
+    xAng -= 10;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-10);
