@@ -13,12 +13,15 @@ public class Triangle implements Comparable<Triangle> {
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
   }
+  
+  PVector[] getPoints() {
+    return points;
+  }
   void update_close() {
     this.center = calcCenter();
     this.close = dist(center, new PVector(0, 0, -1 * fromScreen));
   }
-
-  PVector calcCenter () {
+  private PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
     for (PVector point : points) {
       cent.add(point);
