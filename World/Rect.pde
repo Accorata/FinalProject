@@ -15,7 +15,7 @@ public class Rect extends Obj {
     setObj(p, new ArrayList<Triangle>());
     ArrayList<Triangle> tris = calcTriangles(p, color(0));
     for (Triangle t : tris) {
-      addTriangles(t.splitTriangle(this));
+      addTriangles(t.splitTriangle(this, 0));
     }
   }
   public Rect (PVector pos, float len) {
