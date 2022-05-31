@@ -13,20 +13,20 @@ void setup() {
   if (!test) noCursor();
   c = new Camera();
   PVector p = new PVector (0,0,0);
-  PVector p2 = new PVector (400, 100, 100);
+  PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
-  testTris.add(new Triangle(p, p2, l));
-  testTris = testTris.get(0).splitTriangle(new Obj());
-  //Rect one = new Rect(p, 200, true);
-  //c.addObject(one);
-  //c.addObject(new Rect(p2, l, color(255, 0, 0)));
-  //c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
+  //testTris.add(new Triangle(p, p2, l));
+  //testTris = testTris.get(0).splitTriangle(new Obj());
+  Rect one = new Rect(p, 200, true);
+  c.addObject(one);
+  c.addObject(new Rect(p2, l, color(255, 0, 0)));
+  c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
 
   //objs.get(0).rotateX(30);
-  //for (Obj obj : objs) {
-  //  obj.translate(new PVector(0, 0, 1000));
-  //  obj.rotateOnZ(45);
-  //}
+  for (Obj obj : objs) {
+    obj.translate(new PVector(0, 0, 200));
+    obj.rotateOnZ(45);
+  }
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
@@ -47,34 +47,34 @@ float dist(PVector a, PVector b) {
 }
 
 void draw() {
-  //// --Mouse Control--
-  //if (!test) c.rotateByMouse();
-  //// --Update World--
-  //c.updatePos(dir);
-  //// --Screen--
-  //boolean breached = false;
-  //for (Obj obj : objs) {
-  //  obj.translate(dir);
-  //  if (obj.breached()) breached = true;  
-  //}
-  //if (breached) {
-  //  for (Obj obj : objs) {
-  //    obj.translate(PVector.mult(dir, -1));
-  //  }
-  //}
-  //background(255);
-  //c.display();
-  //stroke(75);
-  //strokeWeight(2);
-  //line(width/2-10, height/2, width/2+10, height/2);
-  //line(width/2, height/2-10, width/2, height/2+10);
-  //strokeWeight(1);
-  background(100);
-  fill(255,50);
-  for (Triangle t : testTris) {
-    PVector[] points = t.getPoints();
-    triangle(points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y); 
+  // --Mouse Control--
+  if (!test) c.rotateByMouse();
+  // --Update World--
+  c.updatePos(dir);
+  // --Screen--
+  boolean breached = false;
+  for (Obj obj : objs) {
+    obj.translate(dir);
+    if (obj.breached()) breached = true;  
   }
+  if (breached) {
+    for (Obj obj : objs) {
+      obj.translate(PVector.mult(dir, -1));
+    }
+  }
+  background(255);
+  c.display();
+  stroke(75);
+  strokeWeight(2);
+  line(width/2-10, height/2, width/2+10, height/2);
+  line(width/2, height/2-10, width/2, height/2+10);
+  strokeWeight(1);
+  //background(100);
+  //fill(255,50);
+  //for (Triangle t : testTris) {
+  //  PVector[] points = t.getPoints();
+  //  triangle(points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y); 
+  //}
 }
 void keyPressed() {
   switch (key) {
