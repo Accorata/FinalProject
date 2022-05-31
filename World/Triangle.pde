@@ -4,11 +4,22 @@ public class Triangle implements Comparable<Triangle> {
   float light;
   float close;
   PVector center;
+  double ID;
+  Triangle copyOf() {
+    Triangle t = new Triangle(points[0].copy(), points[1].copy(), points[2].copy(), clr);
+    t.light = this.light;
+    t.close = this.close;
+    t.ID = this.ID;
+    return t;
+  }
   public Triangle (PVector a_, PVector b_, PVector c_, color clr_) {
     points[0] = a_;
     points[1] = b_;
     points[2]= c_;
     clr = clr_;
+    this.center = calcCenter();
+    this.light = 0;
+    this.ID = Math.random();
   }
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
@@ -21,7 +32,7 @@ public class Triangle implements Comparable<Triangle> {
     this.center = calcCenter();
     this.close = dist(center, new PVector(0, 0, -1 * fromScreen));
   }
-  private PVector calcCenter () {
+  PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
     for (PVector point : points) {
       cent.add(point);

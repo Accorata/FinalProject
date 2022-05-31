@@ -1,18 +1,73 @@
 import java.util.Collections;
+import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
 Camera c;
+Light l;
 ArrayList<Obj> objs = new ArrayList<Obj>();
 final float speed = 5;
 PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
+String print2D(float[][] f) {
+  String s = "";
+ for (int i = 0; i < f.length; i++) {
+   s += Arrays.toString(f[i]);
+   s += "\n";
+ }
+ return s;
+}/*
+void setup() {
+ size(1000, 600);
+ double[][] test = new double[600][1000];
+ for (int i = 0; i < test.length; i++) {
+    for (int j = 0; j < test[i].length; j++) {
+       test[i][j] = 0;
+    }
+ }
+ Light l = new Light(new PVector(0, 0, 0), 10);
+ l.plot(100, 100, 200, 150, 50, 200, test, 1);
+ display(test);
+}*/
+void display(double[][] test) {
+ for (int i = 0; i < test.length; i++) {
+    for (int j = 0; j < test[i].length; j++) {
+       if (test[i][j] != 0) point(j, i); 
+    }
+ }
+}
+
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
   c = new Camera();
   PVector p = new PVector (0,0,0);
+  //l = new Light(new PVector(500, 500, 500), 10);
+  //PVector v1 = new PVector(100, 100, 100);
+  //PVector v2 = new PVector(100, 100, -100);
+  //PVector v3 = new PVector(100, -100, -100);
+  //PVector v4 = new PVector(100, -100, 100);
+  //PVector v5 = new PVector(-100, 100, 100);
+  //PVector v6 = new PVector(-100, -100, -100);
+  //PVector v7 = new PVector(-100, 100, -100);
+  //PVector v8 = new PVector(-100, -100, 100);
+  //ArrayList<Triangle> t = new ArrayList<Triangle>();
+  //t.add(new Triangle(v6, v7, v2, color(255, 153, 153)));
+  //t.add(new Triangle(v2, v3, v6, color(255, 153, 153)));
+  //t.add(new Triangle(v3, v2, v1, color(102, 255, 178)));
+  //t.add(new Triangle(v1, v4, v3, color(102, 255, 178)));
+  //t.add(new Triangle(v4, v1, v5, color(255, 204, 229)));
+  //t.add(new Triangle(v5, v8, v4, color(255, 204, 229)));
+  //t.add(new Triangle(v8, v5, v7, color(204, 229, 255)));
+  //t.add(new Triangle(v7, v8, v6, color(204, 229, 255)));
+  //t.add(new Triangle(v7, v5, v1, color(255, 229, 204)));
+  //t.add(new Triangle(v1, v2, v7, color(255, 229, 204)));
+  //t.add(new Triangle(v8, v6, v3, color(204, 229, 255)));
+  //t.add(new Triangle(v3, v8, v4, color(204, 229, 255)));
+  //objs.add(new Obj(t));
+
+  //PVector p = new PVector (-100, -100, -100);
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
   //testTris.add(new Triangle(p, p2, l));
@@ -47,6 +102,7 @@ float dist(PVector a, PVector b) {
 }
 
 void draw() {
+  //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
