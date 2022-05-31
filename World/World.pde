@@ -11,33 +11,11 @@ void setup() {
   size(1000, 600);
   if (!test) noCursor();
   c = new Camera();
-  //PVector v1 = new PVector(100, 100, 100);
-  //PVector v2 = new PVector(100, 100, -100);
-  //PVector v3 = new PVector(100, -100, -100);
-  //PVector v4 = new PVector(100, -100, 100);
-  //PVector v5 = new PVector(-100, 100, 100);
-  //PVector v6 = new PVector(-100, -100, -100);
-  //PVector v7 = new PVector(-100, 100, -100);
-  //PVector v8 = new PVector(-100, -100, 100);
-  //ArrayList<Triangle> t = new ArrayList<Triangle>();
-  //t.add(new Triangle(v6, v7, v2, color(255, 153, 153)));
-  //t.add(new Triangle(v2, v3, v6, color(255, 153, 153)));
-  //t.add(new Triangle(v3, v2, v1, color(102, 255, 178)));
-  //t.add(new Triangle(v1, v4, v3, color(102, 255, 178)));
-  //t.add(new Triangle(v4, v1, v5, color(255, 204, 229)));
-  //t.add(new Triangle(v5, v8, v4, color(255, 204, 229)));
-  //t.add(new Triangle(v8, v5, v7, color(204, 229, 255)));
-  //t.add(new Triangle(v7, v8, v6, color(204, 229, 255)));
-  //t.add(new Triangle(v7, v5, v1, color(255, 229, 204)));
-  //t.add(new Triangle(v1, v2, v7, color(255, 229, 204)));
-  //t.add(new Triangle(v8, v6, v3, color(204, 229, 255)));
-  //t.add(new Triangle(v3, v8, v4, color(204, 229, 255)));
-  //objs.add(new Obj(t));
-
   PVector p = new PVector (-100, -100, -100);
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
-  c.addObject(new Rect(p, 200));
+  Rect one = new Rect(p, 200, true);
+  c.addObject(one);
   c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
 
