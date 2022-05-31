@@ -21,7 +21,7 @@ void setup() {
 
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
-    obj.translate(new PVector(0, 0, 10000));
+    obj.translate(new PVector(0, 0, 1000));
     obj.rotateOnZ(45);
   }
   //p.add(new PVector(100, 100, 100));
