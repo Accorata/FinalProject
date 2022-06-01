@@ -19,3 +19,16 @@ float dist(PVector a, PVector b) {
   //return a.sub(b).mag();
   return sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z));
 }
+
+
+boolean addGun(Gun g) {
+    if (INVENTORY.size() < 3) {
+       INVENTORY.add(g);
+       return true;
+    }
+    return false;
+  }
+  
+Enemy inSight() {
+   return null;
+}

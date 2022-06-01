@@ -2,6 +2,8 @@ import java.util.Collections;
 import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
+int PLAYER_HEALTH;
+ArrayList<Gun> INVENTORY;
 Plane sc = new Plane(100, color(40, 30, 200), 2000, 2000);
 float xAng = 0;
 Camera c;
@@ -30,6 +32,7 @@ void setup() {
   size(1000, 600);
   if (!test) noCursor();
   c = new Camera();
+  PLAYER_HEALTH = 100;
   //l = new Light(new PVector(500, 500, 500), 10);
   PVector p = new PVector (-800, -200, -600);
   PVector p2 = new PVector (400, -100, -100);

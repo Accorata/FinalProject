@@ -10,7 +10,10 @@ public class Gun extends Obj {
     this.MAGS = magNum;
     this.BUL = magCap;
   }
-  void shoot(Chr c) {
+  void shoot(Enemy c) {
     c.changeHealth(-DMG);
+  }
+  void shoot() {
+    PLAYER_HEALTH -= DMG;
   }
 }
