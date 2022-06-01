@@ -1,9 +1,11 @@
-public class Obj { //<>// //<>//
-
+public class Obj {  //<>//
+  boolean breachable = false;
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
-
+  boolean getBreachable() {
+     return this.breachable; 
+  }
   public Obj(PVector center) {
     this.center = center;
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
@@ -23,7 +25,9 @@ public class Obj { //<>// //<>//
     this.triangles = t;
     setCenter();
   }
-
+  void setBreachable(boolean b) {
+   this.breachable = b; 
+  }
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
     this.triangles = triangles_;

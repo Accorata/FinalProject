@@ -83,7 +83,7 @@ void draw() {
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(xAng);
 
-    if (obj.breached()) breached = true;  
+    if (!obj.getBreachable() && obj.breached()) breached = true;  
     //}
   }
   if (breached) {
