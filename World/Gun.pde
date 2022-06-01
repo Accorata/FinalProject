@@ -11,6 +11,6 @@ public class Gun extends Obj {
     this.BUL = magCap;
   }
   void shoot(Chr c) {
-    
+    c.changeHealth(-DMG);
   }
 }
