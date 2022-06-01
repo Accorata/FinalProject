@@ -2,6 +2,7 @@ import java.util.Collections;
 import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
+ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
 Plane sc = new Plane(100, color(40, 30, 200), 2000, 2000);
@@ -37,7 +38,7 @@ void setup() {
   PVector p = new PVector (-800, -200, -600);
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
-
+  //ENEMIES
   //testTris.add(new Triangle(p, p2, l));
   //testTris = testTris.get(0).splitTriangle(new Obj());
   Rect one = new Rect(p, 200, 1);

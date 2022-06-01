@@ -9,7 +9,10 @@ public class Enemy extends Obj {
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
     this.loc = loc;
-    
+    double nID = Math.random();
+    for (Triangle t : this.getTriangles()) {
+      t.ID = nID;
+    }
   }
   int getHealth() {
     return HEALTH;

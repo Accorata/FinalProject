@@ -19,7 +19,7 @@ public class Triangle implements Comparable<Triangle> {
     this.clr = clr_;
     this.center = calcCenter();
     this.light = 0;
-    this.ID = Math.random();
+    this.ID = 0;
   }
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
