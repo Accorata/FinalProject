@@ -1,4 +1,4 @@
-public class Obj { //<>// //<>//
+public class Obj { //<>// //<>// //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
@@ -80,6 +80,7 @@ public class Obj { //<>// //<>//
     return breached;
   }
   void rotateOnX(float deg) {
+    if (deg != 0) {
     float rad = radians(deg);
     for (PVector point : points) {
       point.sub(center);
@@ -88,6 +89,7 @@ public class Obj { //<>// //<>//
       point.y = temp.y;
       point.z = temp.x;
       point.add(center);
+    }
     }
   }
   void rotateOnY(float deg) {

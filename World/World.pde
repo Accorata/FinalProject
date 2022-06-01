@@ -110,19 +110,19 @@ void draw() {
   if (!test) c.rotateByMouse();
   // --Update World--
 
-  c.updatePos(dir);
+  //c.updatePos(dir);
   // --Screen--
   boolean breached = false;
-  println(sc.ps);
+  //println(sc.ps);
   for (Obj obj : objs) {
-    
     
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(-xAng);
+
     obj.translate(dir);
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(xAng);
-    
+
     if (obj.breached()) breached = true;  
     //}
   }
@@ -170,24 +170,24 @@ void keyPressed() {
     }
     break;
   case 'i':
- 
+    if (xAng <= 80) {
     xAng += 10;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(10);
     }
     
-   
+    }
     break;
     
   case 'k':
-   
+    if (xAng >= -80){
     xAng -= 10;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-10);
     }
-    
+    }
     
     break;
   case 'w':
@@ -202,12 +202,13 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
+  /*
   case ' ':
     if (c.getLoc().y == 0) {
       dir.y = speed*2;
     }
     break;
-
+  */
   case 'p':
     for (Obj obj : objs) {
       println("------------");

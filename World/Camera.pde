@@ -77,14 +77,15 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
+    /*
     loc.add(dir);
-    dir.y -= speed/30;
+    //dir.y -= speed/30;
     if (loc.y < 0) {
       for (Obj obj : objs) {
         obj.translate(new PVector(0, -loc.y, 0));
       }
       loc.y = 0;
       dir.y = 0;
-    }
+    }*/
   }
 }
