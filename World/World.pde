@@ -34,7 +34,7 @@ void setup() {
   PVector p = new PVector (-100, -100, -100);
   PVector p2 = new PVector (400, -100, -100);
   PVector l = new PVector (200, 200, 200);
-  Rect one = new Rect(p, 200, 2); //Max 3 resolution
+  Rect one = new Rect(p, l, color(0,0,255), 2); //Max 3 resolution
   c.addObject(one);
   c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(800, 200, 200), l, color(0, 255, 0)));
