@@ -56,10 +56,10 @@ public class Triangle implements Comparable<Triangle> {
     object.addPoint(mid01);
     object.addPoint(mid12);
     object.addPoint(mid20);
-    Triangle tri1 = new Triangle(points[0], mid01, mid20);
-    Triangle tri2 = new Triangle(points[1], mid01, mid12);
-    Triangle tri3 = new Triangle(points[2], mid12, mid20);
-    Triangle tri4 = new Triangle(mid01, mid12, mid20);
+    Triangle tri1 = new Triangle(points[0], mid01, mid20, clr);
+    Triangle tri2 = new Triangle(points[1], mid01, mid12, clr);
+    Triangle tri3 = new Triangle(points[2], mid12, mid20, clr);
+    Triangle tri4 = new Triangle(mid01, mid12, mid20, clr);
     if (num <= 0) {
       smallTris.add(tri1);
       smallTris.add(tri2);
