@@ -98,6 +98,9 @@ void draw() {
       obj.rotateOnX(xAng);
     }
   }
+  for (Enemy e : ENEMIES) {
+    if (e.inSight()) println(e.getName());
+  }
   // --Screen--
   background(255);
   AIM = 0;

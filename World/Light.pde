@@ -351,11 +351,5 @@ public class Light extends Obj {
       }
     }
   }
-  ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
-    ArrayList<Triangle> tsc = new ArrayList<Triangle>();
-    for (Triangle t : ts) {
-      tsc.add(t.copyOf());
-    }
-    return tsc;
-  }
+  
 }

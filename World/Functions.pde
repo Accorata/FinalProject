@@ -58,3 +58,10 @@ boolean aprox(double a, double b) {
   double err = a * .01;
   return (b >= a - err && b <= a + err);
 }
+ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
+  ArrayList<Triangle> tsc = new ArrayList<Triangle>();
+  for (Triangle t : ts) {
+    tsc.add(t.copyOf());
+  }
+  return tsc;
+}

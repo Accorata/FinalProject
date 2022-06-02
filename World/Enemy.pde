@@ -4,6 +4,7 @@ public class Enemy extends Obj {
   ArrayList<Gun> inventory;
   PVector loc;
   double ID;
+  float vAng;
   public Enemy(String name, PVector loc) {
     super();
     this.loc = loc;
@@ -18,6 +19,7 @@ public class Enemy extends Obj {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
+    this.vAng = 0;
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
@@ -70,16 +72,62 @@ public class Enemy extends Obj {
     return this.inventory;
   }
   boolean inSight() {
+    ArrayList<Triangle> ts = copyOf(c.Triangles);
+    ts.add(new Triangle(new PVector(0, -100, -fromScreen), new PVector(100, 75, -fromScreen), new PVector(-100, 75, -fromScreen)));
+    ts.get(ts.size()-1).ID = 3;
+    Obj ob = new Obj(ts);
+    ob.setCenter(loc);
+    ob.rotateOnY(vAng);
+    ob.translate(new PVector(-loc.x, -loc.y, -loc.z - fromScreen));
+
+    return see(ts);
+  }
+
+  boolean see (ArrayList<Triangle> Triangles) {
+    boolean s = false;
+    for (Triangle t : Triangles) {
+      t.update_close();
+    }
+    Collections.sort(Triangles);
+    for (Triangle t : Triangles) {
+      if (!(t.points[0].z < 0 && t.points[1].z < 0 && t.points[2].z < 0)) {
+        float[][] pT = new float[3][2];
+        int count = 0;
+        for (PVector point : t.points) {
+          try {
+            float scX = 0;
+            float scY = 0;
+            if (point.z <= -1 * fromScreen) {
+              scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
+              scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
+            } else {      
+              scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+              scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+            }
+            pT[count][0] = scX;
+            pT[count][1] = scY;
+            count++;
+          } 
+          catch (Exception e) {
+            break;
+          }
+        }
+        if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
+          s = t.ID == 3;          
+        }
+      }
+    }
+    return s;
+  }
+
+boolean addGun(Gun g) {
+  if (inventory.size() < 3) {
+    inventory.add(g);
     return true;
   }
-  boolean addGun(Gun g) {
-    if (inventory.size() < 3) {
-      inventory.add(g);
-      return true;
-    }
-    return false;
-  }
-  String getName() {
-    return this.NAME;
-  }
+  return false;
+}
+String getName() {
+  return this.NAME;
+}
 }
