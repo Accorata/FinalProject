@@ -26,7 +26,7 @@ void setup() {
   c = new Camera();
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
-  
+
   INVENTORY = new ArrayList<Gun>();
   INVENTORY.add(new Gun("Pistol", 20, 7, 12));
   INVENTORY.add(new Gun("Deagle", 40, 3, 6));
@@ -49,15 +49,15 @@ void setup() {
   c.addObject(one);
   c.addObject(two);
   c.addObject(three);
- // c.addObject(four);
+  // c.addObject(four);
   //objs.get(0).rotateX(30);
   /*
   for (Obj obj : objs) {
-    obj.translate(new PVector(0, 0, 200));
-    obj.rotateOnZ(45);
-    //obj.rotateOnY(135);
-  }*/
-  //c.addObject(new Sphere(new PVector(500,-200,200), 100, color(0)));
+   obj.translate(new PVector(0, 0, 200));
+   obj.rotateOnZ(45);
+   //obj.rotateOnY(135);
+   }*/
+  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 15, 15));
   c.addObject(sc);
   Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
   Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
@@ -74,7 +74,7 @@ void draw() {
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-  
+
   //c.updatePos(dir);
   boolean breached = false;
   //dir.y -= 0.1;
@@ -217,15 +217,15 @@ void keyPressed() {
       }
     }
     break;
-  
+
   case '1':
     curG = 0;
     break;
-    
+
   case '2':
     curG = 1;
     break;
-  
+
   case '3':
     curG = 2;
     break;
@@ -245,7 +245,7 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
-  
+
   case 'r':
     INVENTORY.get(curG).reload();
     break;
@@ -253,18 +253,21 @@ void keyReleased() {
 }
 void mouseClicked() {
   Enemy E = inSight();
-  if (INVENTORY.size() > curG){
-  if (E != null) {
-    INVENTORY.get(curG).shoot(E, true);
-    if (E.isDead()) {
-      ENEMIES.remove(E);
-      objs.remove(E);
-      for (int i = 0; i < c.Triangles.size(); i++) {
-        if (c.Triangles.get(i).ID == E.ID) {
-          c.Triangles.remove(i);
-          i--;
+  if (curG < INVENTORY.size()) {
+    if (E != null) {
+      INVENTORY.get(curG).shoot(E, true);
+      if (E.isDead()) {
+        ENEMIES.remove(E);
+        objs.remove(E);
+        for (int i = 0; i < c.Triangles.size(); i++) {
+          if (c.Triangles.get(i).ID == E.ID) {
+            c.Triangles.remove(i);
+            i--;
+          }
         }
       }
     }
-  } else { INVENTORY.get(curG).shoot(E, false);}}
+  } else { 
+    INVENTORY.get(curG).shoot(E, false);
+  }
 }
