@@ -68,10 +68,10 @@ void draw() {
   //c.updatePos(dir);
   // --Screen--
   boolean breached = false;
-  dir.y -= 0.1;
-  if (c.getLoc().y < 0) {
-    dir.y = 0;
-  }
+  //dir.y -= 0.1;
+  //if (c.getLoc().y < 0) {
+  //  dir.y = 0;
+  //}
   for (Obj obj : objs) {
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(-xAng);
