@@ -2,6 +2,7 @@ import java.util.Collections;
 import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
+double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
@@ -34,6 +35,9 @@ void setup() {
   if (!test) noCursor();
   c = new Camera();
   PLAYER_HEALTH = 100;
+  ENEMIES = new ArrayList<Enemy>();
+  Enemy e1 = new Enemy("john", new PVector(200, -200, 200));
+  
   //l = new Light(new PVector(500, 500, 500), 10);
   PVector p = new PVector (-800, -200, -600);
   PVector p2 = new PVector (400, -100, -100);
@@ -54,6 +58,9 @@ void setup() {
     //obj.rotateOnY(135);
   }
   c.addObject(sc);
+  ENEMIES.add(e1);
+  c.addObject(e1);
+  
   //p.add(new PVector(100, 100, 100));
   //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
   //ArrayList<PVector> coords = test.getCoords();
@@ -101,6 +108,7 @@ void draw() {
   }
   background(255);
   c.display();
+  text(AIM + "", 10, 20);
   stroke(75);
   strokeWeight(2);
   line(width/2-10, height/2, width/2+10, height/2);
@@ -108,24 +116,42 @@ void draw() {
   strokeWeight(1);
 }
 void keyPressed() {
+  boolean breached = false;
   switch (key) {
   case 'l':
-  
+    
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
+      if (!obj.getBreachable() && obj.breached()) breached = true; 
     }
+    if (breached) {
+    for (Obj obj : objs) {
+      obj.rotateOnX(-xAng);
+      obj.rotateOnY(-10);
+      obj.rotateOnX(xAng);
+    }
+  }
+    
     break;
   case 'j':
-    
+   
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
+      if (!obj.getBreachable() && obj.breached()) breached = true; 
     }
+    if (breached) {
+    for (Obj obj : objs) {
+      obj.rotateOnX(-xAng);
+      obj.rotateOnY(10);
+      obj.rotateOnX(xAng);
+    }
+  }
     break;
   case 'i':
     if (xAng <= 80) {
@@ -133,8 +159,13 @@ void keyPressed() {
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(10);
+      if (!obj.getBreachable() && obj.breached()) breached = true; 
     }
-    
+    if (breached) {
+    for (Obj obj : objs) {
+      obj.rotateOnX(-10);
+    }
+  }
     }
     break;
     
@@ -144,7 +175,13 @@ void keyPressed() {
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-10);
+      if (!obj.getBreachable() && obj.breached()) breached = true; 
     }
+    if (breached) {
+    for (Obj obj : objs) {
+      obj.rotateOnX(10);
+    }
+  }
     }
     
     break;
