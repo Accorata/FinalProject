@@ -15,5 +15,8 @@ public class Plane extends Obj {
     for (Triangle t : ts) {
       addTriangles(t.splitTriangle(this, 3));
     }
+    for (Triangle t : getTriangles()) {
+       t.ID = -1; 
+    }
   }
 }

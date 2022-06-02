@@ -253,6 +253,7 @@ void keyReleased() {
 }
 void mouseClicked() {
   Enemy E = inSight();
+  if (INVENTORY.size() > curG){
   if (E != null) {
     INVENTORY.get(curG).shoot(E, true);
     if (E.isDead()) {
@@ -265,5 +266,5 @@ void mouseClicked() {
         }
       }
     }
-  } else { INVENTORY.get(curG).shoot(E, false);}
+  } else { INVENTORY.get(curG).shoot(E, false);}}
 }
