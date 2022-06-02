@@ -56,6 +56,7 @@ void setup() {
     obj.rotateOnZ(45);
     //obj.rotateOnY(135);
   }
+  c.addObject(new Sphere(new PVector(500,-200,200), 100, color(0)));
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
