@@ -68,12 +68,13 @@ void draw() {
   //c.updatePos(dir);
   // --Screen--
   boolean breached = false;
-  //println(sc.ps);
+  dir.y -= 0.1;
+  if (c.getLoc().y < 0) {
+    dir.y = 0;
+  }
   for (Obj obj : objs) {
-
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(-xAng);
-
     obj.translate(dir);
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(xAng);
@@ -181,13 +182,11 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
-    /*
   case ' ':
-     if (c.getLoc().y == 0) {
-     dir.y = speed*2;
-     }
-     break;
-     */
+    if (c.getLoc().y == 0) {
+      dir.y = speed*2;
+    }
+    break;
   case 'p':
     for (Obj obj : objs) {
       println("------------");
