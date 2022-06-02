@@ -50,7 +50,7 @@ void setup() {
     obj.rotateOnZ(45);
     //obj.rotateOnY(135);
   }
-  c.addObject(new Sphere(new PVector(500,-200,200), 100, color(0)));
+  //c.addObject(new Sphere(new PVector(500,-200,200), 100, color(0)));
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
@@ -199,7 +199,7 @@ void keyPressed() {
   case 't':
     if (mouseX > width/2-50 && mouseX < width/2+50) {
       if (mouseY > height/2-50 && mouseY < height/2+50) {
-        test = false;
+        test = !test;
       }
     }
     break;
