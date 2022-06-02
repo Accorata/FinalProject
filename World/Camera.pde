@@ -89,9 +89,6 @@ public class Camera {
         xAng -= yRotate;
       }
     } 
-    //if (xAng <= 80 && yRotate < 0) {
-      
-    //}
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
     mouse.x += mouseX-mouseOld.x;
