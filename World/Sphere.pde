@@ -18,6 +18,7 @@ public class Sphere extends Obj {
         ps.add(new PVector(pos.x+rSin*cosP, pos.y+rCos, pos.z+rSin*sinP));
       }
     }
+    ps.add(new PVector(pos.x, pos.y-radius, pos.z));
     println(ps.size());
     ts.add(new Triangle(ps.get(0), ps.get(rows), ps.get(1)));
     for (int i = 1; i<rows; i++) {
@@ -28,6 +29,11 @@ public class Sphere extends Obj {
     for (int i = 1; i<rows; i++) {
       ts.add(new Triangle(ps.get(i), ps.get(i+1), ps.get(i+rows)));
       ts.add(new Triangle(ps.get(i+1), ps.get(i+1+rows), ps.get(i+rows)));
+    }
+    int end = ps.size()-1;
+    ts.add(new Triangle(ps.get(end), ps.get(end-rows), ps.get(end-1)));
+    for (int i = 1; i<rows; i++) {
+      ts.add(new Triangle(ps.get(end), ps.get(end-i), ps.get(end-i-1)));
     }
     //for (int i = rows; i<rows*2; i++) {
     //  ts.add(new Triangle(ps.get(i), ps.get(i+1), ps.get(i+rows)));
