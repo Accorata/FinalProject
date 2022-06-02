@@ -182,16 +182,23 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
-  //case ' ':
-  //  if (c.getLoc().y == 0) {
-  //    dir.y = speed*2;
-  //  }
-  //  break;
+    //case ' ':
+    //  if (c.getLoc().y == 0) {
+    //    dir.y = speed*2;
+    //  }
+    //  break;
   case 'p':
     for (Obj obj : objs) {
       println("------------");
       for (PVector p : obj.getPoints()) {
         println(p);
+      }
+    }
+    break;
+  case 't':
+    if (mouseX > width/2-50 && mouseX < width/2+50) {
+      if (mouseY > height/2-50 && mouseY < height/2+50) {
+        test = !test;
       }
     }
     break;
@@ -211,13 +218,5 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
-  }
-}
-
-void mouseClicked() {
-  if (mouseX > width/2-50 && mouseX < width/2+50) {
-    if (mouseY > height/2-50 && mouseY < height/2+50) {
-      test = !test;
-    }
   }
 }
