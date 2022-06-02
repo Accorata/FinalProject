@@ -6,7 +6,7 @@ double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
-int gun;
+int curG;
 Plane sc = new Plane(100, color(40, 30, 200), 2000, 2000);
 float xAng = 0;
 Camera c;
@@ -17,7 +17,7 @@ PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
-
+UI ui;
 
 
 void setup() {
@@ -29,9 +29,9 @@ void setup() {
   Enemy e1 = new Enemy("john", new PVector(200, -150, 200));
 
   INVENTORY = new ArrayList<Gun>();
-  INVENTORY.add(new Gun("The Destroyer", 10, 10, 10));
-  gun = 0;
-
+  INVENTORY.add(new Gun("Pistol", 20, 7, 12));
+  curG = 0;
+  ui = new UI();
   //l = new Light(new PVector(500, 500, 500), 10);
   PVector p = new PVector (-800, -200, -600);
   PVector p2 = new PVector (400, -100, -100);
@@ -60,7 +60,7 @@ void draw() {
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-
+  
   //c.updatePos(dir);
   boolean breached = false;
   //dir.y -= 0.1;
@@ -89,6 +89,7 @@ void draw() {
   AIM = 0;
   c.display();
   //text(ENEMIES.get(0).getHealth() + "", 10, 20);
+  ui.box(INVENTORY);
   stroke(75);
   strokeWeight(2);
   line(width/2-10, height/2, width/2+10, height/2);
@@ -200,6 +201,18 @@ void keyPressed() {
       }
     }
     break;
+  
+  case '1':
+    curG = 0;
+    break;
+    
+  case '2':
+    curG = 1;
+    break;
+  
+  case '3':
+    curG = 2;
+    break;
   }
 }
 void keyReleased() {
@@ -216,12 +229,16 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
+  
+  case 'r':
+    INVENTORY.get(curG).reload();
+    break;
   }
 }
 void mouseClicked() {
   Enemy E = inSight();
   if (E != null) {
-    INVENTORY.get(gun).shoot(E);
+    INVENTORY.get(curG).shoot(E, true);
     if (E.isDead()) {
       ENEMIES.remove(E);
       objs.remove(E);
@@ -232,5 +249,5 @@ void mouseClicked() {
         }
       }
     }
-  }
+  } else { INVENTORY.get(curG).shoot(E, false);}
 }
