@@ -29,6 +29,7 @@ void setup() {
   
   INVENTORY = new ArrayList<Gun>();
   INVENTORY.add(new Gun("Pistol", 20, 7, 12));
+  INVENTORY.add(new Gun("Deagle", 40, 3, 6));
   curG = 0;
   ui = new UI();
   //l = new Light(new PVector(500, 500, 500), 10);
