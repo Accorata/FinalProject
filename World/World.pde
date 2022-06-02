@@ -1,3 +1,4 @@
+//NEW_DEMO
 import java.util.Collections;
 import java.util.Arrays;
 final PVector xaxis = new PVector(1, 0, 0);
