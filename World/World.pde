@@ -145,8 +145,9 @@ void keyPressed() {
       if (breached) {
         for (Obj obj : objs) {
           obj.rotateOnX(-10);
-          xAng -= 10;
+          
         }
+        xAng -= 10;
       }
     }
     break;
@@ -162,8 +163,9 @@ void keyPressed() {
       if (breached) {
         for (Obj obj : objs) {
           obj.rotateOnX(10);
-          xAng += 10;
+          
         }
+        xAng += 10;
       }
     }
 
@@ -196,7 +198,7 @@ void keyPressed() {
   case 't':
     if (mouseX > width/2-50 && mouseX < width/2+50) {
       if (mouseY > height/2-50 && mouseY < height/2+50) {
-        test = !test;
+        test = false;
       }
     }
     break;
