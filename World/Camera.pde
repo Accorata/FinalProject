@@ -65,47 +65,44 @@ public class Camera {
     }
   }
   void rotateByMouse() {
+    boolean breached = false;
+    float xRotate = (mouse.x-width/2)*1/sensitivity;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnY((mouse.x-width/2)*1/sensitivity);
+      obj.rotateOnX(-xAng);
+      obj.rotateOnY(xRotate);
+      obj.rotateOnX(xAng);
+      if (!obj.getBreachable() && obj.breached()) breached = true;
     }
-    for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
+    if (breached) {
+      for (Obj obj : objs) {
+        obj.rotateOnX(-xAng);
+        obj.rotateOnY(-xRotate);
+        obj.rotateOnX(xAng);
+      }
     }
+    //for (Obj obj : objs) {
+    //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    //  obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
+    //}
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
     mouse.x += mouseX-mouseOld.x;
     mouse.y += mouseY-mouseOld.y;
     mouseOld.x = mouseX;
     mouseOld.y = mouseY;
-    
-    //for (Obj obj : objs) {
-    //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    //  obj.rotateOnX(-xAng);
-    //  obj.rotateOnY(10);
-    //  obj.rotateOnX(xAng);
-    //  if (!obj.getBreachable() && obj.breached()) breached = true;
-    //}
-    //if (breached) {
-    //  for (Obj obj : objs) {
-    //    obj.rotateOnX(-xAng);
-    //    obj.rotateOnY(-10);
-    //    obj.rotateOnX(xAng);
-    //  }
-    //}
   }
   void updatePos(PVector dir) {
-  /*
+    /*
     this.loc.add(dir);
-    dir.y -= speed/30;
-
-    if (loc.y < 0) {
-      for (Obj obj : objs) {
-        obj.translate(new PVector(0, -loc.y, 0));
-      }
-      this.loc.y = 0;
-      dir.y = 0;
-    }*/
+     dir.y -= speed/30;
+     
+     if (loc.y < 0) {
+     for (Obj obj : objs) {
+     obj.translate(new PVector(0, -loc.y, 0));
+     }
+     this.loc.y = 0;
+     dir.y = 0;
+     }*/
   }
 }
