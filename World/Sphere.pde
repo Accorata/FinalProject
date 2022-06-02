@@ -4,8 +4,8 @@ public class Sphere extends Obj {
     super(); 
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
     ArrayList<PVector> ps = new ArrayList<PVector>();
-    int angle = 30;
-    int rows = 10;
+    int angle = 15;
+    int rows = 15;
     int rowAngle = 360/rows;
 
     ps.add(new PVector(pos.x, pos.y+radius, pos.z));
