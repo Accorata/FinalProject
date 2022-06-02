@@ -5,29 +5,32 @@ public class Sphere extends Obj {
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
     ArrayList<PVector> ps = new ArrayList<PVector>();
     int angle = 30;
-    for (int theta = 0; theta < 360; theta+=angle) {
+    ps.add(new PVector(pos.x, pos.y+radius, pos.z));
+    for (int theta = angle; theta < 360; theta+=angle) {
       float rSin = radius*sin(radians(theta));
       float rCos = radius*cos(radians(theta));
       ps.add(new PVector(pos.x+rSin, pos.y+rCos, pos.z));
       ps.add(new PVector(pos.x, pos.y+rCos, pos.z+rSin));
       //ps.add(new PVector(pos.x, pos.y, pos.z+rCos));
     }
-    ts.add(new Triangle(ps.get(0), ps.get(2), ps.get(3)));
-    ts.add(new Triangle(ps.get(0), ps.get(3), ps.get(ps.size()-2)));
+    ts.add(new Triangle(ps.get(0), ps.get(1), ps.get(2)));
+    ts.add(new Triangle(ps.get(0), ps.get(2), ps.get(ps.size()-2)));
     ts.add(new Triangle(ps.get(0), ps.get(ps.size()-2), ps.get(ps.size()-1)));
-    ts.add(new Triangle(ps.get(0), ps.get(ps.size()-1), ps.get(2)));
+    ts.add(new Triangle(ps.get(0), ps.get(ps.size()-1), ps.get(1)));
     
-    ts.add(new Triangle(ps.get(2), ps.get(3), ps.get(4)));
-    ts.add(new Triangle(ps.get(5), ps.get(3), ps.get(4)));
+    ts.add(new Triangle(ps.get(1), ps.get(2), ps.get(3)));
+    ts.add(new Triangle(ps.get(4), ps.get(2), ps.get(3)));
     
-    ts.add(new Triangle(ps.get(3), ps.get(ps.size()-2), ps.get(5)));
-    ts.add(new Triangle(ps.get(ps.size()-4), ps.get(ps.size()-2), ps.get(5)));
+    ts.add(new Triangle(ps.get(2), ps.get(ps.size()-2), ps.get(4)));
+    ts.add(new Triangle(ps.get(ps.size()-4), ps.get(ps.size()-2), ps.get(4)));
     
     ts.add(new Triangle(ps.get(ps.size()-2), ps.get(ps.size()-1), ps.get(ps.size()-4)));
     ts.add(new Triangle(ps.get(ps.size()-3), ps.get(ps.size()-1), ps.get(ps.size()-4)));
     
-    ts.add(new Triangle(ps.get(ps.size()-1), ps.get(2), ps.get(ps.size()-3)));
-    ts.add(new Triangle(ps.get(4), ps.get(2), ps.get(ps.size()-3)));
+    ts.add(new Triangle(ps.get(ps.size()-1), ps.get(1), ps.get(ps.size()-3)));
+    ts.add(new Triangle(ps.get(3), ps.get(1), ps.get(ps.size()-3)));
+    
+    
     //ts.add(new Triangle(ps.get(0), ps.get(3), ps.get(4)));
     //for (int i = 0; i<m*2+1; i++) {
     //  ts.add(new Triangle(ps.get(i*2), ps.get(i*2+1), ps.get(i*2), clr));
