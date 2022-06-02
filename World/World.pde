@@ -57,7 +57,7 @@ void setup() {
    obj.rotateOnZ(45);
    //obj.rotateOnY(135);
    }*/
-  c.addObject(new Sphere(new PVector(300,-200,200), 100, color(0)));
+  c.addObject(new Sphere(new PVector(300,-100,200), 100, color(0)));
   c.addObject(sc);
   Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
   Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));

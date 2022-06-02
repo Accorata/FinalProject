@@ -16,6 +16,14 @@ public class Sphere extends Obj {
     ts.add(new Triangle(ps.get(0), ps.get(3), ps.get(14)));
     ts.add(new Triangle(ps.get(0), ps.get(14), ps.get(15)));
     ts.add(new Triangle(ps.get(0), ps.get(15), ps.get(2)));
+    ts.add(new Triangle(ps.get(2), ps.get(3), ps.get(4)));
+    ts.add(new Triangle(ps.get(5), ps.get(3), ps.get(4)));
+    ts.add(new Triangle(ps.get(3), ps.get(14), ps.get(5)));
+    ts.add(new Triangle(ps.get(12), ps.get(14), ps.get(5)));
+    ts.add(new Triangle(ps.get(14), ps.get(15), ps.get(12)));
+    ts.add(new Triangle(ps.get(13), ps.get(15), ps.get(12)));
+    ts.add(new Triangle(ps.get(15), ps.get(2), ps.get(13)));
+    ts.add(new Triangle(ps.get(4), ps.get(2), ps.get(13)));
     //ts.add(new Triangle(ps.get(0), ps.get(3), ps.get(4)));
     //for (int i = 0; i<m*2+1; i++) {
     //  ts.add(new Triangle(ps.get(i*2), ps.get(i*2+1), ps.get(i*2), clr));
