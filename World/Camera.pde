@@ -26,6 +26,7 @@ public class Camera {
     }
     Collections.sort(Triangles);
     for (Triangle t : Triangles) {
+      
       if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
         float[][] pT = new float[3][2];
         int count = 0;
@@ -51,11 +52,12 @@ public class Camera {
         fill(t.clr);
         if (!dense) noStroke();
         triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
-        if (cover(new PVector(pT[0][0], pT[0][1], 0), new PVector(pT[1][0], pT[1][1], 0), new PVector(pT[2][0], pT[2][1], 0))) {
-          println(t.ID);
+        //println(cover(new PVector(pT[0][0], pT[0][1], 0), new PVector(pT[1][0], pT[1][1], 0), new PVector(pT[2][0], pT[2][1], 0)));
+        if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
           AIM = t.ID;
         }
       }
+      
     }
   }
   void addObject(Obj obj) {
@@ -86,8 +88,9 @@ public class Camera {
         obj.rotateOnY(-xRotate);
         obj.rotateOnX(xAng);
         obj.rotateOnX(-yRotate);
-        xAng -= yRotate;
+
       }
+              xAng -= yRotate;
     } 
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
