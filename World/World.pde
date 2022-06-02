@@ -147,6 +147,7 @@ void keyPressed() {
       if (breached) {
         for (Obj obj : objs) {
           obj.rotateOnX(-10);
+          xAng -= 10;
         }
       }
     }
@@ -163,6 +164,7 @@ void keyPressed() {
       if (breached) {
         for (Obj obj : objs) {
           obj.rotateOnX(10);
+          xAng += 10;
         }
       }
     }
@@ -180,11 +182,11 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
-  case ' ':
-    if (c.getLoc().y == 0) {
-      dir.y = speed*2;
-    }
-    break;
+  //case ' ':
+  //  if (c.getLoc().y == 0) {
+  //    dir.y = speed*2;
+  //  }
+  //  break;
   case 'p':
     for (Obj obj : objs) {
       println("------------");
