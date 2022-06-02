@@ -6,6 +6,7 @@ double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
+int gun;
 Plane sc = new Plane(100, color(40, 30, 200), 2000, 2000);
 float xAng = 0;
 Camera c;
@@ -25,7 +26,9 @@ void setup() {
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
   Enemy e1 = new Enemy("john", new PVector(200, -200, 200));
-  
+  INVENTORY = new ArrayList<Gun>();
+  INVENTORY.add(new Gun("The Destroyer", 10, 10, 10));
+  gun = 0;
   //l = new Light(new PVector(500, 500, 500), 10);
   PVector p = new PVector (-800, -200, -600);
   PVector p2 = new PVector (400, -100, -100);
@@ -83,7 +86,7 @@ void draw() {
   background(255);
   AIM = 0;
   c.display();
-  text(AIM + "", 10, 20);
+  //text(ENEMIES.get(0).getHealth() + "", 10, 20);
   stroke(75);
   strokeWeight(2);
   line(width/2-10, height/2, width/2+10, height/2);
@@ -204,5 +207,21 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
+  }
+}
+void mouseClicked() {
+  Enemy E = inSight();
+  if (E != null) {
+    INVENTORY.get(gun).shoot(E);
+    if (E.isDead()) {
+     ENEMIES.remove(E);
+     objs.remove(E);
+     for (int i = 0; i < c.Triangles.size(); i++) {
+        if (c.Triangles.get(i).ID == E.ID) {
+          c.Triangles.remove(i);
+          i--;
+        }
+     }
+    }
   }
 }
