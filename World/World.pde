@@ -26,7 +26,7 @@ void setup() {
   c = new Camera();
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
-  Enemy e1 = new Enemy("john", new PVector(200, -200, 200));
+  Enemy e1 = new Enemy("john", new PVector(200, -150, 200));
 
   INVENTORY = new ArrayList<Gun>();
   INVENTORY.add(new Gun("The Destroyer", 10, 10, 10));
