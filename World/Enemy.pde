@@ -13,7 +13,6 @@ public class Enemy extends Obj {
     this.NAME = name;
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
-    
     super.setBreachable(true);
     ID = Math.random();
     for (Triangle t : this.getTriangles()) {
@@ -62,7 +61,7 @@ public class Enemy extends Obj {
     return HEALTH;
   }
   void changeHealth(int amount) {
-   this.HEALTH += amount; 
+    this.HEALTH += amount;
   }
   boolean isDead() {
     return (getHealth() <= 0);
@@ -75,8 +74,8 @@ public class Enemy extends Obj {
   }
   boolean addGun(Gun g) {
     if (inventory.size() < 3) {
-       inventory.add(g);
-       return true;
+      inventory.add(g);
+      return true;
     }
     return false;
   }

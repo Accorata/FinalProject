@@ -22,19 +22,19 @@ float dist(PVector a, PVector b) {
 
 
 boolean addGun(Gun g) {
-    if (INVENTORY.size() < 3) {
-       INVENTORY.add(g);
-       return true;
-    }
-    return false;
+  if (INVENTORY.size() < 3) {
+    INVENTORY.add(g);
+    return true;
   }
-  
+  return false;
+}
+
 Enemy inSight() {
-   if (AIM != 0) {
-     for (int i = 0; i < ENEMIES.size(); i++) {
-       if (ENEMIES.get(i).ID == AIM) return ENEMIES.get(i);
-     }   
-   }
+  if (AIM != 0) {
+    for (int i = 0; i < ENEMIES.size(); i++) {
+      if (ENEMIES.get(i).ID == AIM) return ENEMIES.get(i);
+    }
+  }
   return null;
 }
 

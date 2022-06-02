@@ -54,7 +54,6 @@ void setup() {
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
-
 }
 void draw() {
   //l.shine(c.Triangles);
@@ -146,7 +145,6 @@ void keyPressed() {
       if (breached) {
         for (Obj obj : objs) {
           obj.rotateOnX(-10);
-          
         }
         xAng -= 10;
       }
@@ -164,7 +162,6 @@ void keyPressed() {
       if (breached) {
         for (Obj obj : objs) {
           obj.rotateOnX(10);
-          
         }
         xAng += 10;
       }
@@ -226,14 +223,14 @@ void mouseClicked() {
   if (E != null) {
     INVENTORY.get(gun).shoot(E);
     if (E.isDead()) {
-     ENEMIES.remove(E);
-     objs.remove(E);
-     for (int i = 0; i < c.Triangles.size(); i++) {
+      ENEMIES.remove(E);
+      objs.remove(E);
+      for (int i = 0; i < c.Triangles.size(); i++) {
         if (c.Triangles.get(i).ID == E.ID) {
           c.Triangles.remove(i);
           i--;
         }
-     }
+      }
     }
   }
 }

@@ -72,7 +72,7 @@ public class Camera {
     if ((xAng > 80 && yRotate > 0) || (xAng < -80 && yRotate < 0)) {
       yRotate = 0;
     }
-    
+
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
@@ -81,7 +81,7 @@ public class Camera {
       obj.rotateOnX(yRotate);
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
-    
+
     if (breached) {
       for (Obj obj : objs) {
         obj.rotateOnX(-yRotate);
@@ -89,9 +89,8 @@ public class Camera {
         obj.rotateOnY(-xRotate);
         obj.rotateOnX(xAng);
       }
-   
     } else {
-       xAng += yRotate;
+      xAng += yRotate;
     }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
