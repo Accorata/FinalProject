@@ -79,6 +79,21 @@ public class Camera {
     mouse.y += mouseY-mouseOld.y;
     mouseOld.x = mouseX;
     mouseOld.y = mouseY;
+    
+    //for (Obj obj : objs) {
+    //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+    //  obj.rotateOnX(-xAng);
+    //  obj.rotateOnY(10);
+    //  obj.rotateOnX(xAng);
+    //  if (!obj.getBreachable() && obj.breached()) breached = true;
+    //}
+    //if (breached) {
+    //  for (Obj obj : objs) {
+    //    obj.rotateOnX(-xAng);
+    //    obj.rotateOnY(-10);
+    //    obj.rotateOnX(xAng);
+    //  }
+    //}
   }
   void updatePos(PVector dir) {
   /*
