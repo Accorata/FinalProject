@@ -266,8 +266,8 @@ void mouseClicked() {
           }
         }
       }
-    }
-  } else { 
+    } else { 
     INVENTORY.get(curG).shoot(E, false);
-  }
+    }
+  } 
 }
