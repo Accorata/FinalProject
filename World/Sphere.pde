@@ -4,32 +4,35 @@ public class Sphere extends Obj {
     super(); 
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
     ArrayList<PVector> ps = new ArrayList<PVector>();
-    int angle = 45;
+    int angle = 30;
     int rows = 10;
     int rowAngle = 360/rows;
 
     ps.add(new PVector(pos.x, pos.y+radius, pos.z));
-
-    //for (int theta = angle; theta < 180; theta+=angle) {
-      int theta = angle;
+    for (int theta = angle; theta < 180; theta+=angle) {
       float rSin = radius*sin(radians(theta));
       float rCos = radius*cos(radians(theta));
-      for (int phi = 0; phi < 360; phi += rowAngle) {
-        
+      for (int phi = 0; phi < 360; phi += rowAngle) {      
         float sinP = sin(radians(phi));
         float cosP = cos(radians(phi));
-        println(sinP + " " + cosP);
         ps.add(new PVector(pos.x+rSin*cosP, pos.y+rCos, pos.z+rSin*sinP));
-        //ps.add(new PVector(pos.x, pos.y+rCos, pos.z+rSin));//*sinP
-        //ps.add(new PVector(pos.x, pos.y, pos.z+rCos));
       }
-    //}
-    //println(ps.size());
+    }
+    println(ps.size());
     ts.add(new Triangle(ps.get(0), ps.get(rows), ps.get(1)));
     for (int i = 1; i<rows; i++) {
       ts.add(new Triangle(ps.get(0), ps.get(i), ps.get(i+1)));
     }
-    //for (int i = 0; i<rows; i++) {
+    ts.add(new Triangle(ps.get(rows), ps.get(1), ps.get(rows+rows)));
+    ts.add(new Triangle(ps.get(rows+1), ps.get(1), ps.get(rows+rows)));
+    for (int i = 1; i<rows; i++) {
+      ts.add(new Triangle(ps.get(i), ps.get(i+1), ps.get(i+rows)));
+      ts.add(new Triangle(ps.get(i+1), ps.get(i+1+rows), ps.get(i+rows)));
+    }
+    //for (int i = rows; i<rows*2; i++) {
+    //  ts.add(new Triangle(ps.get(i), ps.get(i+1), ps.get(i+rows)));
+    //  //ts.add(new Triangle(ps.get(i), ps.get(i+1), ps.get(i+rows)));
+    //}
     //  ts.add(new Triangle(ps.get(0), ps.get(i+1), ps.get(i+2)));
     //  ts.add(new Triangle(ps.get(0), ps.get(ps.size()-i-1), ps.get(ps.size()-i-2)));
     //}
