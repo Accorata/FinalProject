@@ -6,6 +6,7 @@ double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
+int gun;
 Plane sc = new Plane(100, color(40, 30, 200), 2000, 2000);
 float xAng = 0;
 Camera c;
@@ -16,20 +17,9 @@ PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
-/*
-void setup() {
- size(1000, 600);
- double[][] test = new double[600][1000];
- for (int i = 0; i < test.length; i++) {
- for (int j = 0; j < test[i].length; j++) {
- test[i][j] = 0;
- }
- }
- Light l = new Light(new PVector(0, 0, 0), 10);
- l.plot(100, 100, 200, 150, 50, 200, test, 1);
- display(test);
- }
- */
+
+
+
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -37,6 +27,10 @@ void setup() {
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
   Enemy e1 = new Enemy("john", new PVector(200, -200, 200));
+
+  INVENTORY = new ArrayList<Gun>();
+  INVENTORY.add(new Gun("The Destroyer", 10, 10, 10));
+  gun = 0;
 
   //l = new Light(new PVector(500, 500, 500), 10);
   PVector p = new PVector (-800, -200, -600);
@@ -59,12 +53,14 @@ void setup() {
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
+
 }
 void draw() {
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
+
   //c.updatePos(dir);
   boolean breached = false;
   //dir.y -= 0.1;
@@ -90,14 +86,16 @@ void draw() {
   }
   // --Screen--
   background(255);
+  AIM = 0;
   c.display();
-  text(AIM + "", 10, 20);
+  //text(ENEMIES.get(0).getHealth() + "", 10, 20);
   stroke(75);
   strokeWeight(2);
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
 }
+
 void keyPressed() {
   boolean breached = false;
   switch (key) {
@@ -218,5 +216,21 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
+  }
+}
+void mouseClicked() {
+  Enemy E = inSight();
+  if (E != null) {
+    INVENTORY.get(gun).shoot(E);
+    if (E.isDead()) {
+     ENEMIES.remove(E);
+     objs.remove(E);
+     for (int i = 0; i < c.Triangles.size(); i++) {
+        if (c.Triangles.get(i).ID == E.ID) {
+          c.Triangles.remove(i);
+          i--;
+        }
+     }
+    }
   }
 }

@@ -3,8 +3,8 @@ public class Gun extends Obj {
   int DMG;
   int MAGS;
   int BUL;
-  public Gun(String name, int damage, int magNum, int magCap, ArrayList<Triangle> shape) {
-    super(shape);
+  public Gun(String name, int damage, int magNum, int magCap) {
+    super();
     this.NAME = name;
     this.DMG = damage;
     this.MAGS = magNum;
