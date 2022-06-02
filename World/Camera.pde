@@ -84,10 +84,11 @@ public class Camera {
     }
     if (breached) {
       for (Obj obj : objs) {
+        obj.rotateOnX(-yRotate);
         obj.rotateOnX(-xAng);
         obj.rotateOnY(-xRotate);
         obj.rotateOnX(xAng);
-        obj.rotateOnX(-yRotate);
+        
 
       }
               xAng -= yRotate;
