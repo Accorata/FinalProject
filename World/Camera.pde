@@ -65,14 +65,30 @@ public class Camera {
     }
   }
   void rotateByMouse() {
+    boolean breached = false;
+    float xRotate = (mouse.x-width/2)*1/sensitivity;
+    float yRotate = (height/2-mouse.y)*1/sensitivity;
+    if ((xAng > 80 && yRotate > 0) || (xAng < -80 && yRotate < 0)) {
+      yRotate = 0;
+    }
+    xAng += yRotate;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnY((mouse.x-width/2)*1/sensitivity);
+      obj.rotateOnX(-xAng);
+      obj.rotateOnY(xRotate);
+      obj.rotateOnX(xAng);
+      obj.rotateOnX(yRotate);
+      if (!obj.getBreachable() && obj.breached()) breached = true;
     }
-    for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
-    }
+    if (breached) {
+      for (Obj obj : objs) {
+        obj.rotateOnX(-xAng);
+        obj.rotateOnY(-xRotate);
+        obj.rotateOnX(xAng);
+        obj.rotateOnX(-yRotate);
+        xAng -= yRotate;
+      }
+    } 
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
     mouse.x += mouseX-mouseOld.x;
@@ -81,16 +97,27 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
-  /*
-    this.loc.add(dir);
-    dir.y -= speed/30;
-
-    if (loc.y < 0) {
+    boolean breached = false;
+    //dir.y -= 0.1;
+    //if (c.getLoc().y < 0) {
+    //  dir.y = 0;
+    //}
+    for (Obj obj : objs) {
+      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX(-xAng);
+      obj.translate(dir);
+      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.rotateOnX(xAng);
+      if (!obj.getBreachable() && obj.breached()) breached = true;
+    }
+    if (breached) {
       for (Obj obj : objs) {
-        obj.translate(new PVector(0, -loc.y, 0));
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.rotateOnX(-xAng);
+        obj.translate(PVector.mult(dir, -1));
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.rotateOnX(xAng);
       }
-      this.loc.y = 0;
-      dir.y = 0;
-    }*/
+    }
   }
 }

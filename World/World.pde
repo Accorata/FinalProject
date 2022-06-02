@@ -21,15 +21,15 @@ void setup() {
  size(1000, 600);
  double[][] test = new double[600][1000];
  for (int i = 0; i < test.length; i++) {
-    for (int j = 0; j < test[i].length; j++) {
-       test[i][j] = 0;
-    }
+ for (int j = 0; j < test[i].length; j++) {
+ test[i][j] = 0;
+ }
  }
  Light l = new Light(new PVector(0, 0, 0), 10);
  l.plot(100, 100, 200, 150, 50, 200, test, 1);
  display(test);
-}
-*/
+ }
+ */
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -37,7 +37,7 @@ void setup() {
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
   Enemy e1 = new Enemy("john", new PVector(200, -200, 200));
-  
+
   //l = new Light(new PVector(500, 500, 500), 10);
   PVector p = new PVector (-800, -200, -600);
   PVector p2 = new PVector (400, -100, -100);
@@ -45,7 +45,7 @@ void setup() {
   //ENEMIES
   //testTris.add(new Triangle(p, p2, l));
   //testTris = testTris.get(0).splitTriangle(new Obj());
-  Rect one = new Rect(p, 200, 1);
+  Rect one = new Rect(p, 200, 0);
   //c.addObject(one);
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
@@ -59,29 +59,25 @@ void setup() {
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
-  c.addObject(new Plane(100, color(100), 1000, 1000));
 }
 void draw() {
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-
   //c.updatePos(dir);
-  // --Screen--
   boolean breached = false;
-  //println(sc.ps);
+  //dir.y -= 0.1;
+  //if (c.getLoc().y < 0) {
+  //  dir.y = 0;
+  //}
   for (Obj obj : objs) {
-    
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(-xAng);
-
     obj.translate(dir);
     obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     obj.rotateOnX(xAng);
-
-    if (!obj.getBreachable() && obj.breached()) breached = true;  
-    //}
+    if (!obj.getBreachable() && obj.breached()) breached = true;
   }
   if (breached) {
     for (Obj obj : objs) {
@@ -92,6 +88,7 @@ void draw() {
       obj.rotateOnX(xAng);
     }
   }
+  // --Screen--
   background(255);
   c.display();
   text(AIM + "", 10, 20);
@@ -105,71 +102,73 @@ void keyPressed() {
   boolean breached = false;
   switch (key) {
   case 'l':
-    
+
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached()) breached = true; 
+      if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
-    for (Obj obj : objs) {
-      obj.rotateOnX(-xAng);
-      obj.rotateOnY(-10);
-      obj.rotateOnX(xAng);
+      for (Obj obj : objs) {
+        obj.rotateOnX(-xAng);
+        obj.rotateOnY(-10);
+        obj.rotateOnX(xAng);
+      }
     }
-  }
-    
+
     break;
   case 'j':
-   
+
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached()) breached = true; 
+      if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
-    for (Obj obj : objs) {
-      obj.rotateOnX(-xAng);
-      obj.rotateOnY(10);
-      obj.rotateOnX(xAng);
+      for (Obj obj : objs) {
+        obj.rotateOnX(-xAng);
+        obj.rotateOnY(10);
+        obj.rotateOnX(xAng);
+      }
     }
-  }
     break;
   case 'i':
     if (xAng <= 80) {
-    xAng += 10;
-    for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX(10);
-      if (!obj.getBreachable() && obj.breached()) breached = true; 
-    }
-    if (breached) {
-    for (Obj obj : objs) {
-      obj.rotateOnX(-10);
-    }
-  }
+      xAng += 10;
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.rotateOnX(10);
+        if (!obj.getBreachable() && obj.breached()) breached = true;
+      }
+      if (breached) {
+        for (Obj obj : objs) {
+          obj.rotateOnX(-10);
+          xAng -= 10;
+        }
+      }
     }
     break;
-    
+
   case 'k':
-    if (xAng >= -80){
-    xAng -= 10;
-    for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX(-10);
-      if (!obj.getBreachable() && obj.breached()) breached = true; 
+    if (xAng >= -80) {
+      xAng -= 10;
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.rotateOnX(-10);
+        if (!obj.getBreachable() && obj.breached()) breached = true;
+      }
+      if (breached) {
+        for (Obj obj : objs) {
+          obj.rotateOnX(10);
+          xAng += 10;
+        }
+      }
     }
-    if (breached) {
-    for (Obj obj : objs) {
-      obj.rotateOnX(10);
-    }
-  }
-    }
-    
+
     break;
   case 'w':
     dir.z = -speed;
@@ -183,18 +182,23 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
-  /*
-  case ' ':
-    if (c.getLoc().y == 0) {
-      dir.y = speed*2;
-    }
-    break;
-  */
+    //case ' ':
+    //  if (c.getLoc().y == 0) {
+    //    dir.y = speed*2;
+    //  }
+    //  break;
   case 'p':
     for (Obj obj : objs) {
       println("------------");
       for (PVector p : obj.getPoints()) {
         println(p);
+      }
+    }
+    break;
+  case 't':
+    if (mouseX > width/2-50 && mouseX < width/2+50) {
+      if (mouseY > height/2-50 && mouseY < height/2+50) {
+        test = !test;
       }
     }
     break;
