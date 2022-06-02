@@ -31,8 +31,8 @@ public class Sphere extends Obj {
       ts.add(new Triangle(ps.get(rows*i), ps.get(1+rows*(i-1)), ps.get(rows*i+rows)));
       ts.add(new Triangle(ps.get(rows*i+1), ps.get(1+rows*(i-1)), ps.get(rows*i+rows)));
       for (int j = 1; j<rows; j++) {
-        ts.add(new Triangle(ps.get(j), ps.get(j+1), ps.get(j+rows)));
-        ts.add(new Triangle(ps.get(j+1), ps.get(j+1+rows), ps.get(j+rows)));
+        ts.add(new Triangle(ps.get(j+rows*(i-1)), ps.get(j+1+rows*(i-1)), ps.get(j+rows*i)));
+        ts.add(new Triangle(ps.get(j+1+rows*(i-1)), ps.get(j+1+rows*i), ps.get(j+rows*i)));
       }
     }
     int end = ps.size()-1;
