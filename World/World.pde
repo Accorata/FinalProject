@@ -50,7 +50,6 @@ void setup() {
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
   c.addObject(one);
-  
   //objs.get(0).rotateX(30);
   for (Obj obj : objs) {
     obj.translate(new PVector(0, 0, 200));
@@ -60,20 +59,7 @@ void setup() {
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
-  
-  //p.add(new PVector(100, 100, 100));
-  //test = new Triangle(new PVector(100, 100), new PVector(200, 100), new PVector(100, 200));
-  //ArrayList<PVector> coords = test.getCoords();
-  ////println(coords);
-  //stroke(0);
-  //for (PVector coord : coords) {
-  //  point(coord.x, coord.y);
-  //  //circle(coord.x, coord.y,5);
-  //}
-  //PVector test = new PVector (100,0,0);
-  //println(test.setMag(25));
-
-  //objs.get(0).rotateOnZ(45);
+  c.addObject(new Plane(100, color(100), 1000, 1000));
 }
 void draw() {
   //l.shine(c.Triangles);

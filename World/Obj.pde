@@ -1,4 +1,4 @@
-public class Obj {  //<>//
+public class Obj { //<>//
   boolean breachable = false;
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
