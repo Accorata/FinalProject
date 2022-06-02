@@ -68,6 +68,9 @@ public class Camera {
     boolean breached = false;
     float xRotate = (mouse.x-width/2)*1/sensitivity;
     float yRotate = (height/2-mouse.y)*1/sensitivity;
+    if ((xAng > 80 && yRotate > 0) || (xAng < -80 && yRotate < 0)) {
+      yRotate = 0;
+    }
     xAng += yRotate;
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
@@ -83,25 +86,11 @@ public class Camera {
         obj.rotateOnY(-xRotate);
         obj.rotateOnX(xAng);
         obj.rotateOnX(-yRotate);
+        xAng -= yRotate;
       }
-    }
-    
+    } 
     //if (xAng <= 80 && yRotate < 0) {
       
-      for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-        
-        if (!obj.getBreachable() && obj.breached()) breached = true;
-      }
-      if (breached) {
-        for (Obj obj : objs) {
-          
-        }
-      }
-    //}
-    //for (Obj obj : objs) {
-    //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    //  obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
     //}
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
