@@ -65,7 +65,6 @@ void draw() {
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-
   //c.updatePos(dir);
   // --Screen--
   boolean breached = false;

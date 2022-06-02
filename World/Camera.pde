@@ -81,6 +81,20 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     }
+    float yRotate = (height/2-mouse.y)*1/sensitivity;
+    //if (xAng <= 80 && yRotate < 0) {
+      xAng += yRotate;
+      for (Obj obj : objs) {
+        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.rotateOnX(yRotate);
+        if (!obj.getBreachable() && obj.breached()) breached = true;
+      }
+      if (breached) {
+        for (Obj obj : objs) {
+          obj.rotateOnX(-yRotate);
+        }
+      }
+    //}
     //for (Obj obj : objs) {
     //  obj.setCenter(new PVector(0, 0, -1 * fromScreen));
     //  obj.rotateOnX((height/2-mouse.y)*1/sensitivity);
