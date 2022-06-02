@@ -16,20 +16,8 @@ PVector dir = new PVector(0, 0, 0);
 final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
-/*
-void setup() {
- size(1000, 600);
- double[][] test = new double[600][1000];
- for (int i = 0; i < test.length; i++) {
-    for (int j = 0; j < test[i].length; j++) {
-       test[i][j] = 0;
-    }
- }
- Light l = new Light(new PVector(0, 0, 0), 10);
- l.plot(100, 100, 200, 150, 50, 200, test, 1);
- display(test);
-}
-*/
+
+
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -45,7 +33,7 @@ void setup() {
   //ENEMIES
   //testTris.add(new Triangle(p, p2, l));
   //testTris = testTris.get(0).splitTriangle(new Obj());
-  Rect one = new Rect(p, 200, 1);
+  Rect one = new Rect(p, 200, 0);
   //c.addObject(one);
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
   c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
@@ -59,14 +47,14 @@ void setup() {
   c.addObject(sc);
   ENEMIES.add(e1);
   c.addObject(e1);
-  c.addObject(new Plane(100, color(100), 1000, 1000));
+  
 }
 void draw() {
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-
+  
   //c.updatePos(dir);
   // --Screen--
   boolean breached = false;
@@ -93,6 +81,7 @@ void draw() {
     }
   }
   background(255);
+  AIM = 0;
   c.display();
   text(AIM + "", 10, 20);
   stroke(75);
@@ -101,6 +90,7 @@ void draw() {
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
 }
+
 void keyPressed() {
   boolean breached = false;
   switch (key) {

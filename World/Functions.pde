@@ -45,15 +45,16 @@ boolean cover(PVector a, PVector b, PVector c) {
   float d1 = dist(a, b);
   float d2 = dist(b, c);
   float d3 = dist(c, a);
+  //println(solveT(i1, i2, d1) + solveT(i1, i3, d3) + solveT(i3, i2, d2));
   return (aprox(2*PI, solveT(i1, i2, d1) + solveT(i1, i3, d3) + solveT(i3, i2, d2)));
 }
 
-float solveT(float a, float b, float op) {
-  float theta = acos(sq(op)-sq(a)-sq(b))/(-2 * a * b);
+double solveT(float a, float b, float op) {
+  double theta = acos((sq(op)-sq(a)-sq(b))/(-2 * a * b));
   return theta;
 }
 
-boolean aprox(float a, float b) {
-  float err = a * .001;
+boolean aprox(double a, double b) {
+  double err = a * .01;
   return (b >= a - err && b <= a + err);
 }
