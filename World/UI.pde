@@ -17,9 +17,32 @@ public class UI {
         fill(255);
       }
     }
-    
-    
-    
   }
-  
+  void showHealth() {
+    textSize(20);
+    if (PLAYER_HEALTH >= 80) {
+      fill(0, 204, 0);
+    } else if (PLAYER_HEALTH > 20) {
+      fill(102, 102, 0);
+    } else {
+      fill(255, 0, 0);
+    }
+    text("" + PLAYER_HEALTH, 40, height - 50);
+  }
+  void showEnemyHealth(Enemy e) {
+    if (e != null) {
+      textSize(15);
+      fill(0);
+      text(e.getName(), 40, 50);  
+    
+    if (e.getHealth() >= 80) {
+      fill(0, 204, 0);
+    } else if (e.getHealth() > 20) {
+      fill(102, 102, 0);
+    } else {
+      fill(255, 0, 0);
+    }
+    
+    text(e.getHealth(), 40, 70);  
+  }}
 }

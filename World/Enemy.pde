@@ -8,7 +8,7 @@ public class Enemy extends Obj {
     super();
     this.loc = loc;
     ArrayList<PVector> points = calcPoints(loc, new PVector(100, 170, 20));
-    ArrayList<Triangle> shape = calcTriangles(points, color(0));
+    ArrayList<Triangle> shape = calcTriangles(points, color(102, 0, 0));
     super.setObj(points, shape);
     this.NAME = name;
     this.HEALTH = 100;
@@ -78,5 +78,8 @@ public class Enemy extends Obj {
       return true;
     }
     return false;
+  }
+  String getName() {
+    return this.NAME;
   }
 }
