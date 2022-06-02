@@ -269,7 +269,7 @@ void mouseClicked() {
         }
       }
     } else { 
-      INVENTORY.get(curG).shoot(E, false);
+    INVENTORY.get(curG).shoot(E, false);
     }
-  }
+  } 
 }

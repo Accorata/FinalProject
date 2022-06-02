@@ -20,14 +20,8 @@ public class Camera {
       }
     }
   }
-  void display() {
-    for (Triangle t : Triangles) {
-      t.update_close();
-    }
-    Collections.sort(Triangles);
-    for (Triangle t : Triangles) {
-
-      if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
+  void proj(Triangle t) {
+    if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
         float[][] pT = new float[3][2];
         int count = 0;
         for (PVector point : t.points) {
@@ -57,6 +51,19 @@ public class Camera {
           AIM = t.ID;
         }
       }
+  }
+  void display() {
+    
+    for (Triangle t : Triangles) {
+      t.update_close();
+    }
+    Collections.sort(Triangles);
+    //Collections.sort(sc.getTriangles());
+    for (Triangle t : sc.getTriangles()) {
+      proj(t);
+    }
+    for (Triangle t : Triangles) {
+      if (t.ID != -1) proj(t); 
     }
   }
   void addObject(Obj obj) {

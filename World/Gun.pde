@@ -25,13 +25,12 @@ public class Gun extends Obj {
   }
   void reload() {
     if (totBUL > 0) {
-      totBUL -= (BUL - curBUL);     
+      totBUL -= (BUL - curBUL);   
+      curBUL = BUL;
       if (totBUL < 0) {
         curBUL += totBUL;
         totBUL = 0;
-      } else {
-        curBUL = BUL;
-      }
+      } 
     }
   }
   int getTOT() {
