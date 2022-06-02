@@ -65,32 +65,8 @@ void draw() {
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-  //c.updatePos(dir);
+  c.updatePos(dir);
   // --Screen--
-  boolean breached = false;
-  //dir.y -= 0.1;
-  //if (c.getLoc().y < 0) {
-  //  dir.y = 0;
-  //}
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX(-xAng);
-    obj.translate(dir);
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX(xAng);
-
-    if (!obj.getBreachable() && obj.breached()) breached = true;  
-    //}
-  }
-  if (breached) {
-    for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX(-xAng);
-      obj.translate(PVector.mult(dir, -1));
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX(xAng);
-    }
-  }
   background(255);
   c.display();
   text(AIM + "", 10, 20);
