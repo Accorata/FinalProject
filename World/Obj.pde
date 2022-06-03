@@ -4,9 +4,6 @@ public class Obj { //<>// //<>// //<>//
   private ArrayList<Triangle> triangles;
   private PVector center;
 
-  boolean getBreachable() {
-    return this.breachable;
-  }
   public Obj(PVector center) {
     this.center = center;
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
@@ -25,6 +22,10 @@ public class Obj { //<>// //<>// //<>//
     this.points = calcPoints(t);
     this.triangles = t;
     setCenter();
+  }
+  
+  boolean getBreachable() {
+    return this.breachable;
   }
   void setBreachable(boolean b) {
     this.breachable = b;
@@ -157,15 +158,4 @@ public class Obj { //<>// //<>// //<>//
     cent.div(points.size());
     return cent;
   }
-  //void rotateX(float deg) {
-  //  float rad = radians(deg);
-  //  for (PVector point : points) {
-  //    PVector xy = new PVector(point.x, point.y, 0);
-  //    float angle = PVector.angleBetween(xy, xaxis) + rad;
-  //    point.x = xy.mag() * cos(angle);
-  //    point.y = xy.mag() * sin(angle);
-  //    PVector xy2 = new PVector(point.x, point.y, 0);
-  //    println(xy.mag() + " " + xy2.mag());
-  //  }
-  //}
 }

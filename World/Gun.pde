@@ -5,6 +5,7 @@ public class Gun extends Obj {
   private int curBUL;
   private int totBUL;
   private color bColor;
+  
   public Gun(String name, int damage, int magNum, int magCap) {
     this(name, damage, magNum, magCap, color(255, 0, 0));
   }
