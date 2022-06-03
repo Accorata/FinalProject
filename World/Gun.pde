@@ -1,11 +1,10 @@
 public class Gun extends Obj {
-  String NAME;
-  int DMG;
-  int MAGS;
-  int BUL;
-  int curBUL;
-  int totBUL;
-  color bColor;
+  private String NAME;
+  private int DMG;
+  private int BUL;
+  private int curBUL;
+  private int totBUL;
+  private color bColor;
   public Gun(String name, int damage, int magNum, int magCap) {
     this(name, damage, magNum, magCap, color(255, 0, 0));
   }
@@ -13,7 +12,6 @@ public class Gun extends Obj {
     super();
     this.NAME = name;
     this.DMG = damage;
-    this.MAGS = magNum;
     this.BUL = magCap;
     this.curBUL = magCap;
     this.totBUL = (magCap * magNum) - magCap;

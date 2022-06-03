@@ -1,8 +1,8 @@
 public class Obj { //<>// //<>// //<>//
-  boolean breachable = false;
-  ArrayList<PVector> points;
-  ArrayList<Triangle> triangles;
-  PVector center;
+  private boolean breachable = false;
+  private ArrayList<PVector> points;
+  private ArrayList<Triangle> triangles;
+  private PVector center;
 
   boolean getBreachable() {
     return this.breachable;

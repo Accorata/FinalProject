@@ -1,11 +1,11 @@
 public class Enemy extends Obj {
-  String NAME;
-  int HEALTH;
-  ArrayList<Gun> inventory;
-  PVector loc;
-  double ID;
-  float vAng;
-  int curGun;
+  private String NAME;
+  private int HEALTH;
+  private ArrayList<Gun> inventory;
+  private PVector loc;
+  private double ID;
+  private float vAng;
+  public int curGun;
   public Enemy(String name, PVector loc) {
     super();
     this.loc = loc;
@@ -121,7 +121,7 @@ public class Enemy extends Obj {
     //point.add(center);
     println(eAng);
     PVector cent = new PVector(0, -1 * fromScreen);
-    for (PVector p : points) {
+    for (PVector p : getPoints()) {
       PVector temp = new PVector(p.x, p.z);
       //temp.sub(cent);
       //temp.rotate(-radians(eAng));

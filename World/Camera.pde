@@ -1,10 +1,10 @@
 public class Camera {
-  color[][] screen = new color[height][width];
-  PVector loc;
-  boolean dense;
-  ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
-  PVector mouse = new PVector(width/2, height/2);
-  PVector mouseOld = new PVector(width/2, height/2);
+  private color[][] screen = new color[height][width];
+  private PVector loc;
+  private boolean dense;
+  private ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
+  private PVector mouse = new PVector(width/2, height/2);
+  private PVector mouseOld = new PVector(width/2, height/2);
   public Camera() {
     resetScreen();
     this.loc = new PVector(0, 0, 0);
