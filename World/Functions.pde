@@ -1,10 +1,10 @@
-String print2D(float[][] f) {
+void print2D(Float[][] f) {
   String s = "";
   for (int i = 0; i < f.length; i++) {
     s += Arrays.toString(f[i]);
     s += "\n";
   }
-  return s;
+  println(s);
 }
 
 void display(double[][] test) {

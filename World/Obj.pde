@@ -3,7 +3,7 @@ public class Obj { //<>// //<>// //<>//
   ArrayList<PVector> points;
   ArrayList<Triangle> triangles;
   PVector center;
- 
+
   boolean getBreachable() {
     return this.breachable;
   }
@@ -13,7 +13,6 @@ public class Obj { //<>// //<>// //<>//
     ts.add(new Triangle(center.copy(), center.copy(), center.copy()));
     this.triangles = ts;
     this.points = calcPoints(ts);
-   
   }
   public Obj() {
   }
