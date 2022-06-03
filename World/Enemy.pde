@@ -80,13 +80,12 @@ public class Enemy extends Obj {
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
     //println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
     if (aprox2(vAng, (ang% TWO_PI)+(radians(eAng)%TWO_PI))) {
-      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));   
+      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));
     }
     return false;
-    
   }
   boolean checkBetween(float d) {
-    for (Triangle t: c.Triangles) {
+    for (Triangle t : c.Triangles) {
       t.update_close(loc);
     }
     Collections.sort(c.Triangles, Collections.reverseOrder());
@@ -95,12 +94,12 @@ public class Enemy extends Obj {
       PVector t1 = t.points[0];
       PVector t2 = t.points[1];
       PVector t3 = t.points[2];
-/*
+      /*
       PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
-      PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
-      PVector crV = v1.cross(v2);
-      float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
-    */
+       PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
+       PVector crV = v1.cross(v2);
+       float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
+       */
       boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
       boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
       boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
@@ -112,63 +111,68 @@ public class Enemy extends Obj {
   }
   /*
   boolean inSight() {
-    ArrayList<Triangle> ts = copyOf(c.Triangles);
-    ts.add(new Triangle(new PVector(0, -200, -fromScreen), new PVector(100, 75, -fromScreen), new PVector(-100, 75, -fromScreen)));
-    ts.get(ts.size()-1).ID = 3;
-    Obj ob = new Obj(ts);
-    super.setCenter();
-    ob.setCenter(super.getCenter());
-    ob.rotateOnY(vAng);
-    ob.translate(new PVector(-getCenter().x, 0, -getCenter().z - fromScreen));
-
-    return see(ts);
-  }
-
-  boolean see (ArrayList<Triangle> Triangles) {
-    boolean s = false;
-    for (Triangle t : Triangles) {
-      t.update_close();
+   ArrayList<Triangle> ts = copyOf(c.Triangles);
+   ts.add(new Triangle(new PVector(0, -200, -fromScreen), new PVector(100, 75, -fromScreen), new PVector(-100, 75, -fromScreen)));
+   ts.get(ts.size()-1).ID = 3;
+   Obj ob = new Obj(ts);
+   super.setCenter();
+   ob.setCenter(super.getCenter());
+   ob.rotateOnY(vAng);
+   ob.translate(new PVector(-getCenter().x, 0, -getCenter().z - fromScreen));
+   
+   return see(ts);
+   }
+   
+   boolean see (ArrayList<Triangle> Triangles) {
+   boolean s = false;
+   for (Triangle t : Triangles) {
+   t.update_close();
+   }
+   Collections.sort(Triangles);
+   for (Triangle t : Triangles) {
+   if (!(t.points[0].z < 0 && t.points[1].z < 0 && t.points[2].z < 0)) {
+   float[][] pT = new float[3][2];
+   int count = 0;
+   for (PVector point : t.points) {
+   try {
+   float scX = 0;
+   float scY = 0;
+   if (point.z <= -1 * fromScreen) {
+   scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
+   scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
+   } else {      
+   scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+   scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+   }
+   pT[count][0] = scX;
+   pT[count][1] = scY;
+   count++;
+   } 
+   catch (Exception e) {
+   break;
+   }
+   }
+   if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
+   s = t.ID == 3;          
+   }
+   }
+   }
+   return s;
+   }
+   */
+  void move(PVector dir) {
+    for (PVector p : points) {
+      p.add(dir);
     }
-    Collections.sort(Triangles);
-    for (Triangle t : Triangles) {
-      if (!(t.points[0].z < 0 && t.points[1].z < 0 && t.points[2].z < 0)) {
-        float[][] pT = new float[3][2];
-        int count = 0;
-        for (PVector point : t.points) {
-          try {
-            float scX = 0;
-            float scY = 0;
-            if (point.z <= -1 * fromScreen) {
-              scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
-              scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
-            } else {      
-              scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-              scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
-            }
-            pT[count][0] = scX;
-            pT[count][1] = scY;
-            count++;
-          } 
-          catch (Exception e) {
-            break;
-          }
-        }
-        if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
-          s = t.ID == 3;          
-        }
-      }
+  }
+  boolean addGun(Gun g) {
+    if (inventory.size() < 3) {
+      inventory.add(g);
+      return true;
     }
-    return s;
+    return false;
   }
-*/
-boolean addGun(Gun g) {
-  if (inventory.size() < 3) {
-    inventory.add(g);
-    return true;
+  String getName() {
+    return this.NAME;
   }
-  return false;
-}
-String getName() {
-  return this.NAME;
-}
 }

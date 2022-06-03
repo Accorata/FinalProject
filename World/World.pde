@@ -20,6 +20,7 @@ ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng =0;
 boolean aniEn = true;
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -61,7 +62,7 @@ void setup() {
   c.addObject(new Pyramid(new PVector(-300,-100,200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(new TriPrism(new PVector(-300,-100,200), new PVector(-100, -100, 100), new PVector(0,-100,0), new PVector(0,-340,0), color(70), 1));
   c.addObject(sc);
-  Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
+  
   Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
   Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
   ENEMIES.add(e2);
@@ -71,7 +72,9 @@ void setup() {
   ENEMIES.add(e1);
   c.addObject(e1);
 }
+PVector xAxis = new PVector(1,0,0);
 void draw() {
+  e1.move(xAxis);
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
