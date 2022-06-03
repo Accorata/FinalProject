@@ -51,6 +51,7 @@ public class Enemy extends Obj {
   }
   ArrayList<Triangle> renderShape() {
     ArrayList<Triangle> shape = new ArrayList<Triangle>();
+    PVector loc = getCenter();
     PVector p1 = new PVector(loc.x-50, loc.y-50, loc.z);
     PVector p2 = new PVector(loc.x+50, loc.y-50, loc.z);
     PVector p3 = new PVector(loc.x-50, loc.y+200, loc.z);
@@ -72,13 +73,53 @@ public class Enemy extends Obj {
     return this.inventory;
   }
   boolean inSight() {
+    float ang = 0;
+    super.setCenter();
+    //println(getCenter());
+    if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
+    if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
+    println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
+    if (aprox2(vAng, (ang% TWO_PI)+(radians(eAng)%TWO_PI))) {
+      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));   
+    }
+    return false;
+    
+  }
+  boolean checkBetween(float d) {
+    for (Triangle t: c.Triangles) {
+      t.update_close(loc);
+    }
+    Collections.sort(c.Triangles, Collections.reverseOrder());
+    for (Triangle t : c.Triangles) {
+      if (t.close > d) break;
+      PVector t1 = t.points[0];
+      PVector t2 = t.points[1];
+      PVector t3 = t.points[2];
+/*
+      PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
+      PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
+      PVector crV = v1.cross(v2);
+      float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
+    */
+      boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
+      boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
+      boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
+
+      boolean within = wx && wy && wz;
+      if (within) return false;
+    }
+    return true;
+  }
+  /*
+  boolean inSight() {
     ArrayList<Triangle> ts = copyOf(c.Triangles);
-    ts.add(new Triangle(new PVector(0, -100, -fromScreen), new PVector(100, 75, -fromScreen), new PVector(-100, 75, -fromScreen)));
+    ts.add(new Triangle(new PVector(0, -200, -fromScreen), new PVector(100, 75, -fromScreen), new PVector(-100, 75, -fromScreen)));
     ts.get(ts.size()-1).ID = 3;
     Obj ob = new Obj(ts);
-    ob.setCenter(loc);
+    super.setCenter();
+    ob.setCenter(super.getCenter());
     ob.rotateOnY(vAng);
-    ob.translate(new PVector(-loc.x, -loc.y, -loc.z - fromScreen));
+    ob.translate(new PVector(-getCenter().x, 0, -getCenter().z - fromScreen));
 
     return see(ts);
   }
@@ -119,7 +160,7 @@ public class Enemy extends Obj {
     }
     return s;
   }
-
+*/
 boolean addGun(Gun g) {
   if (inventory.size() < 3) {
     inventory.add(g);

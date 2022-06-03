@@ -18,7 +18,7 @@ final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
-
+float eAng =0;
 
 void setup() {
   size(1000, 600);
@@ -65,8 +65,8 @@ void setup() {
   ENEMIES.add(e2);
   c.addObject(e2);
   c.addObject(e3);
-  ENEMIES.add(e3);
-  ENEMIES.add(e1);
+  //ENEMIES.add(e3);
+  //ENEMIES.add(e1);
   c.addObject(e1);
 }
 void draw() {
@@ -126,7 +126,9 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
+      
       if (!obj.getBreachable() && obj.breached()) breached = true;
+      
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -134,7 +136,7 @@ void keyPressed() {
         obj.rotateOnY(-10);
         obj.rotateOnX(xAng);
       }
-    }
+    } else eAng+=10;
 
     break;
   case 'j':
@@ -144,6 +146,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
+      
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
@@ -152,7 +155,7 @@ void keyPressed() {
         obj.rotateOnY(10);
         obj.rotateOnX(xAng);
       }
-    }
+    } else eAng-=10;
     break;
   case 'i':
     if (xAng <= 80) {
