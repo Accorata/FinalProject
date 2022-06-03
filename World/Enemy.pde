@@ -78,7 +78,7 @@ public class Enemy extends Obj {
     //println(getCenter());
     if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
-    println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
+    //println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
     if (aprox2(vAng, (ang% TWO_PI)+(radians(eAng)%TWO_PI))) {
       return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));   
     }

@@ -98,6 +98,7 @@ public class Camera {
       }
     } else {
       xAng += yRotate;
+      eAng+= xRotate;
     }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
