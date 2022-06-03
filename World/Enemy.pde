@@ -5,6 +5,7 @@ public class Enemy extends Obj {
   PVector loc;
   double ID;
   float vAng;
+  int curGun;
   public Enemy(String name, PVector loc) {
     super();
     this.loc = loc;
@@ -20,6 +21,8 @@ public class Enemy extends Obj {
       t.ID = this.ID;
     }
     this.vAng = 0;
+    curGun = 0;
+    inventory.add(new Gun("Pistol", 20, 7, 12));
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
