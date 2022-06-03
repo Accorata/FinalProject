@@ -167,12 +167,14 @@ public class Enemy extends Obj {
       //point.z = temp.y;
       //point.add(center);
       println(eAng);
-      //PVector cent = new PVector(0, 0, -1 * fromScreen);
+    PVector cent = new PVector(0, -1 * fromScreen);
     for (PVector p : points) {
       PVector temp = new PVector(p.x, p.z);
-      temp.rotate(radians(eAng));
-      temp.add(dir);
-      temp.rotate(-radians(eAng));
+      //temp.sub(cent);
+      //temp.rotate(-radians(eAng));
+      temp.add(new PVector(dir.x, 0));
+      //temp.rotate(radians(eAng));
+      //temp.add(cent);
       p.set(temp.x, p.y, temp.z);
     }
   }
