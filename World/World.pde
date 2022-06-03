@@ -19,7 +19,7 @@ boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng =0;
-
+boolean aniEn = true;
 void setup() {
   size(1000, 600);
   if (!test) noCursor();
@@ -98,9 +98,8 @@ void draw() {
       obj.rotateOnX(xAng);
     }
   }
-  for (Enemy e : ENEMIES) {
-    if (e.inSight()) println(e.getName());
-  }
+  
+  if (aniEn) animateEnemies();
   // --Screen--
   background(255);
   AIM = 0;
@@ -115,7 +114,11 @@ void draw() {
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
 }
-
+void animateEnemies() {
+  for (Enemy e : ENEMIES) {
+    if (e.inSight()) println(e.getName());
+  }
+}
 void keyPressed() {
   boolean breached = false;
   switch (key) {
@@ -209,12 +212,7 @@ void keyPressed() {
     //  }
     //  break;
   case 'p':
-    for (Obj obj : objs) {
-      println("------------");
-      for (PVector p : obj.getPoints()) {
-        println(p);
-      }
-    }
+    aniEn = !aniEn;
     break;
   case 't':
     if (mouseX > width/2-50 && mouseX < width/2+50) {
@@ -236,6 +234,7 @@ void keyPressed() {
     curG = 2;
     break;
   }
+  
 }
 void keyReleased() {
   switch (key) {

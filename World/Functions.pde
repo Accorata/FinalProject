@@ -59,10 +59,10 @@ boolean aprox(double a, double b) {
   return (b >= a - err && b <= a + err);
 }
 boolean aprox2(double a, double b) {
-  if (((a >= 6.2 && a<= 6.37) || (a >= -.1 && a <= .1)) && ((b >= 6.2 && b<= 6.37) || (b >= -.1 && b <= .1))) return true;
-  double err = a * .025;
-  if (a <= 1 && a >= -1) err = .025;
-  return (b >= a - err && b <= a + err);
+  double view = 2;
+  if (((a >= 6.28-view && a<= 6.28+view) || (a >= -view && a <= view)) && ((b >= 6.28-view && b<= 6.28+view) || (b >= -view && b <= view))) return true;
+
+  return (b >= a - view && b <= a + view);
 }
 ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
   ArrayList<Triangle> tsc = new ArrayList<Triangle>();
