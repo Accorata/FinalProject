@@ -58,3 +58,16 @@ boolean aprox(double a, double b) {
   double err = a * .01;
   return (b >= a - err && b <= a + err);
 }
+boolean aprox2(double a, double b) {
+  double view = 2;
+  if (((a >= 6.28-view && a<= 6.28+view) || (a >= -view && a <= view)) && ((b >= 6.28-view && b<= 6.28+view) || (b >= -view && b <= view))) return true;
+
+  return (b >= a - view && b <= a + view);
+}
+ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
+  ArrayList<Triangle> tsc = new ArrayList<Triangle>();
+  for (Triangle t : ts) {
+    tsc.add(t.copyOf());
+  }
+  return tsc;
+}
