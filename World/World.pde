@@ -69,12 +69,9 @@ void setup() {
 
   Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
   Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
-  ENEMIES.add(e2);
-  c.addObject(e2);
-  c.addObject(e3);
-  ENEMIES.add(e3);
-  ENEMIES.add(e1);
-  c.addObject(e1);
+  addEnemy(e1);
+  addEnemy(e2);
+  addEnemy(e3);
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
