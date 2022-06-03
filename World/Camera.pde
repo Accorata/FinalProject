@@ -34,6 +34,7 @@ public class Camera {
             } else {      
               scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
               scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
+              
             }
             pT[count][0] = scX;
             pT[count][1] = scY;

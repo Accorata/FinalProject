@@ -5,6 +5,7 @@ public class Enemy extends Obj {
   PVector loc;
   double ID;
   float vAng;
+  int curGun;
   public Enemy(String name, PVector loc) {
     super();
     this.loc = loc;
@@ -19,7 +20,10 @@ public class Enemy extends Obj {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
+    this.mve = 0;
     this.vAng = 0;
+    curGun = 0;
+    inventory.add(new Gun("Pistol", 20, 7, 12));
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
@@ -110,57 +114,7 @@ public class Enemy extends Obj {
     }
     return true;
   }
-  /*
-  boolean inSight() {
-    ArrayList<Triangle> ts = copyOf(c.Triangles);
-    ts.add(new Triangle(new PVector(0, -200, -fromScreen), new PVector(100, 75, -fromScreen), new PVector(-100, 75, -fromScreen)));
-    ts.get(ts.size()-1).ID = 3;
-    Obj ob = new Obj(ts);
-    super.setCenter();
-    ob.setCenter(super.getCenter());
-    ob.rotateOnY(vAng);
-    ob.translate(new PVector(-getCenter().x, 0, -getCenter().z - fromScreen));
 
-    return see(ts);
-  }
-
-  boolean see (ArrayList<Triangle> Triangles) {
-    boolean s = false;
-    for (Triangle t : Triangles) {
-      t.update_close();
-    }
-    Collections.sort(Triangles);
-    for (Triangle t : Triangles) {
-      if (!(t.points[0].z < 0 && t.points[1].z < 0 && t.points[2].z < 0)) {
-        float[][] pT = new float[3][2];
-        int count = 0;
-        for (PVector point : t.points) {
-          try {
-            float scX = 0;
-            float scY = 0;
-            if (point.z <= -1 * fromScreen) {
-              scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
-              scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
-            } else {      
-              scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-              scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
-            }
-            pT[count][0] = scX;
-            pT[count][1] = scY;
-            count++;
-          } 
-          catch (Exception e) {
-            break;
-          }
-        }
-        if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
-          s = t.ID == 3;          
-        }
-      }
-    }
-    return s;
-  }
-*/
 boolean addGun(Gun g) {
   if (inventory.size() < 3) {
     inventory.add(g);
@@ -170,5 +124,34 @@ boolean addGun(Gun g) {
 }
 String getName() {
   return this.NAME;
+}
+
+void rotate(float deg) {
+    super.setCenter(new PVector(0, 0, -fromScreen));
+    super.rotateOnY(-eAng);
+    super.rotateOnX(-xAng);
+    super.setCenter();
+    super.rotateOnY(deg);
+    super.setCenter(new PVector(0, 0, -fromScreen));
+    super.rotateOnX(xAng);
+    super.rotateOnY(eAng);
+   
+}
+int mve;
+void move() {
+  if (mve == 0) {
+    float nv = (float) (Math.random() * PI) + PI;
+    mve = (int) (Math.random() * 20 + 10);
+    //rotateOnY(nv);
+    //vAng = (nv + vAng)%TWO_PI;
+    
+    rotateOnY(40);
+    //vAng += radians(40);
+    println(mve);
+    println(nv);
+  } else {
+   super.translate(new PVector(acos(vAng), 0, asin(vAng))); 
+   mve--;
+  }
 }
 }
