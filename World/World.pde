@@ -9,7 +9,7 @@ ArrayList<Gun> INVENTORY;
 int curG;
 Plane sc = new Plane(100, color(0), 2000, 2000);
 float xAng = 0;
-float yAng = 0;
+//float yAng = 0;
 Camera c;
 Light l;
 ArrayList<Obj> objs = new ArrayList<Obj>();

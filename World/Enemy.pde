@@ -161,8 +161,17 @@ public class Enemy extends Obj {
    }
    */
   void move(PVector dir) {
+    //PVector temp = new PVector(point.x, point.z);
+    //  temp.rotate(eAng);
+      //point.x = temp.x;
+      //point.z = temp.y;
+      //point.add(center);
+      println(eAng);
     for (PVector p : points) {
+      PVector temp = new PVector(p.x, p.z);
+      temp.rotate(-radians(eAng));
       p.add(dir);
+      temp.rotate(radians(eAng));
     }
   }
   boolean addGun(Gun g) {
