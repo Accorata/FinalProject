@@ -46,8 +46,9 @@ public class Gun extends Obj {
   int getCUR() {
     return curBUL;
   }
-  void shoot() {
+  void shoot(PVector source, PVector dest) {
     PLAYER_HEALTH -= DMG;
+    animateBullet(source, dest);
   }
   void animateBullet(PVector source, PVector dest) {
     Queue q = new ArrayDeque<Float[][]>();
@@ -59,8 +60,8 @@ public class Gun extends Obj {
       
       cord[0][0] = (float) source.x + (i+count)*cx/5;
       cord[0][1] = (float) source.y + (i+count)*cy/5;
-      cord[1][0] = (float) source.x + (i+.5)*cx/5;
-      cord[1][1] = (float) source.y + (i+.5)*cy/5;
+      cord[1][0] = (float) source.x + (i+.4)*cx/5;
+      cord[1][1] = (float) source.y + (i+.4)*cy/5;
       cord[2] = new Float[]{red(bColor), green(bColor), blue(bColor)};
       q.add(cord);
       count+=.1;

@@ -23,8 +23,10 @@ UI ui;
 float eAng =0;
 boolean aniEn = true;
 ArrayList<Queue<Float[][]>> bullets;
+
 void setup() {
   size(1000, 600);
+  
   if (!test) noCursor();
   c = new Camera();
   PLAYER_HEALTH = 100;
@@ -68,8 +70,8 @@ void setup() {
   ENEMIES.add(e2);
   c.addObject(e2);
   c.addObject(e3);
-  ENEMIES.add(e3);
-  ENEMIES.add(e1);
+  //ENEMIES.add(e3);
+  //ENEMIES.add(e1);
   c.addObject(e1);
 }
 void draw() {
@@ -102,7 +104,7 @@ void draw() {
     }
   }
 
-  if (aniEn) animateEnemies();
+  //if (aniEn) animateEnemies();
   // --Screen--
   background(255);
   AIM = 0;
@@ -132,7 +134,7 @@ void draw() {
 }
 void animateEnemies() {
   for (Enemy e : ENEMIES) {
-    //if (e.inSight()) println(e.getName());
+    e.move();
   }
 }
 void keyPressed() {
@@ -247,6 +249,9 @@ void keyPressed() {
 
   case '3':
     curG = 2;
+    break;
+  case 'm':
+    animateEnemies();
     break;
   }
 }
