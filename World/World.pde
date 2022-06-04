@@ -27,15 +27,15 @@ Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
 ArrayList<Queue<Float[][]>> bullets;
 void setup() {
   size(1000, 600);
-  
+
   if (!test) noCursor();
   c = new Camera();
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
   bullets = new ArrayList<Queue<Float[][]>>();
   INVENTORY = new ArrayList<Gun>();
-  INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0,255,0)));
-  INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0,0,255)));
+  INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
+  INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
   curG = 0;
   ui = new UI();
   //l = new Light(new PVector(500, 500, 500), 10);
@@ -63,20 +63,17 @@ void setup() {
    obj.rotateOnZ(45);
    //obj.rotateOnY(135);
    }*/
-  c.addObject(new Sphere(new PVector(300,-100,200), 100, color(40), 15, 15));
-  c.addObject(new Pyramid(new PVector(-300,-100,200), new PVector(100, -100, 100), color(70), 1));
+  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 15, 15));
+  c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
-  
+
   Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
   Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
-  ENEMIES.add(e2);
-  c.addObject(e2);
-  c.addObject(e3);
-  //ENEMIES.add(e3);
-  //ENEMIES.add(e1);
-  c.addObject(e1);
+  addEnemy(e1);
+  addEnemy(e2);
+  addEnemy(e3);
 }
-PVector xAxis = new PVector(1,0,0);
+PVector xAxis = new PVector(1, 0, 0);
 void draw() {
   e1.move(xAxis);
   //l.shine(c.Triangles);
@@ -114,10 +111,10 @@ void draw() {
   AIM = 0;
   c.display();
   for (int i = 0; i < bullets.size(); i++) {
-    
+
     strokeWeight(5);
     Float[][] cord = bullets.get(i).poll();
-    
+
     if (cord != null) {
       stroke(cord[2][0], cord[2][1], cord[2][2]);
       line(cord[0][0], cord[0][1], cord[1][0], cord[1][1]);
@@ -275,9 +272,9 @@ void keyReleased() {
     break;
 
   case 'r':
-  if (curG < INVENTORY.size()) {
-    INVENTORY.get(curG).reload();
-  }
+    if (curG < INVENTORY.size()) {
+      INVENTORY.get(curG).reload();
+    }
     break;
   }
 }

@@ -71,3 +71,8 @@ ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
   }
   return tsc;
 }
+
+void addEnemy (Enemy e) {
+  c.addObject(e);
+  ENEMIES.add(e);
+}
