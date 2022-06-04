@@ -1,10 +1,11 @@
 public class Camera {
-  color[][] screen = new color[height][width];
-  PVector loc;
-  boolean dense;
-  ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
-  PVector mouse = new PVector(width/2, height/2);
-  PVector mouseOld = new PVector(width/2, height/2);
+  private color[][] screen = new color[height][width];
+  private PVector loc;
+  private boolean dense;
+  private ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
+  private PVector mouse = new PVector(width/2, height/2);
+  private PVector mouseOld = new PVector(width/2, height/2);
+  
   public Camera() {
     resetScreen();
     this.loc = new PVector(0, 0, 0);
@@ -22,39 +23,38 @@ public class Camera {
   }
   void proj(Triangle t) {
     if (!(t.points[0].z < -1 * fromScreen && t.points[1].z < -1 * fromScreen && t.points[2].z < -1 * fromScreen)) {
-        float[][] pT = new float[3][2];
-        int count = 0;
-        for (PVector point : t.points) {
-          try {
-            float scX = 0;
-            float scY = 0;
-            if (point.z <= -1 * fromScreen) {
-              scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
-              scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
-            } else {      
-              scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
-              scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
-              
-            }
-            pT[count][0] = scX;
-            pT[count][1] = scY;
-            count++;
-          } 
-          catch (Exception e) {
-            break;
+      float[][] pT = new float[3][2];
+      int count = 0;
+      for (PVector point : t.points) {
+        try {
+          float scX = 0;
+          float scY = 0;
+          if (point.z <= -1 * fromScreen) {
+            scX = (((fromScreen * point.x) / ((-1 * fromScreen + 1) + fromScreen)) + width/2);
+            scY = (((fromScreen * point.y) / ((-1 * fromScreen + 1) + fromScreen)) + height/2);
+          } else {      
+            scX = (((fromScreen * point.x) / (point.z + fromScreen)) + width/2);
+            scY = (((fromScreen * point.y) / (point.z + fromScreen)) + height/2);
           }
-        }
-        fill(t.clr);
-        if (!dense) noStroke();
-        triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
-        //println(cover(new PVector(pT[0][0], pT[0][1], 0), new PVector(pT[1][0], pT[1][1], 0), new PVector(pT[2][0], pT[2][1], 0)));
-        if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
-          AIM = t.ID;
+          pT[count][0] = scX;
+          pT[count][1] = scY;
+          count++;
+        } 
+        catch (Exception e) {
+          break;
         }
       }
+      fill(t.clr);
+      if (!dense) noStroke();
+      triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
+      //println(cover(new PVector(pT[0][0], pT[0][1], 0), new PVector(pT[1][0], pT[1][1], 0), new PVector(pT[2][0], pT[2][1], 0)));
+      if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
+        AIM = t.ID;
+      }
+    }
   }
   void display() {
-    
+
     for (Triangle t : Triangles) {
       t.update_close();
     }
@@ -64,7 +64,7 @@ public class Camera {
       proj(t);
     }
     for (Triangle t : Triangles) {
-      if (t.ID != -1) proj(t); 
+      if (t.ID != -1) proj(t);
     }
   }
   void addObject(Obj obj) {
