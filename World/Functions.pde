@@ -20,6 +20,16 @@ void rotateAxisOnX(PVector axis, float deg) {
   }
 }
 
+void rotateAxisOnZ(PVector axis, float deg) {
+  if (deg != 0) {
+    float rad = radians(deg);
+    PVector temp = new PVector(axis.x, axis.y);
+    temp.rotate(rad);
+    axis.x = temp.x;
+    axis.y = temp.y;
+  }
+}
+
 void print2D(Float[][] f) {
   String s = "";
   for (int i = 0; i < f.length; i++) {
