@@ -70,8 +70,8 @@ void setup() {
   ENEMIES.add(e2);
   c.addObject(e2);
   c.addObject(e3);
-  //ENEMIES.add(e3);
-  //ENEMIES.add(e1);
+  ENEMIES.add(e3);
+  ENEMIES.add(e1);
   c.addObject(e1);
 }
 void draw() {

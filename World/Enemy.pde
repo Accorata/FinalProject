@@ -128,13 +128,13 @@ String getName() {
 
 void rotate(float deg) {
     super.setCenter(new PVector(0, 0, -fromScreen));
-    super.rotateOnY(-eAng);
+    
     super.rotateOnX(-xAng);
     super.setCenter();
     super.rotateOnY(deg);
     super.setCenter(new PVector(0, 0, -fromScreen));
     super.rotateOnX(xAng);
-    super.rotateOnY(eAng);
+
    
 }
 int mve;
