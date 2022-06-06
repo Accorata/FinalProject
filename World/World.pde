@@ -200,6 +200,9 @@ void keyPressed() {
           obj.rotateOnX(-10);
         }
         xAng -= 10;
+      } else {
+        rotateAxisOnX(xDir, 10);
+        rotateAxisOnX(zDir, 10);
       }
     }
     break;
@@ -217,6 +220,9 @@ void keyPressed() {
           obj.rotateOnX(10);
         }
         xAng += 10;
+      } else {
+        rotateAxisOnX(xDir, -10);
+        rotateAxisOnX(zDir, -10);
       }
     }
 
