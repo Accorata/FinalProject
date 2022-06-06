@@ -24,6 +24,8 @@ UI ui;
 float eAng =0;
 boolean aniEn = true;
 Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
+Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
+Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
 void setup() {
   size(1000, 600);
@@ -67,15 +69,16 @@ void setup() {
   c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
 
-  Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
-  Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
+
   addEnemy(e1);
   addEnemy(e2);
   addEnemy(e3);
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  e1.move(xAxis);
+  e1.moveX();
+  e2.moveX();
+  e3.moveX();
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();

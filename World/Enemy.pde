@@ -5,6 +5,8 @@ public class Enemy extends Obj {
   private PVector loc;
   private double ID;
   private float vAng;
+  private PVector xDir = new PVector(1,0,0);
+  private PVector zDir = new PVector(0,0,1);
   public int curGun;
   
   public Enemy(String name, PVector loc) {
@@ -113,6 +115,12 @@ public class Enemy extends Obj {
       if (within) return false;
     }
     return true;
+  }
+  void moveX() {
+    loc.add(xDir);
+    for (PVector p : getPoints()) {
+      p.add(xDir);
+    }
   }
   void move(PVector dir) {
     //PVector temp = new PVector(point.x, point.z);
