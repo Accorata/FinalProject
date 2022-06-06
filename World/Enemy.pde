@@ -1,6 +1,3 @@
-public PVector xDir = new PVector(1,0,0);
-public PVector zDir = new PVector(0,0,1);
-
 public class Enemy extends Obj {
   private String NAME;
   private int HEALTH;
@@ -117,12 +114,6 @@ public class Enemy extends Obj {
       if (within) return false;
     }
     return true;
-  }
-  void moveX() {
-    //loc.add(xDir);
-    for (PVector p : getPoints()) {
-      p.add(xDir);
-    }
   }
   void move(PVector dir) {
     //PVector temp = new PVector(point.x, point.z);

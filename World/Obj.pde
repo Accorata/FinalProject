@@ -1,4 +1,8 @@
-public class Obj { //<>// //<>// //<>//
+public PVector xDir = new PVector(1,0,0); //<>//
+public PVector yDir = new PVector(0,1,0);
+public PVector zDir = new PVector(0,0,1);
+
+public class Obj { //<>// //<>//
   private boolean breachable = false;
   private ArrayList<PVector> points;
   private ArrayList<Triangle> triangles;
@@ -23,7 +27,22 @@ public class Obj { //<>// //<>// //<>//
     this.triangles = t;
     setCenter();
   }
-
+  
+  void moveX() {
+    for (PVector p : getPoints()) {
+      p.add(xDir);
+    }
+  }
+  void moveY() {
+    for (PVector p : getPoints()) {
+      p.add(yDir);
+    }
+  }
+  void moveZ() {
+    for (PVector p : getPoints()) {
+      p.add(zDir);
+    }
+  }
   boolean getBreachable() {
     return this.breachable;
   }
