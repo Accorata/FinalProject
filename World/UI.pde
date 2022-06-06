@@ -1,12 +1,13 @@
 public class UI {
-  public UI() {}
+  public UI() {
+  }
   void box(ArrayList<Gun> gs) {
     fill(255);
     strokeWeight(4);
     for (int i = 0; i < 3; i++) {
       stroke(0);
       if (curG == i) stroke(51, 153, 255);
-      rect(width-(250- 70*i), height-80, 50,50);  
+      rect(width-(250- 70*i), height-80, 50, 50);  
       if (gs.size() > i) {
         fill(0);
         textSize(13);
@@ -34,15 +35,16 @@ public class UI {
       textSize(15);
       fill(0);
       text(e.getName(), 40, 50);  
-    
-    if (e.getHealth() >= 80) {
-      fill(0, 204, 0);
-    } else if (e.getHealth() > 20) {
-      fill(102, 102, 0);
-    } else {
-      fill(255, 0, 0);
+
+      if (e.getHealth() >= 80) {
+        fill(0, 204, 0);
+      } else if (e.getHealth() > 20) {
+        fill(102, 102, 0);
+      } else {
+        fill(255, 0, 0);
+      }
+
+      text(e.getHealth(), 40, 70);
     }
-    
-    text(e.getHealth(), 40, 70);  
-  }}
+  }
 }

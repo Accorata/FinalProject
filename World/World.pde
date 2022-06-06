@@ -79,7 +79,7 @@ void draw() {
   if (!test) c.rotateByMouse();
   // --Update World--
   c.updatePos(dir);
-  
+
   //if (aniEn) animateEnemies();
   // --Screen--
   background(255);
@@ -132,8 +132,8 @@ void keyPressed() {
       }
     } else {
       eAng+=10;
-      rotateAxisOnY(xDir, 10);
-      rotateAxisOnY(zDir, 10);
+      rotateAxisOnY(xUnit, 10);
+      rotateAxisOnY(zUnit, 10);
     }
 
     break;
@@ -155,8 +155,8 @@ void keyPressed() {
       }
     } else {
       eAng-=10;
-      rotateAxisOnY(xDir, -10);
-      rotateAxisOnY(zDir, -10);
+      rotateAxisOnY(xUnit, -10);
+      rotateAxisOnY(zUnit, -10);
     }
     break;
   case 'i':
@@ -173,8 +173,8 @@ void keyPressed() {
         }
         xAng -= 10;
       } else {
-        //rotateAxisOnX(xDir, 10);
-        rotateAxisOnX(zDir, 10);
+        rotateAxisOnX(xUnit, 10);
+        rotateAxisOnX(zUnit, 10);
       }
     }
     break;
@@ -193,8 +193,8 @@ void keyPressed() {
         }
         xAng += 10;
       } else {
-        //rotateAxisOnX(xDir, -10);
-        rotateAxisOnX(zDir, -10);
+        rotateAxisOnX(xUnit, -10);
+        rotateAxisOnX(zUnit, -10);
       }
     }
 

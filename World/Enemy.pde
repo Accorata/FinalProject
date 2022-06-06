@@ -5,9 +5,9 @@ public class Enemy extends Obj {
   private PVector loc;
   private double ID;
   private float vAng;
-  
+
   public int curGun;
-  
+
   public Enemy(String name, PVector loc) {
     super();
     this.loc = loc;

@@ -1,7 +1,7 @@
 public class Light extends Obj {
   private float intensity;
   private int mag;
-  
+
   public Light(PVector loc, float intensity) {
     super(loc);
     this.intensity = intensity;

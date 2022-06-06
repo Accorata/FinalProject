@@ -24,7 +24,7 @@ public class Triangle implements Comparable<Triangle> {
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
   }
-  
+
   PVector[] getPoints() {
     return points;
   }

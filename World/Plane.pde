@@ -11,7 +11,7 @@ public class Plane extends Obj {
     ts.add(new Triangle(ps.get(2), ps.get(0), ps.get(3), clr));
     super.setObj(ps, new ArrayList<Triangle>());
     for (Triangle t : ts) {
-      addTriangles(t.splitTriangle(this, 2));//3
+      addTriangles(t.splitTriangle(this, 3));
     }
     for (Triangle t : getTriangles()) {
       t.ID = -1;

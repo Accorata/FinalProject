@@ -1,6 +1,6 @@
-public PVector xDir = new PVector(1,0,0); //<>//
-public PVector yDir = new PVector(0,1,0);
-public PVector zDir = new PVector(0,0,1);
+public PVector xUnit = new PVector(1, 0, 0); //<>//
+public PVector yUnit = new PVector(0, 1, 0);
+public PVector zUnit = new PVector(0, 0, 1);
 
 public class Obj { //<>// //<>//
   private boolean breachable = false;
@@ -27,21 +27,30 @@ public class Obj { //<>// //<>//
     this.triangles = t;
     setCenter();
   }
-  
-  void moveX() {
+
+  void moveX(float n) {
     for (PVector p : getPoints()) {
-      p.add(xDir);
+      p.add(xUnit.mult(n));
     }
+  }
+  void moveY(float n) {
+    for (PVector p : getPoints()) {
+      p.add(yUnit.mult(n));
+    }
+  }
+  void moveZ(float n) {
+    for (PVector p : getPoints()) {
+      p.add(zUnit.mult(n));
+    }
+  }
+  void moveX() {
+    moveX(1);
   }
   void moveY() {
-    for (PVector p : getPoints()) {
-      p.add(yDir);
-    }
+    moveY(1);
   }
   void moveZ() {
-    for (PVector p : getPoints()) {
-      p.add(zDir);
-    }
+    moveZ(1);
   }
   boolean getBreachable() {
     return this.breachable;
