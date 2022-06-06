@@ -27,6 +27,7 @@ Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100), new PVector(-1,
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
+Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5);
 void setup() {
   size(1000, 600);
 
@@ -62,7 +63,7 @@ void setup() {
    obj.rotateOnZ(45);
    //obj.rotateOnY(135);
    }*/
-  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5));
+  c.addObject(sphere);
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
   addEnemy(e1);
@@ -76,8 +77,10 @@ void draw() {
   //e2.moveX(-1);
   //e3.moveY(0.5);
   e1.move();
-  //PVector a = new PVector(0, 1, 0);
-  //e1.rotate(a);
+  PVector a = new PVector(0, 1, 0);
+  e1.rotate(a);
+  PVector b = new PVector(0, 1, 1);
+  sphere.rotate(b);
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();

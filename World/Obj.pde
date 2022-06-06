@@ -5,6 +5,7 @@ public PVector zUnit = new PVector(0, 0, 1);
 public class Obj {
   private boolean breachable = false;
   private ArrayList<PVector> points;
+  private ArrayList<PVector> foundationPoints;
   private ArrayList<Triangle> triangles;
   private PVector center;
 
@@ -14,16 +15,19 @@ public class Obj {
     ts.add(new Triangle(center.copy(), center.copy(), center.copy()));
     this.triangles = ts;
     this.points = calcPoints(ts);
+    this.foundationPoints = points;
   }
   public Obj() {
   }
   public Obj(ArrayList<Triangle> t, PVector center) {
     this.points = calcPoints(t);
+    this.foundationPoints = points;
     this.triangles = t;
     this.center = center;
   }
   public Obj(ArrayList<Triangle> t) {
     this.points = calcPoints(t);
+    this.foundationPoints = points;
     this.triangles = t;
     setCenter();
   }
@@ -63,11 +67,13 @@ public class Obj {
   }
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
+    this.foundationPoints = points;
     this.triangles = triangles_;
     setCenter();
   }
   void setObj (ArrayList<Triangle> triangles_) {
     this.points = calcPoints(triangles_);
+    this.foundationPoints = points;
     this.triangles = triangles_;
     setCenter();
   }
@@ -189,10 +195,10 @@ public class Obj {
   }
   private PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
-    for (PVector vec : points) {
+    for (PVector vec : foundationPoints) {
       cent.add(vec);
     }
-    cent.div(points.size());
+    cent.div(foundationPoints.size());
     return cent;
   }
 }
