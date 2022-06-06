@@ -1,11 +1,14 @@
 # FinalProject
 
-5/23 (Class) Both - Started Project
-5/23 (Home) Henry - Created a basic framework for displaying objects and started rotations.
-5/26 (Home) Henry - Started more intuitive movement controls.
-5/27 (Class) Henry - Added jump features and expanded upon movement controls.
-5/28 (Home) Henry - Build a rectangular prism class.
-5/29 (Home) Henry - Created the system for how rotating the camera will work.
+5/23 Henry - Created a basic framework for displaying objects and started rotations.
+5/26 Henry - Started more intuitive movement controls.
+5/27 Henry - Added jump features and expanded upon movement controls.
+5/28 Henry - Build a rectangular prism class.
+5/29 Henry - Created the system for how rotating the camera will work.
+5/30 Henry - Created code that makes objects built out a lot of smaller triangles.
+5/30 + 6/1 Henry - Fixed some bugs and reworked some functions.
+6/2 Henry - Built the sphere, pyramid, and triangular prism classes.
+6/6 Henry - Created code that allows objects to be moved.
 
 THE SAME NEW WORLD:
 
