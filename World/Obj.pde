@@ -1,10 +1,11 @@
-public PVector xUnit = new PVector(1, 0, 0); //<>//
+public PVector xUnit = new PVector(1, 0, 0); //<>// //<>//
 public PVector yUnit = new PVector(0, 1, 0);
 public PVector zUnit = new PVector(0, 0, 1);
 
 public class Obj {
   private boolean breachable = false;
   private ArrayList<PVector> points;
+  private ArrayList<PVector> foundationPoints;
   private ArrayList<Triangle> triangles;
   private PVector center;
 
@@ -14,16 +15,19 @@ public class Obj {
     ts.add(new Triangle(center.copy(), center.copy(), center.copy()));
     this.triangles = ts;
     this.points = calcPoints(ts);
+    this.foundationPoints = points;
   }
   public Obj() {
   }
   public Obj(ArrayList<Triangle> t, PVector center) {
     this.points = calcPoints(t);
+    this.foundationPoints = points;
     this.triangles = t;
     this.center = center;
   }
   public Obj(ArrayList<Triangle> t) {
     this.points = calcPoints(t);
+    this.foundationPoints = points;
     this.triangles = t;
     setCenter();
   }
@@ -31,16 +35,19 @@ public class Obj {
   void moveX(float n) {
     for (PVector p : getPoints()) {
       p.add(xUnit.mult(n));
+      xUnit.div(n);
     }
   }
   void moveY(float n) {
     for (PVector p : getPoints()) {
-      p.add(yUnit.mult(n));
+      p.add(yUnit.mult(-n));
+      yUnit.div(-n);
     }
   }
   void moveZ(float n) {
     for (PVector p : getPoints()) {
       p.add(zUnit.mult(n));
+      zUnit.div(n);
     }
   }
   void moveX() {
@@ -60,11 +67,13 @@ public class Obj {
   }
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
+    this.foundationPoints = points;
     this.triangles = triangles_;
     setCenter();
   }
   void setObj (ArrayList<Triangle> triangles_) {
     this.points = calcPoints(triangles_);
+    this.foundationPoints = points;
     this.triangles = triangles_;
     setCenter();
   }
@@ -149,6 +158,13 @@ public class Obj {
       point.add(center);
     }
   }
+  void rotate(PVector degrees) {
+    degrees.mult(speedAdjust);
+    setCenter();
+    rotateOnX(degrees.x);
+    rotateOnY(degrees.y);
+    rotateOnZ(degrees.z);
+  }
   void addTriangles(ArrayList<Triangle> tris) {
     for (Triangle t : tris) {
       triangles.add(t);
@@ -180,10 +196,10 @@ public class Obj {
   }
   private PVector calcCenter () {
     PVector cent = new PVector(0, 0, 0);
-    for (PVector vec : points) {
+    for (PVector vec : foundationPoints) {
       cent.add(vec);
     }
-    cent.div(points.size());
+    cent.div(foundationPoints.size());
     return cent;
   }
 }

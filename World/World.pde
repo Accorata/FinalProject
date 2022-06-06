@@ -23,10 +23,12 @@ ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng =0;
 boolean aniEn = true;
-Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100), new PVector(-1, 0, -2));
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
+Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5);
+float speedAdjust = 0.5;
 void setup() {
   size(1000, 600);
 
@@ -62,7 +64,7 @@ void setup() {
    obj.rotateOnZ(45);
    //obj.rotateOnY(135);
    }*/
-  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5));
+  c.addObject(sphere);
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
   addEnemy(e1);
@@ -71,9 +73,16 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  e1.moveZ();
-  e2.moveZ();
-  e3.moveZ();
+  speedAdjust = 30/frameRate;
+  //e1.moveZ(-2);
+  //e1.moveX(-1);
+  //e2.moveX(-1);
+  //e3.moveY(0.5);
+  e1.move();
+  PVector a = new PVector(0, 1, 0);
+  e1.rotate(a);
+  PVector b = new PVector(0, 1, 1);
+  sphere.rotate(b);
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
@@ -105,6 +114,7 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
+  println(frameRate);
 }
 void keyPressed() {
   boolean breached = false;
@@ -126,6 +136,7 @@ void keyPressed() {
     } else {
       eAng+=10;
       rotateAxisOnY(xUnit, 10);
+      rotateAxisOnY(yUnit, 10);
       rotateAxisOnY(zUnit, 10);
     }
 
@@ -149,6 +160,7 @@ void keyPressed() {
     } else {
       eAng-=10;
       rotateAxisOnY(xUnit, -10);
+      rotateAxisOnY(yUnit, -10);
       rotateAxisOnY(zUnit, -10);
     }
     break;
@@ -167,6 +179,7 @@ void keyPressed() {
         xAng -= 10;
       } else {
         rotateAxisOnX(xUnit, 10);
+        rotateAxisOnX(yUnit, 10);
         rotateAxisOnX(zUnit, 10);
       }
     }
@@ -187,6 +200,7 @@ void keyPressed() {
         xAng += 10;
       } else {
         rotateAxisOnX(xUnit, -10);
+        rotateAxisOnX(yUnit, -10);
         rotateAxisOnX(zUnit, -10);
       }
     }

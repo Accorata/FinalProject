@@ -6,24 +6,31 @@ public class Enemy extends Obj {
   private double ID;
   private float vAng;
   public int curGun;
+  private PVector dir;
+  private PVector rotation;
 
-  public Enemy(String name, PVector loc) {
+  public Enemy(String name_, PVector loc_) {
+    this(name_, loc_, new PVector(0, 0, 0));
+  }
+  public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
-    this.loc = loc;
+    this.loc = loc_;
     ArrayList<PVector> points = calcPoints(loc, new PVector(100, 170, 20));
     ArrayList<Triangle> shape = calcTriangles(points, color(102, 0, 0));
     super.setObj(points, shape);
-    this.NAME = name;
+    this.NAME = name_;
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
     super.setBreachable(true);
-    ID = Math.random();
+    this.ID = Math.random();
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
     this.vAng = 0;
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
+    this.dir = dir_;
+    this.rotation = new PVector(0, 0, 0);
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
@@ -113,23 +120,25 @@ public class Enemy extends Obj {
     }
     return true;
   }
-  void move(PVector dir) {
-    //PVector temp = new PVector(point.x, point.z);
-    //  temp.rotate(eAng);
-    //point.x = temp.x;
-    //point.z = temp.y;
-    //point.add(center);
-    println(eAng);
-    PVector cent = new PVector(0, -1 * fromScreen);
-    for (PVector p : getPoints()) {
-      PVector temp = new PVector(p.x, p.z);
-      //temp.sub(cent);
-      //temp.rotate(-radians(eAng));
-      temp.add(new PVector(dir.x, 0));
-      //temp.rotate(radians(eAng));
-      //temp.add(cent);
-      p.set(temp.x, p.y, temp.z);
+  void move() {
+    dir.mult(speedAdjust);
+    PVector move = new PVector(0, 0, 0);
+    if (dir.x != 0) {
+      move.add(xUnit.mult(dir.x));
+      xUnit.div(dir.x);
     }
+    if (dir.y != 0) {
+      move.add(yUnit.mult(dir.y));
+      yUnit.div(dir.y);
+    }
+    if (dir.z != 0) {
+      move.add(zUnit.mult(dir.z));
+      zUnit.div(dir.z);
+    }
+    for (PVector p : getPoints()) {
+      p.add(move);
+    }
+    dir.div(speedAdjust);
   }
   boolean addGun(Gun g) {
     if (inventory.size() < 3) {
@@ -141,14 +150,12 @@ public class Enemy extends Obj {
   String getName() {
     return this.NAME;
   }
-
-  //void rotate(float deg) {
-  //  super.setCenter(new PVector(0, 0, -fromScreen));
-
-  //  super.rotateOnX(-xAng);
-  //  super.setCenter();
-  //  super.rotateOnY(deg);
-  //  super.setCenter(new PVector(0, 0, -fromScreen));
-  //  super.rotateOnX(xAng);
-  //}
+  @Override
+    void rotate(PVector degrees) {
+    super.rotate(degrees);
+    rotation.add(degrees);
+    //rotateAxisOnX(dir, degrees.y);
+    //rotateAxisOnY(dir, degrees.x);
+    //rotateAxisOnZ(dir, degrees.z);
+  }
 }

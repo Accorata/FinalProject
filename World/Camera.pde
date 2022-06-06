@@ -54,7 +54,6 @@ public class Camera {
     }
   }
   void display() {
-
     for (Triangle t : Triangles) {
       t.update_close();
     }
@@ -75,12 +74,11 @@ public class Camera {
   }
   void rotateByMouse() {
     boolean breached = false;
-    float xRotate = (mouse.x-width/2)*1/sensitivity;
-    float yRotate = (height/2-mouse.y)*1/sensitivity;
+    float xRotate = speedAdjust*(mouse.x-width/2)*1/sensitivity;
+    float yRotate = speedAdjust*(height/2-mouse.y)*1/sensitivity;
     if ((xAng > 80 && yRotate > 0) || (xAng < -80 && yRotate < 0)) {
       yRotate = 0;
     }
-
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
@@ -89,7 +87,6 @@ public class Camera {
       obj.rotateOnX(yRotate);
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
-
     if (breached) {
       for (Obj obj : objs) {
         obj.rotateOnX(-yRotate);
@@ -98,8 +95,14 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     } else {
+      rotateAxisOnY(xUnit, xRotate);
+      rotateAxisOnY(yUnit, xRotate);
+      rotateAxisOnY(zUnit, xRotate);
+      rotateAxisOnX(xUnit, yRotate);
+      rotateAxisOnX(yUnit, yRotate);
+      rotateAxisOnX(zUnit, yRotate);
       xAng += yRotate;
-      eAng+= xRotate;
+      eAng+= yRotate;
     }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
@@ -109,6 +112,7 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
+    dir.mult(speedAdjust);
     boolean breached = false;
     //dir.y -= 0.1;
     //if (c.getLoc().y < 0) {
@@ -131,5 +135,6 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     }
+    dir.div(speedAdjust);
   }
 }
