@@ -28,6 +28,7 @@ Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5);
+float speedAdjust = 0.5;
 void setup() {
   size(1000, 600);
 
@@ -72,6 +73,7 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
+  speedAdjust = 30/frameRate;
   //e1.moveZ(-2);
   //e1.moveX(-1);
   //e2.moveX(-1);

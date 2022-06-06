@@ -121,6 +121,7 @@ public class Enemy extends Obj {
     return true;
   }
   void move() {
+    dir.mult(speedAdjust);
     PVector move = new PVector(0, 0, 0);
     if (dir.x != 0) {
       move.add(xUnit.mult(dir.x));
@@ -137,6 +138,7 @@ public class Enemy extends Obj {
     for (PVector p : getPoints()) {
       p.add(move);
     }
+    dir.div(speedAdjust);
   }
   boolean addGun(Gun g) {
     if (inventory.size() < 3) {
@@ -149,7 +151,7 @@ public class Enemy extends Obj {
     return this.NAME;
   }
   @Override
-  void rotate(PVector degrees) {
+    void rotate(PVector degrees) {
     super.rotate(degrees);
     rotation.add(degrees);
     //rotateAxisOnX(dir, degrees.y);

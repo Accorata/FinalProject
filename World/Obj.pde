@@ -159,6 +159,7 @@ public class Obj {
     }
   }
   void rotate(PVector degrees) {
+    degrees.mult(speedAdjust);
     setCenter();
     rotateOnX(degrees.x);
     rotateOnY(degrees.y);

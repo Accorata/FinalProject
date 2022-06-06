@@ -74,8 +74,8 @@ public class Camera {
   }
   void rotateByMouse() {
     boolean breached = false;
-    float xRotate = (mouse.x-width/2)*1/sensitivity;
-    float yRotate = (height/2-mouse.y)*1/sensitivity;
+    float xRotate = speedAdjust*(mouse.x-width/2)*1/sensitivity;
+    float yRotate = speedAdjust*(height/2-mouse.y)*1/sensitivity;
     if ((xAng > 80 && yRotate > 0) || (xAng < -80 && yRotate < 0)) {
       yRotate = 0;
     }
@@ -112,6 +112,7 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
+    dir.mult(speedAdjust);
     boolean breached = false;
     //dir.y -= 0.1;
     //if (c.getLoc().y < 0) {
@@ -134,5 +135,6 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     }
+    dir.div(speedAdjust);
   }
 }
