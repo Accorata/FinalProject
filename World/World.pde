@@ -145,7 +145,6 @@ void keyPressed() {
   boolean breached = false;
   switch (key) {
   case 'l':
-
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
@@ -160,7 +159,10 @@ void keyPressed() {
         obj.rotateOnY(-10);
         obj.rotateOnX(xAng);
       }
-    } else eAng+=10;
+    } else {
+      eAng+=10;
+      rotateXaxis(xDir, 10);
+    }
 
     break;
   case 'j':

@@ -23,7 +23,7 @@ public class Obj { //<>// //<>// //<>//
     this.triangles = t;
     setCenter();
   }
-  
+
   boolean getBreachable() {
     return this.breachable;
   }
