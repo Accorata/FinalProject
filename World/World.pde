@@ -181,7 +181,10 @@ void keyPressed() {
         obj.rotateOnY(10);
         obj.rotateOnX(xAng);
       }
-    } else eAng-=10;
+    } else {
+      eAng-=10;
+      rotateXaxis(xDir, -10);
+    }
     break;
   case 'i':
     if (xAng <= 80) {

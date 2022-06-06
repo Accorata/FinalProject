@@ -1,13 +1,13 @@
 void rotateXaxis(PVector axis, float deg) {
   if (deg != 0) {
     float rad = radians(deg);
-    PVector center = new PVector(0, 0, -1 * fromScreen);
-    axis.sub(center);
+    //PVector center = new PVector(0, 0, -1 * fromScreen);
+    //axis.sub(center);
     PVector temp = new PVector(axis.x, axis.z);
-      temp.rotate(rad);
-      axis.x = temp.x;
-      axis.z = temp.y;
-    axis.add(center);
+    temp.rotate(rad);
+    axis.x = temp.x;
+    axis.z = temp.y;
+    //axis.add(center);
   }
 }
 
