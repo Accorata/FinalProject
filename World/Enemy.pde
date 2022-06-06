@@ -152,8 +152,8 @@ public class Enemy extends Obj {
   void rotate(PVector degrees) {
     super.rotate(degrees);
     rotation.add(degrees);
-    //rotateAxisOnX(dir, degrees.y);
-    //rotateAxisOnY(dir, degrees.x);
-    //rotateAxisOnZ(dir, degrees.z);
+    rotateAxisOnX(dir, degrees.y);
+    rotateAxisOnY(dir, degrees.x);
+    rotateAxisOnZ(dir, degrees.z);
   }
 }
