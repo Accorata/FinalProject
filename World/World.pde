@@ -150,7 +150,6 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
-
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
@@ -161,7 +160,8 @@ void keyPressed() {
       }
     } else {
       eAng+=10;
-      rotateXaxis(xDir, 10);
+      rotateAxisOnY(xDir, 10);
+      rotateAxisOnY(zDir, 10);
     }
 
     break;
@@ -183,7 +183,8 @@ void keyPressed() {
       }
     } else {
       eAng-=10;
-      rotateXaxis(xDir, -10);
+      rotateAxisOnY(xDir, -10);
+      rotateAxisOnY(zDir, -10);
     }
     break;
   case 'i':
