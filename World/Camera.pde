@@ -54,7 +54,6 @@ public class Camera {
     }
   }
   void display() {
-
     for (Triangle t : Triangles) {
       t.update_close();
     }
@@ -80,7 +79,6 @@ public class Camera {
     if ((xAng > 80 && yRotate > 0) || (xAng < -80 && yRotate < 0)) {
       yRotate = 0;
     }
-
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
@@ -89,7 +87,6 @@ public class Camera {
       obj.rotateOnX(yRotate);
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
-
     if (breached) {
       for (Obj obj : objs) {
         obj.rotateOnX(-yRotate);
@@ -99,7 +96,13 @@ public class Camera {
       }
     } else {
       xAng += yRotate;
-      eAng+= xRotate;
+      eAng+= yRotate;
+      rotateAxisOnY(xUnit, xRotate);
+      rotateAxisOnY(yUnit, xRotate);
+      rotateAxisOnY(zUnit, xRotate);
+      rotateAxisOnX(xUnit, yRotate);
+      rotateAxisOnX(yUnit, yRotate);
+      rotateAxisOnX(zUnit, yRotate);
     }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;

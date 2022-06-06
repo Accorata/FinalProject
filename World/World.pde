@@ -128,6 +128,7 @@ void keyPressed() {
     } else {
       eAng+=10;
       rotateAxisOnY(xUnit, 10);
+      rotateAxisOnY(yUnit, 10);
       rotateAxisOnY(zUnit, 10);
     }
 
@@ -151,6 +152,7 @@ void keyPressed() {
     } else {
       eAng-=10;
       rotateAxisOnY(xUnit, -10);
+      rotateAxisOnY(yUnit, -10);
       rotateAxisOnY(zUnit, -10);
     }
     break;
@@ -169,6 +171,7 @@ void keyPressed() {
         xAng -= 10;
       } else {
         rotateAxisOnX(xUnit, 10);
+        rotateAxisOnX(yUnit, 10);
         rotateAxisOnX(zUnit, 10);
       }
     }
@@ -189,6 +192,7 @@ void keyPressed() {
         xAng += 10;
       } else {
         rotateAxisOnX(xUnit, -10);
+        rotateAxisOnX(yUnit, -10);
         rotateAxisOnX(zUnit, -10);
       }
     }
