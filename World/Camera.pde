@@ -112,12 +112,17 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
+    if (c.getLoc().y > 0) {
+      dir.y -= 0.5*speedAdjust;
+    }
+    if (c.getLoc().y < 0) {
+      dir.y = 0;
+      //loc.y = 0;
+    }
+    println(dir.y);
     dir.mult(speedAdjust);
+    loc.add(dir);
     boolean breached = false;
-    //dir.y -= 0.1;
-    //if (c.getLoc().y < 0) {
-    //  dir.y = 0;
-    //}
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);

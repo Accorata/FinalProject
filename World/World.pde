@@ -28,7 +28,7 @@ Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5);
-float speedAdjust = 0.5;
+float speedAdjust = 1;
 void setup() {
   size(1000, 600);
 
@@ -73,7 +73,7 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  speedAdjust = 30/frameRate;
+  speedAdjust = 60/frameRate;
   //e1.moveZ(-2);
   //e1.moveX(-1);
   //e2.moveX(-1);
@@ -114,7 +114,8 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
-  println(frameRate);
+  println(dir.y);
+  //println(frameRate);
 }
 void keyPressed() {
   boolean breached = false;
@@ -218,11 +219,11 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
-    //case ' ':
-    //  if (c.getLoc().y == 0) {
-    //    dir.y = speed*2;
-    //  }
-    //  break;
+  case ' ':
+    if (c.getLoc().y == 0) {
+      dir.y = speed*2;
+    }
+    break;
   case 'p':
     aniEn = !aniEn;
     break;
