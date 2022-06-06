@@ -23,7 +23,7 @@ ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng =0;
 boolean aniEn = true;
-Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100), new PVector(-1, 0, -2));
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
@@ -71,10 +71,11 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  e1.moveZ(-2);
-  e1.moveX(-1);
-  e2.moveX(-1);
-  e3.moveY(0.5);
+  //e1.moveZ(-2);
+  //e1.moveX(-1);
+  //e2.moveX(-1);
+  //e3.moveY(0.5);
+  e1.move();
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
