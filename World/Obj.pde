@@ -1,19 +1,19 @@
-public class Obj { //<>// //<>// //<>//
-  boolean breachable = false;
-  ArrayList<PVector> points;
-  ArrayList<Triangle> triangles;
-  PVector center;
- 
-  boolean getBreachable() {
-    return this.breachable;
-  }
+public PVector xUnit = new PVector(1, 0, 0); //<>//
+public PVector yUnit = new PVector(0, 1, 0);
+public PVector zUnit = new PVector(0, 0, 1);
+
+public class Obj {
+  private boolean breachable = false;
+  private ArrayList<PVector> points;
+  private ArrayList<Triangle> triangles;
+  private PVector center;
+
   public Obj(PVector center) {
     this.center = center;
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
     ts.add(new Triangle(center.copy(), center.copy(), center.copy()));
     this.triangles = ts;
     this.points = calcPoints(ts);
-   
   }
   public Obj() {
   }
@@ -26,6 +26,34 @@ public class Obj { //<>// //<>// //<>//
     this.points = calcPoints(t);
     this.triangles = t;
     setCenter();
+  }
+
+  void moveX(float n) {
+    for (PVector p : getPoints()) {
+      p.add(xUnit.mult(n));
+    }
+  }
+  void moveY(float n) {
+    for (PVector p : getPoints()) {
+      p.add(yUnit.mult(n));
+    }
+  }
+  void moveZ(float n) {
+    for (PVector p : getPoints()) {
+      p.add(zUnit.mult(n));
+    }
+  }
+  void moveX() {
+    moveX(1);
+  }
+  void moveY() {
+    moveY(1);
+  }
+  void moveZ() {
+    moveZ(1);
+  }
+  boolean getBreachable() {
+    return this.breachable;
   }
   void setBreachable(boolean b) {
     this.breachable = b;
@@ -158,15 +186,4 @@ public class Obj { //<>// //<>// //<>//
     cent.div(points.size());
     return cent;
   }
-  //void rotateX(float deg) {
-  //  float rad = radians(deg);
-  //  for (PVector point : points) {
-  //    PVector xy = new PVector(point.x, point.y, 0);
-  //    float angle = PVector.angleBetween(xy, xaxis) + rad;
-  //    point.x = xy.mag() * cos(angle);
-  //    point.y = xy.mag() * sin(angle);
-  //    PVector xy2 = new PVector(point.x, point.y, 0);
-  //    println(xy.mag() + " " + xy2.mag());
-  //  }
-  //}
 }

@@ -1,11 +1,12 @@
 public class Enemy extends Obj {
-  String NAME;
-  int HEALTH;
-  ArrayList<Gun> inventory;
-  PVector loc;
-  double ID;
-  float vAng;
-  int curGun;
+  private String NAME;
+  private int HEALTH;
+  private ArrayList<Gun> inventory;
+  private PVector loc;
+  private double ID;
+  private float vAng;
+  public int curGun;
+
   public Enemy(String name, PVector loc) {
     super();
     this.loc = loc;
@@ -20,9 +21,8 @@ public class Enemy extends Obj {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
-    this.mve = 0;
     this.vAng = 0;
-    curGun = 0;
+    this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
@@ -84,13 +84,12 @@ public class Enemy extends Obj {
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
     //println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
     if (aprox2(vAng, (ang% TWO_PI)+(radians(eAng)%TWO_PI))) {
-      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));   
+      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));
     }
     return false;
-    
   }
   boolean checkBetween(float d) {
-    for (Triangle t: c.Triangles) {
+    for (Triangle t : c.Triangles) {
       t.update_close(loc);
     }
     Collections.sort(c.Triangles, Collections.reverseOrder());
@@ -99,12 +98,12 @@ public class Enemy extends Obj {
       PVector t1 = t.points[0];
       PVector t2 = t.points[1];
       PVector t3 = t.points[2];
-/*
+      /*
       PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
-      PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
-      PVector crV = v1.cross(v2);
-      float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
-    */
+       PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
+       PVector crV = v1.cross(v2);
+       float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
+       */
       boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
       boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
       boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
@@ -114,44 +113,42 @@ public class Enemy extends Obj {
     }
     return true;
   }
-
-boolean addGun(Gun g) {
-  if (inventory.size() < 3) {
-    inventory.add(g);
-    return true;
+  void move(PVector dir) {
+    //PVector temp = new PVector(point.x, point.z);
+    //  temp.rotate(eAng);
+    //point.x = temp.x;
+    //point.z = temp.y;
+    //point.add(center);
+    println(eAng);
+    PVector cent = new PVector(0, -1 * fromScreen);
+    for (PVector p : getPoints()) {
+      PVector temp = new PVector(p.x, p.z);
+      //temp.sub(cent);
+      //temp.rotate(-radians(eAng));
+      temp.add(new PVector(dir.x, 0));
+      //temp.rotate(radians(eAng));
+      //temp.add(cent);
+      p.set(temp.x, p.y, temp.z);
+    }
   }
-  return false;
-}
-String getName() {
-  return this.NAME;
-}
-
-void rotate(float deg) {
-    super.setCenter(new PVector(0, 0, -fromScreen));
-    
-    super.rotateOnX(-xAng);
-    super.setCenter();
-    super.rotateOnY(deg);
-    super.setCenter(new PVector(0, 0, -fromScreen));
-    super.rotateOnX(xAng);
-
-   
-}
-int mve;
-void move() {
-  if (mve == 0) {
-    float nv = (float) (Math.random() * PI) + PI;
-    mve = (int) (Math.random() * 20 + 10);
-    //rotateOnY(nv);
-    //vAng = (nv + vAng)%TWO_PI;
-    
-    rotateOnY(40);
-    //vAng += radians(40);
-    println(mve);
-    println(nv);
-  } else {
-   super.translate(new PVector(acos(vAng), 0, asin(vAng))); 
-   mve--;
+  boolean addGun(Gun g) {
+    if (inventory.size() < 3) {
+      inventory.add(g);
+      return true;
+    }
+    return false;
   }
-}
+  String getName() {
+    return this.NAME;
+  }
+
+  //void rotate(float deg) {
+  //  super.setCenter(new PVector(0, 0, -fromScreen));
+
+  //  super.rotateOnX(-xAng);
+  //  super.setCenter();
+  //  super.rotateOnY(deg);
+  //  super.setCenter(new PVector(0, 0, -fromScreen));
+  //  super.rotateOnX(xAng);
+  //}
 }
