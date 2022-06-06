@@ -76,6 +76,8 @@ void draw() {
   //e2.moveX(-1);
   //e3.moveY(0.5);
   e1.move();
+  PVector a = new PVector(0, 1, 0);
+  //e1.rotate(a);
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
@@ -107,6 +109,7 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
+  println(frameRate);
 }
 void keyPressed() {
   boolean breached = false;

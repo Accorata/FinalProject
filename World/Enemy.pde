@@ -30,6 +30,7 @@ public class Enemy extends Obj {
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
+    this.rotation = new PVector(0, 0, 0);
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
     ArrayList<PVector> p = new ArrayList<PVector>();
@@ -151,5 +152,8 @@ public class Enemy extends Obj {
   void rotate(PVector degrees) {
     super.rotate(degrees);
     rotation.add(degrees);
+    //rotateAxisOnX(dir, degrees.y);
+    //rotateAxisOnY(dir, degrees.x);
+    //rotateAxisOnZ(dir, degrees.z);
   }
 }

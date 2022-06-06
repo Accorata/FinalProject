@@ -1,3 +1,13 @@
+void rotateAxisOnX(PVector axis, float deg) {
+  if (deg != 0) {
+    float rad = radians(deg);
+    PVector temp = new PVector(axis.z, axis.y);
+    temp.rotate(rad);
+    axis.y = temp.y;
+    axis.z = temp.x;
+  }
+}
+
 void rotateAxisOnY(PVector axis, float deg) {
   if (deg != 0) {
     rotateAxisOnX(axis, -xAng);
@@ -10,23 +20,15 @@ void rotateAxisOnY(PVector axis, float deg) {
   }
 }
 
-void rotateAxisOnX(PVector axis, float deg) {
-  if (deg != 0) {
-    float rad = radians(deg);
-    PVector temp = new PVector(axis.z, axis.y);
-    temp.rotate(rad);
-    axis.y = temp.y;
-    axis.z = temp.x;
-  }
-}
-
 void rotateAxisOnZ(PVector axis, float deg) {
   if (deg != 0) {
+    //rotateAxisOnX(axis, -xAng);
     float rad = radians(deg);
     PVector temp = new PVector(axis.x, axis.y);
     temp.rotate(rad);
     axis.x = temp.x;
     axis.y = temp.y;
+    //rotateAxisOnX(axis, xAng);
   }
 }
 

@@ -95,14 +95,14 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     } else {
-      xAng += yRotate;
-      eAng+= yRotate;
       rotateAxisOnY(xUnit, xRotate);
       rotateAxisOnY(yUnit, xRotate);
       rotateAxisOnY(zUnit, xRotate);
       rotateAxisOnX(xUnit, yRotate);
       rotateAxisOnX(yUnit, yRotate);
       rotateAxisOnX(zUnit, yRotate);
+      xAng += yRotate;
+      eAng+= yRotate;
     }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
