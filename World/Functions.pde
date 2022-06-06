@@ -1,12 +1,13 @@
 void rotateAxisOnY(PVector axis, float deg) {
   if (deg != 0) {
+    rotateAxisOnX(axis, -xAng);
     float rad = radians(deg);
     PVector temp = new PVector(axis.x, axis.z);
     temp.rotate(rad);
     axis.x = temp.x;
     axis.z = temp.y;
+    rotateAxisOnX(axis, xAng);
   }
-  println(axis);
 }
 
 void rotateAxisOnX(PVector axis, float deg) {
@@ -17,7 +18,6 @@ void rotateAxisOnX(PVector axis, float deg) {
     axis.y = temp.y;
     axis.z = temp.x;
   }
-  println(axis);
 }
 
 void print2D(Float[][] f) {
