@@ -8,6 +8,16 @@ void rotateAxisOnY(PVector axis, float deg) {
   }
 }
 
+void rotateAxisOnX(PVector axis, float deg) {
+  if (deg != 0) {
+    float rad = radians(deg);
+    PVector temp = new PVector(axis.z, axis.y);
+    temp.rotate(rad);
+    axis.y = temp.y;
+    axis.z = temp.x;
+  }
+}
+
 void print2D(Float[][] f) {
   String s = "";
   for (int i = 0; i < f.length; i++) {
