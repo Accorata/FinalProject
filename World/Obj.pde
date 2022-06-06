@@ -1,4 +1,4 @@
-public PVector xUnit = new PVector(1, 0, 0); //<>//
+public PVector xUnit = new PVector(1, 0, 0); //<>// //<>//
 public PVector yUnit = new PVector(0, 1, 0);
 public PVector zUnit = new PVector(0, 0, 1);
 
@@ -31,16 +31,19 @@ public class Obj {
   void moveX(float n) {
     for (PVector p : getPoints()) {
       p.add(xUnit.mult(n));
+      xUnit.div(n);
     }
   }
   void moveY(float n) {
     for (PVector p : getPoints()) {
-      p.add(yUnit.mult(n));
+      p.add(yUnit.mult(-n));
+      yUnit.div(-n);
     }
   }
   void moveZ(float n) {
     for (PVector p : getPoints()) {
       p.add(zUnit.mult(n));
+      zUnit.div(n);
     }
   }
   void moveX() {

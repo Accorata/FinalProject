@@ -71,9 +71,10 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  e1.moveZ();
-  e2.moveZ();
-  e3.moveZ();
+  e1.moveZ(-2);
+  e1.moveX(-1);
+  e2.moveX(-1);
+  e3.moveY(0.5);
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
