@@ -7,6 +7,7 @@ public class Enemy extends Obj {
   private float vAng;
   public int curGun;
   private PVector dir;
+  private PVector rotation;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -21,7 +22,7 @@ public class Enemy extends Obj {
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
     super.setBreachable(true);
-    ID = Math.random();
+    this.ID = Math.random();
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
@@ -146,13 +147,9 @@ public class Enemy extends Obj {
   String getName() {
     return this.NAME;
   }
-  //void rotate(float deg) {
-  //  super.setCenter(new PVector(0, 0, -fromScreen));
-
-  //  super.rotateOnX(-xAng);
-  //  super.setCenter();
-  //  super.rotateOnY(deg);
-  //  super.setCenter(new PVector(0, 0, -fromScreen));
-  //  super.rotateOnX(xAng);
-  //}
+  @Override
+  void rotate(PVector degrees) {
+    super.rotate(degrees);
+    rotation.add(degrees);
+  }
 }

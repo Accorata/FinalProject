@@ -1,4 +1,4 @@
-public PVector xUnit = new PVector(1, 0, 0); //<>// //<>// //<>//
+public PVector xUnit = new PVector(1, 0, 0); //<>// //<>//
 public PVector yUnit = new PVector(0, 1, 0);
 public PVector zUnit = new PVector(0, 0, 1);
 
@@ -151,6 +151,12 @@ public class Obj {
       point.y = temp.y;
       point.add(center);
     }
+  }
+  void rotate(PVector degrees) {
+    setCenter();
+    rotateOnX(degrees.x);
+    rotateOnY(degrees.y);
+    rotateOnZ(degrees.z);
   }
   void addTriangles(ArrayList<Triangle> tris) {
     for (Triangle t : tris) {
