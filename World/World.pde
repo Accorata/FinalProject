@@ -24,6 +24,8 @@ UI ui;
 float eAng =0;
 boolean aniEn = true;
 Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100));
+Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
+Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
 void setup() {
   size(1000, 600);
@@ -43,12 +45,9 @@ void setup() {
   PVector p2 = new PVector (500, -510, -100);
   PVector l = new PVector (200, 200, 200);
   //ENEMIES
-  //testTris.add(new Triangle(p, p2, l));
-  //testTris = testTris.get(0).splitTriangle(new Obj());
   Rect one = new Rect(p, l, color(102, 0, 102), 1);
   Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
   Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-  //Rect four =  new Rect(
   //c.addObject(one);
   //c.addObject(new Rect(p2, l, color(255, 0, 0)));
   //c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
@@ -63,47 +62,23 @@ void setup() {
    obj.rotateOnZ(45);
    //obj.rotateOnY(135);
    }*/
-  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 15, 15));
-  c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
+  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5));
+  //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
-
-  Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
-  Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
   addEnemy(e1);
   addEnemy(e2);
   addEnemy(e3);
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  e1.move(xAxis);
+  e1.moveZ();
+  e2.moveZ();
+  e3.moveZ();
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
-
-  //c.updatePos(dir);
-  boolean breached = false;
-  //dir.y -= 0.1;
-  //if (c.getLoc().y < 0) {
-  //  dir.y = 0;
-  //}
-  for (Obj obj : objs) {
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX(-xAng);
-    obj.translate(dir);
-    obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-    obj.rotateOnX(xAng);
-    if (!obj.getBreachable() && obj.breached()) breached = true;
-  }
-  if (breached) {
-    for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX(-xAng);
-      obj.translate(PVector.mult(dir, -1));
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
-      obj.rotateOnX(xAng);
-    }
-  }
+  c.updatePos(dir);
 
   //if (aniEn) animateEnemies();
   // --Screen--
@@ -142,13 +117,11 @@ void keyPressed() {
   boolean breached = false;
   switch (key) {
   case 'l':
-
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
-
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
@@ -157,7 +130,11 @@ void keyPressed() {
         obj.rotateOnY(-10);
         obj.rotateOnX(xAng);
       }
-    } else eAng+=10;
+    } else {
+      eAng+=10;
+      rotateAxisOnY(xUnit, 10);
+      rotateAxisOnY(zUnit, 10);
+    }
 
     break;
   case 'j':
@@ -176,7 +153,11 @@ void keyPressed() {
         obj.rotateOnY(10);
         obj.rotateOnX(xAng);
       }
-    } else eAng-=10;
+    } else {
+      eAng-=10;
+      rotateAxisOnY(xUnit, -10);
+      rotateAxisOnY(zUnit, -10);
+    }
     break;
   case 'i':
     if (xAng <= 80) {
@@ -191,6 +172,9 @@ void keyPressed() {
           obj.rotateOnX(-10);
         }
         xAng -= 10;
+      } else {
+        rotateAxisOnX(xUnit, 10);
+        rotateAxisOnX(zUnit, 10);
       }
     }
     break;
@@ -208,6 +192,9 @@ void keyPressed() {
           obj.rotateOnX(10);
         }
         xAng += 10;
+      } else {
+        rotateAxisOnX(xUnit, -10);
+        rotateAxisOnX(zUnit, -10);
       }
     }
 

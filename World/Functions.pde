@@ -1,3 +1,25 @@
+void rotateAxisOnY(PVector axis, float deg) {
+  if (deg != 0) {
+    rotateAxisOnX(axis, -xAng);
+    float rad = radians(deg);
+    PVector temp = new PVector(axis.x, axis.z);
+    temp.rotate(rad);
+    axis.x = temp.x;
+    axis.z = temp.y;
+    rotateAxisOnX(axis, xAng);
+  }
+}
+
+void rotateAxisOnX(PVector axis, float deg) {
+  if (deg != 0) {
+    float rad = radians(deg);
+    PVector temp = new PVector(axis.z, axis.y);
+    temp.rotate(rad);
+    axis.y = temp.y;
+    axis.z = temp.x;
+  }
+}
+
 void print2D(Float[][] f) {
   String s = "";
   for (int i = 0; i < f.length; i++) {
@@ -58,12 +80,14 @@ boolean aprox(double a, double b) {
   double err = a * .01;
   return (b >= a - err && b <= a + err);
 }
+
 boolean aprox2(double a, double b) {
   double view = 2;
   if (((a >= 6.28-view && a<= 6.28+view) || (a >= -view && a <= view)) && ((b >= 6.28-view && b<= 6.28+view) || (b >= -view && b <= view))) return true;
 
   return (b >= a - view && b <= a + view);
 }
+
 ArrayList<Triangle> copyOf(ArrayList<Triangle> ts) {
   ArrayList<Triangle> tsc = new ArrayList<Triangle>();
   for (Triangle t : ts) {

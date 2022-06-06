@@ -1,17 +1,11 @@
 public class Triangle implements Comparable<Triangle> {
-  PVector[] points = new PVector[3];
-  color clr;
-  float light;
-  float close;
-  PVector center;
-  double ID;
-  Triangle copyOf() {
-    Triangle t = new Triangle(points[0].copy(), points[1].copy(), points[2].copy(), clr);
-    t.light = this.light;
-    t.close = this.close;
-    t.ID = this.ID;
-    return t;
-  }
+  private PVector[] points = new PVector[3];
+  private color clr;
+  private float light;
+  private float close;
+  private PVector center;
+  private double ID;
+  
   public Triangle (PVector a_, PVector b_, PVector c_, color clr_) {
     this.points[0] = a_;
     this.points[1] = b_;
@@ -24,7 +18,14 @@ public class Triangle implements Comparable<Triangle> {
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
   }
-  
+
+  Triangle copyOf() {
+    Triangle t = new Triangle(points[0].copy(), points[1].copy(), points[2].copy(), clr);
+    t.light = this.light;
+    t.close = this.close;
+    t.ID = this.ID;
+    return t;
+  }
   PVector[] getPoints() {
     return points;
   }
