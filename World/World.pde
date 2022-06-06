@@ -65,7 +65,7 @@ void setup() {
    obj.rotateOnZ(45);
    //obj.rotateOnY(135);
    }*/
-  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 15, 15));
+  c.addObject(new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5));
   c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
 
@@ -201,7 +201,7 @@ void keyPressed() {
         }
         xAng -= 10;
       } else {
-        rotateAxisOnX(xDir, 10);
+        //rotateAxisOnX(xDir, 10);
         rotateAxisOnX(zDir, 10);
       }
     }
@@ -221,7 +221,7 @@ void keyPressed() {
         }
         xAng += 10;
       } else {
-        rotateAxisOnX(xDir, -10);
+        //rotateAxisOnX(xDir, -10);
         rotateAxisOnX(zDir, -10);
       }
     }
