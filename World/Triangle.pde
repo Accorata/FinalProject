@@ -5,7 +5,7 @@ public class Triangle implements Comparable<Triangle> {
   private float close;
   private PVector center;
   private double ID;
-  
+
   public Triangle (PVector a_, PVector b_, PVector c_, color clr_) {
     this.points[0] = a_;
     this.points[1] = b_;

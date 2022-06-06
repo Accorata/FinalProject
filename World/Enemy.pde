@@ -5,7 +5,6 @@ public class Enemy extends Obj {
   private PVector loc;
   private double ID;
   private float vAng;
-
   public int curGun;
 
   public Enemy(String name, PVector loc) {
@@ -22,9 +21,8 @@ public class Enemy extends Obj {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
-    this.mve = 0;
     this.vAng = 0;
-    curGun = 0;
+    this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
   }
   private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
@@ -144,31 +142,13 @@ public class Enemy extends Obj {
     return this.NAME;
   }
 
-  void rotate(float deg) {
-    super.setCenter(new PVector(0, 0, -fromScreen));
-    super.rotateOnY(-eAng);
-    super.rotateOnX(-xAng);
-    super.setCenter();
-    super.rotateOnY(deg);
-    super.setCenter(new PVector(0, 0, -fromScreen));
-    super.rotateOnX(xAng);
-    super.rotateOnY(eAng);
-  }
-  int mve;
-  void move() {
-    if (mve == 0) {
-      float nv = (float) (Math.random() * PI) + PI;
-      mve = (int) (Math.random() * 20 + 10);
-      //rotateOnY(nv);
-      //vAng = (nv + vAng)%TWO_PI;
+  //void rotate(float deg) {
+  //  super.setCenter(new PVector(0, 0, -fromScreen));
 
-      rotateOnY(40);
-      //vAng += radians(40);
-      println(mve);
-      println(nv);
-    } else {
-      super.translate(new PVector(acos(vAng), 0, asin(vAng))); 
-      mve--;
-    }
-  }
+  //  super.rotateOnX(-xAng);
+  //  super.setCenter();
+  //  super.rotateOnY(deg);
+  //  super.setCenter(new PVector(0, 0, -fromScreen));
+  //  super.rotateOnX(xAng);
+  //}
 }

@@ -79,8 +79,6 @@ void draw() {
   if (!test) c.rotateByMouse();
   // --Update World--
   c.updatePos(dir);
-
-  //if (aniEn) animateEnemies();
   // --Screen--
   background(255);
   AIM = 0;
@@ -107,11 +105,6 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
-}
-void animateEnemies() {
-  for (Enemy e : ENEMIES) {
-    e.move();
-  }
 }
 void keyPressed() {
   boolean breached = false;
@@ -237,9 +230,6 @@ void keyPressed() {
 
   case '3':
     curG = 2;
-    break;
-  case 'm':
-    animateEnemies();
     break;
   }
 }
