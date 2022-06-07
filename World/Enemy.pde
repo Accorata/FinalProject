@@ -134,37 +134,25 @@ public class Enemy extends Obj {
       target.add(zUnitInv.mult(t.z));
       zUnitInv.div(t.z);
     }
-    //if (t.x != 0) {
-    //  target.add(xUnit.mult(t.x));
-    //  xUnit.div(t.x);
-    //}
-    //if (t.y != 0) {
-    //  target.add(yUnit.mult(t.y));
-    //  yUnit.div(t.y);
-    //}
-    //if (t.z != 0) {
-    //  target.add(zUnit.mult(t.z));
-    //  zUnit.div(t.z);
-    //}
-    
-    //target.add(zUnit.mult(t.z));
-    //zUnit.div(t.z);
     PVector pos = getPos();
-    if (target.x > pos.x) {
-      dir.x = 2;
-    } else {
-      dir.x = -2;
-    }
-    if (target.y > pos.y) {
-      dir.y = 2;
-    } else {
-      dir.y = -2;
-    }
-    if (target.z > pos.z) {
-      dir.z = 2;
-    } else {
-      dir.z = -2;
-    }
+    float theta = atan((pos.z-target.z)/(pos.x-target.x));
+    dir.x = -cos(theta);
+    dir.z = -sin(theta);
+    //if (target.x > pos.x) {
+    //  dir.x = 2;
+    //} else {
+    //  dir.x = -2;
+    //}
+    ////if (target.y > pos.y) {
+    ////  dir.y = 2;
+    ////} else {
+    ////  dir.y = -2;
+    ////}
+    //if (target.z > pos.z) {
+    //  dir.z = 2;
+    //} else {
+    //  dir.z = -2;
+    //}
     move();
   }
   void move() {
