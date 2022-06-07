@@ -189,10 +189,16 @@ public class Obj {
   }
   void rotate(PVector degrees) {
     degrees.mult(speedAdjust);
+    setCenter(place);
+    rotateOnX(-xAng);
+    rotateOnY(-eAng);
     setCenter();
     rotateOnX(degrees.x);
     rotateOnY(degrees.y);
     rotateOnZ(degrees.z);
+    setCenter(place);
+    rotateOnY(eAng);
+    rotateOnX(xAng);
   }
   void addTriangles(ArrayList<Triangle> tris) {
     for (Triangle t : tris) {

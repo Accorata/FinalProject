@@ -86,19 +86,8 @@ void draw() {
     e2.moveTowards(e3.getCenter());
   }
   //e1.rotate(a);
-
-  for (Obj obj : objs) {
-    obj.setCenter(place);
-    obj.rotateOnX(-xAng);
-    obj.rotateOnY(-eAng);
-  }
-  PVector b = new PVector(0, 0, 1);
+  PVector b = new PVector(1, 0, 0);
   sphere.rotate(b);
-  for (Obj obj : objs) {
-    obj.setCenter(place);
-    obj.rotateOnY(eAng);
-    obj.rotateOnX(xAng);
-  }
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
