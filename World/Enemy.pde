@@ -135,24 +135,24 @@ public class Enemy extends Obj {
       zUnitInv.div(t.z);
     }
     PVector pos = getPos();
-    float theta = atan((pos.z-target.z)/(pos.x-target.x));
-    dir.x = -cos(theta);
-    dir.z = -sin(theta);
-    //if (target.x > pos.x) {
-    //  dir.x = 2;
+    //float theta = atan((pos.x-target.x)/(pos.z-target.z));
+    //dir.x = -5*sin(theta);
+    //dir.z = -5*cos(theta);
+    if (target.x > pos.x) {
+      dir.x = 2;
+    } else {
+      dir.x = -2;
+    }
+    //if (target.y > pos.y) {
+    //  dir.y = 2;
     //} else {
-    //  dir.x = -2;
+    //  dir.y = -2;
     //}
-    ////if (target.y > pos.y) {
-    ////  dir.y = 2;
-    ////} else {
-    ////  dir.y = -2;
-    ////}
-    //if (target.z > pos.z) {
-    //  dir.z = 2;
-    //} else {
-    //  dir.z = -2;
-    //}
+    if (target.z > pos.z) {
+      dir.z = 2;
+    } else {
+      dir.z = -2;
+    }
     move();
   }
   void move() {
