@@ -30,7 +30,7 @@ ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 10, 10);//30 5
 float speedAdjust = 1;
 void setup() {
-  
+
   size(1000, 600);
 
   if (!test) noCursor();
@@ -74,10 +74,7 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  PVector[] inv = inverse(xUnit, yUnit, zUnit);
-  xUnitInv = inv[0];
-  yUnitInv = inv[1];
-  zUnitInv = inv[2];
+  recalcInverses();
   println(xUnitInv);
   println(yUnitInv);
   println(zUnitInv);
@@ -93,8 +90,9 @@ void draw() {
   //e1.moveX(-1);
   //e2.moveX(-1);
   //e3.moveY(0.5);
-  e1.move();
-  PVector a = new PVector(0, 1, 0);
+  //e1.move();
+  PVector a = new PVector(0, 0, -1 * fromScreen);
+  e1.moveTowards(a);
   //e1.rotate(a);
   PVector b = new PVector(0, 1, 0);
   sphere.rotate(b);

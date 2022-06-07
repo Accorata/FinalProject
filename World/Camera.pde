@@ -140,7 +140,7 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     }
-    
+
     //if (c.getLoc().y == 0) {
     //  dir.y = 0;
     //}

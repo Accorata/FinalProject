@@ -32,6 +32,13 @@ void rotateAxisOnZ(PVector axis, float deg) {
   }
 }
 
+void recalcInverses() {
+  PVector[] inv = inverse(xUnit, yUnit, zUnit);
+  xUnitInv = inv[0];
+  yUnitInv = inv[1];
+  zUnitInv = inv[2];
+}
+
 float determinate(PVector one, PVector two, PVector three) {
   float ans = 0;
   ans += one.x * (two.y * three.z - two.z * three.y);
@@ -43,7 +50,7 @@ float determinate(PVector one, PVector two, PVector three) {
 PVector[] inverse(PVector one, PVector two, PVector three) {
   PVector[] ans = new PVector[3];
   for (int i = 0; i<3; i++) {
-    ans[i] = new PVector(0,0,0);
+    ans[i] = new PVector(0, 0, 0);
   }
   ans[0].x = (two.y * three.z - three.y * two.z);
   ans[0].y = -(one.y * three.z - three.y * one.z);
