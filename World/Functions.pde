@@ -39,6 +39,22 @@ void recalcInverses() {
   zUnitInv = inv[2];
 }
 
+void printMatrices() {
+  println(xUnit);
+  println(yUnit);
+  println(zUnit);
+  println(determinate(xUnit, yUnit, zUnit));
+  println();
+  println(xUnitInv);
+  println(yUnitInv);
+  println(zUnitInv);
+  println(determinate(xUnitInv, yUnitInv, zUnitInv));
+  println();
+  println(e1.getPos());
+  println();
+}
+
+
 float determinate(PVector one, PVector two, PVector three) {
   float ans = 0;
   ans += one.x * (two.y * three.z - two.z * three.y);

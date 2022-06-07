@@ -78,6 +78,7 @@ public class Obj {
       zUnitInv.div(center.z);
     }
     return ans;
+    //return center;
   }
   boolean getBreachable() {
     return this.breachable;

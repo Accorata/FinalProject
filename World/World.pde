@@ -75,16 +75,7 @@ void setup() {
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
   recalcInverses();
-  println(xUnitInv);
-  println(yUnitInv);
-  println(zUnitInv);
-  println();
-  println(xUnit);
-  println(yUnit);
-  println(zUnit);
-  println();
-  println(e1.getPos());
-  println();
+  if (test) printMatrices();
   speedAdjust = 60/frameRate;
   //e1.moveZ(-2);
   //e1.moveX(-1);
