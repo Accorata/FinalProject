@@ -32,6 +32,14 @@ void rotateAxisOnZ(PVector axis, float deg) {
   }
 }
 
+float determinate(PVector one, PVector two, PVector three) {
+  float ans = 0;
+  ans += one.x * (two.y * three.z - two.z * three.y);
+  ans -= two.x * (one.y * three.z - one.z * three.y);
+  ans += three.x * (one.y * two.z - one.z * two.y);
+  return ans;
+}
+
 void print2D(Float[][] f) {
   String s = "";
   for (int i = 0; i < f.length; i++) {

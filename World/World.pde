@@ -27,9 +27,10 @@ Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100), new PVector(-1,
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
 ArrayList<Queue<Float[][]>> bullets;
-Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5);
+Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 10, 10);//30 5
 float speedAdjust = 1;
 void setup() {
+  
   size(1000, 600);
 
   if (!test) noCursor();
@@ -73,6 +74,7 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
+  println(determinate(xUnit, yUnit, zUnit));
   speedAdjust = 60/frameRate;
   //e1.moveZ(-2);
   //e1.moveX(-1);
@@ -80,8 +82,8 @@ void draw() {
   //e3.moveY(0.5);
   e1.move();
   PVector a = new PVector(0, 1, 0);
-  e1.rotate(a);
-  PVector b = new PVector(0, 1, 1);
+  //e1.rotate(a);
+  PVector b = new PVector(0, 1, 0);
   sphere.rotate(b);
   //l.shine(c.Triangles);
   // --Mouse Control--
@@ -114,7 +116,7 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
-  println(dir.y);
+  //println(dir.y);
   //println(frameRate);
 }
 void keyPressed() {
