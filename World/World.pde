@@ -23,9 +23,9 @@ ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng =0;
 boolean aniEn = true;
-Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100), new PVector(-1, 0, -2));
-Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
-Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -20, 100), new PVector(-1, 0, -2));
+Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -20, -500));
+Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -20, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 10, 10);//30 5
 float speedAdjust = 1;
