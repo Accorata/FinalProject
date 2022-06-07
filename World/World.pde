@@ -2,7 +2,6 @@ import java.util.Collections;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.ArrayDeque;
-final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
 double AIM = 0;
 ArrayList<Enemy> ENEMIES;
@@ -11,7 +10,6 @@ ArrayList<Gun> INVENTORY;
 int curG;
 Plane sc = new Plane(100, color(0), 2000, 2000);
 float xAng = 0;
-//float yAng = 0;
 Camera c;
 Light l;
 ArrayList<Obj> objs = new ArrayList<Obj>();
@@ -29,10 +27,9 @@ Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -20, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 10, 10);//30 5
 float speedAdjust = 1;
+
 void setup() {
-
   size(1000, 600);
-
   if (!test) noCursor();
   c = new Camera();
   PLAYER_HEALTH = 100;
@@ -72,7 +69,7 @@ void setup() {
   addEnemy(e2);
   addEnemy(e3);
 }
-PVector xAxis = new PVector(1, 0, 0);
+
 void draw() {
   recalcInverses();
   if (test) printMatrices();
@@ -124,6 +121,7 @@ void draw() {
   //println(dir.y);
   //println(frameRate);
 }
+
 void keyPressed() {
   boolean breached = false;
   switch (key) {
@@ -147,10 +145,8 @@ void keyPressed() {
       rotateAxisOnY(yUnit, 10);
       rotateAxisOnY(zUnit, 10);
     }
-
     break;
   case 'j':
-
     for (Obj obj : objs) {
       obj.setCenter(new PVector(0, 0, -1 * fromScreen));
       obj.rotateOnX(-xAng);
@@ -192,7 +188,6 @@ void keyPressed() {
       }
     }
     break;
-
   case 'k':
     if (xAng >= -80) {
       xAng -= 10;
@@ -212,7 +207,6 @@ void keyPressed() {
         rotateAxisOnX(zUnit, -10);
       }
     }
-
     break;
   case 'w':
     dir.z = -speed;
@@ -241,20 +235,18 @@ void keyPressed() {
       }
     }
     break;
-
   case '1':
     curG = 0;
     break;
-
   case '2':
     curG = 1;
     break;
-
   case '3':
     curG = 2;
     break;
   }
 }
+
 void keyReleased() {
   switch (key) {
   case 'w':
@@ -269,7 +261,6 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
-
   case 'r':
     if (curG < INVENTORY.size()) {
       INVENTORY.get(curG).reload();
@@ -277,19 +268,18 @@ void keyReleased() {
     break;
   }
 }
+
 void mouseClicked() {
   Enemy E = inSight();
-  if (curG < INVENTORY.size()) {
-    if (E != null) {
-      INVENTORY.get(curG).shoot(E, true);
-      if (E.isDead()) {
-        ENEMIES.remove(E);
-        objs.remove(E);
-        for (int i = 0; i < c.Triangles.size(); i++) {
-          if (c.Triangles.get(i).ID == E.ID) {
-            c.Triangles.remove(i);
-            i--;
-          }
+  if (E != null && curG < INVENTORY.size()) {
+    INVENTORY.get(curG).shoot(E, true);
+    if (E.isDead()) {
+      ENEMIES.remove(E);
+      objs.remove(E);
+      for (int i = 0; i < c.Triangles.size(); i++) {
+        if (c.Triangles.get(i).ID == E.ID) {
+          c.Triangles.remove(i);
+          i--;
         }
       }
     } else { 

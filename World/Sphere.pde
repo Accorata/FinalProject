@@ -6,8 +6,9 @@ public class Sphere extends Obj {
     super(); 
     ArrayList<PVector> ps = calcPoints(pos, radius, angle, rows);
     ArrayList<Triangle> ts = calcTriangles(ps, angle, rows, clr);
-    setObj(ps, ts);
+    setObj(ps, ts, ps.get(0), ps.get(ps.size()-1));
   }
+  
   public ArrayList<PVector> calcPoints (PVector pos, float radius, int angle, int rows) {
     return calcPoints(pos, radius, radius, angle, rows);
   }
@@ -17,12 +18,11 @@ public class Sphere extends Obj {
     points.add(new PVector(pos.x, pos.y+yRadius, pos.z));
     for (int theta = angle; theta < 180; theta+=angle) {
       float rSin = xRadius*sin(radians(theta));
-      float rCos = xRadius*cos(radians(theta));
-      float rCosY = yRadius*cos(radians(theta));
+      float rCos = yRadius*cos(radians(theta));
       for (int phi = 0; phi < 360; phi += rowAngle) {      
         float sinP = sin(radians(phi));
         float cosP = cos(radians(phi));
-        points.add(new PVector(pos.x+rSin*cosP, pos.y+rCosY, pos.z+rSin*sinP));
+        points.add(new PVector(pos.x+rSin*cosP, pos.y+rCos, pos.z+rSin*sinP));
       }
     }
     points.add(new PVector(pos.x, pos.y-yRadius, pos.z));

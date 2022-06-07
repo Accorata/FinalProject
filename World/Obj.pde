@@ -86,6 +86,14 @@ public class Obj {
   void setBreachable(boolean b) {
     this.breachable = b;
   }
+  void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_, PVector one, PVector two) {
+    this.points = points_;
+    this.foundationPoints = new ArrayList<PVector>();
+    foundationPoints.add(one);
+    foundationPoints.add(two);
+    this.triangles = triangles_;
+    setCenter();
+  }
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
     this.foundationPoints = points;

@@ -32,21 +32,18 @@ public class Enemy extends Sphere {
     this.dir = dir_;
     this.rotation = new PVector(0, 0, 0);
   }
-  //private ArrayList<PVector> calcPoints (PVector pos, PVector size) {
-    
+  //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
+  //  ArrayList<PVector> p = new ArrayList<PVector>();
+  //  p.add(pos);
+  //  p.add(new PVector(pos.x, pos.y+size.y, pos.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y, pos.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z+size.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y, pos.z+size.z));  
+  //  p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
+  //  p.add(new PVector(pos.x, pos.y, pos.z+size.z));
+  //  return p;
   //}
-  private ArrayList<PVector> oldCalcPoints(PVector pos, PVector size) {
-    ArrayList<PVector> p = new ArrayList<PVector>();
-    p.add(pos);
-    p.add(new PVector(pos.x, pos.y+size.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z+size.z));
-    p.add(new PVector(pos.x+size.x, pos.y, pos.z+size.z));  
-    p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
-    p.add(new PVector(pos.x, pos.y, pos.z+size.z));
-    return p;
-  }
   //private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points, color c) {
   //  ArrayList<Triangle> t = new ArrayList<Triangle>();
   //  t.add(new Triangle(points.get(0), points.get(1), points.get(2), c));
