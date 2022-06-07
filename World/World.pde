@@ -92,7 +92,7 @@ void draw() {
   //e3.moveY(0.5);
   //e1.move();
   PVector a = new PVector(0, 0, -1 * fromScreen);
-  e1.moveTowards(a);
+  e1.moveTowards(a);//.copy().add(c.getLoc()));
   //e1.rotate(a);
   PVector b = new PVector(0, 1, 0);
   sphere.rotate(b);

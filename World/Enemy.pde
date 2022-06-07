@@ -120,7 +120,14 @@ public class Enemy extends Obj {
     }
     return true;
   }
-  void moveTowards(PVector target) {
+  void moveTowards(PVector t) {
+    PVector target = new PVector(t.x, t.y, 0);
+    if (t.z != 0) {
+      target.add(zUnit.mult(t.z));
+      zUnit.div(t.z);
+    }
+    //target.add(zUnit.mult(t.z));
+    //zUnit.div(t.z);
     PVector pos = getPos();
     if (target.x > pos.x) {
       dir.x = 2;
