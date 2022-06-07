@@ -20,13 +20,13 @@ final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
-float eAng =0;
+float eAng = 0;
 boolean aniEn = true;
 Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -20, 100), new PVector(-1, 0, -2));
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -20, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -20, -800));
 ArrayList<Queue<Float[][]>> bullets;
-Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 10, 10);//30 5
+Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
 float speedAdjust = 1;
 
 void setup() {
@@ -86,16 +86,18 @@ void draw() {
     e2.moveTowards(e3.getCenter());
   }
   //e1.rotate(a);
-  
+
   for (Obj obj : objs) {
-      obj.setCenter(place);
-      obj.rotateOnX(-xAng);
+    obj.setCenter(place);
+    obj.rotateOnX(-xAng);
+    obj.rotateOnY(-eAng);
   }
-  PVector b = new PVector(0, 1, 0);
+  PVector b = new PVector(0, 0, 1);
   sphere.rotate(b);
   for (Obj obj : objs) {
-      obj.setCenter(place);
-      obj.rotateOnX(xAng);
+    obj.setCenter(place);
+    obj.rotateOnY(eAng);
+    obj.rotateOnX(xAng);
   }
   //l.shine(c.Triangles);
   // --Mouse Control--

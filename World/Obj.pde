@@ -63,7 +63,7 @@ public class Obj {
     moveZ(1);
   }
   PVector getPos() {
-    center = calcCenter();
+    setCenter();
     PVector ans = new PVector(0, 0, 0);
     if (center.x != 0) {
       ans.add(xUnitInv.mult(center.x));
@@ -206,7 +206,6 @@ public class Obj {
     for (PVector point : points) {
       point.add(a);
     }
-    center = calcCenter();
   }
   ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
     ArrayList<PVector> p = new ArrayList<PVector>();

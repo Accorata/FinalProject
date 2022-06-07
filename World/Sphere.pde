@@ -8,7 +8,7 @@ public class Sphere extends Obj {
     ArrayList<Triangle> ts = calcTriangles(ps, angle, rows, clr);
     setObj(ps, ts, ps.get(0), ps.get(ps.size()-1));
   }
-  
+
   public ArrayList<PVector> calcPoints (PVector pos, float radius, int angle, int rows) {
     return calcPoints(pos, radius, radius, angle, rows);
   }
