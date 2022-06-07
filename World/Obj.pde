@@ -62,6 +62,23 @@ public class Obj {
   void moveZ() {
     moveZ(1);
   }
+  PVector getPos() {
+    center = calcCenter();
+    PVector ans = new PVector(0, 0, 0);
+    if (center.x != 0) {
+      ans.add(xUnitInv.mult(center.x));
+      xUnitInv.div(center.x);
+    }
+    if (center.y != 0) {
+      ans.add(yUnitInv.mult(center.y));
+      yUnitInv.div(center.y);
+    }
+    if (center.z != 0) {
+      ans.add(zUnitInv.mult(center.z));
+      zUnitInv.div(center.z);
+    }
+    return ans;
+  }
   boolean getBreachable() {
     return this.breachable;
   }

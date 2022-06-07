@@ -86,6 +86,8 @@ void draw() {
   println(yUnit);
   println(zUnit);
   println();
+  println(e1.getPos());
+  println();
   speedAdjust = 60/frameRate;
   //e1.moveZ(-2);
   //e1.moveX(-1);
