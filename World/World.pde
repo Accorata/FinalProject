@@ -74,7 +74,18 @@ void setup() {
 }
 PVector xAxis = new PVector(1, 0, 0);
 void draw() {
-  println(determinate(xUnit, yUnit, zUnit));
+  PVector[] inv = inverse(xUnit, yUnit, zUnit);
+  xUnitInv = inv[0];
+  yUnitInv = inv[1];
+  zUnitInv = inv[2];
+  println(xUnitInv);
+  println(yUnitInv);
+  println(zUnitInv);
+  println();
+  println(xUnit);
+  println(yUnit);
+  println(zUnit);
+  println();
   speedAdjust = 60/frameRate;
   //e1.moveZ(-2);
   //e1.moveX(-1);
