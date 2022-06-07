@@ -80,7 +80,7 @@ public class Camera {
       yRotate = 0;
     }
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.rotateOnY(xRotate);
       obj.rotateOnX(xAng);
@@ -124,19 +124,19 @@ public class Camera {
     }
     boolean breached = false;
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.translate(dir);
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(xAng);
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(-xAng);
         obj.translate(PVector.mult(dir, -1));
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(xAng);
       }
     }

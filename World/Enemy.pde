@@ -15,8 +15,8 @@ public class Enemy extends Sphere {
   public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
     this.loc = loc_;
-    ArrayList<PVector> points = calcPoints(loc, 100, 50, 20, 20);
-    ArrayList<Triangle> shape = calcTriangles(points, 20, 20, color(102, 0, 0)); //ArrayList<PVector> points, int angle, int rows, color clr
+    ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
+    ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
     super.setObj(points, shape);
     this.NAME = name_;
     this.HEALTH = 100;

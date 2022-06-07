@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
+final PVector place = new PVector(0, 0, -1 * fromScreen);
 double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
@@ -79,14 +80,23 @@ void draw() {
   //e2.moveX(-1);
   //e3.moveY(0.5);
   //e1.move();
-  PVector a = new PVector(0, 0, -1 * fromScreen);
-  e1.moveTowards(a);//.copy().add(c.getLoc()));
+  PVector a = place;
+  //e1.moveTowards(a);//.copy().add(c.getLoc()));
   if (!e3.isDead()) {
     e2.moveTowards(e3.getCenter());
   }
   //e1.rotate(a);
+  
+  for (Obj obj : objs) {
+      obj.setCenter(place);
+      obj.rotateOnX(-xAng);
+  }
   PVector b = new PVector(0, 1, 0);
   sphere.rotate(b);
+  for (Obj obj : objs) {
+      obj.setCenter(place);
+      obj.rotateOnX(xAng);
+  }
   //l.shine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
@@ -127,7 +137,7 @@ void keyPressed() {
   switch (key) {
   case 'l':
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
@@ -148,11 +158,10 @@ void keyPressed() {
     break;
   case 'j':
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
-
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
@@ -172,7 +181,7 @@ void keyPressed() {
     if (xAng <= 80) {
       xAng += 10;
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(10);
         if (!obj.getBreachable() && obj.breached()) breached = true;
       }
@@ -192,7 +201,7 @@ void keyPressed() {
     if (xAng >= -80) {
       xAng -= 10;
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(-10);
         if (!obj.getBreachable() && obj.breached()) breached = true;
       }
