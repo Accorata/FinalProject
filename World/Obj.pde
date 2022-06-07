@@ -111,7 +111,7 @@ public class Obj {
     return triangles;
   }
   PVector getCenter () {
-    return center;
+    return calcCenter();
   }
   boolean breached() {
     boolean breached = false;

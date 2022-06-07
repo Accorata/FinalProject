@@ -84,6 +84,9 @@ void draw() {
   //e1.move();
   PVector a = new PVector(0, 0, -1 * fromScreen);
   e1.moveTowards(a);//.copy().add(c.getLoc()));
+  if (!e3.isDead()) {
+    e2.moveTowards(e3.getCenter());
+  }
   //e1.rotate(a);
   PVector b = new PVector(0, 1, 0);
   sphere.rotate(b);
