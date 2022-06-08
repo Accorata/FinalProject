@@ -2,8 +2,8 @@ import java.util.Collections;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.ArrayDeque;
-final PVector xaxis = new PVector(1, 0, 0);
 final float fromScreen = 300;
+final PVector place = new PVector(0, 0, -1 * fromScreen);
 double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
@@ -11,7 +11,6 @@ ArrayList<Gun> INVENTORY;
 int curG;
 Plane sc = new Plane(100, color(0), 2000, 2000);
 float xAng = 0;
-//float yAng = 0;
 Camera c;
 Light l;
 ArrayList<Obj> objs = new ArrayList<Obj>();
@@ -21,17 +20,17 @@ final float sensitivity = 20;
 boolean test = true;
 ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
-float eAng =0;
+float eAng = 0;
 boolean aniEn = true;
-Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -100, 100), new PVector(-1, 0, -2));
-Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -100, -500));
-Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -100, -800));
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -20, 100), new PVector(-1, 0, -2));
+Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -20, -500));
+Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -20, -800));
 ArrayList<Queue<Float[][]>> bullets;
-Sphere sphere = new Sphere(new PVector(300, -100, 200), 100, color(40), 30, 5);
-float speedAdjust = 0.5;
+Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
+float speedAdjust = 1;
+
 void setup() {
   size(1000, 600);
-
   if (!test) noCursor();
   c = new Camera();
   PLAYER_HEALTH = 100;
@@ -71,19 +70,26 @@ void setup() {
   addEnemy(e2);
   addEnemy(e3);
 }
-PVector xAxis = new PVector(1, 0, 0);
+
 void draw() {
-  speedAdjust = 30/frameRate;
-  //e1.moveZ(-2);
-  //e1.moveX(-1);
-  //e2.moveX(-1);
-  //e3.moveY(0.5);
-  e1.move();
-  PVector a = new PVector(0, 1, 0);
-  e1.rotate(a);
-  PVector b = new PVector(0, 1, 1);
-  sphere.rotate(b);
-  //l.shine(c.Triangles);
+  recalcInverses();
+  speedAdjust = 60/frameRate;
+  for (Enemy e : ENEMIES) {
+  //  if (e.inSight()) {
+    e.moveTowards(place);
+  //  } else {
+  //    e.wander();
+  //  }
+  }
+  //e1.moveTowards(a);//.copy().add(c.getLoc()));
+  //if (!e3.isDead()) {
+  //  e2.moveTowards(e3.getCenter());
+  //}
+  //e1.rotate(a);
+  PVector b = new PVector(1, 0, 0);
+  //sphere.rotate(b);
+  //l.sshine(c.Triangles);
+
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
@@ -93,10 +99,8 @@ void draw() {
   AIM = 0;
   c.display();
   for (int i = 0; i < bullets.size(); i++) {
-
     strokeWeight(5);
     Float[][] cord = bullets.get(i).poll();
-
     if (cord != null) {
       stroke(cord[2][0], cord[2][1], cord[2][2]);
       line(cord[0][0], cord[0][1], cord[1][0], cord[1][1]);
@@ -114,14 +118,16 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
-  println(frameRate);
+  //println(dir.y);
+  //println(frameRate);
 }
+
 void keyPressed() {
   boolean breached = false;
   switch (key) {
   case 'l':
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
@@ -139,16 +145,13 @@ void keyPressed() {
       rotateAxisOnY(yUnit, 10);
       rotateAxisOnY(zUnit, 10);
     }
-
     break;
   case 'j':
-
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
-
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
@@ -168,7 +171,7 @@ void keyPressed() {
     if (xAng <= 80) {
       xAng += 10;
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(10);
         if (!obj.getBreachable() && obj.breached()) breached = true;
       }
@@ -184,12 +187,11 @@ void keyPressed() {
       }
     }
     break;
-
   case 'k':
     if (xAng >= -80) {
       xAng -= 10;
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(-10);
         if (!obj.getBreachable() && obj.breached()) breached = true;
       }
@@ -204,7 +206,6 @@ void keyPressed() {
         rotateAxisOnX(zUnit, -10);
       }
     }
-
     break;
   case 'w':
     dir.z = -speed;
@@ -218,11 +219,11 @@ void keyPressed() {
   case 'd':
     dir.x = -speed;
     break;
-    //case ' ':
-    //  if (c.getLoc().y == 0) {
-    //    dir.y = speed*2;
-    //  }
-    //  break;
+  case ' ':
+    if (c.getLoc().y == 0) {
+      dir.y = speed*2;
+    }
+    break;
   case 'p':
     aniEn = !aniEn;
     break;
@@ -233,20 +234,18 @@ void keyPressed() {
       }
     }
     break;
-
   case '1':
     curG = 0;
     break;
-
   case '2':
     curG = 1;
     break;
-
   case '3':
     curG = 2;
     break;
   }
 }
+
 void keyReleased() {
   switch (key) {
   case 'w':
@@ -261,7 +260,6 @@ void keyReleased() {
   case 'd':
     dir.x = 0;
     break;
-
   case 'r':
     if (curG < INVENTORY.size()) {
       INVENTORY.get(curG).reload();
@@ -269,19 +267,18 @@ void keyReleased() {
     break;
   }
 }
+
 void mouseClicked() {
   Enemy E = inSight();
-  if (curG < INVENTORY.size()) {
-    if (E != null) {
-      INVENTORY.get(curG).shoot(E, true);
-      if (E.isDead()) {
-        ENEMIES.remove(E);
-        objs.remove(E);
-        for (int i = 0; i < c.Triangles.size(); i++) {
-          if (c.Triangles.get(i).ID == E.ID) {
-            c.Triangles.remove(i);
-            i--;
-          }
+  if (E != null && curG < INVENTORY.size()) {
+    INVENTORY.get(curG).shoot(E, true);
+    if (E.isDead()) {
+      ENEMIES.remove(E);
+      objs.remove(E);
+      for (int i = 0; i < c.Triangles.size(); i++) {
+        if (c.Triangles.get(i).ID == E.ID) {
+          c.Triangles.remove(i);
+          i--;
         }
       }
     } else { 

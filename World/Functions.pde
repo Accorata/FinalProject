@@ -32,6 +32,54 @@ void rotateAxisOnZ(PVector axis, float deg) {
   }
 }
 
+void recalcInverses() {
+  PVector[] inv = inverse(xUnit, yUnit, zUnit);
+  xUnitInv = inv[0];
+  yUnitInv = inv[1];
+  zUnitInv = inv[2];
+}
+
+void printMatrices() {
+  println(xUnit);
+  println(yUnit);
+  println(zUnit);
+  println(determinate(xUnit, yUnit, zUnit));
+  println();
+  println(xUnitInv);
+  println(yUnitInv);
+  println(zUnitInv);
+  println(determinate(xUnitInv, yUnitInv, zUnitInv));
+  println();
+  println(e1.getPos());
+  println();
+}
+
+
+float determinate(PVector one, PVector two, PVector three) {
+  float ans = 0;
+  ans += one.x * (two.y * three.z - two.z * three.y);
+  ans -= two.x * (one.y * three.z - one.z * three.y);
+  ans += three.x * (one.y * two.z - one.z * two.y);
+  return ans;
+}
+
+PVector[] inverse(PVector one, PVector two, PVector three) {
+  PVector[] ans = new PVector[3];
+  for (int i = 0; i<3; i++) {
+    ans[i] = new PVector(0, 0, 0);
+  }
+  ans[0].x = (two.y * three.z - three.y * two.z);
+  ans[0].y = -(one.y * three.z - three.y * one.z);
+  ans[0].z = (one.y * two.z - two.y * one.z);
+  ans[1].x = -(two.x * three.z - three.x * two.z);
+  ans[1].y = (one.x * three.z - three.x * one.z);
+  ans[1].z = -(one.x * two.z - two.x * one.z);
+  ans[2].x = (two.x * three.y - three.x * two.y);
+  ans[2].y = -(one.x * three.y - three.x * one.y);
+  ans[2].z = (one.x * two.y - two.x * one.y);
+  return ans;
+}
+
 void print2D(Float[][] f) {
   String s = "";
   for (int i = 0; i < f.length; i++) {

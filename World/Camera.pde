@@ -80,7 +80,7 @@ public class Camera {
       yRotate = 0;
     }
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.rotateOnY(xRotate);
       obj.rotateOnX(xAng);
@@ -112,29 +112,41 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
+    //println(dir.y);
     dir.mult(speedAdjust);
+    loc.add(dir);
+    if (c.getLoc().y < 0) {
+      dir.y = loc.y;
+      loc.y = 0;
+    }
+    if (c.getLoc().y > 0) {
+      dir.y -= 0.5*speedAdjust;
+    }
     boolean breached = false;
-    //dir.y -= 0.1;
-    //if (c.getLoc().y < 0) {
-    //  dir.y = 0;
-    //}
     for (Obj obj : objs) {
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.translate(dir);
-      obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+      obj.setCenter(place);
       obj.rotateOnX(xAng);
       if (!obj.getBreachable() && obj.breached()) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(-xAng);
         obj.translate(PVector.mult(dir, -1));
-        obj.setCenter(new PVector(0, 0, -1 * fromScreen));
+        obj.setCenter(place);
         obj.rotateOnX(xAng);
       }
     }
+
+    //if (c.getLoc().y == 0) {
+    //  dir.y = 0;
+    //}
+    if (c.getLoc().y == 0) {
+      dir.y = 0;
+    }  //else 
     dir.div(speedAdjust);
   }
 }

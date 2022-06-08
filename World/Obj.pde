@@ -1,6 +1,9 @@
-public PVector xUnit = new PVector(1, 0, 0); //<>// //<>//
+public PVector xUnit = new PVector(1, 0, 0); //<>// //<>// //<>//
 public PVector yUnit = new PVector(0, 1, 0);
 public PVector zUnit = new PVector(0, 0, 1);
+public PVector xUnitInv = new PVector(1, 0, 0);
+public PVector yUnitInv = new PVector(0, 1, 0);
+public PVector zUnitInv = new PVector(0, 0, 1);
 
 public class Obj {
   private boolean breachable = false;
@@ -59,11 +62,37 @@ public class Obj {
   void moveZ() {
     moveZ(1);
   }
+  PVector getPos() {
+    setCenter();
+    PVector ans = new PVector(0, 0, 0);
+    if (center.x != 0) {
+      ans.add(xUnitInv.mult(center.x));
+      xUnitInv.div(center.x);
+    }
+    if (center.y != 0) {
+      ans.add(yUnitInv.mult(center.y));
+      yUnitInv.div(center.y);
+    }
+    if (center.z != 0) {
+      ans.add(zUnitInv.mult(center.z));
+      zUnitInv.div(center.z);
+    }
+    return ans;
+    //return center;
+  }
   boolean getBreachable() {
     return this.breachable;
   }
   void setBreachable(boolean b) {
     this.breachable = b;
+  }
+  void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_, PVector one, PVector two) {
+    this.points = points_;
+    this.foundationPoints = new ArrayList<PVector>();
+    foundationPoints.add(one);
+    foundationPoints.add(two);
+    this.triangles = triangles_;
+    setCenter();
   }
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
@@ -90,7 +119,7 @@ public class Obj {
     return triangles;
   }
   PVector getCenter () {
-    return center;
+    return calcCenter();
   }
   boolean breached() {
     boolean breached = false;
@@ -160,10 +189,16 @@ public class Obj {
   }
   void rotate(PVector degrees) {
     degrees.mult(speedAdjust);
+    setCenter(place);
+    rotateOnX(-xAng);
+    rotateOnY(-eAng);
     setCenter();
     rotateOnX(degrees.x);
     rotateOnY(degrees.y);
     rotateOnZ(degrees.z);
+    setCenter(place);
+    rotateOnY(eAng);
+    rotateOnX(xAng);
   }
   void addTriangles(ArrayList<Triangle> tris) {
     for (Triangle t : tris) {
@@ -177,7 +212,6 @@ public class Obj {
     for (PVector point : points) {
       point.add(a);
     }
-    center = calcCenter();
   }
   ArrayList<PVector> calcPoints(ArrayList<Triangle> t) {
     ArrayList<PVector> p = new ArrayList<PVector>();

@@ -1,4 +1,4 @@
-public class Enemy extends Obj {
+public class Enemy extends Sphere {
   private String NAME;
   private int HEALTH;
   private ArrayList<Gun> inventory;
@@ -8,6 +8,7 @@ public class Enemy extends Obj {
   public int curGun;
   private PVector dir;
   private PVector rotation;
+  private double wanderTimer;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -15,8 +16,8 @@ public class Enemy extends Obj {
   public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
     this.loc = loc_;
-    ArrayList<PVector> points = calcPoints(loc, new PVector(100, 170, 20));
-    ArrayList<Triangle> shape = calcTriangles(points, color(102, 0, 0));
+    ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
+    ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
     super.setObj(points, shape);
     this.NAME = name_;
     this.HEALTH = 100;
@@ -31,35 +32,36 @@ public class Enemy extends Obj {
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.rotation = new PVector(0, 0, 0);
+    this.wanderTimer = Math.random()*120;
   }
-  private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
-    ArrayList<PVector> p = new ArrayList<PVector>();
-    p.add(pos);
-    p.add(new PVector(pos.x, pos.y+size.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y, pos.z));
-    p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z+size.z));
-    p.add(new PVector(pos.x+size.x, pos.y, pos.z+size.z));  
-    p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
-    p.add(new PVector(pos.x, pos.y, pos.z+size.z));
-    return p;
-  }
-  private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points, color c) {
-    ArrayList<Triangle> t = new ArrayList<Triangle>();
-    t.add(new Triangle(points.get(0), points.get(1), points.get(2), c));
-    t.add(new Triangle(points.get(2), points.get(3), points.get(0), c));
-    t.add(new Triangle(points.get(3), points.get(2), points.get(4), c));
-    t.add(new Triangle(points.get(4), points.get(5), points.get(3), c));
-    t.add(new Triangle(points.get(5), points.get(4), points.get(6), c));
-    t.add(new Triangle(points.get(6), points.get(7), points.get(5), c));
-    t.add(new Triangle(points.get(7), points.get(6), points.get(1), c));
-    t.add(new Triangle(points.get(1), points.get(7), points.get(0), c));
-    t.add(new Triangle(points.get(1), points.get(6), points.get(4), c));
-    t.add(new Triangle(points.get(4), points.get(2), points.get(1), c));
-    t.add(new Triangle(points.get(7), points.get(0), points.get(3), c));
-    t.add(new Triangle(points.get(3), points.get(7), points.get(5), c));
-    return t;
-  }
+  //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
+  //  ArrayList<PVector> p = new ArrayList<PVector>();
+  //  p.add(pos);
+  //  p.add(new PVector(pos.x, pos.y+size.y, pos.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y, pos.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z+size.z));
+  //  p.add(new PVector(pos.x+size.x, pos.y, pos.z+size.z));  
+  //  p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
+  //  p.add(new PVector(pos.x, pos.y, pos.z+size.z));
+  //  return p;
+  //}
+  //private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points, color c) {
+  //  ArrayList<Triangle> t = new ArrayList<Triangle>();
+  //  t.add(new Triangle(points.get(0), points.get(1), points.get(2), c));
+  //  t.add(new Triangle(points.get(2), points.get(3), points.get(0), c));
+  //  t.add(new Triangle(points.get(3), points.get(2), points.get(4), c));
+  //  t.add(new Triangle(points.get(4), points.get(5), points.get(3), c));
+  //  t.add(new Triangle(points.get(5), points.get(4), points.get(6), c));
+  //  t.add(new Triangle(points.get(6), points.get(7), points.get(5), c));
+  //  t.add(new Triangle(points.get(7), points.get(6), points.get(1), c));
+  //  t.add(new Triangle(points.get(1), points.get(7), points.get(0), c));
+  //  t.add(new Triangle(points.get(1), points.get(6), points.get(4), c));
+  //  t.add(new Triangle(points.get(4), points.get(2), points.get(1), c));
+  //  t.add(new Triangle(points.get(7), points.get(0), points.get(3), c));
+  //  t.add(new Triangle(points.get(3), points.get(7), points.get(5), c));
+  //  return t;
+  //}
   ArrayList<Triangle> renderShape() {
     ArrayList<Triangle> shape = new ArrayList<Triangle>();
     PVector loc = getCenter();
@@ -119,6 +121,57 @@ public class Enemy extends Obj {
       if (within) return false;
     }
     return true;
+  }
+  void moveTowards(PVector t) {
+    PVector target = new PVector(0, 0, 0);
+    if (t.x != 0) {
+      target.add(xUnitInv.mult(t.x));
+      xUnitInv.div(t.x);
+    }
+    if (t.y != 0) {
+      target.add(yUnitInv.mult(t.y));
+      yUnitInv.div(t.y);
+    }
+    if (t.z != 0) {
+      target.add(zUnitInv.mult(t.z));
+      zUnitInv.div(t.z);
+    }
+    PVector pos = getPos();
+    //if (pos.z == target.z) {
+    //  dir.set(1,0,0);
+    //} else {
+    //  float theta = atan((pos.x-target.x)/(pos.z-target.z));
+    //  float signX = 1;//(pos.x-target.x)/abs(pos.x-target.x);
+    //  float signZ = (pos.z-target.z)/abs(pos.z-target.z);
+    //  dir.x = -3*signX*sin(theta);
+    //  dir.z = -3*signZ*cos(theta);
+    //}
+    if (target.x > pos.x) {
+      dir.x = 2;
+    } else {
+      dir.x = -2;
+    }
+    //if (target.y > pos.y) {
+    //  dir.y = 2;
+    //} else {
+    //  dir.y = -2;
+    //}
+    if (target.z > pos.z) {
+      dir.z = 2;
+    } else {
+      dir.z = -2;
+    }
+    move();
+  }
+  void wander() {
+    wanderTimer += Math.random()*speedAdjust;
+    if (wanderTimer >= 120) {
+      wanderTimer = 0;
+      float theta = random(360);
+      //vAng = theta;
+      dir.set(2*cos(theta),0,2*sin(theta));
+    }
+    move();
   }
   void move() {
     dir.mult(speedAdjust);
