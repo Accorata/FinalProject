@@ -18,7 +18,7 @@ public class Enemy extends Sphere {
     this.loc = loc_;
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
-    int added = addLegs(loc, points, shape);
+    int added = addLegs(loc, points, shape, color(102, 0, 0));
     super.setObj(points, shape, points.get(0), points.get(points.size()-1-added));
     this.NAME = name_;
     this.HEALTH = 100;
@@ -36,26 +36,30 @@ public class Enemy extends Sphere {
     this.wanderTimer = Math.random()*120;
   }
   
-  private int addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape) {
-    //int rowAngle = 360/rows;
-    //points.add(new PVector(pos.x, pos.y+yRadius, pos.z));
-    //for (int theta = angle; theta < 180; theta+=angle) {
-    //  float rSin = xRadius*sin(radians(theta));
-    //  float rCos = yRadius*cos(radians(theta));
-    //  for (int phi = 0; phi < 360; phi += rowAngle) {      
-    //    float sinP = sin(radians(phi));
-    //    float cosP = cos(radians(phi));
-    //    points.add(new PVector(pos.x+rSin*cosP, pos.y+rCos, pos.z+rSin*sinP));
-    //  }
-    //}
+  private int addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
     int added = 0;
-    loc.y += 80;
+    loc.y += 50;
     float radius = 50*sin(radians(30));
     for (int theta = 0; theta<360; theta+=90){
-      points.add(new PVector(loc.x + radius*cos(radians(theta)), loc.y, loc.z + radius*sin(radians(theta))));
-      added++;
+      float xDisplace = radius*cos(radians(theta));
+      float zDisplace = radius*sin(radians(theta));
+      points.add(new PVector(loc.x + xDisplace, loc.y, loc.z + zDisplace));
+      xDisplace += 40*cos(radians(theta));
+      zDisplace += 40*sin(radians(theta));
+      points.add(new PVector(loc.x + xDisplace + zDisplace/10, loc.y, loc.z + zDisplace + xDisplace/10));
+      points.add(new PVector(loc.x + xDisplace - zDisplace/10, loc.y, loc.z + zDisplace - xDisplace/10));
+      points.add(new PVector(loc.x + xDisplace*0.9, loc.y + 20, loc.z + zDisplace*0.9));
+      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
+      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
+      //shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
+      shape.add(new Triangle(points.get(points.size()-2), points.get(points.size()-3), points.get(points.size()-4), clr));
+      points.add(new PVector(loc.x + xDisplace, loc.y + 60, loc.z + zDisplace));
+      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
+      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
+      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
+      added += 5;
     }
-    loc.y -= 80;
+    loc.y -= 50;
     return added;
   }
   //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {

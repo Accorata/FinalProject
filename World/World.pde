@@ -22,9 +22,9 @@ ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng = 0;
 boolean aniEn = true;
-Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -20, 100), new PVector(-1, 0, -2));
-Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -20, -500));
-Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -20, -800));
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 0, -2));
+Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
+Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
 float speedAdjust = 1;
@@ -79,7 +79,7 @@ void draw() {
   //  if (e.inSight()) {
     //e.moveTowards(place);
   //  } else {
-      e.wander();
+      //e.wander();
   //  }
   }
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
