@@ -73,7 +73,6 @@ void setup() {
 
 void draw() {
   recalcInverses();
-  if (test) printMatrices();
   speedAdjust = 60/frameRate;
   for (Enemy e : ENEMIES) {
     if (e.inSight()) {
@@ -90,6 +89,7 @@ void draw() {
   PVector b = new PVector(1, 0, 0);
   //sphere.rotate(b);
   //l.sshine(c.Triangles);
+  
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
@@ -99,10 +99,8 @@ void draw() {
   AIM = 0;
   c.display();
   for (int i = 0; i < bullets.size(); i++) {
-
     strokeWeight(5);
     Float[][] cord = bullets.get(i).poll();
-
     if (cord != null) {
       stroke(cord[2][0], cord[2][1], cord[2][2]);
       line(cord[0][0], cord[0][1], cord[1][0], cord[1][1]);

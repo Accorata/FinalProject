@@ -162,6 +162,7 @@ public class Enemy extends Sphere {
     if (wanderTimer >= 120) {
       wanderTimer = 0;
       float theta = random(360);
+      //vAng = theta;
       dir.set(2*cos(theta),0,2*sin(theta));
     }
     move();
