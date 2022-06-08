@@ -9,6 +9,7 @@ public class Enemy extends Sphere {
   private PVector dir;
   private PVector rotation;
   private double wanderTimer;
+  private ArrayList<Leg> legs;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -18,8 +19,8 @@ public class Enemy extends Sphere {
     this.loc = loc_;
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
-    int added = addLegs(loc, points, shape, color(102, 0, 0));
-    super.setObj(points, shape, points.get(0), points.get(points.size()-1-added));
+    legs = addLegs(loc, points, shape, color(102, 0, 0));
+    super.setObj(points, shape, points.get(0), points.get(points.size()-21));
     this.NAME = name_;
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
@@ -36,8 +37,8 @@ public class Enemy extends Sphere {
     this.wanderTimer = Math.random()*120;
   }
   
-  private int addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
-    int added = 0;
+  private ArrayList<Leg> addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
+    ArrayList<Leg> legs = new ArrayList<Leg>();
     loc.y += 50;
     float radius = 50*sin(radians(30));
     for (int theta = 0; theta<360; theta+=90){
@@ -56,10 +57,9 @@ public class Enemy extends Sphere {
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
-      added += 5;
     }
     loc.y -= 50;
-    return added;
+    return legs;
   }
   ArrayList<Triangle> renderShape() {
     ArrayList<Triangle> shape = new ArrayList<Triangle>();
