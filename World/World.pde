@@ -9,7 +9,7 @@ ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
 int curG;
-Plane sc = new Plane(100, color(0), 2000, 2000);
+Plane sc = new Plane(100, color(0), 4000, 4000);
 float xAng = 0;
 Camera c;
 Light l;
@@ -73,12 +73,13 @@ void setup() {
 
 void draw() {
   recalcInverses();
+  printMatrices();
   speedAdjust = 60/frameRate;
   for (Enemy e : ENEMIES) {
   //  if (e.inSight()) {
-    e.moveTowards(place);
+    //e.moveTowards(place);
   //  } else {
-  //    e.wander();
+      e.wander();
   //  }
   }
   //e1.moveTowards(a);//.copy().add(c.getLoc()));

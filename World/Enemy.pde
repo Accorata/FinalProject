@@ -18,7 +18,8 @@ public class Enemy extends Sphere {
     this.loc = loc_;
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
-    super.setObj(points, shape);
+    int added = addLegs(loc, points, shape);
+    super.setObj(points, shape, points.get(0), points.get(points.size()-1-added));
     this.NAME = name_;
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
@@ -33,6 +34,29 @@ public class Enemy extends Sphere {
     this.dir = dir_;
     this.rotation = new PVector(0, 0, 0);
     this.wanderTimer = Math.random()*120;
+  }
+  
+  private int addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape) {
+    //int rowAngle = 360/rows;
+    //points.add(new PVector(pos.x, pos.y+yRadius, pos.z));
+    //for (int theta = angle; theta < 180; theta+=angle) {
+    //  float rSin = xRadius*sin(radians(theta));
+    //  float rCos = yRadius*cos(radians(theta));
+    //  for (int phi = 0; phi < 360; phi += rowAngle) {      
+    //    float sinP = sin(radians(phi));
+    //    float cosP = cos(radians(phi));
+    //    points.add(new PVector(pos.x+rSin*cosP, pos.y+rCos, pos.z+rSin*sinP));
+    //  }
+    //}
+    int added = 0;
+    loc.y += 80;
+    float radius = 50*sin(radians(30));
+    for (int theta = 0; theta<360; theta+=90){
+      points.add(new PVector(loc.x + radius*cos(radians(theta)), loc.y, loc.z + radius*sin(radians(theta))));
+      added++;
+    }
+    loc.y -= 80;
+    return added;
   }
   //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
   //  ArrayList<PVector> p = new ArrayList<PVector>();
