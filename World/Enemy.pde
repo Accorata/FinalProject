@@ -51,7 +51,6 @@ public class Enemy extends Sphere {
       points.add(new PVector(loc.x + xDisplace*0.9, loc.y + 20, loc.z + zDisplace*0.9));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
-      //shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
       shape.add(new Triangle(points.get(points.size()-2), points.get(points.size()-3), points.get(points.size()-4), clr));
       points.add(new PVector(loc.x + xDisplace, loc.y + 60, loc.z + zDisplace));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
@@ -62,34 +61,6 @@ public class Enemy extends Sphere {
     loc.y -= 50;
     return added;
   }
-  //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
-  //  ArrayList<PVector> p = new ArrayList<PVector>();
-  //  p.add(pos);
-  //  p.add(new PVector(pos.x, pos.y+size.y, pos.z));
-  //  p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z));
-  //  p.add(new PVector(pos.x+size.x, pos.y, pos.z));
-  //  p.add(new PVector(pos.x+size.x, pos.y+size.y, pos.z+size.z));
-  //  p.add(new PVector(pos.x+size.x, pos.y, pos.z+size.z));  
-  //  p.add(new PVector(pos.x, pos.y+size.y, pos.z+size.z));
-  //  p.add(new PVector(pos.x, pos.y, pos.z+size.z));
-  //  return p;
-  //}
-  //private ArrayList<Triangle> calcTriangles(ArrayList<PVector> points, color c) {
-  //  ArrayList<Triangle> t = new ArrayList<Triangle>();
-  //  t.add(new Triangle(points.get(0), points.get(1), points.get(2), c));
-  //  t.add(new Triangle(points.get(2), points.get(3), points.get(0), c));
-  //  t.add(new Triangle(points.get(3), points.get(2), points.get(4), c));
-  //  t.add(new Triangle(points.get(4), points.get(5), points.get(3), c));
-  //  t.add(new Triangle(points.get(5), points.get(4), points.get(6), c));
-  //  t.add(new Triangle(points.get(6), points.get(7), points.get(5), c));
-  //  t.add(new Triangle(points.get(7), points.get(6), points.get(1), c));
-  //  t.add(new Triangle(points.get(1), points.get(7), points.get(0), c));
-  //  t.add(new Triangle(points.get(1), points.get(6), points.get(4), c));
-  //  t.add(new Triangle(points.get(4), points.get(2), points.get(1), c));
-  //  t.add(new Triangle(points.get(7), points.get(0), points.get(3), c));
-  //  t.add(new Triangle(points.get(3), points.get(7), points.get(5), c));
-  //  return t;
-  //}
   ArrayList<Triangle> renderShape() {
     ArrayList<Triangle> shape = new ArrayList<Triangle>();
     PVector loc = getCenter();
