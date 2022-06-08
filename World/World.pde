@@ -75,20 +75,21 @@ void draw() {
   recalcInverses();
   if (test) printMatrices();
   speedAdjust = 60/frameRate;
-  //e1.moveZ(-2);
-  //e1.moveX(-1);
-  //e2.moveX(-1);
-  //e3.moveY(0.5);
-  //e1.move();
-  PVector a = place;
-  //e1.moveTowards(a);//.copy().add(c.getLoc()));
-  if (!e3.isDead()) {
-    e2.moveTowards(e3.getCenter());
+  for (Enemy e : ENEMIES) {
+    if (e.inSight()) {
+      e.moveTowards(place);
+    } else {
+      e.wander();
+    }
   }
+  //e1.moveTowards(a);//.copy().add(c.getLoc()));
+  //if (!e3.isDead()) {
+  //  e2.moveTowards(e3.getCenter());
+  //}
   //e1.rotate(a);
   PVector b = new PVector(1, 0, 0);
-  sphere.rotate(b);
-  //l.shine(c.Triangles);
+  //sphere.rotate(b);
+  //l.sshine(c.Triangles);
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--

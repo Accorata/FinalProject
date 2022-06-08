@@ -8,6 +8,7 @@ public class Enemy extends Sphere {
   public int curGun;
   private PVector dir;
   private PVector rotation;
+  private double wanderTimer;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -31,6 +32,7 @@ public class Enemy extends Sphere {
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.rotation = new PVector(0, 0, 0);
+    this.wanderTimer = Math.random()*120;
   }
   //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
   //  ArrayList<PVector> p = new ArrayList<PVector>();
@@ -152,6 +154,15 @@ public class Enemy extends Sphere {
       dir.z = 2;
     } else {
       dir.z = -2;
+    }
+    move();
+  }
+  void wander() {
+    wanderTimer += Math.random()*speedAdjust;
+    if (wanderTimer >= 120) {
+      wanderTimer = 0;
+      float theta = random(360);
+      dir.set(2*cos(theta),0,2*sin(theta));
     }
     move();
   }
