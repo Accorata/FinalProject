@@ -137,9 +137,15 @@ public class Enemy extends Sphere {
       zUnitInv.div(t.z);
     }
     PVector pos = getPos();
-    //float theta = atan((pos.x-target.x)/(pos.z-target.z));
-    //dir.x = -5*sin(theta);
-    //dir.z = -5*cos(theta);
+    //if (pos.z == target.z) {
+    //  dir.set(1,0,0);
+    //} else {
+    //  float theta = atan((pos.x-target.x)/(pos.z-target.z));
+    //  float signX = 1;//(pos.x-target.x)/abs(pos.x-target.x);
+    //  float signZ = (pos.z-target.z)/abs(pos.z-target.z);
+    //  dir.x = -3*signX*sin(theta);
+    //  dir.z = -3*signZ*cos(theta);
+    //}
     if (target.x > pos.x) {
       dir.x = 2;
     } else {

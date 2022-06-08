@@ -75,11 +75,11 @@ void draw() {
   recalcInverses();
   speedAdjust = 60/frameRate;
   for (Enemy e : ENEMIES) {
-    if (e.inSight()) {
-      e.moveTowards(place);
-    } else {
-      e.wander();
-    }
+  //  if (e.inSight()) {
+    e.moveTowards(place);
+  //  } else {
+  //    e.wander();
+  //  }
   }
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
   //if (!e3.isDead()) {
@@ -89,7 +89,7 @@ void draw() {
   PVector b = new PVector(1, 0, 0);
   //sphere.rotate(b);
   //l.sshine(c.Triangles);
-  
+
   // --Mouse Control--
   if (!test) c.rotateByMouse();
   // --Update World--
