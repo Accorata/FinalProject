@@ -10,6 +10,8 @@ public class Enemy extends Sphere {
   private PVector rotation;
   private double wanderTimer;
   private ArrayList<Leg> legs;
+  private int movementStage = 0;
+  private int movementTimer = 0;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -45,15 +47,20 @@ public class Enemy extends Sphere {
       float xDisplace = radius*cos(radians(theta));
       float zDisplace = radius*sin(radians(theta));
       points.add(new PVector(loc.x + xDisplace, loc.y, loc.z + zDisplace));
-      xDisplace += 40*cos(radians(theta));
-      zDisplace += 40*sin(radians(theta));
-      points.add(new PVector(loc.x + xDisplace + zDisplace/10, loc.y, loc.z + zDisplace + xDisplace/10));
-      points.add(new PVector(loc.x + xDisplace - zDisplace/10, loc.y, loc.z + zDisplace - xDisplace/10));
-      points.add(new PVector(loc.x + xDisplace*0.9, loc.y + 20, loc.z + zDisplace*0.9));
+      xDisplace += 33*cos(radians(theta));
+      zDisplace += 33*sin(radians(theta));
+      PVector one = new PVector(loc.x + xDisplace + zDisplace/6, loc.y, loc.z + zDisplace + xDisplace/6);
+      points.add(one);
+      PVector two = new PVector(loc.x + xDisplace - zDisplace/6, loc.y, loc.z + zDisplace - xDisplace/6);
+      points.add(two);
+      PVector three = new PVector(loc.x + xDisplace*0.9, loc.y + 20, loc.z + zDisplace*0.9);
+      points.add(three);
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-2), points.get(points.size()-3), points.get(points.size()-4), clr));
-      points.add(new PVector(loc.x + xDisplace, loc.y + 60, loc.z + zDisplace));
+      PVector four = new PVector(loc.x + xDisplace, loc.y + 60, loc.z + zDisplace);
+      points.add(four);
+      legs.add(new Leg(one, two, three, four));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
@@ -174,6 +181,22 @@ public class Enemy extends Sphere {
   }
   void move() {
     dir.mult(speedAdjust);
+    if (movementStage == 0) {
+      legs.get(0).move(new PVector(0,-0.5,0).mult(speedAdjust));
+      legs.get(2).move(new PVector(0,-0.5,0).mult(speedAdjust));
+      legs.get(1).move(new PVector(0,0.5,0).mult(speedAdjust));
+      legs.get(3).move(new PVector(0,0.5,0).mult(speedAdjust));
+    } else {
+      legs.get(0).move(new PVector(0,0.5,0).mult(speedAdjust));
+      legs.get(2).move(new PVector(0,0.5,0).mult(speedAdjust));
+      legs.get(1).move(new PVector(0,-0.5,0).mult(speedAdjust));
+      legs.get(3).move(new PVector(0,-0.5,0).mult(speedAdjust));
+    }
+    if (movementTimer >= 60) {
+      movementTimer = 0;
+      movementStage = 1 - movementStage;
+    }
+    movementTimer+=1*speedAdjust;
     PVector move = new PVector(0, 0, 0);
     if (dir.x != 0) {
       move.add(xUnit.mult(dir.x));

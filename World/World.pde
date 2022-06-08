@@ -79,7 +79,7 @@ void draw() {
   //  if (e.inSight()) {
     //e.moveTowards(place);
   //  } else {
-      //e.wander();
+      e.wander();
   //  }
   }
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
