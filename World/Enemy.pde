@@ -38,12 +38,12 @@ public class Enemy extends Sphere {
     this.rotation = new PVector(0, 0, 0);
     this.wanderTimer = Math.random()*120;
   }
-  
+
   private ArrayList<Leg> addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
     ArrayList<Leg> legs = new ArrayList<Leg>();
     loc.y += 50;
     float radius = 50*sin(radians(30));
-    for (int theta = 0; theta<360; theta+=90){
+    for (int theta = 0; theta<360; theta+=90) {
       float xDisplace = radius*cos(radians(theta));
       float zDisplace = radius*sin(radians(theta));
       points.add(new PVector(loc.x + xDisplace, loc.y, loc.z + zDisplace));
@@ -58,7 +58,7 @@ public class Enemy extends Sphere {
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
       shape.add(new Triangle(points.get(points.size()-2), points.get(points.size()-3), points.get(points.size()-4), clr));
-      PVector four = new PVector(loc.x + xDisplace, loc.y + 60, loc.z + zDisplace);
+      PVector four = new PVector(loc.x + xDisplace*1.2, loc.y + 60, loc.z + zDisplace*1.2);
       points.add(four);
       legs.add(new Leg(one, two, three, four));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
@@ -66,6 +66,12 @@ public class Enemy extends Sphere {
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
     }
     loc.y -= 50;
+    legs.get(1).move(new PVector(0, -30, 0));
+    legs.get(3).move(new PVector(0, -30, 0));
+    //xUnit.mult(60);
+    //legs.get(1).four.sub(xUnit);
+    //legs.get(3).four.add(xUnit);
+    //xUnit.div(60);
     return legs;
   }
   ArrayList<Triangle> renderShape() {
@@ -175,23 +181,35 @@ public class Enemy extends Sphere {
       wanderTimer = 0;
       float theta = random(360);
       //vAng = theta;
-      dir.set(2*cos(theta),0,2*sin(theta));
+      dir.set(2*cos(theta), 0, 2*sin(theta));
     }
     move();
   }
   void move() {
     dir.mult(speedAdjust);
+    xUnit.mult(speedAdjust/4);
+    zUnit.mult(speedAdjust/4);
     if (movementStage == 0) {
-      legs.get(0).move(new PVector(0,-0.5,0).mult(speedAdjust));
-      legs.get(2).move(new PVector(0,-0.5,0).mult(speedAdjust));
-      legs.get(1).move(new PVector(0,0.5,0).mult(speedAdjust));
-      legs.get(3).move(new PVector(0,0.5,0).mult(speedAdjust));
+      legs.get(0).move(new PVector(0, -0.5, 0).mult(speedAdjust));
+      legs.get(2).move(new PVector(0, -0.5, 0).mult(speedAdjust));
+      legs.get(0).four.sub(xUnit);
+      legs.get(2).four.add(xUnit);
+      legs.get(1).move(new PVector(0, 0.5, 0).mult(speedAdjust));
+      legs.get(3).move(new PVector(0, 0.5, 0).mult(speedAdjust));
+      legs.get(1).four.add(zUnit);
+      legs.get(3).four.sub(zUnit);
     } else {
-      legs.get(0).move(new PVector(0,0.5,0).mult(speedAdjust));
-      legs.get(2).move(new PVector(0,0.5,0).mult(speedAdjust));
-      legs.get(1).move(new PVector(0,-0.5,0).mult(speedAdjust));
-      legs.get(3).move(new PVector(0,-0.5,0).mult(speedAdjust));
+      legs.get(0).move(new PVector(0, 0.5, 0).mult(speedAdjust));
+      legs.get(2).move(new PVector(0, 0.5, 0).mult(speedAdjust));
+      legs.get(0).four.add(xUnit);
+      legs.get(2).four.sub(xUnit);
+      legs.get(1).move(new PVector(0, -0.5, 0).mult(speedAdjust));
+      legs.get(3).move(new PVector(0, -0.5, 0).mult(speedAdjust));
+      legs.get(1).four.sub(zUnit);
+      legs.get(3).four.add(zUnit);
     }
+    xUnit.div(speedAdjust/4);
+    zUnit.div(speedAdjust/4);
     if (movementTimer >= 60) {
       movementTimer = 0;
       movementStage = 1 - movementStage;
