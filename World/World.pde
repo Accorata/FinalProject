@@ -79,7 +79,7 @@ void setup() {
 
 void draw() {
   recalcInverses();
-  printMatrices();
+  //printMatrices();
   speedAdjust = 60/frameRate;
   for (Enemy e : ENEMIES) {
   //  if (e.inSight()) {

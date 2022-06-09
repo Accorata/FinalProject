@@ -7,7 +7,6 @@ public class Enemy extends Sphere {
   private float vAng;
   public int curGun;
   private PVector dir;
-  private PVector rotation;
   private double wanderTimer;
   private ArrayList<Leg> legs;
   private int movementStage = 0;
@@ -31,11 +30,11 @@ public class Enemy extends Sphere {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
-    this.vAng = 0;
+    this.vAng = 45;
+    rotate(new PVector(0, vAng, 0));
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
-    this.rotation = new PVector(0, 0, 0);
     this.wanderTimer = Math.random()*120;
   }
 
@@ -177,36 +176,39 @@ public class Enemy extends Sphere {
     wanderTimer += Math.random()*speedAdjust;
     if (wanderTimer >= 120) {
       wanderTimer = 0;
-      rotate(new PVector(0, -vAng, 0));
+      //rotate(new PVector(0, -vAng, 0));
       vAng = random(360);
-      rotate(new PVector(0, vAng, 0));
+      //rotate(new PVector(0, vAng, 0));
       dir.set(2*cos(vAng), 0, 2*sin(vAng));
     }
     move();
   }
   void move() {
-    float speed = 1;
+    float sa = speedAdjust;
+    speedAdjust = 2;
+    float speed = 1.5;
     dir.mult(speedAdjust);
     xUnit.mult(speedAdjust/2*speed);
     zUnit.mult(speedAdjust/2*speed);
+    PVector center = super.getCenter();
     if (movementStage == 0) {
       legs.get(0).move(yUnit.copy().mult(-speed*speedAdjust));
       legs.get(2).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(0).four.sub(xUnit);
-      legs.get(2).four.add(xUnit);
+      legs.get(0).moveToCenter(center);
+      legs.get(2).moveToCenter(center);
       legs.get(1).move(yUnit.copy().mult(speed*speedAdjust));
       legs.get(3).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(1).four.add(zUnit);
-      legs.get(3).four.sub(zUnit);
+      legs.get(0).moveFromCenter(center);
+      legs.get(2).moveFromCenter(center);
     } else {
       legs.get(0).move(yUnit.copy().mult(speed*speedAdjust));
       legs.get(2).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(0).four.add(xUnit);
-      legs.get(2).four.sub(xUnit);
+      legs.get(0).moveFromCenter(center);
+      legs.get(2).moveFromCenter(center);
       legs.get(1).move(yUnit.copy().mult(-speed*speedAdjust));
       legs.get(3).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(1).four.sub(zUnit);
-      legs.get(3).four.add(zUnit);
+      legs.get(1).moveToCenter(center);
+      legs.get(3).moveToCenter(center);
     }
     xUnit.div(speedAdjust/2*speed);
     zUnit.div(speedAdjust/2*speed);
@@ -229,9 +231,10 @@ public class Enemy extends Sphere {
       zUnit.div(dir.z);
     }
     for (PVector p : getPoints()) {
-      p.add(move);
+      //p.add(move);
     }
     dir.div(speedAdjust);
+    speedAdjust = sa;
   }
   boolean addGun(Gun g) {
     if (inventory.size() < 3) {
@@ -242,13 +245,5 @@ public class Enemy extends Sphere {
   }
   String getName() {
     return this.NAME;
-  }
-  @Override
-    void rotate(PVector degrees) {
-    super.rotate(degrees);
-    rotation.add(degrees);
-    //rotateAxisOnX(dir, degrees.y);
-    //rotateAxisOnY(dir, degrees.x);
-    //rotateAxisOnZ(dir, degrees.z);
   }
 }
