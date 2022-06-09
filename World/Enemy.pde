@@ -68,10 +68,8 @@ public class Enemy extends Sphere {
     loc.y -= 50;
     legs.get(1).move(new PVector(0, -30, 0));
     legs.get(3).move(new PVector(0, -30, 0));
-    //xUnit.mult(60);
-    //legs.get(1).four.sub(xUnit);
-    //legs.get(3).four.add(xUnit);
-    //xUnit.div(60);
+    legs.get(1).four.sub(new PVector(0,0,15));
+    legs.get(3).four.add(new PVector(0,0,15));
     return legs;
   }
   ArrayList<Triangle> renderShape() {
@@ -179,38 +177,40 @@ public class Enemy extends Sphere {
     wanderTimer += Math.random()*speedAdjust;
     if (wanderTimer >= 120) {
       wanderTimer = 0;
-      float theta = random(360);
-      //vAng = theta;
-      dir.set(2*cos(theta), 0, 2*sin(theta));
+      rotate(new PVector(0, -vAng, 0));
+      vAng = random(360);
+      rotate(new PVector(0, vAng, 0));
+      dir.set(2*cos(vAng), 0, 2*sin(vAng));
     }
     move();
   }
   void move() {
+    float speed = 1;
     dir.mult(speedAdjust);
-    xUnit.mult(speedAdjust/4);
-    zUnit.mult(speedAdjust/4);
+    xUnit.mult(speedAdjust/2*speed);
+    zUnit.mult(speedAdjust/2*speed);
     if (movementStage == 0) {
-      legs.get(0).move(new PVector(0, -0.5, 0).mult(speedAdjust));
-      legs.get(2).move(new PVector(0, -0.5, 0).mult(speedAdjust));
+      legs.get(0).move(yUnit.copy().mult(-speed*speedAdjust));
+      legs.get(2).move(yUnit.copy().mult(-speed*speedAdjust));
       legs.get(0).four.sub(xUnit);
       legs.get(2).four.add(xUnit);
-      legs.get(1).move(new PVector(0, 0.5, 0).mult(speedAdjust));
-      legs.get(3).move(new PVector(0, 0.5, 0).mult(speedAdjust));
+      legs.get(1).move(yUnit.copy().mult(speed*speedAdjust));
+      legs.get(3).move(yUnit.copy().mult(speed*speedAdjust));
       legs.get(1).four.add(zUnit);
       legs.get(3).four.sub(zUnit);
     } else {
-      legs.get(0).move(new PVector(0, 0.5, 0).mult(speedAdjust));
-      legs.get(2).move(new PVector(0, 0.5, 0).mult(speedAdjust));
+      legs.get(0).move(yUnit.copy().mult(speed*speedAdjust));
+      legs.get(2).move(yUnit.copy().mult(speed*speedAdjust));
       legs.get(0).four.add(xUnit);
       legs.get(2).four.sub(xUnit);
-      legs.get(1).move(new PVector(0, -0.5, 0).mult(speedAdjust));
-      legs.get(3).move(new PVector(0, -0.5, 0).mult(speedAdjust));
+      legs.get(1).move(yUnit.copy().mult(-speed*speedAdjust));
+      legs.get(3).move(yUnit.copy().mult(-speed*speedAdjust));
       legs.get(1).four.sub(zUnit);
       legs.get(3).four.add(zUnit);
     }
-    xUnit.div(speedAdjust/4);
-    zUnit.div(speedAdjust/4);
-    if (movementTimer >= 60) {
+    xUnit.div(speedAdjust/2*speed);
+    zUnit.div(speedAdjust/2*speed);
+    if (movementTimer >= 30/speed) {
       movementTimer = 0;
       movementStage = 1 - movementStage;
     }
