@@ -103,7 +103,11 @@ public class Camera {
       rotateAxisOnX(zUnit, yRotate);
       xAng += yRotate;
       eAng+= yRotate;
-    }
+      
+    
+      
+      }
+    
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
     mouse.x += mouseX-mouseOld.x;
@@ -139,6 +143,11 @@ public class Camera {
         obj.setCenter(place);
         obj.rotateOnX(xAng);
       }
+    } else {
+     for (Enemy e : ENEMIES) {
+        e.goal.x -= dir.x;
+        e.goal.y -= dir.y;
+     }
     }
 
     //if (c.getLoc().y == 0) {

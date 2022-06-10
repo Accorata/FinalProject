@@ -78,7 +78,8 @@ void draw() {
   speedAdjust = 60/frameRate;
   for (Enemy e : ENEMIES) {
   //  if (e.inSight()) {
-    e.moveTowards(place);
+    //e.moveTowards(new PVector(0, 0, 100));
+    e.mv();
   //  } else {
   //    e.wander();
   //  }

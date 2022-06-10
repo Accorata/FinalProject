@@ -9,7 +9,7 @@ public class Enemy extends Sphere {
   private PVector dir;
   private PVector rotation;
   private double wanderTimer;
-  public PVector goal;
+  public PVector goal = new PVector(0, 0, -1 * fromScreen);
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
   }
