@@ -9,14 +9,16 @@ public class Enemy extends Sphere {
   private PVector dir;
   private PVector rotation;
   private double wanderTimer;
-
+  PVector goal;
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
   }
   public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
     this.loc = loc_;
+    this.goal = rand();
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
+    
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
     super.setObj(points, shape);
     this.NAME = name_;
@@ -33,21 +35,22 @@ public class Enemy extends Sphere {
     this.dir = dir_;
     this.rotation = new PVector(0, 0, 0);
     this.wanderTimer = Math.random()*120;
+    super.addPoint(goal);
   }
-  void turn(float degrees) {
-    float ang = radians(degrees);
-    vAng += ang;
-    super.setCenter(new PVector(0, 0, -1 * fromScreen));
-    super.rotateOnY(-eAng);
-    super.rotateOnX(-xAng);
-    super.setCenter();
-    super.translate(new PVector(0, 0, super.getCenter()));
-    super.setCenter();
-    super.rotateOnY(degrees);
-    super.setCenter(new PVector(0, 0, -1 * fromScreen));
-    super.rotateOnX(xAng);
-    super.rotateOnY(eAng);
+  PVector rand() {
+    return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
   }
+   void animate() {
+     PVector cen = super.getCenter();
+     if (inSight()) {
+       moveTowards(new PVector(0, 0, -fromScreen));
+     } else if (aprox(cen.x, goal.x) && aprox(cen.z, goal.z) && aprox(cen.y, goal.y)) {
+       goal = rand();
+     }else {
+       moveTowards(goal);
+     }
+     
+   }
   //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
   //  ArrayList<PVector> p = new ArrayList<PVector>();
   //  p.add(pos);

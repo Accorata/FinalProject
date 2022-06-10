@@ -77,9 +77,10 @@ void draw() {
   recalcInverses();
   speedAdjust = 60/frameRate;
   for (Enemy e : ENEMIES) {
+    e.animate();
   //  if (e.inSight()) {
     //e.moveTowards(new PVector(0, 0, 100));
-    e.turn(10);
+    //e.turn(10);
   //  } else {
   //    e.wander();
   //  }
