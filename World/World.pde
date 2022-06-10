@@ -79,7 +79,7 @@ void draw() {
   for (Enemy e : ENEMIES) {
   //  if (e.inSight()) {
     //e.moveTowards(new PVector(0, 0, 100));
-    e.mv();
+    e.turn(10);
   //  } else {
   //    e.wander();
   //  }

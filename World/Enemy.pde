@@ -9,7 +9,7 @@ public class Enemy extends Sphere {
   private PVector dir;
   private PVector rotation;
   private double wanderTimer;
-  public PVector goal = new PVector(0, 0, -1 * fromScreen);
+
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
   }
@@ -34,14 +34,19 @@ public class Enemy extends Sphere {
     this.rotation = new PVector(0, 0, 0);
     this.wanderTimer = Math.random()*120;
   }
-  void mv() {
-    PVector ct = super.getCenter();
-    if (aprox(ct.x, goal.x) && aprox(ct.z, goal.z)) {
-      goal = new PVector((float)Math.random() * len - len, 0, (float)Math.random() * wid - wid);      
-    } else {
-      moveTowards(goal);
-    }
-    
+  void turn(float degrees) {
+    float ang = radians(degrees);
+    vAng += ang;
+    super.setCenter(new PVector(0, 0, -1 * fromScreen));
+    super.rotateOnY(-eAng);
+    super.rotateOnX(-xAng);
+    super.setCenter();
+    super.translate(new PVector(0, 0, super.getCenter()));
+    super.setCenter();
+    super.rotateOnY(degrees);
+    super.setCenter(new PVector(0, 0, -1 * fromScreen));
+    super.rotateOnX(xAng);
+    super.rotateOnY(eAng);
   }
   //private ArrayList<PVector> calcPoints(PVector pos, PVector size) {
   //  ArrayList<PVector> p = new ArrayList<PVector>();

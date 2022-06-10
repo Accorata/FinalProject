@@ -143,12 +143,7 @@ public class Camera {
         obj.setCenter(place);
         obj.rotateOnX(xAng);
       }
-    } else {
-     for (Enemy e : ENEMIES) {
-        e.goal.x -= dir.x;
-        e.goal.y -= dir.y;
-     }
-    }
+    } 
 
     //if (c.getLoc().y == 0) {
     //  dir.y = 0;
