@@ -66,9 +66,11 @@ public class Enemy extends Sphere {
     }
     loc.y -= 50;
     legs.get(1).move(new PVector(0, -30, 0));
-    legs.get(3).move(new PVector(0, -30, 0));
-    legs.get(1).four.sub(new PVector(0,0,15));
-    legs.get(3).four.add(new PVector(0,0,15));
+    //legs.get(3).move(new PVector(0, -30, 0));
+    //PVector center = super.getCenter();
+    legs.get(1).moveToCenter(loc, 30);//sub(new PVector(0,0,15));
+    //legs.get(3).moveToCenter(center, 30);
+    //legs.get(3).four.add(new PVector(0,0,15));
     return legs;
   }
   ArrayList<Triangle> renderShape() {
@@ -194,21 +196,21 @@ public class Enemy extends Sphere {
     if (movementStage == 0) {
       legs.get(0).move(yUnit.copy().mult(-speed*speedAdjust));
       legs.get(2).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(0).moveToCenter(center);
-      legs.get(2).moveToCenter(center);
+      legs.get(0).moveToCenter(center, 3);
+      legs.get(2).moveToCenter(center, 3);
       legs.get(1).move(yUnit.copy().mult(speed*speedAdjust));
       legs.get(3).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(0).moveFromCenter(center);
-      legs.get(2).moveFromCenter(center);
+      legs.get(1).moveFromCenter(center, 3);
+      legs.get(3).moveFromCenter(center, 3);
     } else {
       legs.get(0).move(yUnit.copy().mult(speed*speedAdjust));
       legs.get(2).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(0).moveFromCenter(center);
-      legs.get(2).moveFromCenter(center);
+      legs.get(0).moveFromCenter(center, 3);
+      legs.get(2).moveFromCenter(center, 3);
       legs.get(1).move(yUnit.copy().mult(-speed*speedAdjust));
       legs.get(3).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(1).moveToCenter(center);
-      legs.get(3).moveToCenter(center);
+      legs.get(1).moveToCenter(center, 3);
+      legs.get(3).moveToCenter(center, 3);
     }
     xUnit.div(speedAdjust/2*speed);
     zUnit.div(speedAdjust/2*speed);

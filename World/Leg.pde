@@ -17,12 +17,14 @@ public class Leg {
     three.add(dir);
     four.add(dir);
   }
-  public void moveToCenter (PVector target) {
+  public void moveToCenter (PVector target, float mag) {
     PVector dir = new PVector(four.x-target.x, 0, four.z-target.z);
-    four.add(dir.setMag(1));
+    three.add(dir.setMag(mag/5));
+    four.add(dir.setMag(mag));
   }
-  public void moveFromCenter (PVector target) {
+  public void moveFromCenter (PVector target, float mag) {
     PVector dir = new PVector(four.x-target.x, 0, four.z-target.z);
-    four.sub(dir.setMag(1));
+    three.sub(dir.setMag(mag/5));
+    four.sub(dir.setMag(mag));
   }
 }
