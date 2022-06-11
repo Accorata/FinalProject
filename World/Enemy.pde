@@ -186,11 +186,10 @@ public class Enemy extends Sphere {
       //rotate(new PVector(0, -vAng, 0));
       targetYRot = random(360);
     }
-    float theta = 1;
-    theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
-    //if (targetYRot - vAng > 180) {
-    //  theta *= -1;
-    //}
+    float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
+    if (targetYRot - vAng > 180) {
+      theta *= -1;
+    }
     if (abs(vAng - targetYRot) <= 1) {
       theta *= abs(vAng - targetYRot);
     }
