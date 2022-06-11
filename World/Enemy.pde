@@ -187,6 +187,9 @@ public class Enemy extends Sphere {
     }
     move();
   }
+  void setDir(float theta) {
+    targetYRot = theta;
+  }
   void move() {
     if (vAng != targetYRot) {
       float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
