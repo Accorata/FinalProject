@@ -21,8 +21,8 @@ public class Enemy extends Sphere {
     super();
     this.loc = loc_;
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
-    ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(102, 0, 0));
-    legs = addLegs(loc, points, shape, color(102, 0, 0));
+    ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
+    legs = addLegs(loc, points, shape, color(72, 0, 0));
     super.setObj(points, shape, points.get(0), points.get(points.size()-21));
     this.NAME = name_;
     this.HEALTH = 100;
@@ -64,7 +64,7 @@ public class Enemy extends Sphere {
       legs.add(new Leg(one, two, three, four));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-3), clr));
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-2), points.get(points.size()-4), clr));
-      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), clr));
+      shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), color(62, 0, 0)));
     }
     loc.y -= 50;
     legs.get(1).move(new PVector(0, -30, 0));
