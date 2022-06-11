@@ -14,6 +14,7 @@ public class Enemy extends Sphere {
   private int movementStage = 0;
   private int movementTimer = 16;
   private float targetYRot = 0;
+  PVector goal;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -21,6 +22,7 @@ public class Enemy extends Sphere {
   public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
     this.loc = loc_;
+    this.goal = rand();
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
     shape.get(177).updateColor(color(145, 255, 255));
@@ -41,8 +43,11 @@ public class Enemy extends Sphere {
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.wanderTimer = Math.random()*120;
+    super.addPoint(goal);
   }
-
+  PVector rand() {
+    return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
+  }
   private ArrayList<Leg> addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
     ArrayList<Leg> legs = new ArrayList<Leg>();
     loc.y += 50;
@@ -76,6 +81,17 @@ public class Enemy extends Sphere {
     //legs.get(3).moveToCenter(loc, 15*constrict);
     return legs;
   }
+   void animate() {
+     PVector cen = super.getCenter();
+     if (inSight()) {
+       moveTowards(new PVector(0, 0, -fromScreen));
+     } else if (aprox(cen.x, goal.x) && aprox(cen.z, goal.z) && aprox(cen.y, goal.y)) {
+       goal = rand();
+     }else {
+       moveTowards(goal);
+     }
+     
+   }
   ArrayList<Triangle> renderShape() {
     ArrayList<Triangle> shape = new ArrayList<Triangle>();
     PVector loc = getCenter();
