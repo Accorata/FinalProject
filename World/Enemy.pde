@@ -281,6 +281,6 @@ public class Enemy extends Sphere {
     rotation.add(deg);
     //deg.div(speedAdjust);
     //dir.set(0, 0, 0);
-    dir.set(2*cos(rotation.y), 0, 2*sin(rotation.y));
+    dir.set(2*cos(radians(rotation.y)), 0, 2*sin(radians(rotation.y)));
   }
 }
