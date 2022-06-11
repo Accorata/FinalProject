@@ -13,6 +13,7 @@ public class Enemy extends Sphere {
   private ArrayList<Leg> legs;
   private int movementStage = 0;
   private int movementTimer = 0;
+  private PVector rotation = new PVector(0, 0, 0);
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -191,6 +192,8 @@ public class Enemy extends Sphere {
     //float sa = speedAdjust;
     //speedAdjust = 2;
     float speed = 1.5*2;//speedAdjust;
+    float theta = rotation.y;
+    dir = new PVector(2*cos(theta), 0, 2*sin(theta));
     dir.mult(speedAdjust);
     PVector center = super.getCenter();
     if (movementStage == 0) {
@@ -217,6 +220,7 @@ public class Enemy extends Sphere {
       movementStage = 1 - movementStage;
     }
     movementTimer+=1*speed;
+    //rotate(new PVector(0, -1, 0));
     PVector move = new PVector(0, 0, 0);
     if (dir.x != 0) {
       move.add(xUnit.mult(dir.x));
@@ -245,5 +249,12 @@ public class Enemy extends Sphere {
   }
   String getName() {
     return this.NAME;
+  }
+  @Override
+    void rotate(PVector degrees) {
+      super.rotate(rotation.mult(-1));
+      super.rotate(degrees);
+      rotation = degrees;
+      println(rotation);
   }
 }
