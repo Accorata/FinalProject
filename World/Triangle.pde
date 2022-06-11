@@ -29,6 +29,9 @@ public class Triangle implements Comparable<Triangle> {
   PVector[] getPoints() {
     return points;
   }
+  void updateColor(color clr_) {
+    this.clr = clr_;
+  }
   void update_close() {
     this.center = calcCenter();
     this.close = dist(center, place);
