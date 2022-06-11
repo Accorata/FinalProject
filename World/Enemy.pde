@@ -26,8 +26,6 @@ public class Enemy extends Sphere {
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
     shape.get(177).updateColor(color(145, 255, 255));
     shape.get(176).updateColor(color(145, 255, 255));
-    //shape.get(165).updateColor(color(145, 255, 255));
-    //shape.get(164).updateColor(color(145, 255, 255));
     legs = addLegs(loc, points, shape, color(72, 0, 0));
     super.setObj(points, shape, points.get(0), points.get(points.size()-21));
     this.NAME = name_;
@@ -205,7 +203,7 @@ public class Enemy extends Sphere {
       if (vAng < 0) {
         vAng += 360;
       }
-      println(targetYRot + "  " + theta + "  " + vAng);
+      //println(targetYRot + "  " + theta + "  " + vAng);
     }
     //float sa = speedAdjust;
     //speedAdjust = 2;
