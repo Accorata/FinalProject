@@ -1,4 +1,4 @@
-final float constrict = 1;
+//final float constrict = 1;
 
 public class Enemy extends Sphere {
   private String NAME;
@@ -180,14 +180,14 @@ public class Enemy extends Sphere {
       if (abs(vAng - targetYRot) <= speedAdjust) {
         theta = 0;
       }
-      //rotate(theta);
+      rotate(theta);
       if (vAng < 0) {
         vAng += 360;
       }
     }
-    float speed = 1.5*2;//speedAdjust;
+    float speed = 2*2;//speedAdjust;
     dir.mult(speedAdjust);
-    PVector center = super.getCenter();
+    //PVector center = super.getCenter();
     if (movementStage == 0) {
       legs.get(0).move(yUnit.copy().mult(-speed));
       legs.get(2).move(yUnit.copy().mult(-speed));
@@ -237,15 +237,15 @@ public class Enemy extends Sphere {
     }
     move.div(speedAdjust);
     if (movementStage == 0 || movementStage == 3) {
-      legs.get(1).move(move.copy().mult(1));
-      legs.get(3).move(move.copy().mult(1));
-      legs.get(0).move(move.copy().mult(-1));
-      legs.get(2).move(move.copy().mult(-1));
+      legs.get(1).move(move.copy().mult(speed));
+      legs.get(3).move(move.copy().mult(speed));
+      legs.get(0).move(move.copy().mult(-speed));
+      legs.get(2).move(move.copy().mult(-speed));
     } else {
-      legs.get(0).move(move.copy().mult(1));
-      legs.get(2).move(move.copy().mult(1));
-      legs.get(1).move(move.copy().mult(-1));
-      legs.get(3).move(move.copy().mult(-1));
+      legs.get(0).move(move.copy().mult(speed));
+      legs.get(2).move(move.copy().mult(speed));
+      legs.get(1).move(move.copy().mult(-speed));
+      legs.get(3).move(move.copy().mult(-speed));
     } 
     dir.div(speedAdjust);
   }
