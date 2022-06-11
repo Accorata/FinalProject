@@ -75,7 +75,7 @@ void setup() {
   addEnemy(e1);
   //addEnemy(e2);
   //addEnemy(e3);
-  frameRate(2);
+  //frameRate(2);
 }
 
 void draw() {

@@ -181,7 +181,7 @@ public class Enemy extends Sphere {
   }
   void wander() {
     wanderTimer += Math.random()*speedAdjust;
-    if (wanderTimer >= 240) {
+    if (wanderTimer >= 120) {
       wanderTimer = 0;
       //rotate(new PVector(0, -vAng, 0));
       targetYRot = random(360);
@@ -193,8 +193,8 @@ public class Enemy extends Sphere {
     if (abs(vAng - targetYRot) <= 1) {
       theta *= abs(vAng - targetYRot);
     }
-    if (abs(vAng + 360 - targetYRot) <= 1) {
-      theta *= abs(vAng + 360 - targetYRot);
+    if (abs(targetYRot - vAng - 360) <= 1) {
+      theta *= abs(targetYRot - vAng - 360);
     }
     vAng += theta;
     println(targetYRot + "  " + theta + "  " + vAng);
