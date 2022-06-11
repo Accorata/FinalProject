@@ -4,12 +4,13 @@ import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
 final PVector place = new PVector(0, 0, -1 * fromScreen);
+float speedAdjust = 1;
 double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
 int curG;
-Plane sc = new Plane(100, color(0), 2000, 2000);
+Plane sc = new Plane(100, color(0), 4000, 4000);
 float xAng = 0;
 Camera c;
 Light l;
@@ -22,12 +23,17 @@ ArrayList<Triangle> testTris = new ArrayList<Triangle>();
 UI ui;
 float eAng = 0;
 boolean aniEn = true;
-Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -20, 100), new PVector(-1, 0, -2));
-Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -20, -500));
-Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -20, -800));
+Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 0, -2));
+Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
+Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
-float speedAdjust = 1;
+public PVector xUnit = new PVector(1, 0, 0);
+public PVector yUnit = new PVector(0, 1, 0);
+public PVector zUnit = new PVector(0, 0, 1);
+public PVector xUnitInv = new PVector(1, 0, 0);
+public PVector yUnitInv = new PVector(0, 1, 0);
+public PVector zUnitInv = new PVector(0, 0, 1);
 
 void setup() {
   size(1000, 600);
@@ -49,38 +55,39 @@ void setup() {
   Rect one = new Rect(p, l, color(102, 0, 102), 1);
   Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
   Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-  //c.addObject(one);
-  //c.addObject(new Rect(p2, l, color(255, 0, 0)));
-  //c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
   c.addObject(one);
   c.addObject(two);
   c.addObject(three);
-  // c.addObject(four);
-  //objs.get(0).rotateX(30);
-  /*
-  for (Obj obj : objs) {
-   obj.translate(new PVector(0, 0, 200));
-   obj.rotateOnZ(45);
-   //obj.rotateOnY(135);
-   }*/
-  c.addObject(sphere);
+  //c.addObject(sphere);
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
   addEnemy(e1);
   addEnemy(e2);
   addEnemy(e3);
+  //for (int i = 0; i<12; i++) {
+  //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
+  //}
+  //for (int i = 0; i<12; i++) {
+  //  Enemy e = ENEMIES.get(i);
+  //  e.setDir(i*30);
+  //  //e.rotate(new PVector(0, i*30, 0));
+  //}
 }
 
 void draw() {
   recalcInverses();
+  //printMatrices();
   speedAdjust = 60/frameRate;
+  //if (frameCount < 200) {
   for (Enemy e : ENEMIES) {
-  //  if (e.inSight()) {
-    e.moveTowards(place);
-  //  } else {
-  //    e.wander();
-  //  }
+    //if (e.inSight()) {
+    //  e.moveTowards(place);
+    //} else {
+    e.wander();
+    //}
+    //e.move();
   }
+  //}
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
   //if (!e3.isDead()) {
   //  e2.moveTowards(e3.getCenter());
