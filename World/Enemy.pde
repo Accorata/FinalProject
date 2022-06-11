@@ -37,8 +37,8 @@ public class Enemy extends Sphere {
       t.ID = this.ID;
     }
     this.rotation = new PVector(0, 0, 0);
-    this.vAng = 45;
-    super.rotate(new PVector(0, vAng, 0));
+    this.vAng = 0;
+    //super.rotate(new PVector(0, vAng, 0));
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
@@ -277,9 +277,10 @@ public class Enemy extends Sphere {
   @Override
     void rotate(PVector deg) {
     super.rotate(deg);
-    deg.div(speedAdjust);
+    vAng += deg.y;
     rotation.add(deg);
-    dir.set(0, 0, 0);
-    //dir.set(2*cos(rotation.y), 0, 2*sin(rotation.y));
+    //deg.div(speedAdjust);
+    //dir.set(0, 0, 0);
+    dir.set(2*cos(rotation.y), 0, 2*sin(rotation.y));
   }
 }

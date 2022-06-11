@@ -64,11 +64,13 @@ void setup() {
   //addEnemy(e1);
   //addEnemy(e2);
   //addEnemy(e3);
-  for (int i = 0; i<10; i++) {
+  for (int i = 0; i<12; i++) {
     addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
   }
-  for (Enemy e : ENEMIES) {
-    e.wander();
+  for (int i = 0; i<12; i++) {
+    Enemy e = ENEMIES.get(i);
+    e.setDir(i*30);
+    e.rotate(new PVector(0, i*30, 0));
   }
 }
 
@@ -76,13 +78,16 @@ void draw() {
   recalcInverses();
   //printMatrices();
   speedAdjust = 60/frameRate;
-  //for (Enemy e : ENEMIES) {
-  ////  if (e.inSight()) {
-  //  //e.moveTowards(place);
-  ////  } else {
-  //    e.wander();
-  ////  }
-  //}
+  if (frameCount < 200) {
+    for (Enemy e : ENEMIES) {
+      ////  if (e.inSight()) {
+      //  //e.moveTowards(place);
+      ////  } else {
+      //    e.wander();
+      ////  }
+      e.move();
+    }
+  }
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
   //if (!e3.isDead()) {
   //  e2.moveTowards(e3.getCenter());
