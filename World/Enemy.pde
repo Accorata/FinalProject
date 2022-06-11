@@ -183,9 +183,11 @@ public class Enemy extends Sphere {
     wanderTimer += Math.random()*speedAdjust;
     if (wanderTimer >= 120) {
       wanderTimer = 0;
-      //rotate(new PVector(0, -vAng, 0));
       targetYRot = random(360);
     }
+    move();
+  }
+  void move() {
     if (vAng != targetYRot) {
       float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
       if (targetYRot - vAng > 180) {
@@ -201,10 +203,6 @@ public class Enemy extends Sphere {
       rotate(new PVector(0, theta, 0));
       println(targetYRot + "  " + theta + "  " + vAng);
     }
-    //dir.set(2*cos(vAng), 0, 2*sin(vAng));
-    move();
-  }
-  void move() {
     //float sa = speedAdjust;
     //speedAdjust = 2;
     float speed = 1.5*2;//speedAdjust;
@@ -236,7 +234,7 @@ public class Enemy extends Sphere {
       if (movementStage >= 4) {
         movementStage = 0;
       }
-      if (movementStage % 2 == 0) {
+      if (movementStage % 2 == 0){
         movementTimer = 0;
       } else {
         movementTimer = 20;

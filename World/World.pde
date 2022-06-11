@@ -56,26 +56,17 @@ void setup() {
   Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
   Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
   //c.addObject(one);
-  //c.addObject(new Rect(p2, l, color(255, 0, 0)));
-  //c.addObject(new Rect(new PVector(0, -200, 100), l, color(0, 255, 0)));
-  c.addObject(one);
-  c.addObject(two);
-  c.addObject(three);
-  // c.addObject(four);
-  //objs.get(0).rotateX(30);
-  /*
-  for (Obj obj : objs) {
-   obj.translate(new PVector(0, 0, 200));
-   obj.rotateOnZ(45);
-   //obj.rotateOnY(135);
-   }*/
-  c.addObject(sphere);
+  //c.addObject(two);
+  //c.addObject(three);
+  //c.addObject(sphere);
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
-  addEnemy(e1);
+  //addEnemy(e1);
   //addEnemy(e2);
   //addEnemy(e3);
-  //frameRate(2);
+  for (int i = 0; i<10; i++) {
+    addEnemy(new Enemy("THE BABA YAGA", new PVector(-600, -30, -500)));
+  }
 }
 
 void draw() {
