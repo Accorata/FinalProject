@@ -13,7 +13,7 @@ public class Enemy extends Sphere {
   private ArrayList<Leg> legs;
   private int movementStage = 0;
   private int movementTimer = 0;
-  private PVector rotation = new PVector(0, 0, 0);
+  private PVector rotation;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -35,12 +35,15 @@ public class Enemy extends Sphere {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
+    this.rotation = new PVector(0, 0, 0);
     this.vAng = 45;
-    rotate(new PVector(0, vAng, 0));
+    println(vAng);
+    rotate(new PVector(0, 0, 0));
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.wanderTimer = Math.random()*120;
+        
   }
 
   private ArrayList<Leg> addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
@@ -251,10 +254,11 @@ public class Enemy extends Sphere {
     return this.NAME;
   }
   @Override
-    void rotate(PVector degrees) {
-      super.rotate(rotation.mult(-1));
-      super.rotate(degrees);
-      rotation = degrees;
-      println(rotation);
+    void rotate(PVector deg) {
+    super.rotate(rotation.mult(-1));
+    super.rotate(deg);
+    this.rotation.set(deg.x, deg.y, deg.z);
+    println(deg.y);
+    println(rotation);
   }
 }
