@@ -12,7 +12,7 @@ public class Enemy extends Sphere {
   private double wanderTimer;
   private ArrayList<Leg> legs;
   private int movementStage = 0;
-  private int movementTimer = 0;
+  private int movementTimer = 16;
   private float targetYRot = 0;
 
   public Enemy(String name_, PVector loc_) {
@@ -70,10 +70,10 @@ public class Enemy extends Sphere {
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), color(62, 0, 0)));
     }
     loc.y -= 50;
-    legs.get(1).move(new PVector(0, -30, 0));
-    legs.get(3).move(new PVector(0, -30, 0));
-    legs.get(1).moveToCenter(loc, 30*constrict);
-    legs.get(3).moveToCenter(loc, 30*constrict);
+    legs.get(1).move(new PVector(0, -15, 0));
+    legs.get(3).move(new PVector(0, -15, 0));
+    //legs.get(1).moveToCenter(loc, 15*constrict);
+    //legs.get(3).moveToCenter(loc, 15*constrict);
     return legs;
   }
   ArrayList<Triangle> renderShape() {
@@ -171,6 +171,7 @@ public class Enemy extends Sphere {
     targetYRot = theta;
   }
   void move() {
+    dir.set(2,0,0);
     if (vAng != targetYRot) {
       float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
       if (targetYRot - vAng > 180) {
@@ -179,7 +180,7 @@ public class Enemy extends Sphere {
       if (abs(vAng - targetYRot) <= speedAdjust) {
         theta = 0;
       }
-      rotate(theta);
+      //rotate(theta);
       if (vAng < 0) {
         vAng += 360;
       }
@@ -190,21 +191,21 @@ public class Enemy extends Sphere {
     if (movementStage == 0) {
       legs.get(0).move(yUnit.copy().mult(-speed));
       legs.get(2).move(yUnit.copy().mult(-speed));
-      legs.get(0).moveToCenter(center, constrict*speed);
-      legs.get(2).moveToCenter(center, constrict*speed);
+      //legs.get(0).moveToCenter(center, constrict*speed);
+      //legs.get(2).moveToCenter(center, constrict*speed);
       legs.get(1).move(yUnit.copy().mult(speed));
       legs.get(3).move(yUnit.copy().mult(speed));
-      legs.get(1).moveFromCenter(center, constrict*speed);
-      legs.get(3).moveFromCenter(center, constrict*speed);
+      //legs.get(1).moveFromCenter(center, constrict*speed);
+      //legs.get(3).moveFromCenter(center, constrict*speed);
     } else if (movementStage == 2) {
       legs.get(0).move(yUnit.copy().mult(speed));
       legs.get(2).move(yUnit.copy().mult(speed));
-      legs.get(0).moveFromCenter(center, constrict*speed);
-      legs.get(2).moveFromCenter(center, constrict*speed);
+      //legs.get(0).moveFromCenter(center, constrict*speed);
+      //legs.get(2).moveFromCenter(center, constrict*speed);
       legs.get(1).move(yUnit.copy().mult(-speed));
       legs.get(3).move(yUnit.copy().mult(-speed));
-      legs.get(1).moveToCenter(center, constrict*speed);
-      legs.get(3).moveToCenter(center, constrict*speed);
+      //legs.get(1).moveToCenter(center, constrict*speed);
+      //legs.get(3).moveToCenter(center, constrict*speed);
     }
     if (movementTimer >= 30) {
       movementStage++;
@@ -214,7 +215,7 @@ public class Enemy extends Sphere {
       if (movementStage % 2 == 0) {
         movementTimer = 0;
       } else {
-        movementTimer = 20;
+        movementTimer = 21;
       }
     }
     movementTimer+=1*speed;
@@ -232,18 +233,28 @@ public class Enemy extends Sphere {
       zUnit.div(dir.z);
     }
     for (PVector p : getPoints()) {
-      //p.add(move);
+      p.add(move);
     }
+    move.div(speedAdjust);
     if (movementStage == 0) {
-      legs.get(1).move(move);
-      legs.get(3).move(move);
+      legs.get(1).move(move.copy().mult(1.6));
+      legs.get(3).move(move.copy().mult(1.6));
+      //legs.get(1).move(move);
+      //legs.get(3).move(move);
       legs.get(0).move(move.copy().mult(-1));
       legs.get(2).move(move.copy().mult(-1));
     } else if (movementStage == 2) {
-      legs.get(0).move(move);
-      legs.get(2).move(move);
+      legs.get(0).move(move.copy().mult(1.6));
+      legs.get(2).move(move.copy().mult(1.6));
+      //legs.get(0).move(move);
+      //legs.get(2).move(move);
       legs.get(1).move(move.copy().mult(-1));
       legs.get(3).move(move.copy().mult(-1));
+    } 
+    else {
+      for (Leg leg : legs) {
+        leg.move(move.copy().mult(-1));
+      }
     }
     dir.div(speedAdjust);
   }
