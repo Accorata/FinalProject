@@ -4,6 +4,7 @@ import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
 final PVector place = new PVector(0, 0, -1 * fromScreen);
+float speedAdjust = 1;
 double AIM = 0;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
@@ -27,7 +28,6 @@ Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Queue<Float[][]>> bullets;
 Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
-float speedAdjust = 1;
 public PVector xUnit = new PVector(1, 0, 0);
 public PVector yUnit = new PVector(0, 1, 0);
 public PVector zUnit = new PVector(0, 0, 1);

@@ -38,12 +38,12 @@ public class Enemy extends Sphere {
     this.rotation = new PVector(0, 0, 0);
     this.vAng = 45;
     println(vAng);
-    rotate(new PVector(0, 0, 0));
+    PVector a = new PVector(0, 45, 0);
+    rotate(a);
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.wanderTimer = Math.random()*120;
-        
   }
 
   private ArrayList<Leg> addLegs (PVector loc, ArrayList<PVector> points, ArrayList<Triangle> shape, color clr) {
@@ -255,8 +255,12 @@ public class Enemy extends Sphere {
   }
   @Override
     void rotate(PVector deg) {
+    println(deg.y);
     super.rotate(rotation.mult(-1));
+    println(deg.y);
     super.rotate(deg);
+    deg.div(speedAdjust);
+    println(deg.y);
     this.rotation.set(deg.x, deg.y, deg.z);
     println(deg.y);
     println(rotation);
