@@ -13,7 +13,7 @@ public class Enemy extends Sphere {
   private ArrayList<Leg> legs;
   private int movementStage = 0;
   private int movementTimer = 0;
-  private PVector rotation;
+  //private PVector rotation;
   private float targetYRot = 0;
 
   public Enemy(String name_, PVector loc_) {
@@ -36,7 +36,7 @@ public class Enemy extends Sphere {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
-    this.rotation = new PVector(0, 0, 0);
+    //this.rotation = new PVector(0, 0, 0);
     this.vAng = 0;
     super.rotate(new PVector(0, 45, 0));
     this.curGun = 0;
@@ -172,15 +172,18 @@ public class Enemy extends Sphere {
     //} else {
     //  dir.y = -2;
     //}
-    
+
     //if (target.z > pos.z) {
     //  dir.z = 2;
     //} else {
     //  dir.z = -2;
     //}
-    float theta = atan((pos.x-target.x)/(target.z-pos.z));
-    targetYRot = degrees(theta);
-    println(degrees(theta) + "  " + rotation.y);
+    float theta = degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    if (theta < 0) {
+      theta += 360;
+    }
+    targetYRot = theta;
+    println(theta + "  " + vAng);
     move();
   }
   void wander() {
@@ -281,10 +284,10 @@ public class Enemy extends Sphere {
     void rotate(PVector deg) {
     super.rotate(deg);
     vAng += deg.y;
-    rotation.add(deg);
-    dir.set(2*cos(radians(rotation.y)), 0, 2*sin(radians(rotation.y)));
+    //rotation.add(deg);
+    dir.set(2*cos(radians(vAng)), 0, 2*sin(radians(vAng)));
   }
-  
+
   void rotate(float deg) {
     rotate(new PVector(0, deg, 0));
   }
