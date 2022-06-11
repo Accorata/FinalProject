@@ -22,6 +22,8 @@ public class Enemy extends Sphere {
     this.loc = loc_;
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
+    shape.get(177).updateColor(color(145, 255, 255));
+    shape.get(176).updateColor(color(145, 255, 255));
     legs = addLegs(loc, points, shape, color(72, 0, 0));
     super.setObj(points, shape, points.get(0), points.get(points.size()-21));
     this.NAME = name_;
