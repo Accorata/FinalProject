@@ -198,14 +198,13 @@ public class Enemy extends Sphere {
       if (targetYRot - vAng > 180) {
         theta *= -1;
       }
-      if (abs(vAng - targetYRot) <= 1) {
-        theta *= abs(vAng - targetYRot);
+      if (abs(vAng - targetYRot) <= speedAdjust) {
+        theta = 0;
       }
-      vAng += theta;
+      rotate(new PVector(0, theta, 0));
       if (vAng < 0) {
         vAng += 360;
       }
-      rotate(new PVector(0, theta, 0));
       println(targetYRot + "  " + theta + "  " + vAng);
     }
     //float sa = speedAdjust;

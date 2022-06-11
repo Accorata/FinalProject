@@ -64,10 +64,10 @@ void setup() {
   //addEnemy(e1);
   //addEnemy(e2);
   //addEnemy(e3);
-  for (int i = 0; i<2; i++) {
+  for (int i = 0; i<12; i++) {
     addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
   }
-  for (int i = 0; i<2; i++) {
+  for (int i = 0; i<12; i++) {
     Enemy e = ENEMIES.get(i);
     e.setDir(i*30);
     //e.rotate(new PVector(0, i*30, 0));
