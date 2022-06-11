@@ -187,10 +187,10 @@ public class Enemy extends Sphere {
       targetYRot = random(360);
     }
     float theta = 1;
-    theta = 1;
-    if (targetYRot - vAng > 180) {
-      theta *= -1;
-    }
+    theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
+    //if (targetYRot - vAng > 180) {
+    //  theta *= -1;
+    //}
     if (abs(vAng - targetYRot) <= 1) {
       theta *= abs(vAng - targetYRot);
     }
