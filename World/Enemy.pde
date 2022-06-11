@@ -14,6 +14,7 @@ public class Enemy extends Sphere {
   private int movementStage = 0;
   private int movementTimer = 0;
   private PVector rotation;
+  private float targetYRot = 0;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -180,21 +181,33 @@ public class Enemy extends Sphere {
   }
   void wander() {
     wanderTimer += Math.random()*speedAdjust;
-    if (wanderTimer >= 120) {
+    if (wanderTimer >= 240) {
       wanderTimer = 0;
       //rotate(new PVector(0, -vAng, 0));
-      vAng = random(360);
-      //rotate(new PVector(0, vAng, 0));
-      dir.set(2*cos(vAng), 0, 2*sin(vAng));
+      targetYRot = random(360);
     }
+    float theta = 1;
+    theta = 1;
+    if (targetYRot - vAng > 180) {
+      theta *= -1;
+    }
+    if (abs(vAng - targetYRot) <= 1) {
+      theta *= abs(vAng - targetYRot);
+    }
+    if (abs(vAng + 360 - targetYRot) <= 1) {
+      theta *= abs(vAng + 360 - targetYRot);
+    }
+    vAng += theta;
+    println(targetYRot + "  " + theta + "  " + vAng);
+    //dir.set(2*cos(vAng), 0, 2*sin(vAng));
     move();
   }
   void move() {
     //float sa = speedAdjust;
     //speedAdjust = 2;
     float speed = 1.5*2;//speedAdjust;
-    float theta = rotation.y;
-    dir = new PVector(2*cos(theta), 0, 2*sin(theta));
+    //float theta = rotation.y;
+    //dir = new PVector(2*cos(theta), 0, 2*sin(theta));
     dir.mult(speedAdjust);
     PVector center = super.getCenter();
     if (movementStage == 0) {
@@ -253,9 +266,9 @@ public class Enemy extends Sphere {
   }
   @Override
     void rotate(PVector deg) {
-    super.rotate(rotation.mult(-1));
     super.rotate(deg);
     deg.div(speedAdjust);
-    this.rotation.set(deg.x, deg.y, deg.z);
+    rotation.add(deg);
+    dir.set(2*cos(rotation.y), 0, 2*sin(rotation.y));
   }
 }

@@ -73,8 +73,9 @@ void setup() {
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
   addEnemy(e1);
-  addEnemy(e2);
-  addEnemy(e3);
+  //addEnemy(e2);
+  //addEnemy(e3);
+  frameRate(2);
 }
 
 void draw() {
