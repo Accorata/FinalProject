@@ -198,6 +198,7 @@ public class Enemy extends Sphere {
       if (vAng < 0) {
         vAng += 360;
       }
+      rotate(new PVector(0, theta, 0));
       println(targetYRot + "  " + theta + "  " + vAng);
     }
     //dir.set(2*cos(vAng), 0, 2*sin(vAng));
@@ -220,7 +221,7 @@ public class Enemy extends Sphere {
       legs.get(3).move(yUnit.copy().mult(speed));
       legs.get(1).moveFromCenter(center, constrict*speed);
       legs.get(3).moveFromCenter(center, constrict*speed);
-    } else {
+    } else if (movementStage == 2) {
       legs.get(0).move(yUnit.copy().mult(speed));
       legs.get(2).move(yUnit.copy().mult(speed));
       legs.get(0).moveFromCenter(center, constrict*speed);
@@ -231,8 +232,15 @@ public class Enemy extends Sphere {
       legs.get(3).moveToCenter(center, constrict*speed);
     }
     if (movementTimer >= 30) {
-      movementTimer = 0;
-      movementStage = 1 - movementStage;
+      movementStage++;
+      if (movementStage >= 4) {
+        movementStage = 0;
+      }
+      if (movementStage % 2 == 0) {
+        movementTimer = 0;
+      } else {
+        movementTimer = 20;
+      }
     }
     movementTimer+=1*speed;
     //rotate(new PVector(0, -1, 0));
@@ -270,6 +278,7 @@ public class Enemy extends Sphere {
     super.rotate(deg);
     deg.div(speedAdjust);
     rotation.add(deg);
-    dir.set(2*cos(rotation.y), 0, 2*sin(rotation.y));
+    dir.set(0, 0, 0);
+    //dir.set(2*cos(rotation.y), 0, 2*sin(rotation.y));
   }
 }
