@@ -1,3 +1,5 @@
+final float constrict = 1;
+
 public class Enemy extends Sphere {
   private String NAME;
   private int HEALTH;
@@ -66,11 +68,9 @@ public class Enemy extends Sphere {
     }
     loc.y -= 50;
     legs.get(1).move(new PVector(0, -30, 0));
-    //legs.get(3).move(new PVector(0, -30, 0));
-    //PVector center = super.getCenter();
-    legs.get(1).moveToCenter(loc, 30);//sub(new PVector(0,0,15));
-    //legs.get(3).moveToCenter(center, 30);
-    //legs.get(3).four.add(new PVector(0,0,15));
+    legs.get(3).move(new PVector(0, -30, 0));
+    legs.get(1).moveToCenter(loc, 30*constrict);
+    legs.get(3).moveToCenter(loc, 30*constrict);
     return legs;
   }
   ArrayList<Triangle> renderShape() {
@@ -178,47 +178,47 @@ public class Enemy extends Sphere {
     wanderTimer += Math.random()*speedAdjust;
     if (wanderTimer >= 120) {
       wanderTimer = 0;
-      //rotate(new PVector(0, -vAng, 0));
+      rotate(new PVector(0, -vAng, 0));
       vAng = random(360);
-      //rotate(new PVector(0, vAng, 0));
+      rotate(new PVector(0, vAng, 0));
       dir.set(2*cos(vAng), 0, 2*sin(vAng));
     }
     move();
   }
   void move() {
-    float sa = speedAdjust;
-    speedAdjust = 2;
-    float speed = 1.5;
+    //float sa = speedAdjust;
+    //speedAdjust = 2;
+    float speed = 1.5*speedAdjust;
     dir.mult(speedAdjust);
-    xUnit.mult(speedAdjust/2*speed);
-    zUnit.mult(speedAdjust/2*speed);
+    //xUnit.mult(speed/2);
+    //zUnit.mult(speed/2);
     PVector center = super.getCenter();
     if (movementStage == 0) {
-      legs.get(0).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(2).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(0).moveToCenter(center, 3);
-      legs.get(2).moveToCenter(center, 3);
-      legs.get(1).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(3).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(1).moveFromCenter(center, 3);
-      legs.get(3).moveFromCenter(center, 3);
+      legs.get(0).move(yUnit.copy().mult(-speed));
+      legs.get(2).move(yUnit.copy().mult(-speed));
+      legs.get(0).moveToCenter(center, constrict*speed);
+      legs.get(2).moveToCenter(center, constrict*speed);
+      legs.get(1).move(yUnit.copy().mult(speed));
+      legs.get(3).move(yUnit.copy().mult(speed));
+      legs.get(1).moveFromCenter(center, constrict*speed);
+      legs.get(3).moveFromCenter(center, constrict*speed);
     } else {
-      legs.get(0).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(2).move(yUnit.copy().mult(speed*speedAdjust));
-      legs.get(0).moveFromCenter(center, 3);
-      legs.get(2).moveFromCenter(center, 3);
-      legs.get(1).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(3).move(yUnit.copy().mult(-speed*speedAdjust));
-      legs.get(1).moveToCenter(center, 3);
-      legs.get(3).moveToCenter(center, 3);
+      legs.get(0).move(yUnit.copy().mult(speed));
+      legs.get(2).move(yUnit.copy().mult(speed));
+      legs.get(0).moveFromCenter(center, constrict*speed);
+      legs.get(2).moveFromCenter(center, constrict*speed);
+      legs.get(1).move(yUnit.copy().mult(-speed));
+      legs.get(3).move(yUnit.copy().mult(-speed));
+      legs.get(1).moveToCenter(center, constrict*speed);
+      legs.get(3).moveToCenter(center, constrict*speed);
     }
-    xUnit.div(speedAdjust/2*speed);
-    zUnit.div(speedAdjust/2*speed);
-    if (movementTimer >= 30/speed) {
+    //xUnit.div(speed/2);
+    //zUnit.div(speed/2);
+    if (movementTimer >= 30) {
       movementTimer = 0;
       movementStage = 1 - movementStage;
     }
-    movementTimer+=1*speedAdjust;
+    movementTimer+=1*speed;
     PVector move = new PVector(0, 0, 0);
     if (dir.x != 0) {
       move.add(xUnit.mult(dir.x));
@@ -236,7 +236,7 @@ public class Enemy extends Sphere {
       //p.add(move);
     }
     dir.div(speedAdjust);
-    speedAdjust = sa;
+    //speedAdjust = sa;
   }
   boolean addGun(Gun g) {
     if (inventory.size() < 3) {
