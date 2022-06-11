@@ -162,21 +162,24 @@ public class Enemy extends Sphere {
     //  dir.x = -3*signX*sin(theta);
     //  dir.z = -3*signZ*cos(theta);
     //}
-    if (target.x > pos.x) {
-      dir.x = 2;
-    } else {
-      dir.x = -2;
-    }
+    //if (target.x > pos.x) {
+    //  dir.x = 2;
+    //} else {
+    //  dir.x = -2;
+    //}
     //if (target.y > pos.y) {
     //  dir.y = 2;
     //} else {
     //  dir.y = -2;
     //}
-    if (target.z > pos.z) {
-      dir.z = 2;
-    } else {
-      dir.z = -2;
-    }
+    
+    //if (target.z > pos.z) {
+    //  dir.z = 2;
+    //} else {
+    //  dir.z = -2;
+    //}
+    float theta = atan((target.x-pos.x)/(target.z-pos.z));
+    targetYRot = degrees(theta);
     move();
   }
   void wander() {

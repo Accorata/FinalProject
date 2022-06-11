@@ -81,9 +81,9 @@ void draw() {
   //if (frameCount < 200) {
   for (Enemy e : ENEMIES) {
     //if (e.inSight()) {
-    //  e.moveTowards(place);
+    e.moveTowards(place);
     //} else {
-    e.wander();
+    //e.wander();
     //}
     //e.move();
   }
