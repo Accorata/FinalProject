@@ -44,7 +44,7 @@ public class Enemy extends Sphere {
      PVector cen = super.getCenter();
      if (inSight()) {
        moveTowards(new PVector(0, 0, -fromScreen));
-     } else if (aprox(cen.x, goal.x) && aprox(cen.z, goal.z) && aprox(cen.y, goal.y)) {
+     } else if (aprox(cen.x, goal.x) && aprox(cen.z, goal.z)) {
        goal = rand();
      }else {
        moveTowards(goal);
