@@ -215,7 +215,7 @@ public class Enemy extends Sphere {
       if (movementStage % 2 == 0) {
         movementTimer = 0;
       } else {
-        movementTimer = 21;
+        movementTimer = 12;
       }
     }
     movementTimer+=1*speed;
@@ -236,26 +236,17 @@ public class Enemy extends Sphere {
       p.add(move);
     }
     move.div(speedAdjust);
-    if (movementStage == 0) {
-      legs.get(1).move(move.copy().mult(1.6));
-      legs.get(3).move(move.copy().mult(1.6));
-      //legs.get(1).move(move);
-      //legs.get(3).move(move);
+    if (movementStage == 0 || movementStage == 3) {
+      legs.get(1).move(move.copy().mult(1));
+      legs.get(3).move(move.copy().mult(1));
       legs.get(0).move(move.copy().mult(-1));
       legs.get(2).move(move.copy().mult(-1));
-    } else if (movementStage == 2) {
-      legs.get(0).move(move.copy().mult(1.6));
-      legs.get(2).move(move.copy().mult(1.6));
-      //legs.get(0).move(move);
-      //legs.get(2).move(move);
+    } else {
+      legs.get(0).move(move.copy().mult(1));
+      legs.get(2).move(move.copy().mult(1));
       legs.get(1).move(move.copy().mult(-1));
       legs.get(3).move(move.copy().mult(-1));
     } 
-    else {
-      for (Leg leg : legs) {
-        leg.move(move.copy().mult(-1));
-      }
-    }
     dir.div(speedAdjust);
   }
   boolean addGun(Gun g) {
