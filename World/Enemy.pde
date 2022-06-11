@@ -1,4 +1,4 @@
-final float constrict = 1;
+//final float constrict = 1;
 
 public class Enemy extends Sphere {
   private String NAME;
@@ -12,8 +12,7 @@ public class Enemy extends Sphere {
   private double wanderTimer;
   private ArrayList<Leg> legs;
   private int movementStage = 0;
-  private int movementTimer = 0;
-  private PVector rotation;
+  private int movementTimer = 16;
   private float targetYRot = 0;
 
   public Enemy(String name_, PVector loc_) {
@@ -36,7 +35,6 @@ public class Enemy extends Sphere {
     for (Triangle t : this.getTriangles()) {
       t.ID = this.ID;
     }
-    this.rotation = new PVector(0, 0, 0);
     this.vAng = 0;
     super.rotate(new PVector(0, 45, 0));
     this.curGun = 0;
@@ -72,10 +70,10 @@ public class Enemy extends Sphere {
       shape.add(new Triangle(points.get(points.size()-1), points.get(points.size()-3), points.get(points.size()-4), color(62, 0, 0)));
     }
     loc.y -= 50;
-    legs.get(1).move(new PVector(0, -30, 0));
-    legs.get(3).move(new PVector(0, -30, 0));
-    legs.get(1).moveToCenter(loc, 30*constrict);
-    legs.get(3).moveToCenter(loc, 30*constrict);
+    legs.get(1).move(new PVector(0, -15, 0));
+    legs.get(3).move(new PVector(0, -15, 0));
+    //legs.get(1).moveToCenter(loc, 15*constrict);
+    //legs.get(3).moveToCenter(loc, 15*constrict);
     return legs;
   }
   ArrayList<Triangle> renderShape() {
@@ -153,30 +151,12 @@ public class Enemy extends Sphere {
       zUnitInv.div(t.z);
     }
     PVector pos = getPos();
-    //if (pos.z == target.z) {
-    //  dir.set(1,0,0);
-    //} else {
-    //  float theta = atan((pos.x-target.x)/(pos.z-target.z));
-    //  float signX = 1;//(pos.x-target.x)/abs(pos.x-target.x);
-    //  float signZ = (pos.z-target.z)/abs(pos.z-target.z);
-    //  dir.x = -3*signX*sin(theta);
-    //  dir.z = -3*signZ*cos(theta);
-    //}
-    if (target.x > pos.x) {
-      dir.x = 2;
-    } else {
-      dir.x = -2;
+    float theta = degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    if (theta < 0) {
+      theta += 360;
     }
-    //if (target.y > pos.y) {
-    //  dir.y = 2;
-    //} else {
-    //  dir.y = -2;
-    //}
-    if (target.z > pos.z) {
-      dir.z = 2;
-    } else {
-      dir.z = -2;
-    }
+    targetYRot = theta;
+    //println(theta + "  " + vAng);
     move();
   }
   void wander() {
@@ -191,6 +171,7 @@ public class Enemy extends Sphere {
     targetYRot = theta;
   }
   void move() {
+    dir.set(2,0,0);
     if (vAng != targetYRot) {
       float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
       if (targetYRot - vAng > 180) {
@@ -199,37 +180,32 @@ public class Enemy extends Sphere {
       if (abs(vAng - targetYRot) <= speedAdjust) {
         theta = 0;
       }
-      rotate(new PVector(0, theta, 0));
+      rotate(theta);
       if (vAng < 0) {
         vAng += 360;
       }
-      //println(targetYRot + "  " + theta + "  " + vAng);
     }
-    //float sa = speedAdjust;
-    //speedAdjust = 2;
-    float speed = 1.5*2;//speedAdjust;
-    //float theta = rotation.y;
-    //dir = new PVector(2*cos(theta), 0, 2*sin(theta));
+    float speed = 2*2;//speedAdjust;
     dir.mult(speedAdjust);
-    PVector center = super.getCenter();
+    //PVector center = super.getCenter();
     if (movementStage == 0) {
       legs.get(0).move(yUnit.copy().mult(-speed));
       legs.get(2).move(yUnit.copy().mult(-speed));
-      legs.get(0).moveToCenter(center, constrict*speed);
-      legs.get(2).moveToCenter(center, constrict*speed);
+      //legs.get(0).moveToCenter(center, constrict*speed);
+      //legs.get(2).moveToCenter(center, constrict*speed);
       legs.get(1).move(yUnit.copy().mult(speed));
       legs.get(3).move(yUnit.copy().mult(speed));
-      legs.get(1).moveFromCenter(center, constrict*speed);
-      legs.get(3).moveFromCenter(center, constrict*speed);
+      //legs.get(1).moveFromCenter(center, constrict*speed);
+      //legs.get(3).moveFromCenter(center, constrict*speed);
     } else if (movementStage == 2) {
       legs.get(0).move(yUnit.copy().mult(speed));
       legs.get(2).move(yUnit.copy().mult(speed));
-      legs.get(0).moveFromCenter(center, constrict*speed);
-      legs.get(2).moveFromCenter(center, constrict*speed);
+      //legs.get(0).moveFromCenter(center, constrict*speed);
+      //legs.get(2).moveFromCenter(center, constrict*speed);
       legs.get(1).move(yUnit.copy().mult(-speed));
       legs.get(3).move(yUnit.copy().mult(-speed));
-      legs.get(1).moveToCenter(center, constrict*speed);
-      legs.get(3).moveToCenter(center, constrict*speed);
+      //legs.get(1).moveToCenter(center, constrict*speed);
+      //legs.get(3).moveToCenter(center, constrict*speed);
     }
     if (movementTimer >= 30) {
       movementStage++;
@@ -239,11 +215,10 @@ public class Enemy extends Sphere {
       if (movementStage % 2 == 0) {
         movementTimer = 0;
       } else {
-        movementTimer = 20;
+        movementTimer = 12;
       }
     }
     movementTimer+=1*speed;
-    //rotate(new PVector(0, -1, 0));
     PVector move = new PVector(0, 0, 0);
     if (dir.x != 0) {
       move.add(xUnit.mult(dir.x));
@@ -260,8 +235,19 @@ public class Enemy extends Sphere {
     for (PVector p : getPoints()) {
       p.add(move);
     }
+    move.div(speedAdjust);
+    if (movementStage == 0 || movementStage == 3) {
+      legs.get(1).move(move.copy().mult(speed));
+      legs.get(3).move(move.copy().mult(speed));
+      legs.get(0).move(move.copy().mult(-speed));
+      legs.get(2).move(move.copy().mult(-speed));
+    } else {
+      legs.get(0).move(move.copy().mult(speed));
+      legs.get(2).move(move.copy().mult(speed));
+      legs.get(1).move(move.copy().mult(-speed));
+      legs.get(3).move(move.copy().mult(-speed));
+    } 
     dir.div(speedAdjust);
-    //speedAdjust = sa;
   }
   boolean addGun(Gun g) {
     if (inventory.size() < 3) {
@@ -277,7 +263,10 @@ public class Enemy extends Sphere {
     void rotate(PVector deg) {
     super.rotate(deg);
     vAng += deg.y;
-    rotation.add(deg);
-    dir.set(2*cos(radians(rotation.y)), 0, 2*sin(radians(rotation.y)));
+    dir.set(2*cos(radians(vAng)), 0, 2*sin(radians(vAng)));
+  }
+
+  void rotate(float deg) {
+    rotate(new PVector(0, deg, 0));
   }
 }

@@ -61,8 +61,8 @@ void setup() {
   //c.addObject(sphere);
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
-  addEnemy(e1);
-  addEnemy(e2);
+  //addEnemy(e1);
+  //addEnemy(e2);
   addEnemy(e3);
   //for (int i = 0; i<12; i++) {
   //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
@@ -81,9 +81,9 @@ void draw() {
   //if (frameCount < 200) {
   for (Enemy e : ENEMIES) {
     //if (e.inSight()) {
-    //  e.moveTowards(place);
+    e.moveTowards(place);
     //} else {
-    e.wander();
+    //e.wander();
     //}
     //e.move();
   }
