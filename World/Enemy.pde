@@ -26,6 +26,8 @@ public class Enemy extends Sphere {
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
     shape.get(177).updateColor(color(145, 255, 255));
     shape.get(176).updateColor(color(145, 255, 255));
+    //shape.get(165).updateColor(color(145, 255, 255));
+    //shape.get(164).updateColor(color(145, 255, 255));
     legs = addLegs(loc, points, shape, color(72, 0, 0));
     super.setObj(points, shape, points.get(0), points.get(points.size()-21));
     this.NAME = name_;
@@ -38,7 +40,7 @@ public class Enemy extends Sphere {
     }
     this.rotation = new PVector(0, 0, 0);
     this.vAng = 0;
-    //super.rotate(new PVector(0, vAng, 0));
+    super.rotate(new PVector(0, 45, 0));
     this.curGun = 0;
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
@@ -237,7 +239,7 @@ public class Enemy extends Sphere {
       if (movementStage >= 4) {
         movementStage = 0;
       }
-      if (movementStage % 2 == 0){
+      if (movementStage % 2 == 0) {
         movementTimer = 0;
       } else {
         movementTimer = 20;
@@ -279,8 +281,6 @@ public class Enemy extends Sphere {
     super.rotate(deg);
     vAng += deg.y;
     rotation.add(deg);
-    //deg.div(speedAdjust);
-    //dir.set(0, 0, 0);
     dir.set(2*cos(radians(rotation.y)), 0, 2*sin(radians(rotation.y)));
   }
 }
