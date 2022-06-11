@@ -186,18 +186,20 @@ public class Enemy extends Sphere {
       //rotate(new PVector(0, -vAng, 0));
       targetYRot = random(360);
     }
-    float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
-    if (targetYRot - vAng > 180) {
-      theta *= -1;
+    if (vAng != targetYRot) {
+      float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
+      if (targetYRot - vAng > 180) {
+        theta *= -1;
+      }
+      if (abs(vAng - targetYRot) <= 1) {
+        theta *= abs(vAng - targetYRot);
+      }
+      vAng += theta;
+      if (vAng < 0) {
+        vAng += 360;
+      }
+      println(targetYRot + "  " + theta + "  " + vAng);
     }
-    if (abs(vAng - targetYRot) <= 1) {
-      theta *= abs(vAng - targetYRot);
-    }
-    if (abs(targetYRot - vAng - 360) <= 1) {
-      theta *= abs(targetYRot - vAng - 360);
-    }
-    vAng += theta;
-    println(targetYRot + "  " + theta + "  " + vAng);
     //dir.set(2*cos(vAng), 0, 2*sin(vAng));
     move();
   }
