@@ -178,8 +178,9 @@ public class Enemy extends Sphere {
     //} else {
     //  dir.z = -2;
     //}
-    float theta = atan((target.x-pos.x)/(target.z-pos.z));
+    float theta = atan((pos.x-target.x)/(target.z-pos.z));
     targetYRot = degrees(theta);
+    println(degrees(theta) + "  " + rotation.y);
     move();
   }
   void wander() {
@@ -202,7 +203,7 @@ public class Enemy extends Sphere {
       if (abs(vAng - targetYRot) <= speedAdjust) {
         theta = 0;
       }
-      rotate(new PVector(0, theta, 0));
+      rotate(theta);
       if (vAng < 0) {
         vAng += 360;
       }
@@ -282,5 +283,9 @@ public class Enemy extends Sphere {
     vAng += deg.y;
     rotation.add(deg);
     dir.set(2*cos(radians(rotation.y)), 0, 2*sin(radians(rotation.y)));
+  }
+  
+  void rotate(float deg) {
+    rotate(new PVector(0, deg, 0));
   }
 }
