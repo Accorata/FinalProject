@@ -55,39 +55,39 @@ void setup() {
   Rect one = new Rect(p, l, color(102, 0, 102), 1);
   Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
   Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-  //c.addObject(one);
-  //c.addObject(two);
-  //c.addObject(three);
+  c.addObject(one);
+  c.addObject(two);
+  c.addObject(three);
   //c.addObject(sphere);
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
-  //addEnemy(e1);
-  //addEnemy(e2);
-  //addEnemy(e3);
-  for (int i = 0; i<12; i++) {
-    addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
-  }
-  for (int i = 0; i<12; i++) {
-    Enemy e = ENEMIES.get(i);
-    e.setDir(i*30);
-    //e.rotate(new PVector(0, i*30, 0));
-  }
+  addEnemy(e1);
+  addEnemy(e2);
+  addEnemy(e3);
+  //for (int i = 0; i<12; i++) {
+  //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
+  //}
+  //for (int i = 0; i<12; i++) {
+  //  Enemy e = ENEMIES.get(i);
+  //  e.setDir(i*30);
+  //  //e.rotate(new PVector(0, i*30, 0));
+  //}
 }
 
 void draw() {
   recalcInverses();
   //printMatrices();
   speedAdjust = 60/frameRate;
-  if (frameCount < 200) {
-    for (Enemy e : ENEMIES) {
-      ////  if (e.inSight()) {
-      //  //e.moveTowards(place);
-      ////  } else {
-      //    e.wander();
-      ////  }
-      e.move();
-    }
+  //if (frameCount < 200) {
+  for (Enemy e : ENEMIES) {
+    //if (e.inSight()) {
+    //  e.moveTowards(place);
+    //} else {
+    e.wander();
+    //}
+    //e.move();
   }
+  //}
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
   //if (!e3.isDead()) {
   //  e2.moveTowards(e3.getCenter());
