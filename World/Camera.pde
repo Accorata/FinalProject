@@ -9,7 +9,7 @@ public class Camera {
   public Camera() {
     resetScreen();
     this.loc = new PVector(0, 0, 0);
-    this.dense = false;
+    this.dense = true;
   }
   PVector getLoc() {
     return loc;
