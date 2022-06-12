@@ -115,7 +115,7 @@ public class Enemy extends Sphere {
     if (eAng <= 0) {
       eAng += 360;
     }
-    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 3)) {
+    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 2)) {
       return checkBetween(place, getCenter()) == null;
     }
     return false;

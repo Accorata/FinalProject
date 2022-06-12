@@ -5,9 +5,9 @@ public class HitBox extends Obj {
     super.setDAvg(50);
     super.setID(5);
   }
-  
+
   @Override
-  PVector getCenter() {
+    PVector getCenter() {
     return place;
   }
 }
