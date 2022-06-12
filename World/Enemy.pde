@@ -121,38 +121,8 @@ public class Enemy extends Sphere {
     return false;
   }
   boolean blockInSight() {
-    PVector target = loc.copy();
-    if (dir.x != 0) {
-      target.add(xUnitInv.copy().mult(dir.x*1000));
-    }
-    if (dir.y != 0) {
-      target.add(yUnitInv.copy().mult(dir.y*1000));
-    }
-    if (dir.z != 0) {
-      target.add(zUnitInv.copy().mult(dir.z*1000));
-    }
-    PVector center = getCenter();
-    Triangle sight = checkBetween(target, center);
-    if (sight != null) {
-      if (dist(sight.getCenter(), center) < 200) {
-        return true;
-      }
-    }
-    rotateAxisOnX(target, 10);
-    sight = checkBetween(target, center);
-    if (sight != null) {
-      if (dist(sight.getCenter(), center) < 200) {
-        return true;
-      }
-    }
-    rotateAxisOnX(target, -20);
-    sight = checkBetween(target, center);
-    if (sight != null) {
-      if (dist(sight.getCenter(), center) < 200) {
-        return true;
-      }
-    }
-    return false;
+    Obj hit = super.breached();
+    return hit != null;
   }
   Triangle checkBetween(PVector one, PVector two) {
     float d = dist(one, two);

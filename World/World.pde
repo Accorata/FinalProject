@@ -96,22 +96,7 @@ void draw() {
   }
   for (Enemy e : ENEMIES) {
     e.animate();
-
-    //e.inventory.get(0).shoot(e);
-    //  if (e.inSight()) {
-
-    //e.moveTowards(new PVector(0, 0, 100));
-    //e.turn(10);
-    //  } else {
-    //    e.wander();
-    //  }
   }
-  //}
-  //e1.moveTowards(a);//.copy().add(c.getLoc()));
-  //if (!e3.isDead()) {
-  //  e2.moveTowards(e3.getCenter());
-  //}
-  //e1.rotate(a);
   PVector b = new PVector(1, 0, 0);
   //sphere.rotate(b);
   //l.sshine(c.Triangles);

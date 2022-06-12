@@ -126,6 +126,11 @@ public class Obj { //<>// //<>// //<>// //<>//
     setCenter();
     calcDAvg();
   }
+  void setObj (PVector point) {
+    this.points = new ArrayList<PVector>();
+    points.add(point);
+    this.foundationPoints = points;
+  }
   void setCenter(PVector v) {
     this.center = v;
   }
