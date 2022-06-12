@@ -43,7 +43,7 @@ public class Enemy extends Sphere {
     this.dir = dir_;
     this.wanderTimer = Math.random()*120;
   }
-  
+
   PVector getTarget() {
     return dir;
   }
@@ -199,12 +199,6 @@ public class Enemy extends Sphere {
         vAng += 360;
       }
     }
-    if (blockInSight()) {
-      wanderTimer = 0;
-      targetYRot = random(360);
-      println("sdfghjkljhgfdsdfghjkljhgfd");
-      dir.set(0, 0, 0);
-    }
     float speed = 2*2;//speedAdjust;
     dir.mult(speedAdjust);
     //PVector center = super.getCenter();
@@ -255,7 +249,18 @@ public class Enemy extends Sphere {
     for (PVector p : getPoints()) {
       p.add(move);
     }
-    loc.add(move);
+    super.setCenter();
+    if (blockInSight()) {
+      wanderTimer = 0;
+      targetYRot = random(360);
+      for (PVector p : getPoints()) {
+        p.sub(move);
+      }
+      //println("sdfghjkljhgfdsdfghjkljhgfd");
+      //dir.set(0, 0, 0);
+    } else {
+      loc.add(move);
+    }
     move.div(speedAdjust);
     if (movementStage == 0 || movementStage == 3) {
       legs.get(1).move(move.copy().mult(speed));
