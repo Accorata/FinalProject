@@ -8,7 +8,11 @@
 5/30 Henry - Created code that makes objects built out a lot of smaller triangles.
 5/30 + 6/1 Henry - Fixed some bugs and reworked some functions.
 6/2 Henry - Built the sphere, pyramid, and triangular prism classes.
-6/6 Henry - Created code that allows objects to be moved.
+6/6 Henry - Created basis vectors that would be used for object movement and created a system that reduced the points used to calculate the centers of objects to reduce lag.
+6/7 Henry - Created inverse basis vectors to allow objects to be translated into more usable coordinates, fixed a large bug that contributed, turned enemies into ellipses, and started enemy movement AI.
+6/8 Henry - Created the legs for the enemy and expanded the lag reducing idea into enemy ellipses and spheres in general.
+6/10 Henry - Enemies legs now move as they would in real life, the enemy has a better color design and an eye that shows where it heads, they walk in the direction they face, and they track you (although this sometimes bugs).
+
 
 THE SAME NEW WORLD:
 

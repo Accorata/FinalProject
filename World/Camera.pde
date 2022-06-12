@@ -102,12 +102,8 @@ public class Camera {
       rotateAxisOnX(yUnit, yRotate);
       rotateAxisOnX(zUnit, yRotate);
       xAng += yRotate;
-      eAng+= yRotate;
-      
-    
-      
-      }
-    
+      eAng += yRotate;
+    }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
     mouse.x += mouseX-mouseOld.x;
@@ -117,11 +113,11 @@ public class Camera {
   }
   void updatePos(PVector dir) {
     //println(dir.y);
-    
+
     //dir.mult(speedAdjust);
     loc.add(dir);
-   
-    
+
+
     boolean breached = false;
     for (Obj obj : objs) {
       obj.setCenter(place);
@@ -140,7 +136,7 @@ public class Camera {
         obj.rotateOnX(xAng);
       }
     } 
- if (jump) {
+    if (jump) {
       dir.y -= .2;
       if (dir.y <= -5) {
         jump = false;
@@ -150,8 +146,8 @@ public class Camera {
     //if (c.getLoc().y == 0) {
     //  dir.y = 0;
     //}
-     //else 
-     if (!jump) dir.y = 0;
+    //else 
+    if (!jump) dir.y = 0;
     //dir.div(speedAdjust);
   }
 }

@@ -20,7 +20,7 @@ void rotateAxisOnY(PVector axis, float deg) {
   }
 }
 PVector getTarget() {
-  
+
   return zUnitInv.copy();
 }
 void rotateAxisOnZ(PVector axis, float deg) {
@@ -144,10 +144,8 @@ boolean aprox(double a, double b) {
   return (b >= a - err && b <= a + err);
 }
 
-boolean aprox2(double a, double b) {
-  double view = 2;
+boolean aprox2(double a, double b, double view) {
   if (((a >= 6.28-view && a<= 6.28+view) || (a >= -view && a <= view)) && ((b >= 6.28-view && b<= 6.28+view) || (b >= -view && b <= view))) return true;
-
   return (b >= a - view && b <= a + view);
 }
 

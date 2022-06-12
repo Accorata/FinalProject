@@ -46,8 +46,8 @@ public class Enemy extends Sphere {
     super.addPoint(goal);
   }
   PVector getTarget() {
-    
-     return dir; 
+
+    return dir;
   }
   PVector rand() {
     return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
@@ -85,27 +85,12 @@ public class Enemy extends Sphere {
     //legs.get(3).moveToCenter(loc, 15*constrict);
     return legs;
   }
-   void animate() {
-     PVector cen = super.getCenter();
-     if (inSight()) {
-       moveTowards(new PVector(0, 0, -fromScreen));
-     } else if (aprox(cen.x, goal.x) && aprox(cen.z, goal.z)) {
-       goal = rand();
-     }else {
-       moveTowards(goal);
-     }
-     
-   }
-  ArrayList<Triangle> renderShape() {
-    ArrayList<Triangle> shape = new ArrayList<Triangle>();
-    PVector loc = getCenter();
-    PVector p1 = new PVector(loc.x-50, loc.y-50, loc.z);
-    PVector p2 = new PVector(loc.x+50, loc.y-50, loc.z);
-    PVector p3 = new PVector(loc.x-50, loc.y+200, loc.z);
-    PVector p4 = new PVector(loc.x+50, loc.y+200, loc.z);
-    shape.add(new Triangle(p1, p2, p3));
-    shape.add(new Triangle(p4, p2, p3));
-    return shape;
+  void animate() {
+    println(inSight());
+    if (inSight()) {
+      moveTowards(place);
+    } 
+    wander();
   }
   int getHealth() {
     return HEALTH;
@@ -122,16 +107,52 @@ public class Enemy extends Sphere {
   boolean inSight() {
     float ang = 0;
     super.setCenter();
-    //println(getCenter());
     if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
-    //println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
-    if (aprox2(vAng, (ang% TWO_PI)+(radians(eAng)%TWO_PI))) {
-      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));
+    if (eAng <= 0) {
+      eAng += 360;
+    }
+    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 3)) {
+      return checkBetween(place, getCenter()) == null;
     }
     return false;
   }
-  boolean checkBetween(float d) {
+  boolean blockInSight() {
+    PVector target = loc.copy();
+    if (dir.x != 0) {
+      target.add(xUnitInv.copy().mult(dir.x*1000));
+    }
+    if (dir.y != 0) {
+      target.add(yUnitInv.copy().mult(dir.y*1000));
+    }
+    if (dir.z != 0) {
+      target.add(zUnitInv.copy().mult(dir.z*1000));
+    }
+    PVector center = getCenter();
+    Triangle sight = checkBetween(target, center);
+    if (sight != null) {
+      if (dist(sight.getCenter(), center) < 200) {
+        return true;
+      }
+    }
+    rotateAxisOnX(target, 10);
+    sight = checkBetween(target, center);
+    if (sight != null) {
+      if (dist(sight.getCenter(), center) < 200) {
+        return true;
+      }
+    }
+    rotateAxisOnX(target, -20);
+    sight = checkBetween(target, center);
+    if (sight != null) {
+      if (dist(sight.getCenter(), center) < 200) {
+        return true;
+      }
+    }
+    return false;
+  }
+  Triangle checkBetween(PVector one, PVector two) {
+    float d = dist(one, two);
     for (Triangle t : c.Triangles) {
       t.update_close(loc);
     }
@@ -141,20 +162,16 @@ public class Enemy extends Sphere {
       PVector t1 = t.points[0];
       PVector t2 = t.points[1];
       PVector t3 = t.points[2];
-      /*
-      PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
-       PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
-       PVector crV = v1.cross(v2);
-       float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
-       */
-      boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
-      boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
-      boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
-
+      boolean wx = (t1.x >= one.x || t2.x >= one.x || t3.x >= one.x) && 
+        (t1.x <= one.x || t2.x <= one.x || t3.x <= one.x);
+      boolean wy = (t1.y >= one.y || t2.y >= one.y || t3.y >= one.y) && 
+        (t1.y <= one.y || t2.y <= one.y || t3.y <= one.y);
+      boolean wz = (t1.z >= one.z || t2.z >= one.z || t3.z >= one.z) && 
+        (t1.z <= one.z || t2.z <= one.z || t3.z <= one.z);
       boolean within = wx && wy && wz;
-      if (within) return false;
+      if (within) return t;
     }
-    return true;
+    return null;
   }
   void moveTowards(PVector t) {
     PVector target = new PVector(0, 0, 0);
@@ -171,17 +188,21 @@ public class Enemy extends Sphere {
       zUnitInv.div(t.z);
     }
     PVector pos = getPos();
-    float theta = degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    float theta = 0;
+    if (pos.x < target.x) {
+      theta = degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    } else { 
+      theta = 180 + degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    }
     if (theta < 0) {
       theta += 360;
     }
     targetYRot = theta;
-    //println(theta + "  " + vAng);
     move();
   }
   void wander() {
     wanderTimer += Math.random()*speedAdjust;
-    if (wanderTimer >= 120) {
+    if (wanderTimer >= 360) {
       wanderTimer = 0;
       targetYRot = random(360);
     }
@@ -191,7 +212,7 @@ public class Enemy extends Sphere {
     targetYRot = theta;
   }
   void move() {
-    dir.set(2,0,0);
+    dir.set(2, 0, 0);
     if (vAng != targetYRot) {
       float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
       if (targetYRot - vAng > 180) {
@@ -204,6 +225,12 @@ public class Enemy extends Sphere {
       if (vAng < 0) {
         vAng += 360;
       }
+    }
+    if (blockInSight()) {
+      wanderTimer = 0;
+      targetYRot = random(360);
+      println("sdfghjkljhgfdsdfghjkljhgfd");
+      dir.set(0, 0, 0);
     }
     float speed = 2*2;//speedAdjust;
     dir.mult(speedAdjust);
@@ -255,6 +282,7 @@ public class Enemy extends Sphere {
     for (PVector p : getPoints()) {
       p.add(move);
     }
+    loc.add(move);
     move.div(speedAdjust);
     if (movementStage == 0 || movementStage == 3) {
       legs.get(1).move(move.copy().mult(speed));
