@@ -82,6 +82,7 @@ public class Enemy extends Sphere {
     return legs;
   }
   void animate() {
+    println(inSight());
     if (inSight()) {
       moveTowards(new PVector(0, 0, -fromScreen));
     } 
@@ -115,6 +116,9 @@ public class Enemy extends Sphere {
     super.setCenter();
     if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
+    if (eAng <= 0) {
+      eAng += 360;
+    }
     if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 3)) {
       return checkBetween(place, getCenter()) == null;
     }
@@ -123,17 +127,34 @@ public class Enemy extends Sphere {
   boolean blockInSight() {
     PVector target = loc.copy();
     if (dir.x != 0) {
-      target.add(xUnitInv.copy().mult(dir.x));
+      target.add(xUnitInv.copy().mult(dir.x*1000));
     }
     if (dir.y != 0) {
-      target.add(yUnitInv.copy().mult(dir.y));
+      target.add(yUnitInv.copy().mult(dir.y*1000));
     }
     if (dir.z != 0) {
-      target.add(zUnitInv.copy().mult(dir.z));
+      target.add(zUnitInv.copy().mult(dir.z*1000));
     }
-    Triangle sight = checkBetween(target, getCenter());
+    PVector center = getCenter();
+    Triangle sight = checkBetween(target, center);
     if (sight != null) {
-      
+      if (dist(sight.getCenter(), center) < 200) {
+        return true;
+      }
+    }
+    rotateAxisOnX(target, 10);
+    sight = checkBetween(target, center);
+    if (sight != null) {
+      if (dist(sight.getCenter(), center) < 200) {
+        return true;
+      }
+    }
+    rotateAxisOnX(target, -20);
+    sight = checkBetween(target, center);
+    if (sight != null) {
+      if (dist(sight.getCenter(), center) < 200) {
+        return true;
+      }
     }
     return false;
   }
@@ -174,12 +195,16 @@ public class Enemy extends Sphere {
       zUnitInv.div(t.z);
     }
     PVector pos = getPos();
-    float theta = degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    float theta = 0;
+    if (pos.x < target.x) {
+      theta = degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    } else { 
+      theta = 180 + degrees(atan((target.z-pos.z)/(target.x-pos.x)));
+    }
     if (theta < 0) {
       theta += 360;
     }
     targetYRot = theta;
-    //println(theta + "  " + vAng);
     move();
   }
   void wander() {
@@ -207,6 +232,12 @@ public class Enemy extends Sphere {
       if (vAng < 0) {
         vAng += 360;
       }
+    }
+    if (blockInSight()) {
+      wanderTimer = 0;
+      targetYRot = random(360);
+      println("sdfghjkljhgfdsdfghjkljhgfd");
+      dir.set(0, 0, 0);
     }
     float speed = 2*2;//speedAdjust;
     dir.mult(speedAdjust);
