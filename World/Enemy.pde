@@ -5,7 +5,6 @@ public class Enemy extends Sphere {
   private int HEALTH;
   private ArrayList<Gun> inventory;
   private PVector loc;
-  private double ID;
   private float vAng;
   public int curGun;
   private PVector dir;
@@ -33,10 +32,11 @@ public class Enemy extends Sphere {
     this.HEALTH = 100;
     this.inventory = new ArrayList<Gun>();
     super.setBreachable(true);
-    this.ID = Math.random();
+    double ID = Math.random();
     for (Triangle t : this.getTriangles()) {
-      t.ID = this.ID;
+      t.ID = ID;
     }
+    super.setID(ID);
     this.vAng = 0;
     super.rotate(new PVector(0, 45, 0));
     this.curGun = 0;
@@ -49,6 +49,7 @@ public class Enemy extends Sphere {
     
      return dir; 
   }
+
   PVector rand() {
     return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
   }

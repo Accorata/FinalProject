@@ -24,13 +24,13 @@ public class Gun extends Obj {
   void shoot() {
     if (curBUL != 0) {
       curBUL--;
-      Bullet bu = new Bullet(new PVector(20, 30, -fromScreen), getTarget(), color(255, 0, 0));    
+      Bullet bu = new Bullet(new PVector(20, 30, -fromScreen), getTarget(), color(255, 0, 0), DMG);    
       bullets.add(bu);
       c.addObject((Obj)bu);
     }  
   }
   void shoot(Enemy e) {
-    Bullet bu = new Bullet(e.getCenter().copy(), e.getTarget(), color(255, 0, 0));    
+    Bullet bu = new Bullet(e.getCenter().copy(), e.getTarget(), color(255, 0, 0), DMG);    
       bullets.add(bu);
       c.addObject((Obj)bu);
     

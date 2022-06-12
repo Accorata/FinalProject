@@ -85,7 +85,7 @@ public class Camera {
       obj.rotateOnY(xRotate);
       obj.rotateOnX(xAng);
       obj.rotateOnX(yRotate);
-      if (!obj.getBreachable() && obj.breached()) breached = true;
+      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -129,7 +129,7 @@ public class Camera {
       obj.translate(dir);
       obj.setCenter(place);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached()) breached = true;
+      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {

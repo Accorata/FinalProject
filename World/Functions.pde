@@ -117,7 +117,7 @@ boolean addGun(Gun g) {
 Enemy inSight() {
   if (AIM != 0) {
     for (int i = 0; i < ENEMIES.size(); i++) {
-      if (ENEMIES.get(i).ID == AIM) return ENEMIES.get(i);
+      if (ENEMIES.get(i).getID() == AIM) return ENEMIES.get(i);
     }
   }
   return null;

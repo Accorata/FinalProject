@@ -5,7 +5,9 @@ public class Obj { //<>// //<>// //<>//
   private ArrayList<Triangle> triangles;
   private PVector center;
   private float dAvg;
-  
+  private double ID = -1;
+  double getID() {return this.ID;}
+  void setID(double d) {this.ID = d;};
   public Obj(PVector center) {
     this.center = center;
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
@@ -162,13 +164,13 @@ public class Obj { //<>// //<>// //<>//
     }
     return breached;
   }*/
-  boolean breached() {
+  Obj breached() {
     for (Obj o : objs) {
-      if (this != o && !o.getBreachable()) {
-        if (this.getDAvg() + o.getDAvg() + 20 <= dist(this.getCenter(), o.getCenter())) return true;
+      if (this != o) {
+        if (this.getDAvg() + o.getDAvg() + 20 <= dist(this.getCenter(), o.getCenter())) return o;
       }
     }
-    return false;
+    return null;
   }
   void rotateOnX(float deg) {
     if (deg != 0) {

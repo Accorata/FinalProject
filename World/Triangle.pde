@@ -18,7 +18,7 @@ public class Triangle implements Comparable<Triangle> {
   public Triangle (PVector a_, PVector b_, PVector c_) {
     this(a_, b_, c_, color(0));
   }
-
+  
   Triangle copyOf() {
     Triangle t = new Triangle(points[0].copy(), points[1].copy(), points[2].copy(), clr);
     t.light = this.light;

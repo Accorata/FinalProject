@@ -138,7 +138,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached()) breached = true;
+      if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -159,7 +159,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached()) breached = true;
+      if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -180,7 +180,7 @@ void keyPressed() {
       for (Obj obj : objs) {
         obj.setCenter(place);
         obj.rotateOnX(10);
-        if (!obj.getBreachable() && obj.breached()) breached = true;
+        if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
@@ -200,7 +200,7 @@ void keyPressed() {
       for (Obj obj : objs) {
         obj.setCenter(place);
         obj.rotateOnX(-10);
-        if (!obj.getBreachable() && obj.breached()) breached = true;
+        if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
