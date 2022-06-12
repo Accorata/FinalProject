@@ -34,12 +34,15 @@ public class Bullet extends Rect {
         for (Enemy e : ENEMIES) {
           if (e.getID() == o.getID()) {
             e.changeHealth(-damage);
-            if (e.isDead()) ENEMIES.remove(e);
+            if (e.isDead()) {
+              ENEMIES.remove(e);
+              break;
+            }
           }
         }
       } else if (o.getID() == 1.5) {}
-      removeObj(this);
+      c.removeObj(this);
+      bulletsRemoved.add(this);
     }
-
   }
 }

@@ -30,6 +30,7 @@ Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Bullet> bullets;
+ArrayList<Bullet> bulletsRemoved;
 Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
 public PVector xUnit = new PVector(1, 0, 0);
 public PVector yUnit = new PVector(0, 1, 0);
@@ -45,6 +46,7 @@ void setup() {
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
   bullets = new ArrayList<Bullet>();
+  bulletsRemoved = new ArrayList<Bullet>();
   INVENTORY = new ArrayList<Gun>();
   INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
   INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
@@ -88,7 +90,9 @@ void draw() {
   //if (frameCount < 200) {
   for (Bullet bu : bullets) {
     bu.mve();
-    
+  }
+  for (Bullet bu : bulletsRemoved) {
+    bullets.remove(bu);
   }
   for (Enemy e : ENEMIES) {
     e.animate();

@@ -49,6 +49,9 @@ public class Obj { //<>// //<>// //<>// //<>//
     }
     dAvg = t/points.size();
   }
+  void setDAvg(float dAvg_) {
+    this.dAvg = dAvg_;
+  }
   void moveX(float n) {
     for (PVector p : getPoints()) {
       p.add(xUnit.mult(n));
@@ -175,9 +178,9 @@ public class Obj { //<>// //<>// //<>// //<>//
     for (Obj o : objs) {
       //println("ran2");
       if (this != o) {
-        println("ran3");
+        //println("ran3");
         println(this.getDAvg() + o.getDAvg() + 20 + "   " + dist(this.getCenter(), o.getCenter()));
-        if (this.getDAvg() + o.getDAvg() + 20 <= dist(this.getCenter(), o.getCenter())) return o;
+        if (this.getDAvg() + o.getDAvg() + 20 >= dist(this.getCenter(), o.getCenter())) return o;
       }
     }
     return null;
