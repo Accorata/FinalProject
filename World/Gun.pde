@@ -25,10 +25,16 @@ public class Gun extends Obj {
     if (curBUL != 0) {
       if (hit) cunt.changeHealth(-DMG);
       curBUL--;
-      Bullet bu = new Bullet(new PVector(0, 0, -fromScreen), getTarget(), color(255, 0, 0));    
+      Bullet bu = new Bullet(new PVector(20, 30, -fromScreen), getTarget(), color(255, 0, 0));    
       bullets.add(bu);
       c.addObject((Obj)bu);
     }  
+  }
+  void shoot(Enemy e) {
+    Bullet bu = new Bullet(e.getCenter().copy(), e.getTarget(), color(255, 0, 0));    
+      bullets.add(bu);
+      c.addObject((Obj)bu);
+    
   }
   void reload() {
     if (totBUL > 0) {

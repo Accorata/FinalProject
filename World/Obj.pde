@@ -1,4 +1,4 @@
-public class Obj { //<>//
+public class Obj { //<>// //<>//
   private boolean breachable = false;
   private ArrayList<PVector> points;
   private ArrayList<PVector> foundationPoints;

@@ -84,6 +84,7 @@ void draw() {
   //if (frameCount < 200) {
   for (Enemy e : ENEMIES) {
     e.animate();
+    e.inventory.get(0).shoot(e);
   //  if (e.inSight()) {
     //e.moveTowards(new PVector(0, 0, 100));
     //e.turn(10);
@@ -226,7 +227,7 @@ void keyPressed() {
     break;
   case ' ':
     if (!jump)
-      dir.y = speed;
+      dir.y = 5;
       jump = true;
     
     break;

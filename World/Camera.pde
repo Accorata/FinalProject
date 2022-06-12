@@ -141,8 +141,8 @@ public class Camera {
       }
     } 
  if (jump) {
-      dir.y -= .1;
-      if (dir.y <= -speed) {
+      dir.y -= .2;
+      if (dir.y <= -5) {
         jump = false;
         //dir.y=0;
       }
