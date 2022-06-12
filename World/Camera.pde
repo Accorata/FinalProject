@@ -102,12 +102,8 @@ public class Camera {
       rotateAxisOnX(yUnit, yRotate);
       rotateAxisOnX(zUnit, yRotate);
       xAng += yRotate;
-      eAng+= yRotate;
-      
-    
-      
-      }
-    
+      eAng += yRotate;
+    }
     mouse.x -= (mouse.x-width/2)/20;
     mouse.y -= (mouse.y-height/2)/20;
     mouse.x += mouseX-mouseOld.x;

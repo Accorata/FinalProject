@@ -116,21 +116,28 @@ public class Enemy extends Sphere {
     if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
     if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 3)) {
-      return checkBetween(place, getCenter());
+      return checkBetween(place, getCenter()) == null;
     }
     return false;
   }
   boolean blockInSight() {
-    float ang = 0;
-    super.setCenter();
-    if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
-    if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
-    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 0.5)) {
-      return checkBetween(place, getCenter());
+    PVector target = loc.copy();
+    if (dir.x != 0) {
+      target.add(xUnitInv.copy().mult(dir.x));
+    }
+    if (dir.y != 0) {
+      target.add(yUnitInv.copy().mult(dir.y));
+    }
+    if (dir.z != 0) {
+      target.add(zUnitInv.copy().mult(dir.z));
+    }
+    Triangle sight = checkBetween(target, getCenter());
+    if (sight != null) {
+      
     }
     return false;
   }
-  boolean checkBetween(PVector one, PVector two) {
+  Triangle checkBetween(PVector one, PVector two) {
     float d = dist(one, two);
     for (Triangle t : c.Triangles) {
       t.update_close(loc);
@@ -148,9 +155,9 @@ public class Enemy extends Sphere {
       boolean wz = (t1.z >= one.z || t2.z >= one.z || t3.z >= one.z) && 
         (t1.z <= one.z || t2.z <= one.z || t3.z <= one.z);
       boolean within = wx && wy && wz;
-      if (within) return false;
+      if (within) return t;
     }
-    return true;
+    return null;
   }
   void moveTowards(PVector t) {
     PVector target = new PVector(0, 0, 0);
@@ -251,6 +258,7 @@ public class Enemy extends Sphere {
     for (PVector p : getPoints()) {
       p.add(move);
     }
+    loc.add(move);
     move.div(speedAdjust);
     if (movementStage == 0 || movementStage == 3) {
       legs.get(1).move(move.copy().mult(speed));
