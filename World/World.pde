@@ -61,7 +61,8 @@ void setup() {
   c.addObject(one);
   c.addObject(two);
   c.addObject(three);
-  //c.addObject(sphere);
+  c.addObject(sphere);
+  println(sphere.getDAvg());
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
   //addEnemy(e1);
@@ -127,8 +128,6 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
-  //println(dir.y);
-  //println(frameRate);
 }
 
 void keyPressed() {

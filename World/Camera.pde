@@ -47,7 +47,6 @@ public class Camera {
       fill(t.clr);
       if (!dense) noStroke();
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
-      //println(cover(new PVector(pT[0][0], pT[0][1], 0), new PVector(pT[1][0], pT[1][1], 0), new PVector(pT[2][0], pT[2][1], 0)));
       if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
         AIM = t.ID;
       }
@@ -112,9 +111,8 @@ public class Camera {
     mouseOld.y = mouseY;
   }
   void updatePos(PVector dir) {
-    //println(dir.y);
-
-    //dir.mult(speedAdjust);
+    dir.x *= speedAdjust;
+    dir.z *= speedAdjust;
     loc.add(dir);
 
 
@@ -140,14 +138,10 @@ public class Camera {
       dir.y -= .2;
       if (dir.y <= -5) {
         jump = false;
-        //dir.y=0;
       }
     }
-    //if (c.getLoc().y == 0) {
-    //  dir.y = 0;
-    //}
-    //else 
     if (!jump) dir.y = 0;
-    //dir.div(speedAdjust);
+    dir.x /= speedAdjust;
+    dir.z /= speedAdjust;
   }
 }

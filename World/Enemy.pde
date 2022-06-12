@@ -87,7 +87,7 @@ public class Enemy extends Sphere {
     return legs;
   }
   void animate() {
-    println(inSight());
+    //println(inSight());
     if (inSight()) {
       moveTowards(place);
     } 
