@@ -45,7 +45,9 @@ public class Enemy extends Sphere {
   }
 
   PVector getTarget() {
-    return dir;
+    //float theta = random(-10,10);
+    //PVector error = new PVector(2*cos(radians(theta)), 0, 2*sin(radians(theta)));
+    return dir.copy();//.add(error);
   }
   PVector rand() {
     return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
@@ -84,7 +86,6 @@ public class Enemy extends Sphere {
     return legs;
   }
   void animate() {
-    //println(inSight());
     if (inSight()) {
       moveTowards(place);
       if (attackTimer >= 30) {

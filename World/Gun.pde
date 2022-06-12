@@ -30,7 +30,7 @@ public class Gun extends Obj {
     }
   }
   void shoot(Enemy e) {
-    Bullet bu = new Bullet(e.getCenter().copy(), e.getTarget().copy(), color(255, 0, 0), DMG, true);    
+    Bullet bu = new Bullet(e.getCenter().copy(), e.getTarget(), color(255, 0, 0), DMG, true);    
     bullets.add(bu);
     c.addObject((Obj)bu);
   }

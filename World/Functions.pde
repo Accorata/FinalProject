@@ -20,7 +20,6 @@ void rotateAxisOnY(PVector axis, float deg) {
   }
 }
 PVector getTarget() {
-
   return zUnitInv.copy();
 }
 void rotateAxisOnZ(PVector axis, float deg) {
