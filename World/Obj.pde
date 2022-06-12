@@ -174,12 +174,8 @@ public class Obj { //<>// //<>// //<>// //<>//
    return breached;
    }*/
   Obj breached() {
-    //println("ran");
     for (Obj o : objs) {
-      //println("ran2");
       if (this != o) {
-        //println("ran3");
-        //sprintln(this.getDAvg() + o.getDAvg() + "   " + dist(this.getCenter(), o.getCenter()));
         if (this.getDAvg() + o.getDAvg() >= dist(this.getCenter(), o.getCenter())) return o;
       }
     }

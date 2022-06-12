@@ -10,7 +10,7 @@ public class Camera {
   public Camera() {
     resetScreen();
     this.loc = new PVector(0, 0, 0);
-    hitBox = new Obj(loc);
+    hitBox = new Obj(place);
     hitBox.setDAvg(100);
     hitBox.setID(5);
     objs.add(hitBox);

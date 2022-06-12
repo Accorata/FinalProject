@@ -12,8 +12,8 @@ public class Enemy extends Sphere {
   private ArrayList<Leg> legs;
   private int movementStage = 0;
   private int movementTimer = 16;
+  private int attackTimer = 0;
   private float targetYRot = 0;
-  PVector goal;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -21,7 +21,6 @@ public class Enemy extends Sphere {
   public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
     this.loc = loc_;
-    this.goal = rand();
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
     shape.get(177).updateColor(color(145, 255, 255));
@@ -43,13 +42,11 @@ public class Enemy extends Sphere {
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.wanderTimer = Math.random()*120;
-    super.addPoint(goal);
   }
+  
   PVector getTarget() {
-
     return dir;
   }
-
   PVector rand() {
     return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
   }
@@ -90,9 +87,13 @@ public class Enemy extends Sphere {
     //println(inSight());
     if (inSight()) {
       moveTowards(place);
+      if (attackTimer >= 30) {
+        inventory.get(curGun).shoot(this);
+        attackTimer = 0;
+      }
     } 
+    attackTimer+=speedAdjust;
     wander();
-    inventory.get(curGun).shoot(this);
   }
   int getHealth() {
     return HEALTH;
