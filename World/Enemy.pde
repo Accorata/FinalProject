@@ -88,7 +88,7 @@ public class Enemy extends Sphere {
   void animate() {
     if (inSight()) {
       moveTowards(place);
-      if (attackTimer >= 30) {
+      if (attackTimer >= 15) {
         inventory.get(curGun).shoot(this);
         attackTimer = 0;
       }
