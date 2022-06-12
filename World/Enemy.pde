@@ -81,17 +81,12 @@ public class Enemy extends Sphere {
     //legs.get(3).moveToCenter(loc, 15*constrict);
     return legs;
   }
-   void animate() {
-     PVector cen = super.getCenter();
-     if (inSight()) {
-       moveTowards(new PVector(0, 0, -fromScreen));
-     } else if (aprox(cen.x, goal.x) && aprox(cen.z, goal.z) && aprox(cen.y, goal.y)) {
-       goal = rand();
-     }else {
-       moveTowards(goal);
-     }
-     
-   }
+  void animate() {
+    if (inSight()) {
+      moveTowards(new PVector(0, 0, -fromScreen));
+    } 
+    wander();
+  }
   ArrayList<Triangle> renderShape() {
     ArrayList<Triangle> shape = new ArrayList<Triangle>();
     PVector loc = getCenter();
@@ -118,16 +113,25 @@ public class Enemy extends Sphere {
   boolean inSight() {
     float ang = 0;
     super.setCenter();
-    //println(getCenter());
     if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
     if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
-    //println((ang%TWO_PI)+(radians(eAng)%TWO_PI));
-    if (aprox2(vAng, (ang% TWO_PI)+(radians(eAng)%TWO_PI))) {
-      return checkBetween(dist(new PVector(0, 0, -fromScreen), getCenter()));
+    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 3)) {
+      return checkBetween(place, getCenter());
     }
     return false;
   }
-  boolean checkBetween(float d) {
+  boolean blockInSight() {
+    float ang = 0;
+    super.setCenter();
+    if (getCenter().x < 0) ang = (PI/2)-atan((-fromScreen-getCenter().z )/-getCenter().x);
+    if (getCenter().x > 0) ang = (-PI/2) -atan((-fromScreen-getCenter().z )/-getCenter().x);
+    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 0.5)) {
+      return checkBetween(place, getCenter());
+    }
+    return false;
+  }
+  boolean checkBetween(PVector one, PVector two) {
+    float d = dist(one, two);
     for (Triangle t : c.Triangles) {
       t.update_close(loc);
     }
@@ -137,16 +141,12 @@ public class Enemy extends Sphere {
       PVector t1 = t.points[0];
       PVector t2 = t.points[1];
       PVector t3 = t.points[2];
-      /*
-      PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
-       PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
-       PVector crV = v1.cross(v2);
-       float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
-       */
-      boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
-      boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
-      boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
-
+      boolean wx = (t1.x >= one.x || t2.x >= one.x || t3.x >= one.x) && 
+        (t1.x <= one.x || t2.x <= one.x || t3.x <= one.x);
+      boolean wy = (t1.y >= one.y || t2.y >= one.y || t3.y >= one.y) && 
+        (t1.y <= one.y || t2.y <= one.y || t3.y <= one.y);
+      boolean wz = (t1.z >= one.z || t2.z >= one.z || t3.z >= one.z) && 
+        (t1.z <= one.z || t2.z <= one.z || t3.z <= one.z);
       boolean within = wx && wy && wz;
       if (within) return false;
     }
@@ -177,7 +177,7 @@ public class Enemy extends Sphere {
   }
   void wander() {
     wanderTimer += Math.random()*speedAdjust;
-    if (wanderTimer >= 120) {
+    if (wanderTimer >= 360) {
       wanderTimer = 0;
       targetYRot = random(360);
     }
@@ -187,7 +187,7 @@ public class Enemy extends Sphere {
     targetYRot = theta;
   }
   void move() {
-    dir.set(2,0,0);
+    dir.set(2, 0, 0);
     if (vAng != targetYRot) {
       float theta = -(vAng - targetYRot)/abs(vAng - targetYRot);
       if (targetYRot - vAng > 180) {
