@@ -21,9 +21,8 @@ public class Gun extends Obj {
   String getNAME() {
     return NAME;
   }
-  void shoot(Enemy cunt, boolean hit) {
+  void shoot() {
     if (curBUL != 0) {
-      if (hit) cunt.changeHealth(-DMG);
       curBUL--;
       Bullet bu = new Bullet(new PVector(20, 30, -fromScreen), getTarget(), color(255, 0, 0));    
       bullets.add(bu);

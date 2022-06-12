@@ -162,6 +162,14 @@ public class Obj { //<>// //<>// //<>//
     }
     return breached;
   }*/
+  boolean breached() {
+    for (Obj o : objs) {
+      if (this != o && !o.getBreachable()) {
+        if (this.getDAvg() + o.getDAvg() + 20 <= dist(this.getCenter(), o.getCenter())) return true;
+      }
+    }
+    return false;
+  }
   void rotateOnX(float deg) {
     if (deg != 0) {
       float rad = radians(deg);

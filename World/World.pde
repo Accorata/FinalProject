@@ -82,9 +82,13 @@ void draw() {
   //printMatrices();
   speedAdjust = 60/frameRate;
   //if (frameCount < 200) {
+  for (Bullet bu : bullets) {
+    bu.mve();
+    
+  }
   for (Enemy e : ENEMIES) {
     e.animate();
-    e.inventory.get(0).shoot(e);
+    //e.inventory.get(0).shoot(e);
   //  if (e.inSight()) {
     //e.moveTowards(new PVector(0, 0, 100));
     //e.turn(10);
@@ -109,10 +113,7 @@ void draw() {
   // --Screen--
   background(255);
   AIM = 0;
-  for (Bullet bu : bullets) {
-    bu.mve();
-    
-  }
+  
   c.display();
   
   //text(ENEMIES.get(0).getHealth() + "", 10, 20);
@@ -276,20 +277,7 @@ void keyReleased() {
 }
 
 void mouseClicked() {
-  Enemy E = inSight();
-  if (E != null && curG < INVENTORY.size()) {
-    INVENTORY.get(curG).shoot(E, true);
-    if (E.isDead()) {
-      ENEMIES.remove(E);
-      objs.remove(E);
-      for (int i = 0; i < c.Triangles.size(); i++) {
-        if (c.Triangles.get(i).ID == E.ID) {
-          c.Triangles.remove(i);
-          i--;
-        }
-      }
-    } 
-  }else { 
-      INVENTORY.get(curG).shoot(E, false);
-    }
+  if (curG < INVENTORY.size()) {
+    INVENTORY.get(curG).shoot();
+  }
 }
