@@ -71,6 +71,12 @@ public class Camera {
       Triangles.add(t);
     }
   }
+  void removeObj(Obj obj) {
+    objs.remove(obj);
+    for (Triangle t : obj.getTriangles()) {
+      Triangles.remove(t);
+    }
+  }
   void rotateByMouse() {
     boolean breached = false;
     float xRotate = speedAdjust*(mouse.x-width/2)*1/sensitivity;

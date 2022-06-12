@@ -63,6 +63,9 @@ void setup() {
   c.addObject(three);
   c.addObject(sphere);
   println(sphere.getDAvg());
+  println(one.getDAvg());
+  println(two.getDAvg());
+  println(three.getDAvg());
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
   //addEnemy(e1);
@@ -139,7 +142,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached() != null) breached = true;
+      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -160,7 +163,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached() != null) breached = true;
+      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -181,7 +184,7 @@ void keyPressed() {
       for (Obj obj : objs) {
         obj.setCenter(place);
         obj.rotateOnX(10);
-        if (!obj.getBreachable() && obj.breached() != null) breached = true;
+        //if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
@@ -201,7 +204,7 @@ void keyPressed() {
       for (Obj obj : objs) {
         obj.setCenter(place);
         obj.rotateOnX(-10);
-        if (!obj.getBreachable() && obj.breached() != null) breached = true;
+        //if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
