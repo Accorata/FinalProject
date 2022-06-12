@@ -98,7 +98,7 @@ void draw() {
     e.animate();
 
     //e.inventory.get(0).shoot(e);
-  //  if (e.inSight()) {
+    //  if (e.inSight()) {
 
     //e.moveTowards(new PVector(0, 0, 100));
     //e.turn(10);
@@ -288,6 +288,5 @@ void mouseClicked() {
 
   if (curG < INVENTORY.size()) {
     INVENTORY.get(curG).shoot();
-
   }
 }

@@ -92,6 +92,7 @@ public class Enemy extends Sphere {
       moveTowards(place);
     } 
     wander();
+    inventory.get(curGun).shoot(this);
   }
   int getHealth() {
     return HEALTH;

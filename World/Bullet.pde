@@ -1,12 +1,14 @@
 public class Bullet extends Rect {
   private PVector target;
+  private boolean enemy;
 
   int damage;
-  public Bullet(PVector loc, PVector target, color c, int dam) {
+  public Bullet(PVector loc, PVector target, color c, int dam, boolean enemy_) {
     super(loc, new PVector(2, 2, 5), c);
     super.setBreachable(true);
     this.target = target;
     this.damage = dam;
+    this.enemy = enemy_;
     super.setID(1.5);
   }
 
@@ -28,7 +30,7 @@ public class Bullet extends Rect {
 
     Obj o = super.breached();
     
-    if (o != null && o.getID() != 1.5) {
+    if (o != null && o.getID() != 1.5 && (enemy || o.getID() != 5)) {
       println(o);
       if (o.getID() >= 0 && o.getID() < 1) {
         for (Enemy e : ENEMIES) {
@@ -41,8 +43,8 @@ public class Bullet extends Rect {
             }
           }
         }
-      } else if (o.getID() == 5) {
-      
+      } else if (o.getID() == 5 && enemy) {
+        PLAYER_HEALTH -= 20;
       }
       c.removeObj(this);
       bulletsRemoved.add(this);
