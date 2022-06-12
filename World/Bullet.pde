@@ -46,7 +46,7 @@ public class Bullet extends Rect {
           }
         }
       } else if (o.getID() == 5 && enemy) {
-        PLAYER_HEALTH -= 20;
+        PLAYER_HEALTH -= 10;
       }
       if (!hitNothing) {
         println(o);

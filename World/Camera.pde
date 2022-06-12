@@ -123,17 +123,15 @@ public class Camera {
     dir.x *= speedAdjust;
     dir.z *= speedAdjust;
     loc.add(dir);
-
-
-    boolean breached = false;
     for (Obj obj : objs) {
       obj.setCenter(place);
       obj.rotateOnX(-xAng);
       obj.translate(dir);
       obj.setCenter(place);
       obj.rotateOnX(xAng);
-      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
+    Obj hit = hitBox.breached();
+    boolean breached = hit != null && !hit.getBreachable();
     if (breached) {
       for (Obj obj : objs) {
         obj.setCenter(place);
