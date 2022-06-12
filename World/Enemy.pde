@@ -84,7 +84,7 @@ public class Enemy extends Sphere {
   void animate() {
     println(inSight());
     if (inSight()) {
-      moveTowards(new PVector(0, 0, -fromScreen));
+      moveTowards(place);
     } 
     wander();
   }
