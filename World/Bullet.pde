@@ -28,7 +28,7 @@ public class Bullet extends Rect {
 
     Obj o = super.breached();
     
-    if (o != null) {
+    if (o != null && o.getID() != 1.5) {
       println(o);
       if (o.getID() >= 0 && o.getID() < 1) {
         for (Enemy e : ENEMIES) {
@@ -36,11 +36,14 @@ public class Bullet extends Rect {
             e.changeHealth(-damage);
             if (e.isDead()) {
               ENEMIES.remove(e);
+              c.removeObj(e);
               break;
             }
           }
         }
-      } else if (o.getID() == 1.5) {}
+      } else if (o.getID() == 5) {
+      
+      }
       c.removeObj(this);
       bulletsRemoved.add(this);
     }

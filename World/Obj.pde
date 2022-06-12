@@ -179,8 +179,8 @@ public class Obj { //<>// //<>// //<>// //<>//
       //println("ran2");
       if (this != o) {
         //println("ran3");
-        println(this.getDAvg() + o.getDAvg() + 20 + "   " + dist(this.getCenter(), o.getCenter()));
-        if (this.getDAvg() + o.getDAvg() + 20 >= dist(this.getCenter(), o.getCenter())) return o;
+        //sprintln(this.getDAvg() + o.getDAvg() + "   " + dist(this.getCenter(), o.getCenter()));
+        if (this.getDAvg() + o.getDAvg() >= dist(this.getCenter(), o.getCenter())) return o;
       }
     }
     return null;

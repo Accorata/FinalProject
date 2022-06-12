@@ -5,10 +5,14 @@ public class Camera {
   private ArrayList<Triangle> Triangles = new ArrayList<Triangle>();
   private PVector mouse = new PVector(width/2, height/2);
   private PVector mouseOld = new PVector(width/2, height/2);
+  private Obj hitBox;
 
   public Camera() {
     resetScreen();
     this.loc = new PVector(0, 0, 0);
+    hitBox = new Obj(loc);
+    hitBox.setID(5);
+    objs.add(hitBox);
     this.dense = true;
   }
   PVector getLoc() {
