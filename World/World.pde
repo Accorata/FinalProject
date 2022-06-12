@@ -88,13 +88,15 @@ void draw() {
   }
   for (Enemy e : ENEMIES) {
     e.animate();
+
     //e.inventory.get(0).shoot(e);
   //  if (e.inSight()) {
+
     //e.moveTowards(new PVector(0, 0, 100));
     //e.turn(10);
-  //  } else {
-  //    e.wander();
-  //  }
+    //  } else {
+    //    e.wander();
+    //  }
   }
   //}
   //e1.moveTowards(a);//.copy().add(c.getLoc()));
@@ -113,9 +115,9 @@ void draw() {
   // --Screen--
   background(255);
   AIM = 0;
-  
+
   c.display();
-  
+
   //text(ENEMIES.get(0).getHealth() + "", 10, 20);
   ui.box(INVENTORY);
   ui.showHealth();
@@ -229,8 +231,8 @@ void keyPressed() {
   case ' ':
     if (!jump)
       dir.y = 5;
-      jump = true;
-    
+    jump = true;
+
     break;
   case 'p':
     aniEn = !aniEn;
@@ -277,7 +279,9 @@ void keyReleased() {
 }
 
 void mouseClicked() {
+
   if (curG < INVENTORY.size()) {
     INVENTORY.get(curG).shoot();
+
   }
 }

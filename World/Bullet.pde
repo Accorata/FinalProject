@@ -1,5 +1,6 @@
 public class Bullet extends Rect {
   private PVector target;
+
   int damage;
   public Bullet(PVector loc, PVector target, color c, int dam) {
     super(loc, new PVector(2, 2, 5), c);
@@ -8,6 +9,7 @@ public class Bullet extends Rect {
     this.damage = dam;
     super.setID(1.5);
   }
+
 
   void mve() {
     PVector t = target.copy().setMag(50);
@@ -23,6 +25,7 @@ public class Bullet extends Rect {
       move.add(zUnit.copy().mult(t.z));
     }
     super.translate(move);
+
     Obj o = super.breached();
     if (o != null) {
       if (o.getID() >= 0 && o.getID() < 1) {
@@ -35,5 +38,6 @@ public class Bullet extends Rect {
       } else if (o.getID() == 1.5) {}
       objs.remove((Obj)this);
     }
+
   }
 }

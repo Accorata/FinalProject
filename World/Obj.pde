@@ -1,4 +1,4 @@
-public class Obj { //<>// //<>// //<>//
+public class Obj { //<>// //<>// //<>// //<>//
   private boolean breachable = false;
   private ArrayList<PVector> points;
   private ArrayList<PVector> foundationPoints;
@@ -6,8 +6,12 @@ public class Obj { //<>// //<>// //<>//
   private PVector center;
   private float dAvg;
   private double ID = -1;
-  double getID() {return this.ID;}
-  void setID(double d) {this.ID = d;};
+  double getID() {
+    return this.ID;
+  }
+  void setID(double d) {
+    this.ID = d;
+  };
   public Obj(PVector center) {
     this.center = center;
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
@@ -33,8 +37,10 @@ public class Obj { //<>// //<>// //<>//
     setCenter();
     calcDAvg();
   }
-  float getDAvg(){return dAvg;}
-  
+  float getDAvg() {
+    return dAvg;
+  }
+
   void calcDAvg() {
     float t = 0;
     setCenter();
@@ -42,7 +48,6 @@ public class Obj { //<>// //<>// //<>//
       t+= dist(center, p);
     }
     dAvg = t/points.size();
-    
   }
   void moveX(float n) {
     for (PVector p : getPoints()) {
@@ -134,36 +139,37 @@ public class Obj { //<>// //<>// //<>//
     return calcCenter();
   }/*
   boolean breached() {
-    boolean breached = false;
-    for (Triangle t : triangles) {
-      PVector t1 = t.points[0];
-      PVector t2 = t.points[1];
-      PVector t3 = t.points[2];
-
-      PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
-      PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
-      PVector crV = v1.cross(v2);
-      float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
-      
-      float z = ((crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)))/crV.z + t2.z;
-       float x = ((crV.z * (-1 * t2.z)) + (crV.y * (-1 * t2.y)))/crV.x + t2.x;
-       float y = ((crV.x * (-1 * t2.x)) + (crV.z * (-1 * t2.z)))/crV.y + t2.y;
-       boolean op1 = ((x >= -1 * aw && x <= aw) || (y >= -1 * aw && y <= aw)) && (z >= -1 * aw && z<= aw);
-       boolean op2 = ((x >= -1 * aw && x <= aw) && ((y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw)));
-       boolean op3 = (y >= -1 * aw && y <= aw) && ((x >= -1 * aw && x <= aw) ||  (z >= -1 * aw && z<= aw));
-       boolean check = (x >= -1 * aw && x <= aw) || (y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw);
-       
-      boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
-      boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
-      boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
-
-      boolean within = wx && wy && wz;
-      if (within && n < 25000) {
-        breached = true;
-      }
-    }
-    return breached;
-  }*/
+   boolean breached = false;
+   for (Triangle t : triangles) {
+   PVector t1 = t.points[0];
+   PVector t2 = t.points[1];
+   PVector t3 = t.points[2];
+   
+   PVector v1 = new PVector(t1.x - t2.x, t1.y -t2.y, t1.z - t2.z);
+   PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
+   PVector crV = v1.cross(v2);
+   float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
+   
+   
+   float z = ((crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)))/crV.z + t2.z;
+   float x = ((crV.z * (-1 * t2.z)) + (crV.y * (-1 * t2.y)))/crV.x + t2.x;
+   float y = ((crV.x * (-1 * t2.x)) + (crV.z * (-1 * t2.z)))/crV.y + t2.y;
+   boolean op1 = ((x >= -1 * aw && x <= aw) || (y >= -1 * aw && y <= aw)) && (z >= -1 * aw && z<= aw);
+   boolean op2 = ((x >= -1 * aw && x <= aw) && ((y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw)));
+   boolean op3 = (y >= -1 * aw && y <= aw) && ((x >= -1 * aw && x <= aw) ||  (z >= -1 * aw && z<= aw));
+   boolean check = (x >= -1 * aw && x <= aw) || (y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw);
+   
+   
+   boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
+   boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
+   boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
+   boolean within = wx && wy && wz;
+   if (within && n < 50000) {
+   breached = true;
+   }
+   }
+   return breached;
+   }*/
   Obj breached() {
     for (Obj o : objs) {
       if (this != o) {

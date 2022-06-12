@@ -27,13 +27,15 @@ public class Gun extends Obj {
       Bullet bu = new Bullet(new PVector(20, 30, -fromScreen), getTarget(), color(255, 0, 0), DMG);    
       bullets.add(bu);
       c.addObject((Obj)bu);
-    }  
+    }
   }
   void shoot(Enemy e) {
+
     Bullet bu = new Bullet(e.getCenter().copy(), e.getTarget(), color(255, 0, 0), DMG);    
-      bullets.add(bu);
-      c.addObject((Obj)bu);
+    bullets.add(bu);
+    c.addObject((Obj)bu);
     
+
   }
   void reload() {
     if (totBUL > 0) {
@@ -51,6 +53,4 @@ public class Gun extends Obj {
   int getCUR() {
     return curBUL;
   }
-
-  
 }
