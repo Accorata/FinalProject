@@ -1,10 +1,11 @@
-public class Obj { //<>// //<>//
+public class Obj { //<>// //<>// //<>//
   private boolean breachable = false;
   private ArrayList<PVector> points;
   private ArrayList<PVector> foundationPoints;
   private ArrayList<Triangle> triangles;
   private PVector center;
-
+  private float dAvg;
+  
   public Obj(PVector center) {
     this.center = center;
     ArrayList<Triangle> ts = new ArrayList<Triangle>();
@@ -12,6 +13,7 @@ public class Obj { //<>// //<>//
     this.triangles = ts;
     this.points = calcPoints(ts);
     this.foundationPoints = points;
+    calcDAvg();
   }
   public Obj() {
   }
@@ -20,14 +22,26 @@ public class Obj { //<>// //<>//
     this.foundationPoints = points;
     this.triangles = t;
     this.center = center;
+    calcDAvg();
   }
   public Obj(ArrayList<Triangle> t) {
     this.points = calcPoints(t);
     this.foundationPoints = points;
     this.triangles = t;
     setCenter();
+    calcDAvg();
   }
-
+  float getDAvg(){return dAvg;}
+  
+  void calcDAvg() {
+    float t = 0;
+    setCenter();
+    for (PVector p : points) {
+      t+= dist(center, p);
+    }
+    dAvg = t/points.size();
+    
+  }
   void moveX(float n) {
     for (PVector p : getPoints()) {
       p.add(xUnit.mult(n));
@@ -86,18 +100,21 @@ public class Obj { //<>// //<>//
     foundationPoints.add(two);
     this.triangles = triangles_;
     setCenter();
+    calcDAvg();
   }
   void setObj (ArrayList<PVector> points_, ArrayList<Triangle> triangles_) {
     this.points = points_;
     this.foundationPoints = points;
     this.triangles = triangles_;
     setCenter();
+    calcDAvg();
   }
   void setObj (ArrayList<Triangle> triangles_) {
     this.points = calcPoints(triangles_);
     this.foundationPoints = points;
     this.triangles = triangles_;
     setCenter();
+    calcDAvg();
   }
   void setCenter(PVector v) {
     this.center = v;
@@ -113,7 +130,7 @@ public class Obj { //<>// //<>//
   }
   PVector getCenter () {
     return calcCenter();
-  }
+  }/*
   boolean breached() {
     boolean breached = false;
     for (Triangle t : triangles) {
@@ -125,7 +142,7 @@ public class Obj { //<>// //<>//
       PVector v2 = new PVector(t2.x - t3.x, t2.y -t3.y, t2.z - t3.z);
       PVector crV = v1.cross(v2);
       float n = (crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)) + (crV.z * (-fromScreen - t2.z));
-      /*
+      
       float z = ((crV.x * (-1 * t2.x)) + (crV.y * (-1 * t2.y)))/crV.z + t2.z;
        float x = ((crV.z * (-1 * t2.z)) + (crV.y * (-1 * t2.y)))/crV.x + t2.x;
        float y = ((crV.x * (-1 * t2.x)) + (crV.z * (-1 * t2.z)))/crV.y + t2.y;
@@ -133,7 +150,7 @@ public class Obj { //<>// //<>//
        boolean op2 = ((x >= -1 * aw && x <= aw) && ((y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw)));
        boolean op3 = (y >= -1 * aw && y <= aw) && ((x >= -1 * aw && x <= aw) ||  (z >= -1 * aw && z<= aw));
        boolean check = (x >= -1 * aw && x <= aw) || (y >= -1 * aw && y <= aw) || (z >= -1 * aw && z<= aw);
-       */
+       
       boolean wx = (t1.x >= 0 || t2.x >= 0 || t3.x >= 0) && (t1.x <= 0 || t2.x <= 0 || t3.x <= 0);
       boolean wy = (t1.y >= 0 || t2.y >= 0 || t3.y >= 0) && (t1.y <= 0 || t2.y <= 0 || t3.y <= 0);
       boolean wz = (t1.z >= -fromScreen || t2.z >= -fromScreen || t3.z >= -fromScreen) && (t1.z <= -fromScreen || t2.z <= -fromScreen || t3.z <= -fromScreen);
@@ -144,7 +161,7 @@ public class Obj { //<>// //<>//
       }
     }
     return breached;
-  }
+  }*/
   void rotateOnX(float deg) {
     if (deg != 0) {
       float rad = radians(deg);
