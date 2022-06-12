@@ -10,6 +10,7 @@ public class Plane extends Obj {
     ts.add(new Triangle(ps.get(0), ps.get(1), ps.get(2), clr));
     ts.add(new Triangle(ps.get(2), ps.get(0), ps.get(3), clr));
     super.setObj(ps, new ArrayList<Triangle>());
+    super.setDAvg(2);
     for (Triangle t : ts) {
       addTriangles(t.splitTriangle(this, 3));
     }

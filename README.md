@@ -12,7 +12,8 @@
 6/7 Henry - Created inverse basis vectors to allow objects to be translated into more usable coordinates, fixed a large bug that contributed, turned enemies into ellipses, and started enemy movement AI.
 6/8 Henry - Created the legs for the enemy and expanded the lag reducing idea into enemy ellipses and spheres in general.
 6/10 Henry - Enemies legs now move as they would in real life, the enemy has a better color design and an eye that shows where it heads, they walk in the direction they face, and they track you (although this sometimes bugs).
-
+6/11 Henry - Enemy legs now move in the direction they are walking not just into themselves and they finally always walk right towards the player when they see them.
+6/12 Henry - Reworked the breachable system, applied it to the enemies to program them a better AI and not allow them to walk through walls, applied it to bullets to cause them to go away when hitting other objects and actually deal damage to enemies and/or the player.
 
 THE SAME NEW WORLD:
 

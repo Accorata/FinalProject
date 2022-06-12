@@ -12,8 +12,8 @@ public class Enemy extends Sphere {
   private ArrayList<Leg> legs;
   private int movementStage = 0;
   private int movementTimer = 16;
+  private int attackTimer = 0;
   private float targetYRot = 0;
-  PVector goal;
 
   public Enemy(String name_, PVector loc_) {
     this(name_, loc_, new PVector(0, 0, 0));
@@ -21,7 +21,6 @@ public class Enemy extends Sphere {
   public Enemy(String name_, PVector loc_, PVector dir_) {
     super();
     this.loc = loc_;
-    this.goal = rand();
     ArrayList<PVector> points = super.calcPoints(loc, 100, 50, 20, 20);
     ArrayList<Triangle> shape = super.calcTriangles(points, 20, 20, color(92, 0, 0));
     shape.get(177).updateColor(color(145, 255, 255));
@@ -43,13 +42,13 @@ public class Enemy extends Sphere {
     inventory.add(new Gun("Pistol", 20, 7, 12));
     this.dir = dir_;
     this.wanderTimer = Math.random()*120;
-    super.addPoint(goal);
   }
+
   PVector getTarget() {
-
-    return dir;
+    //float theta = random(-10,10);
+    //PVector error = new PVector(2*cos(radians(theta)), 0, 2*sin(radians(theta)));
+    return dir.copy();//.add(error);
   }
-
   PVector rand() {
     return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
   }
@@ -87,10 +86,14 @@ public class Enemy extends Sphere {
     return legs;
   }
   void animate() {
-    println(inSight());
     if (inSight()) {
       moveTowards(place);
+      if (attackTimer >= 15) {
+        inventory.get(curGun).shoot(this);
+        attackTimer = 0;
+      }
     } 
+    attackTimer+=speedAdjust;
     wander();
   }
   int getHealth() {
@@ -113,44 +116,14 @@ public class Enemy extends Sphere {
     if (eAng <= 0) {
       eAng += 360;
     }
-    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 3)) {
+    if (aprox2(radians(vAng), (ang% TWO_PI)+(radians(eAng)%TWO_PI), 2)) {
       return checkBetween(place, getCenter()) == null;
     }
     return false;
   }
   boolean blockInSight() {
-    PVector target = loc.copy();
-    if (dir.x != 0) {
-      target.add(xUnitInv.copy().mult(dir.x*1000));
-    }
-    if (dir.y != 0) {
-      target.add(yUnitInv.copy().mult(dir.y*1000));
-    }
-    if (dir.z != 0) {
-      target.add(zUnitInv.copy().mult(dir.z*1000));
-    }
-    PVector center = getCenter();
-    Triangle sight = checkBetween(target, center);
-    if (sight != null) {
-      if (dist(sight.getCenter(), center) < 200) {
-        return true;
-      }
-    }
-    rotateAxisOnX(target, 10);
-    sight = checkBetween(target, center);
-    if (sight != null) {
-      if (dist(sight.getCenter(), center) < 200) {
-        return true;
-      }
-    }
-    rotateAxisOnX(target, -20);
-    sight = checkBetween(target, center);
-    if (sight != null) {
-      if (dist(sight.getCenter(), center) < 200) {
-        return true;
-      }
-    }
-    return false;
+    Obj hit = super.breached();
+    return hit != null;
   }
   Triangle checkBetween(PVector one, PVector two) {
     float d = dist(one, two);
@@ -227,12 +200,6 @@ public class Enemy extends Sphere {
         vAng += 360;
       }
     }
-    if (blockInSight()) {
-      wanderTimer = 0;
-      targetYRot = random(360);
-      println("sdfghjkljhgfdsdfghjkljhgfd");
-      dir.set(0, 0, 0);
-    }
     float speed = 2*2;//speedAdjust;
     dir.mult(speedAdjust);
     //PVector center = super.getCenter();
@@ -283,7 +250,18 @@ public class Enemy extends Sphere {
     for (PVector p : getPoints()) {
       p.add(move);
     }
-    loc.add(move);
+    super.setCenter();
+    if (blockInSight()) {
+      wanderTimer = 0;
+      targetYRot = random(360);
+      for (PVector p : getPoints()) {
+        p.sub(move);
+      }
+      //println("sdfghjkljhgfdsdfghjkljhgfd");
+      //dir.set(0, 0, 0);
+    } else {
+      loc.add(move);
+    }
     move.div(speedAdjust);
     if (movementStage == 0 || movementStage == 3) {
       legs.get(1).move(move.copy().mult(speed));

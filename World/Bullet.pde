@@ -1,15 +1,16 @@
 public class Bullet extends Rect {
   private PVector target;
+  private boolean enemy;
 
   int damage;
-  public Bullet(PVector loc, PVector target, color c, int dam) {
+  public Bullet(PVector loc, PVector target, color c, int dam, boolean enemy_) {
     super(loc, new PVector(2, 2, 5), c);
     super.setBreachable(true);
     this.target = target;
     this.damage = dam;
+    this.enemy = enemy_;
     super.setID(1.5);
   }
-
 
   void mve() {
     PVector t = target.copy().setMag(50);
@@ -27,17 +28,31 @@ public class Bullet extends Rect {
     super.translate(move);
 
     Obj o = super.breached();
-    if (o != null) {
+    boolean hitNothing = false;
+    if (o != null && o.getID() != 1.5 && (enemy || o.getID() != 5)) {
       if (o.getID() >= 0 && o.getID() < 1) {
         for (Enemy e : ENEMIES) {
           if (e.getID() == o.getID()) {
-            e.changeHealth(-damage);
-            if (e.isDead()) ENEMIES.remove(e);
+            if (!enemy) {
+              e.changeHealth(-damage);
+              if (e.isDead()) {
+                ENEMIES.remove(e);
+                c.removeObj(e);
+                break;
+              }
+            } else {
+              hitNothing = true;
+            }
           }
         }
-      } else if (o.getID() == 1.5) {}
-      objs.remove((Obj)this);
+      } else if (o.getID() == 5 && enemy) {
+        PLAYER_HEALTH -= 10;
+      }
+      if (!hitNothing) {
+        println(o);
+        c.removeObj(this);
+        bulletsRemoved.add(this);
+      }
     }
-
   }
 }
