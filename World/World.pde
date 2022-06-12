@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
+boolean jump = false;
 final PVector place = new PVector(0, 0, -1 * fromScreen);
 float speedAdjust = 1;
 double AIM = 0;
@@ -107,18 +108,12 @@ void draw() {
   // --Screen--
   background(255);
   AIM = 0;
-  c.display();
-  for (int i = 0; i < bullets.size(); i++) {
-    strokeWeight(5);
-    Float[][] cord = bullets.get(i).poll();
-    if (cord != null) {
-      stroke(cord[2][0], cord[2][1], cord[2][2]);
-      line(cord[0][0], cord[0][1], cord[1][0], cord[1][1]);
-    } else {
-      bullets.remove(i);
-      i--;
-    }
+  for (Bullet bu : bullets) {
+    bu.mve();
+    
   }
+  c.display();
+  
   //text(ENEMIES.get(0).getHealth() + "", 10, 20);
   ui.box(INVENTORY);
   ui.showHealth();
@@ -230,9 +225,10 @@ void keyPressed() {
     dir.x = -speed;
     break;
   case ' ':
-    if (c.getLoc().y == 0) {
-      dir.y = speed*2;
-    }
+    if (!jump)
+      dir.y = speed;
+      jump = true;
+    
     break;
   case 'p':
     aniEn = !aniEn;
@@ -291,8 +287,8 @@ void mouseClicked() {
           i--;
         }
       }
-    } else { 
+    } 
+  }else { 
       INVENTORY.get(curG).shoot(E, false);
     }
-  }
 }

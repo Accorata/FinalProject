@@ -21,12 +21,14 @@ public class Gun extends Obj {
   String getNAME() {
     return NAME;
   }
-  void shoot(Enemy c, boolean hit) {
+  void shoot(Enemy cunt, boolean hit) {
     if (curBUL != 0) {
-      if (hit) c.changeHealth(-DMG);
+      if (hit) cunt.changeHealth(-DMG);
       curBUL--;
-      animateBullet(new PVector(700, height), new PVector(width/2, height/2));
-    }
+      Bullet bu = new Bullet(new PVector(0, 0, -fromScreen), getTarget(), color(255, 0, 0));    
+      bullets.add(bu);
+      c.addObject((Obj)bu);
+    }  
   }
   void reload() {
     if (totBUL > 0) {
@@ -44,26 +46,6 @@ public class Gun extends Obj {
   int getCUR() {
     return curBUL;
   }
-  void shoot(PVector source, PVector dest) {
-    PLAYER_HEALTH -= DMG;
-    animateBullet(source, dest);
-  }
-  void animateBullet(PVector source, PVector dest) {
-    Queue q = new ArrayDeque<Float[][]>();
-    float cy = dest.y - source.y;//neg
-    float cx = dest.x - source.x;//neg
-    float count = 0;
-    for (int i = 0; i < 5; i++) {
-      Float[][] cord = new Float[3][3];
 
-      cord[0][0] = (float) source.x + (i+count)*cx/5;
-      cord[0][1] = (float) source.y + (i+count)*cy/5;
-      cord[1][0] = (float) source.x + (i+.4)*cx/5;
-      cord[1][1] = (float) source.y + (i+.4)*cy/5;
-      cord[2] = new Float[]{red(bColor), green(bColor), blue(bColor)};
-      q.add(cord);
-      count+=.1;
-    }
-    bullets.add(q);
-  }
+  
 }

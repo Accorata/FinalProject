@@ -8,7 +8,18 @@ public class Bullet extends Rect {
  }
  void mve() {
    PVector t = target.copy().setMag(1);
-   super.translate(t);
+   PVector move = new PVector(0, 0, 0);
+   
+   if (t.x != 0) {
+      move.add(xUnit.copy().mult(t.x));
+    }
+    if (t.y != 0) {
+      move.add(yUnit.copy().mult(t.y));
+    }
+    if (t.z != 0) {
+      move.add(zUnit.copy().mult(t.z));
+    }
+   super.translate(move);
  }
 
 }

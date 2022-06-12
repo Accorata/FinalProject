@@ -45,6 +45,19 @@ public class Enemy extends Sphere {
     this.wanderTimer = Math.random()*120;
     super.addPoint(goal);
   }
+  PVector getTarget() {
+    PVector target = new PVector(0, 0, 0);
+    if (dir.x != 0) {
+      target.add(xUnitInv.copy().mult(dir.x*1000));
+    }
+    if (dir.y != 0) {
+      target.add(yUnitInv.copy().mult(dir.y*1000));
+    }
+    if (dir.z != 0) {
+      target.add(zUnitInv.copy().mult(dir.z*1000));
+    }
+     return target; 
+  }
   PVector rand() {
     return new PVector((float)Math.random() * len -len/2, 0, (float)Math.random() * wid - wid/2);
   }
