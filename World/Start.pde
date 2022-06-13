@@ -17,9 +17,10 @@ public class Start {
       eNUM = 1;
       startGame();
       progressGame();
-    } else if (st == "DEAD") {} 
-      else if (st == "PROG") {}
-      
+    } else if (st == "DEAD") {
+    } else if (st == "PROG") {
+    }
+
     state = st;
   }
   void startGame() {
@@ -42,7 +43,7 @@ public class Start {
     eAng = 0;
     sc = new Plane(100, color(0), len, wid);
     xAng = 0;
-   
+
     testTris = new ArrayList<Triangle>();
     PLAYER_HEALTH = 100;
     ENEMIES = new ArrayList<Enemy>();
@@ -55,20 +56,27 @@ public class Start {
     curG = 0;
     ui = new UI();
     //l = new Light(new PVector(500, 500, 500), 10);
-    PVector p = new PVector (-650, -110, -300);
-    PVector p2 = new PVector (500, -510, -100);
-    PVector l = new PVector (200, 200, 200);
+    PVector l = new PVector (100+random(50), 200, 100+random(50));
     //ENEMIES
-    Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
-    Rect one = new Rect(p, l, color(102, 0, 102), 1);
-    Rect two = new Rect(new PVector(-200,-100,20), 200, 1);
-    Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-    c.addObject(one);
-    c.addObject(two);
-    c.addObject(three);
-    c.addObject(sphere);
+    ArrayList<Sphere> stars = new ArrayList<Sphere>();
+    for (int i = 0; i<3; i++ ) {
+      stars.add(new Sphere(new PVector(random(-4000,4000), -1000, random(-4000,4000)), 2, color(255), 45, 4));
+    }
+    ArrayList<Rect> rects = new ArrayList<Rect>();
+    for (int i = 0; i<3; i++ ) {
+      rects.add(new Rect(new PVector(-200-random(1000), -100, 100-random(1000)), l, color(random(0,55),random(0,55),random(0,55)), 1));
+      rects.add(new Rect(new PVector(-200-random(1000), -100, 500+random(1000)), l, color(random(0,55),random(0,55),random(0,55)), 1));
+      rects.add(new Rect(new PVector(200+random(1000), -100, 500-random(1000)), l, color(random(0,55),random(0,55),random(0,55)), 1));
+      rects.add(new Rect(new PVector(200+random(1000), -100, 100+random(1000)), l, color(random(0,55),random(0,55),random(0,55)), 1));
+    }
+    for (Rect rect : rects) {
+      rect.rotate(new PVector(0, random(360), 0));
+      c.addObject(rect);
+    }
+    for (Sphere star : stars) {
+      c.addObject(star);
+    }
     c.addObject(sc);
-    
   }
   void progressGame() {
 
@@ -76,9 +84,9 @@ public class Start {
     PLAYER_HEALTH = 100;
     for (int i = 0; i < eNUM; i++) {
       PVector vo = new PVector((len*(i+1)/(eNUM+1))-len/2, -30, -800);
- 
+
       //len*(i+1)/(eNUM+1))
-     
+
       Enemy e = new Enemy(eNAMES[i % eNAMES.length], vo);
       addEnemy(e);
     }
