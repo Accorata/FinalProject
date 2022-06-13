@@ -1,5 +1,18 @@
 # FinalProject
 
+Compile and Run Instructions:
+
+Runs in Processing and there are no other dependencies.
+
+Keyboard Controls:
+"wasd" -> Move forwards/left/backwards/right respectively
+"ijkl" -> Look up/left/down/right respectively
+"p" (Pause) -> Toggle enemy movement
+"t" when mouse is in center of the screen -> Toggle mouse control (Allows screen to be rotated by the mouse)
+"123" -> Swap to gun 1/2/3 respectively
+"r" -> Reloads current gun
+Click -> Shoots current gun
+
 5/23 Henry - Created a basic framework for displaying objects and started rotations.
 5/26 Henry - Started more intuitive movement controls.
 5/27 Henry - Added jump features and expanded upon movement controls.
