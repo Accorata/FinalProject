@@ -49,7 +49,6 @@ public class Bullet extends Rect {
         PLAYER_HEALTH -= 10;
       }
       if (!hitNothing) {
-        println(o);
         c.removeObj(this);
         bulletsRemoved.add(this);
       }

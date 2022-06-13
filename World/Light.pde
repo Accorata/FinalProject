@@ -36,7 +36,7 @@ public class Light extends Obj {
         if (!IDs.contains(s6[i][j])) IDs.add(s1[i][j]);
       }
     }
-    println(IDs);
+    //println(IDs);
   }
   double[][] s6 (ArrayList<Triangle> Triangles) {
     double[][] s = new double[mag][mag];

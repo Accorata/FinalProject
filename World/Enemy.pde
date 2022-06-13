@@ -257,7 +257,6 @@ public class Enemy extends Sphere {
       for (PVector p : getPoints()) {
         p.sub(move);
       }
-      //println("sdfghjkljhgfdsdfghjkljhgfd");
       //dir.set(0, 0, 0);
     } else {
       loc.add(move);

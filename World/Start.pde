@@ -57,11 +57,10 @@ public class Start {
     ui = new UI();
     //l = new Light(new PVector(500, 500, 500), 10);
     PVector l = new PVector (100+random(50), 200, 100+random(50));
-    //ENEMIES
-    ArrayList<Sphere> stars = new ArrayList<Sphere>();
-    for (int i = 0; i<3; i++ ) {
-      stars.add(new Sphere(new PVector(random(-4000,4000), -1000, random(-4000,4000)), 2, color(255), 45, 4));
-    }
+    //ArrayList<Sphere> stars = new ArrayList<Sphere>();
+    //for (int i = 0; i<3; i++ ) {
+    //  stars.add(new Sphere(new PVector(random(-4000,4000), -1000, random(-4000,4000)), 2, color(255), 45, 4));
+    //}
     ArrayList<Rect> rects = new ArrayList<Rect>();
     for (int i = 0; i<3; i++ ) {
       rects.add(new Rect(new PVector(-200-random(1000), -100, 100-random(1000)), l, color(random(0,55),random(0,55),random(0,55)), 1));
@@ -73,9 +72,9 @@ public class Start {
       rect.rotate(new PVector(0, random(360), 0));
       c.addObject(rect);
     }
-    for (Sphere star : stars) {
-      c.addObject(star);
-    }
+    //for (Sphere star : stars) {
+    //  c.addObject(star);
+    //}
     c.addObject(sc);
   }
   void progressGame() {
