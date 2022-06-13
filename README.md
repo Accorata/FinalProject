@@ -1,5 +1,18 @@
 # FinalProject
 
+Compile and Run Instructions:
+
+Runs in Processing and there are no other dependencies.
+
+Keyboard Controls:
+"wasd" -> Move forwards/left/backwards/right respectively
+"ijkl" -> Look up/left/down/right respectively
+"p" (Pause) -> Toggle enemy movement
+"t" when mouse is in center of the screen -> Toggle mouse control (Allows screen to be rotated by the mouse)
+"123" -> Swap to gun 1/2/3 respectively
+"r" -> Reloads current gun
+Click -> Shoots current gun
+
 5/23 Henry - Created a basic framework for displaying objects and started rotations.
 5/26 Henry - Started more intuitive movement controls.
 5/27 Henry - Added jump features and expanded upon movement controls.
@@ -14,6 +27,7 @@
 6/10 Henry - Enemies legs now move as they would in real life, the enemy has a better color design and an eye that shows where it heads, they walk in the direction they face, and they track you (although this sometimes bugs).
 6/11 Henry - Enemy legs now move in the direction they are walking not just into themselves and they finally always walk right towards the player when they see them.
 6/12 Henry - Reworked the breachable system, applied it to the enemies to program them a better AI and not allow them to walk through walls, applied it to bullets to cause them to go away when hitting other objects and actually deal damage to enemies and/or the player.
+6/23 Henry - Fixed some bugs with Raymond and added the compile/run/controls instructions in this file.
 
 THE SAME NEW WORLD:
 
