@@ -11,7 +11,7 @@ public class Bullet extends Rect {
   }
 
 
-  void mve() {
+  boolean mve() {
     PVector t = target.copy().setMag(50);
     PVector move = new PVector(0, 0, 0);
 
@@ -27,7 +27,9 @@ public class Bullet extends Rect {
     super.translate(move);
 
     Obj o = super.breached();
+    
     if (o != null) {
+      println(o.getID());
       if (o.getID() >= 0 && o.getID() < 1) {
         for (Enemy e : ENEMIES) {
           if (e.getID() == o.getID()) {
@@ -36,8 +38,10 @@ public class Bullet extends Rect {
           }
         }
       } else if (o.getID() == 1.5) {}
-      objs.remove((Obj)this);
-    }
-
+      objs.remove(this);
+      bullets.remove(this);
+      return true;
+    } else {println("no");}
+return false;
   }
 }

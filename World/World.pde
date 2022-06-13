@@ -82,12 +82,12 @@ void draw() {
   //printMatrices();
   speedAdjust = 60/frameRate;
   //if (frameCount < 200) {
-  for (Bullet bu : bullets) {
-    bu.mve();
+  for (int i = 0; i < bullets.size(); i++) {
+    if (bullets.get(i).mve()) {i--;}
     
   }
   for (Enemy e : ENEMIES) {
-    e.animate();
+    //e.animate();
 
     //e.inventory.get(0).shoot(e);
   //  if (e.inSight()) {
