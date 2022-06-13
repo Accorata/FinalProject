@@ -182,7 +182,7 @@ public class Obj { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     for (Obj o : objs) {
       if (this != o) {
 
-        if (this.getDAvg() + o.getDAvg() -20>= dist(this.getCenter(), o.getCenter())) return o;
+        if (this.getDAvg() + o.getDAvg() >= dist(this.getCenter(), o.getCenter())) return o;
 
       }
     }

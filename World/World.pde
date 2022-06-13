@@ -40,21 +40,36 @@ public PVector xUnitInv = new PVector(1, 0, 0);
 public PVector yUnitInv = new PVector(0, 1, 0);
 public PVector zUnitInv = new PVector(0, 0, 1);
 Start s = new Start();
+
 void setup() {
   size(1000, 600);
   sky = loadImage("download.jpg");
   sky.resize(width, height);
   //noCursor();
-  
-  
-  //for (int i = 0; i<12; i++) {
-  //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
-  //}
-  //for (int i = 0; i<12; i++) {
-  //  Enemy e = ENEMIES.get(i);
-  //  e.setDir(i*30);
-  //  //e.rotate(new PVector(0, i*30, 0));
-  //}
+  c = new Camera();
+  PLAYER_HEALTH = 100;
+  ENEMIES = new ArrayList<Enemy>();
+  bullets = new ArrayList<Bullet>();
+  bulletsRemoved = new ArrayList<Bullet>();
+  INVENTORY = new ArrayList<Gun>();
+  INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
+  INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
+  INVENTORY.add(new Gun("Sniper", 99, 5, 1, color(0, 140, 140)));
+  curG = 0;
+  ui = new UI();
+  //l = new Light(new PVector(500, 500, 500), 10);
+  PVector p = new PVector (-650, -110, -300);
+  PVector p2 = new PVector (500, -510, -100);
+  PVector l = new PVector (200, 200, 200);
+  //ENEMIES
+  Rect one = new Rect(p, l, color(102, 0, 102), 1);
+  Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
+  Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
+  c.addObject(one);
+  c.addObject(two);
+  c.addObject(three);
+  c.addObject(sphere);
+  c.addObject(sc);
 }
 
 void draw() {
@@ -85,7 +100,7 @@ void draw() {
     // --Screen--
     background(255);
     AIM = 0;
-
+  
     c.display();
 
     //text(ENEMIES.get(0).getHealth() + "", 10, 20);
