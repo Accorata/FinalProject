@@ -8,21 +8,24 @@ public class Start {
   }
 
   void changeState(String st) {
-    if (st == "GAME" && state == "GAME") {
+    cursor();
+    if (st == "GAME" && state == "PROG") {
       eNUM++;
       startGame();
       progressGame();
-    } else if (st == "GAME" && state == "START") {
+    } else if (st == "GAME" && (state == "START" || state == "DEAD")) {
       eNUM = 1;
       startGame();
       progressGame();
-    }
+    } else if (st == "DEAD") {} 
+      else if (st == "PROG") {}
+      
     state = st;
   }
   void startGame() {
     objs = new ArrayList<Obj>();
     c = new Camera();
-     
+    quantize = true;
     xUnit = new PVector(1, 0, 0);
     yUnit = new PVector(0, 1, 0);
     zUnit = new PVector(0, 0, 1);
@@ -65,13 +68,14 @@ public class Start {
     c.addObject(three);
     c.addObject(sphere);
     c.addObject(sc);
+    
   }
   void progressGame() {
 
     for (Gun g : INVENTORY) g.restock();
     PLAYER_HEALTH = 100;
     for (int i = 0; i < eNUM; i++) {
-      PVector vo = new PVector(0, -30, -800);
+      PVector vo = new PVector((len*(i+1)/(eNUM+1))-len/2, -30, -800);
  
       //len*(i+1)/(eNUM+1))
      

@@ -25,6 +25,7 @@ final float sensitivity = 20;
 boolean test;
 ArrayList<Triangle> testTris;
 UI ui;
+boolean quantize;
 float eAng;
 boolean aniEn;
 Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 0, -2));
@@ -62,10 +63,11 @@ void draw() {
     for (Bullet bu : bulletsRemoved) {
       bullets.remove(bu);
     }
+    if (isDead()) s.changeState("DEAD");
     for (Enemy e : ENEMIES) {
-      e.animate();
+      if (aniEn) e.animate();
     }
-    if (ENEMIES.size() == 0) s.changeState("GAME");
+    if (ENEMIES.size() == 0) s.changeState("PROG");
     PVector b = new PVector(1, 0, 0);
     //sphere.rotate(b);
     //l.sshine(c.Triangles);
@@ -100,6 +102,28 @@ void draw() {
     alt();
     fill(col);
     text("CLICK ANYWHERE TO START", width/2, 40);
+    textAlign(BASELINE);
+  } else if (s.state == "DEAD") {
+    aniEn = false;
+    c.display();
+    fill(150, 0, 0);
+    textAlign(CENTER);
+    textSize(50);
+    text("YOU DIED", width/2, height/2);
+    textSize(25);
+    fill(0);
+    text("CLICK ANYWHERE TO RESTART", width/2, height/2 + 40);
+    textAlign(BASELINE);
+  } else if (s.state == "PROG") {
+    aniEn = false;
+    c.display();
+    fill(150, 0, 0);
+    textAlign(CENTER);
+    textSize(50);
+    text("YOU WON", width/2, height/2);
+    textSize(25);
+    fill(0);
+    text("CLICK ANYWHERE TO CONTINUE TO NEXT LEVEL", width/2, height/2 + 40);
     textAlign(BASELINE);
   }
 }
@@ -215,12 +239,7 @@ void keyPressed() {
     case 'd':
       dir.x = -speed;
       break;
-    case ' ':
-      if (!jump)
-        dir.y = 5;
-      jump = true;
-
-      break;
+  
     case 'p':
       aniEn = !aniEn;
       break;
@@ -228,6 +247,7 @@ void keyPressed() {
       if (mouseX > width/2-50 && mouseX < width/2+50) {
         if (mouseY > height/2-50 && mouseY < height/2+50) {
           test = !test;
+          noCursor();
         }
       }
       break;
@@ -240,8 +260,11 @@ void keyPressed() {
     case '3':
       curG = 2;
       break;
+    case 'q': 
+      quantize = !quantize;
+      break;
     }
-  } else if (s.state == "START") {
+  } else if (s.state == "START" || s.state == "DEAD" || s.state == "PROG") {
     s.changeState("GAME");
   }
 }
@@ -275,7 +298,7 @@ void mouseClicked() {
     if (curG < INVENTORY.size()) {
       INVENTORY.get(curG).shoot();
     }
-  } else if (s.state == "START") {
+  } else if (s.state == "START" || s.state == "DEAD" || s.state == "PROG") {
     s.changeState("GAME");
   }
 }

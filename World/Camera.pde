@@ -48,7 +48,7 @@ public class Camera {
         }
       }
       fill(t.clr);
-      if (!dense) noStroke();
+      if (!quantize) noStroke();
       triangle(pT[0][0], pT[0][1], pT[1][0], pT[1][1], pT[2][0], pT[2][1]);
       if (cover(new PVector(pT[0][0]-width/2, pT[0][1]-height/2, 0), new PVector(pT[1][0]-width/2, pT[1][1]-height/2, 0), new PVector(pT[2][0]-width/2, pT[2][1]-height/2, 0))) {
         AIM = t.ID;
