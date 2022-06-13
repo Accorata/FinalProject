@@ -229,10 +229,16 @@ void keyPressed() {
     aniEn = !aniEn;
     break;
   case 't':
-    if (mouseX > width/2-50 && mouseX < width/2+50) {
-      if (mouseY > height/2-50 && mouseY < height/2+50) {
-        test = !test;
+    if (test) {
+      if (mouseX > width/2-50 && mouseX < width/2+50) {
+        if (mouseY > height/2-50 && mouseY < height/2+50) {
+          test = false;
+          noCursor();
+        }
       }
+    } else {
+      test = true;
+      cursor();
     }
     break;
   case '1':
