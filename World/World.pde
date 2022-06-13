@@ -46,6 +46,7 @@ void setup() {
   size(1000, 600);
   sky = loadImage("download.jpg");
   sky.resize(width, height);
+
   //noCursor();
   
 }
@@ -77,9 +78,10 @@ void draw() {
     // --Update World--
     c.updatePos(dir);
     // --Screen--
-    background(255);
+    background(192);
     AIM = 0;
-
+    
+    
     c.display();
 
     //text(ENEMIES.get(0).getHealth() + "", 10, 20);
@@ -111,7 +113,7 @@ void draw() {
     textSize(50);
     text("YOU DIED", width/2, height/2);
     textSize(25);
-    fill(0);
+    fill(255);
     text("CLICK ANYWHERE TO RESTART", width/2, height/2 + 40);
     textAlign(BASELINE);
   } else if (s.state == "PROG") {
@@ -122,7 +124,7 @@ void draw() {
     textSize(50);
     text("YOU WON", width/2, height/2);
     textSize(25);
-    fill(0);
+    fill(255);
     text("CLICK ANYWHERE TO CONTINUE TO NEXT LEVEL", width/2, height/2 + 40);
     textAlign(BASELINE);
   }
