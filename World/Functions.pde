@@ -33,7 +33,9 @@ void rotateAxisOnZ(PVector axis, float deg) {
     //rotateAxisOnX(axis, xAng);
   }
 }
-
+boolean isDead() {
+  return PLAYER_HEALTH <= 0;
+}
 void recalcInverses() {
   PVector[] inv = inverse(xUnit, yUnit, zUnit);
   xUnitInv = inv[0];

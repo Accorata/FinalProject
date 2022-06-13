@@ -12,10 +12,7 @@ public class Bullet extends Rect {
     super.setID(1.5);
   }
 
-
-
-  boolean mve() {
-
+  void mve() {
     PVector t = target.copy().setMag(50);
     PVector move = new PVector(0, 0, 0);
 
@@ -31,10 +28,8 @@ public class Bullet extends Rect {
     super.translate(move);
 
     Obj o = super.breached();
-
     boolean hitNothing = false;
     if (o != null && o.getID() != 1.5 && (enemy || o.getID() != 5)) {
-
       if (o.getID() >= 0 && o.getID() < 1) {
         for (Enemy e : ENEMIES) {
           if (e.getID() == o.getID()) {
@@ -50,13 +45,14 @@ public class Bullet extends Rect {
             }
           }
         }
-
-      } else if (o.getID() == 1.5) {}
-      objs.remove(this);
-      bullets.remove(this);
-      return true;
-    } else {println("no");}
-return false;
-
+      } else if (o.getID() == 5 && enemy) {
+        PLAYER_HEALTH -= 10;
+      }
+      if (!hitNothing) {
+        println(o);
+        c.removeObj(this);
+        bulletsRemoved.add(this);
+      }
+    }
   }
 }

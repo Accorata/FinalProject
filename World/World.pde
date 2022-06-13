@@ -4,6 +4,7 @@ import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
 boolean jump = false;
+PImage sky;
 final PVector place = new PVector(0, 0, -1 * fromScreen);
 float speedAdjust = 1;
 double AIM = 0;
@@ -38,9 +39,11 @@ public PVector zUnit = new PVector(0, 0, 1);
 public PVector xUnitInv = new PVector(1, 0, 0);
 public PVector yUnitInv = new PVector(0, 1, 0);
 public PVector zUnitInv = new PVector(0, 0, 1);
-
+Start s = new Start();
 void setup() {
   size(1000, 600);
+  sky = loadImage("download.jpg");
+  sky.resize(width, height);
   if (!test) noCursor();
   c = new Camera();
   PLAYER_HEALTH = 100;
@@ -84,44 +87,53 @@ void setup() {
 }
 
 void draw() {
-  recalcInverses();
-  //printMatrices();
-  speedAdjust = 60/frameRate;
-  //if (frameCount < 200) {
+  if (s.state == "GAME") {
+    recalcInverses();
+    //printMatrices();
+    speedAdjust = 60/frameRate;
+    //if (frameCount < 200) {
 
-  for (Bullet bu : bullets) {
-    bu.mve();
+    for (Bullet bu : bullets) {
+      bu.mve();
+    }
+    for (Bullet bu : bulletsRemoved) {
+      bullets.remove(bu);
+    }
+    for (Enemy e : ENEMIES) {
+      e.animate();
+    }
+    PVector b = new PVector(1, 0, 0);
+    //sphere.rotate(b);
+    //l.sshine(c.Triangles);
+
+    // --Mouse Control--
+    if (!test) c.rotateByMouse();
+    // --Update World--
+    c.updatePos(dir);
+    // --Screen--
+    background(255);
+    AIM = 0;
+
+    c.display();
+
+    //text(ENEMIES.get(0).getHealth() + "", 10, 20);
+    ui.box(INVENTORY);
+    ui.showHealth();
+    ui.showEnemyHealth(inSight());
+    stroke(75);
+    strokeWeight(2);
+    line(width/2-10, height/2, width/2+10, height/2);
+    line(width/2, height/2-10, width/2, height/2+10);
+    strokeWeight(1);
+  } else if (s.state == "START") {
+    background(sky);
+    stroke(255);
+    textSize(50);
+    textAlign(CENTER);
+    text("THE SAME NEW WORLD", width/2, height/2);
+    textSize(20);
+    text("Raymond Allie & Henry Bach", width/2, height/2 + 40);
   }
-  for (Bullet bu : bulletsRemoved) {
-    bullets.remove(bu);
-  }
-  for (Enemy e : ENEMIES) {
-    e.animate();
-
-  }
-  PVector b = new PVector(1, 0, 0);
-  //sphere.rotate(b);
-  //l.sshine(c.Triangles);
-
-  // --Mouse Control--
-  if (!test) c.rotateByMouse();
-  // --Update World--
-  c.updatePos(dir);
-  // --Screen--
-  background(255);
-  AIM = 0;
-
-  c.display();
-
-  //text(ENEMIES.get(0).getHealth() + "", 10, 20);
-  ui.box(INVENTORY);
-  ui.showHealth();
-  ui.showEnemyHealth(inSight());
-  stroke(75);
-  strokeWeight(2);
-  line(width/2-10, height/2, width/2+10, height/2);
-  line(width/2, height/2-10, width/2, height/2+10);
-  strokeWeight(1);
 }
 
 void keyPressed() {

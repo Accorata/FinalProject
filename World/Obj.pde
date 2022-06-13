@@ -1,4 +1,4 @@
-public class Obj { //<>// //<>// //<>// //<>// //<>// //<>//
+public class Obj { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
   private boolean breachable = false;
   private ArrayList<PVector> points;
   private ArrayList<PVector> foundationPoints;
@@ -182,7 +182,7 @@ public class Obj { //<>// //<>// //<>// //<>// //<>// //<>//
     for (Obj o : objs) {
       if (this != o) {
 
-        if (this.getDAvg() + o.getDAvg() + 20>= dist(this.getCenter(), o.getCenter())) return o;
+        if (this.getDAvg() + o.getDAvg() -20>= dist(this.getCenter(), o.getCenter())) return o;
 
       }
     }
