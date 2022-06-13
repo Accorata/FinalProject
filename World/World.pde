@@ -44,38 +44,9 @@ void setup() {
   size(1000, 600);
   sky = loadImage("download.jpg");
   sky.resize(width, height);
-  if (!test) noCursor();
-  c = new Camera();
-  PLAYER_HEALTH = 100;
-  ENEMIES = new ArrayList<Enemy>();
-  bullets = new ArrayList<Bullet>();
-  bulletsRemoved = new ArrayList<Bullet>();
-  INVENTORY = new ArrayList<Gun>();
-  INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
-  INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
-  curG = 0;
-  ui = new UI();
-  //l = new Light(new PVector(500, 500, 500), 10);
-  PVector p = new PVector (-650, -110, -300);
-  PVector p2 = new PVector (500, -510, -100);
-  PVector l = new PVector (200, 200, 200);
-  //ENEMIES
-  Rect one = new Rect(p, l, color(102, 0, 102), 1);
-  Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
-  Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-  c.addObject(one);
-  c.addObject(two);
-  c.addObject(three);
-  c.addObject(sphere);
-  println(sphere.getDAvg());
-  println(one.getDAvg());
-  println(two.getDAvg());
-  println(three.getDAvg());
-  //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
-  c.addObject(sc);
-  addEnemy(e1);
-  addEnemy(e2);
-  addEnemy(e3);
+  //noCursor();
+  
+  
   //for (int i = 0; i<12; i++) {
   //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
   //}
@@ -102,6 +73,7 @@ void draw() {
     for (Enemy e : ENEMIES) {
       e.animate();
     }
+    if (ENEMIES.size() == 0) s.changeState("GAME");
     PVector b = new PVector(1, 0, 0);
     //sphere.rotate(b);
     //l.sshine(c.Triangles);
