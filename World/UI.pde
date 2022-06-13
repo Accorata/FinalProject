@@ -20,7 +20,9 @@ public class UI {
     }
   }
   void showHealth() {
+    
     textSize(20);
+    
     if (PLAYER_HEALTH >= 80) {
       fill(0, 204, 0);
     } else if (PLAYER_HEALTH > 20) {

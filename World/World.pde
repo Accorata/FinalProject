@@ -136,6 +136,7 @@ void draw() {
     alt();
     fill(col);
     text("CLICK ANYWHERE TO START", width/2, 40);
+    textAlign(BASELINE);
   }
 }
 int col = 0;
@@ -143,162 +144,174 @@ boolean add = true;
 void alt() {
   if (col >= 255) {
     add=false;
-  }
-  else if (col <= 0){
+  } else if (col <= 0) {
     add =true;
   }
-  if (add) {col++;} else {col--;}
+  if (add) {
+    col++;
+  } else {
+    col--;
+  }
 }
 void keyPressed() {
-  boolean breached = false;
-  switch (key) {
-  case 'l':
-    for (Obj obj : objs) {
-      obj.setCenter(place);
-      obj.rotateOnX(-xAng);
-      obj.rotateOnY(10);
-      obj.rotateOnX(xAng);
-      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
-    }
-    if (breached) {
+  if (s.state == "GAME") {
+    boolean breached = false;
+    switch (key) {
+    case 'l':
       for (Obj obj : objs) {
-        obj.rotateOnX(-xAng);
-        obj.rotateOnY(-10);
-        obj.rotateOnX(xAng);
-      }
-    } else {
-      eAng+=10;
-      rotateAxisOnY(xUnit, 10);
-      rotateAxisOnY(yUnit, 10);
-      rotateAxisOnY(zUnit, 10);
-    }
-    break;
-  case 'j':
-    for (Obj obj : objs) {
-      obj.setCenter(place);
-      obj.rotateOnX(-xAng);
-      obj.rotateOnY(-10);
-      obj.rotateOnX(xAng);
-      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
-    }
-    if (breached) {
-      for (Obj obj : objs) {
+        obj.setCenter(place);
         obj.rotateOnX(-xAng);
         obj.rotateOnY(10);
         obj.rotateOnX(xAng);
-      }
-    } else {
-      eAng-=10;
-      rotateAxisOnY(xUnit, -10);
-      rotateAxisOnY(yUnit, -10);
-      rotateAxisOnY(zUnit, -10);
-    }
-    break;
-  case 'i':
-    if (xAng <= 80) {
-      xAng += 10;
-      for (Obj obj : objs) {
-        obj.setCenter(place);
-        obj.rotateOnX(10);
         //if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
-          obj.rotateOnX(-10);
+          obj.rotateOnX(-xAng);
+          obj.rotateOnY(-10);
+          obj.rotateOnX(xAng);
         }
-        xAng -= 10;
       } else {
-        rotateAxisOnX(xUnit, 10);
-        rotateAxisOnX(yUnit, 10);
-        rotateAxisOnX(zUnit, 10);
+        eAng+=10;
+        rotateAxisOnY(xUnit, 10);
+        rotateAxisOnY(yUnit, 10);
+        rotateAxisOnY(zUnit, 10);
       }
-    }
-    break;
-  case 'k':
-    if (xAng >= -80) {
-      xAng -= 10;
+      break;
+    case 'j':
       for (Obj obj : objs) {
         obj.setCenter(place);
-        obj.rotateOnX(-10);
+        obj.rotateOnX(-xAng);
+        obj.rotateOnY(-10);
+        obj.rotateOnX(xAng);
         //if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
-          obj.rotateOnX(10);
+          obj.rotateOnX(-xAng);
+          obj.rotateOnY(10);
+          obj.rotateOnX(xAng);
         }
+      } else {
+        eAng-=10;
+        rotateAxisOnY(xUnit, -10);
+        rotateAxisOnY(yUnit, -10);
+        rotateAxisOnY(zUnit, -10);
+      }
+      break;
+    case 'i':
+      if (xAng <= 80) {
         xAng += 10;
-      } else {
-        rotateAxisOnX(xUnit, -10);
-        rotateAxisOnX(yUnit, -10);
-        rotateAxisOnX(zUnit, -10);
+        for (Obj obj : objs) {
+          obj.setCenter(place);
+          obj.rotateOnX(10);
+          //if (!obj.getBreachable() && obj.breached() != null) breached = true;
+        }
+        if (breached) {
+          for (Obj obj : objs) {
+            obj.rotateOnX(-10);
+          }
+          xAng -= 10;
+        } else {
+          rotateAxisOnX(xUnit, 10);
+          rotateAxisOnX(yUnit, 10);
+          rotateAxisOnX(zUnit, 10);
+        }
       }
-    }
-    break;
-  case 'w':
-    dir.z = -speed;
-    break;
-  case 's':
-    dir.z = speed;
-    break;
-  case 'a':
-    dir.x = speed;
-    break;
-  case 'd':
-    dir.x = -speed;
-    break;
-  case ' ':
-    if (!jump)
-      dir.y = 5;
-    jump = true;
+      break;
+    case 'k':
+      if (xAng >= -80) {
+        xAng -= 10;
+        for (Obj obj : objs) {
+          obj.setCenter(place);
+          obj.rotateOnX(-10);
+          //if (!obj.getBreachable() && obj.breached() != null) breached = true;
+        }
+        if (breached) {
+          for (Obj obj : objs) {
+            obj.rotateOnX(10);
+          }
+          xAng += 10;
+        } else {
+          rotateAxisOnX(xUnit, -10);
+          rotateAxisOnX(yUnit, -10);
+          rotateAxisOnX(zUnit, -10);
+        }
+      }
+      break;
+    case 'w':
+      dir.z = -speed;
+      break;
+    case 's':
+      dir.z = speed;
+      break;
+    case 'a':
+      dir.x = speed;
+      break;
+    case 'd':
+      dir.x = -speed;
+      break;
+    case ' ':
+      if (!jump)
+        dir.y = 5;
+      jump = true;
 
-    break;
-  case 'p':
-    aniEn = !aniEn;
-    break;
-  case 't':
-    if (mouseX > width/2-50 && mouseX < width/2+50) {
-      if (mouseY > height/2-50 && mouseY < height/2+50) {
-        test = !test;
+      break;
+    case 'p':
+      aniEn = !aniEn;
+      break;
+    case 't':
+      if (mouseX > width/2-50 && mouseX < width/2+50) {
+        if (mouseY > height/2-50 && mouseY < height/2+50) {
+          test = !test;
+        }
       }
+      break;
+    case '1':
+      curG = 0;
+      break;
+    case '2':
+      curG = 1;
+      break;
+    case '3':
+      curG = 2;
+      break;
     }
-    break;
-  case '1':
-    curG = 0;
-    break;
-  case '2':
-    curG = 1;
-    break;
-  case '3':
-    curG = 2;
-    break;
+  } else if (s.state == "START") {
+    s.changeState("GAME");
   }
 }
 
 void keyReleased() {
-  switch (key) {
-  case 'w':
-    dir.z = 0;
-    break;
-  case 's':
-    dir.z = 0;
-    break;
-  case 'a':
-    dir.x = 0;
-    break;
-  case 'd':
-    dir.x = 0;
-    break;
-  case 'r':
-    if (curG < INVENTORY.size()) {
-      INVENTORY.get(curG).reload();
+  if (s.state == "GAME") {
+    switch (key) {
+    case 'w':
+      dir.z = 0;
+      break;
+    case 's':
+      dir.z = 0;
+      break;
+    case 'a':
+      dir.x = 0;
+      break;
+    case 'd':
+      dir.x = 0;
+      break;
+    case 'r':
+      if (curG < INVENTORY.size()) {
+        INVENTORY.get(curG).reload();
+      }
+      break;
     }
-    break;
   }
 }
 
 void mouseClicked() {
-
-  if (curG < INVENTORY.size()) {
-    INVENTORY.get(curG).shoot();
+  if (s.state == "GAME") {
+    if (curG < INVENTORY.size()) {
+      INVENTORY.get(curG).shoot();
+    }
+  } else if (s.state == "START") {
+    s.changeState("GAME");
   }
 }

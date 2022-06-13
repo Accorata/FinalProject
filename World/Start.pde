@@ -5,5 +5,7 @@ public class Start {
     
   }
   
-
+  void changeState(String st) {
+    state = st;
+  }
 }
