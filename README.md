@@ -28,7 +28,24 @@ Click -> Shoots current gun
 6/10 Henry - Enemies legs now move as they would in real life, the enemy has a better color design and an eye that shows where it heads, they walk in the direction they face, and they track you (although this sometimes bugs).
 6/11 Henry - Enemy legs now move in the direction they are walking not just into themselves and they finally always walk right towards the player when they see them.
 6/12 Henry - Reworked the breachable system, applied it to the enemies to program them a better AI and not allow them to walk through walls, applied it to bullets to cause them to go away when hitting other objects and actually deal damage to enemies and/or the player.
-6/23 Henry - Fixed some bugs with Raymond, added the compile/run/controls instructions in this file, and designed the map.
+
+
+5/23 Raymond - Fixed some bugs with Henry, worked on preliminary viewing algorithm.
+5/24 Raymond - Researched basic game design
+5/25-5/26 Raymond - Coded rotation on the 3 axises
+5/27 Raymond - Coded a working camera to view objects
+5/28 Raymond - Built standardized object classes
+5/29 Raymond - Created the system for how rotating and translating the camera will work.
+5/30 Raymond - Worked on light
+6/1 Raymond - Worked on refined FPS like movement
+6/2 Raymond - Gun glass and enemy framework
+6/3 Raymond - Worked on shooting from players point of view
+6/4 Raymond - Created a hitscan system for enemies to take damage;
+6/8 Raymond - Bug fixing and refined shooting/movemnt
+6/10 Raymond - More bug fixing and structure building
+6/11 Raymond - Projectile motion for bullets;
+6/12 Raymond - Created game logic for play
+
 
 THE SAME NEW WORLD:
 
