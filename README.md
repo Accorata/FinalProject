@@ -28,7 +28,7 @@ Click -> Shoots current gun
 6/10 Henry - Enemies legs now move as they would in real life, the enemy has a better color design and an eye that shows where it heads, they walk in the direction they face, and they track you (although this sometimes bugs).
 6/11 Henry - Enemy legs now move in the direction they are walking not just into themselves and they finally always walk right towards the player when they see them.
 6/12 Henry - Reworked the breachable system, applied it to the enemies to program them a better AI and not allow them to walk through walls, applied it to bullets to cause them to go away when hitting other objects and actually deal damage to enemies and/or the player.
-
+6/13 Henry - Created final world map, fixed some bugs, and put the gameplay instructions in the readme.
 
 5/23 Raymond - Fixed some bugs with Henry, worked on preliminary viewing algorithm.
 5/24 Raymond - Researched basic game design
