@@ -3,42 +3,42 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
-boolean jump = false;
+boolean jump;
 PImage sky;
 final PVector place = new PVector(0, 0, -1 * fromScreen);
 float speedAdjust = 1;
-double AIM = 0;
+double AIM;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
 int curG;
-float len = 4000;
-float wid = 4000;
-Plane sc = new Plane(100, color(0), len, wid);
-float xAng = 0;
+float len;
+float wid;
+Plane sc;
+float xAng;
 Camera c;
 Light l;
-ArrayList<Obj> objs = new ArrayList<Obj>();
+ArrayList<Obj> objs;
 final float speed = 5;
-PVector dir = new PVector(0, 0, 0);
+PVector dir;
 final float sensitivity = 20;
-boolean test = true;
-ArrayList<Triangle> testTris = new ArrayList<Triangle>();
+boolean test;
+ArrayList<Triangle> testTris;
 UI ui;
-float eAng = 0;
-boolean aniEn = true;
+float eAng;
+boolean aniEn;
 Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 0, -2));
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Bullet> bullets;
 ArrayList<Bullet> bulletsRemoved;
-Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
-public PVector xUnit = new PVector(1, 0, 0);
-public PVector yUnit = new PVector(0, 1, 0);
-public PVector zUnit = new PVector(0, 0, 1);
-public PVector xUnitInv = new PVector(1, 0, 0);
-public PVector yUnitInv = new PVector(0, 1, 0);
-public PVector zUnitInv = new PVector(0, 0, 1);
+
+public PVector xUnit;
+public PVector yUnit;
+public PVector zUnit;
+public PVector xUnitInv;
+public PVector yUnitInv;
+public PVector zUnitInv;
 Start s = new Start();
 
 void setup() {
@@ -46,30 +46,7 @@ void setup() {
   sky = loadImage("download.jpg");
   sky.resize(width, height);
   //noCursor();
-  c = new Camera();
-  PLAYER_HEALTH = 100;
-  ENEMIES = new ArrayList<Enemy>();
-  bullets = new ArrayList<Bullet>();
-  bulletsRemoved = new ArrayList<Bullet>();
-  INVENTORY = new ArrayList<Gun>();
-  INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
-  INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
-  INVENTORY.add(new Gun("Sniper", 99, 5, 1, color(0, 140, 140)));
-  curG = 0;
-  ui = new UI();
-  //l = new Light(new PVector(500, 500, 500), 10);
-  PVector p = new PVector (-650, -110, -300);
-  PVector p2 = new PVector (500, -510, -100);
-  PVector l = new PVector (200, 200, 200);
-  //ENEMIES
-  Rect one = new Rect(p, l, color(102, 0, 102), 1);
-  Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
-  Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-  c.addObject(one);
-  c.addObject(two);
-  c.addObject(three);
-  c.addObject(sphere);
-  c.addObject(sc);
+  
 }
 
 void draw() {
@@ -100,7 +77,7 @@ void draw() {
     // --Screen--
     background(255);
     AIM = 0;
-  
+
     c.display();
 
     //text(ENEMIES.get(0).getHealth() + "", 10, 20);
