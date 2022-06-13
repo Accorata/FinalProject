@@ -127,15 +127,28 @@ void draw() {
     strokeWeight(1);
   } else if (s.state == "START") {
     background(sky);
-    stroke(255);
+    fill(255);
     textSize(50);
     textAlign(CENTER);
     text("THE SAME NEW WORLD", width/2, height/2);
     textSize(20);
     text("Raymond Allie & Henry Bach", width/2, height/2 + 40);
+    alt();
+    fill(col);
+    text("CLICK ANYWHERE TO START", width/2, 40);
   }
 }
-
+int col = 0;
+boolean add = true;
+void alt() {
+  if (col >= 255) {
+    add=false;
+  }
+  else if (col <= 0){
+    add =true;
+  }
+  if (add) {col++;} else {col--;}
+}
 void keyPressed() {
   boolean breached = false;
   switch (key) {
