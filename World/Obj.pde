@@ -49,6 +49,9 @@ public class Obj { //<>// //<>// //<>// //<>// //<>//
     }
     dAvg = t/points.size();
   }
+  void setDAvg(float dAvg_) {
+    this.dAvg = dAvg_;
+  }
   void moveX(float n) {
     for (PVector p : getPoints()) {
       p.add(xUnit.mult(n));
@@ -123,6 +126,11 @@ public class Obj { //<>// //<>// //<>// //<>// //<>//
     setCenter();
     calcDAvg();
   }
+  void setObj (PVector point) {
+    this.points = new ArrayList<PVector>();
+    points.add(point);
+    this.foundationPoints = points;
+  }
   void setCenter(PVector v) {
     this.center = v;
   }
@@ -173,7 +181,11 @@ public class Obj { //<>// //<>// //<>// //<>// //<>//
   Obj breached() {
     for (Obj o : objs) {
       if (this != o) {
+<<<<<<< HEAD
         if (this.getDAvg() + o.getDAvg() + 20>= dist(this.getCenter(), o.getCenter())) return o;
+=======
+        if (this.getDAvg() + o.getDAvg() >= dist(this.getCenter(), o.getCenter())) return o;
+>>>>>>> 5ea93f3d7279c7208ba76493ac362a5600d809f0
       }
     }
     return null;

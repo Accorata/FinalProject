@@ -30,6 +30,7 @@ Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Bullet> bullets;
+ArrayList<Bullet> bulletsRemoved;
 Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
 public PVector xUnit = new PVector(1, 0, 0);
 public PVector yUnit = new PVector(0, 1, 0);
@@ -45,6 +46,7 @@ void setup() {
   PLAYER_HEALTH = 100;
   ENEMIES = new ArrayList<Enemy>();
   bullets = new ArrayList<Bullet>();
+  bulletsRemoved = new ArrayList<Bullet>();
   INVENTORY = new ArrayList<Gun>();
   INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
   INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
@@ -61,11 +63,15 @@ void setup() {
   c.addObject(one);
   c.addObject(two);
   c.addObject(three);
-  //c.addObject(sphere);
+  c.addObject(sphere);
+  println(sphere.getDAvg());
+  println(one.getDAvg());
+  println(two.getDAvg());
+  println(three.getDAvg());
   //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
   c.addObject(sc);
-  //addEnemy(e1);
-  //addEnemy(e2);
+  addEnemy(e1);
+  addEnemy(e2);
   addEnemy(e3);
   //for (int i = 0; i<12; i++) {
   //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
@@ -82,28 +88,17 @@ void draw() {
   //printMatrices();
   speedAdjust = 60/frameRate;
   //if (frameCount < 200) {
-  for (int i = 0; i < bullets.size(); i++) {
-    if (bullets.get(i).mve()) {i--;}
-    
+
+  for (Bullet bu : bullets) {
+    bu.mve();
+  }
+  for (Bullet bu : bulletsRemoved) {
+    bullets.remove(bu);
   }
   for (Enemy e : ENEMIES) {
-    //e.animate();
+    e.animate();
 
-    //e.inventory.get(0).shoot(e);
-  //  if (e.inSight()) {
-
-    //e.moveTowards(new PVector(0, 0, 100));
-    //e.turn(10);
-    //  } else {
-    //    e.wander();
-    //  }
   }
-  //}
-  //e1.moveTowards(a);//.copy().add(c.getLoc()));
-  //if (!e3.isDead()) {
-  //  e2.moveTowards(e3.getCenter());
-  //}
-  //e1.rotate(a);
   PVector b = new PVector(1, 0, 0);
   //sphere.rotate(b);
   //l.sshine(c.Triangles);
@@ -127,8 +122,6 @@ void draw() {
   line(width/2-10, height/2, width/2+10, height/2);
   line(width/2, height/2-10, width/2, height/2+10);
   strokeWeight(1);
-  //println(dir.y);
-  //println(frameRate);
 }
 
 void keyPressed() {
@@ -140,7 +133,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached() != null) breached = true;
+      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -161,7 +154,7 @@ void keyPressed() {
       obj.rotateOnX(-xAng);
       obj.rotateOnY(-10);
       obj.rotateOnX(xAng);
-      if (!obj.getBreachable() && obj.breached() != null) breached = true;
+      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
     }
     if (breached) {
       for (Obj obj : objs) {
@@ -182,7 +175,7 @@ void keyPressed() {
       for (Obj obj : objs) {
         obj.setCenter(place);
         obj.rotateOnX(10);
-        if (!obj.getBreachable() && obj.breached() != null) breached = true;
+        //if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
@@ -202,7 +195,7 @@ void keyPressed() {
       for (Obj obj : objs) {
         obj.setCenter(place);
         obj.rotateOnX(-10);
-        if (!obj.getBreachable() && obj.breached() != null) breached = true;
+        //if (!obj.getBreachable() && obj.breached() != null) breached = true;
       }
       if (breached) {
         for (Obj obj : objs) {
@@ -282,6 +275,5 @@ void mouseClicked() {
 
   if (curG < INVENTORY.size()) {
     INVENTORY.get(curG).shoot();
-
   }
 }

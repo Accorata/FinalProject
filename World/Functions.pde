@@ -20,7 +20,6 @@ void rotateAxisOnY(PVector axis, float deg) {
   }
 }
 PVector getTarget() {
-
   return zUnitInv.copy();
 }
 void rotateAxisOnZ(PVector axis, float deg) {
@@ -130,7 +129,6 @@ boolean cover(PVector a, PVector b, PVector c) {
   float d1 = dist(a, b);
   float d2 = dist(b, c);
   float d3 = dist(c, a);
-  //println(solveT(i1, i2, d1) + solveT(i1, i3, d3) + solveT(i3, i2, d2));
   return (aprox(2*PI, solveT(i1, i2, d1) + solveT(i1, i3, d3) + solveT(i3, i2, d2)));
 }
 
