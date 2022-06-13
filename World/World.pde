@@ -3,283 +3,278 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.ArrayDeque;
 final float fromScreen = 300;
-boolean jump = false;
+boolean jump;
+PImage sky;
 final PVector place = new PVector(0, 0, -1 * fromScreen);
 float speedAdjust = 1;
-double AIM = 0;
+double AIM;
 ArrayList<Enemy> ENEMIES;
 int PLAYER_HEALTH;
 ArrayList<Gun> INVENTORY;
 int curG;
-float len = 4000;
-float wid = 4000;
-Plane sc = new Plane(100, color(0), len, wid);
-float xAng = 0;
+float len;
+float wid;
+Plane sc;
+float xAng;
 Camera c;
 Light l;
-ArrayList<Obj> objs = new ArrayList<Obj>();
+ArrayList<Obj> objs;
 final float speed = 5;
-PVector dir = new PVector(0, 0, 0);
+PVector dir;
 final float sensitivity = 20;
-boolean test = true;
-ArrayList<Triangle> testTris = new ArrayList<Triangle>();
+boolean test;
+ArrayList<Triangle> testTris;
 UI ui;
-float eAng = 0;
-boolean aniEn = true;
+boolean quantize;
+float eAng;
+boolean aniEn;
 Enemy e1 = new Enemy("THE BAD MAN", new PVector(800, -30, 100), new PVector(-1, 0, -2));
 Enemy e3 = new Enemy("THE BABA YAGA", new PVector(-600, -30, -500));
 Enemy e2 = new Enemy("THE UNCHOSEN ONE", new PVector(0, -30, -800));
 ArrayList<Bullet> bullets;
 ArrayList<Bullet> bulletsRemoved;
-Sphere sphere = new Sphere(new PVector(300, -50, 200), 100, color(40), 10, 10);//30 5
-public PVector xUnit = new PVector(1, 0, 0);
-public PVector yUnit = new PVector(0, 1, 0);
-public PVector zUnit = new PVector(0, 0, 1);
-public PVector xUnitInv = new PVector(1, 0, 0);
-public PVector yUnitInv = new PVector(0, 1, 0);
-public PVector zUnitInv = new PVector(0, 0, 1);
+
+public PVector xUnit;
+public PVector yUnit;
+public PVector zUnit;
+public PVector xUnitInv;
+public PVector yUnitInv;
+public PVector zUnitInv;
+Start s = new Start();
 
 void setup() {
   size(1000, 600);
-  if (!test) noCursor();
-  c = new Camera();
-  PLAYER_HEALTH = 100;
-  ENEMIES = new ArrayList<Enemy>();
-  bullets = new ArrayList<Bullet>();
-  bulletsRemoved = new ArrayList<Bullet>();
-  INVENTORY = new ArrayList<Gun>();
-  INVENTORY.add(new Gun("Pistol", 20, 7, 12, color(0, 255, 0)));
-  INVENTORY.add(new Gun("Deagle", 40, 3, 6, color(0, 0, 255)));
-  curG = 0;
-  ui = new UI();
-  //l = new Light(new PVector(500, 500, 500), 10);
-  PVector p = new PVector (-650, -110, -300);
-  PVector p2 = new PVector (500, -510, -100);
-  PVector l = new PVector (200, 200, 200);
-  //ENEMIES
-  Rect one = new Rect(p, l, color(102, 0, 102), 1);
-  Rect two = new Rect(p2, new PVector(100, 600, 300), color(51, 255, 255), 1);
-  Rect three = new Rect(new PVector(-300, -210, 450), new PVector(700, 300, 100), color(255, 153, 51), 1);
-  c.addObject(one);
-  c.addObject(two);
-  c.addObject(three);
-  c.addObject(sphere);
-  println(sphere.getDAvg());
-  println(one.getDAvg());
-  println(two.getDAvg());
-  println(three.getDAvg());
-  //c.addObject(new Pyramid(new PVector(-300, -100, 200), new PVector(100, -100, 100), color(70), 1));
-  c.addObject(sc);
-  addEnemy(e1);
-  addEnemy(e2);
-  addEnemy(e3);
-  //for (int i = 0; i<12; i++) {
-  //  addEnemy(new Enemy(""+i, new PVector(0, -30, 0)));
-  //}
-  //for (int i = 0; i<12; i++) {
-  //  Enemy e = ENEMIES.get(i);
-  //  e.setDir(i*30);
-  //  //e.rotate(new PVector(0, i*30, 0));
-  //}
+  sky = loadImage("download.jpg");
+  sky.resize(width, height);
+  //noCursor();
 }
 
 void draw() {
-  recalcInverses();
-  //printMatrices();
-  speedAdjust = 60/frameRate;
-  //if (frameCount < 200) {
+  if (s.state == "GAME") {
+    recalcInverses();
+    //printMatrices();
+    speedAdjust = 60/frameRate;
+    //if (frameCount < 200) {
 
-  for (Bullet bu : bullets) {
-    bu.mve();
+    for (Bullet bu : bullets) {
+      bu.mve();
+    }
+    for (Bullet bu : bulletsRemoved) {
+      bullets.remove(bu);
+    }
+    if (isDead()) s.changeState("DEAD");
+    for (Enemy e : ENEMIES) {
+      if (aniEn) e.animate();
+    }
+    if (ENEMIES.size() == 0) s.changeState("PROG");
+    PVector b = new PVector(1, 0, 0);
+    //sphere.rotate(b);
+    //l.sshine(c.Triangles);
+
+    // --Mouse Control--
+    if (!test) c.rotateByMouse();
+    // --Update World--
+    c.updatePos(dir);
+    // --Screen--
+    background(255);
+    AIM = 0;
+
+    c.display();
+
+    //text(ENEMIES.get(0).getHealth() + "", 10, 20);
+    ui.box(INVENTORY);
+    ui.showHealth();
+    ui.showEnemyHealth(inSight());
+    stroke(75);
+    strokeWeight(2);
+    line(width/2-10, height/2, width/2+10, height/2);
+    line(width/2, height/2-10, width/2, height/2+10);
+    strokeWeight(1);
+  } else if (s.state == "START") {
+    background(sky);
+    fill(255);
+    textSize(50);
+    textAlign(CENTER);
+    text("THE SAME NEW WORLD", width/2, height/2);
+    textSize(20);
+    text("Henry Bach & Raymond Allie", width/2, height/2 + 40);
+    alt();
+    fill(col);
+    text("CLICK ANYWHERE TO START", width/2, 40);
+    textAlign(BASELINE);
+  } else if (s.state == "DEAD") {
+    aniEn = false;
+    c.display();
+    fill(150, 0, 0);
+    textAlign(CENTER);
+    textSize(50);
+    text("YOU DIED", width/2, height/2);
+    textSize(25);
+    fill(0);
+    text("CLICK ANYWHERE TO RESTART", width/2, height/2 + 40);
+    textAlign(BASELINE);
+  } else if (s.state == "PROG") {
+    aniEn = false;
+    c.display();
+    fill(150, 0, 0);
+    textAlign(CENTER);
+    textSize(50);
+    text("YOU WON", width/2, height/2);
+    textSize(25);
+    fill(0);
+    text("CLICK ANYWHERE TO CONTINUE TO NEXT LEVEL", width/2, height/2 + 40);
+    textAlign(BASELINE);
   }
-  for (Bullet bu : bulletsRemoved) {
-    bullets.remove(bu);
-  }
-  for (Enemy e : ENEMIES) {
-    e.animate();
-
-  }
-  PVector b = new PVector(1, 0, 0);
-  //sphere.rotate(b);
-  //l.sshine(c.Triangles);
-
-  // --Mouse Control--
-  if (!test) c.rotateByMouse();
-  // --Update World--
-  c.updatePos(dir);
-  // --Screen--
-  background(255);
-  AIM = 0;
-
-  c.display();
-
-  //text(ENEMIES.get(0).getHealth() + "", 10, 20);
-  ui.box(INVENTORY);
-  ui.showHealth();
-  ui.showEnemyHealth(inSight());
-  stroke(75);
-  strokeWeight(2);
-  line(width/2-10, height/2, width/2+10, height/2);
-  line(width/2, height/2-10, width/2, height/2+10);
-  strokeWeight(1);
 }
-
+int col = 0;
+boolean add = true;
+void alt() {
+  if (col >= 255) {
+    add=false;
+  } else if (col <= 0) {
+    add =true;
+  }
+  if (add) {
+    col++;
+  } else {
+    col--;
+  }
+}
 void keyPressed() {
-  boolean breached = false;
-  switch (key) {
-  case 'l':
-    for (Obj obj : objs) {
-      obj.setCenter(place);
-      obj.rotateOnX(-xAng);
-      obj.rotateOnY(10);
-      obj.rotateOnX(xAng);
-      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
-    }
-    if (breached) {
+  if (s.state == "GAME") {
+    boolean breached = false;
+    switch (key) {
+    case 'l':
       for (Obj obj : objs) {
-        obj.rotateOnX(-xAng);
-        obj.rotateOnY(-10);
-        obj.rotateOnX(xAng);
-      }
-    } else {
-      eAng+=10;
-      rotateAxisOnY(xUnit, 10);
-      rotateAxisOnY(yUnit, 10);
-      rotateAxisOnY(zUnit, 10);
-    }
-    break;
-  case 'j':
-    for (Obj obj : objs) {
-      obj.setCenter(place);
-      obj.rotateOnX(-xAng);
-      obj.rotateOnY(-10);
-      obj.rotateOnX(xAng);
-      //if (!obj.getBreachable() && obj.breached() != null) breached = true;
-    }
-    if (breached) {
-      for (Obj obj : objs) {
+        obj.setCenter(place);
         obj.rotateOnX(-xAng);
         obj.rotateOnY(10);
         obj.rotateOnX(xAng);
       }
-    } else {
+      eAng+=10;
+      rotateAxisOnY(xUnit, 10);
+      rotateAxisOnY(yUnit, 10);
+      rotateAxisOnY(zUnit, 10);
+      break;
+    case 'j':
+      for (Obj obj : objs) {
+        obj.setCenter(place);
+        obj.rotateOnX(-xAng);
+        obj.rotateOnY(-10);
+        obj.rotateOnX(xAng);
+      }
       eAng-=10;
       rotateAxisOnY(xUnit, -10);
       rotateAxisOnY(yUnit, -10);
       rotateAxisOnY(zUnit, -10);
-    }
-    break;
-  case 'i':
-    if (xAng <= 80) {
-      xAng += 10;
-      for (Obj obj : objs) {
-        obj.setCenter(place);
-        obj.rotateOnX(10);
-        //if (!obj.getBreachable() && obj.breached() != null) breached = true;
-      }
-      if (breached) {
-        for (Obj obj : objs) {
-          obj.rotateOnX(-10);
+      break;
+    case 'w':
+      dir.z = -speed;
+      break;
+    case 's':
+      dir.z = speed;
+      break;
+    case 'a':
+      dir.x = speed;
+      break;
+    case 'd':
+      dir.x = -speed;
+      break;
+    case ' ':
+      if (!jump)
+        dir.y = 5;
+      jump = true;
+      break;
+    case 'p':
+      aniEn = !aniEn;
+      break;
+    case 't':
+      if (test) {
+        if (mouseX > width/2-50 && mouseX < width/2+50) {
+          if (mouseY > height/2-50 && mouseY < height/2+50) {
+            test = false;
+            noCursor();
+          }
         }
-        xAng -= 10;
       } else {
+        test = true;
+        cursor();
+      }
+      break;
+    case 'i':
+      if (xAng <= 80) {
+        for (Obj obj : objs) {
+          obj.setCenter(place);
+          obj.rotateOnX(10);
+        }
+        xAng += 10;
         rotateAxisOnX(xUnit, 10);
         rotateAxisOnX(yUnit, 10);
         rotateAxisOnX(zUnit, 10);
       }
-    }
-    break;
-  case 'k':
-    if (xAng >= -80) {
-      xAng -= 10;
-      for (Obj obj : objs) {
-        obj.setCenter(place);
-        obj.rotateOnX(-10);
-        //if (!obj.getBreachable() && obj.breached() != null) breached = true;
-      }
-      if (breached) {
+      break;
+    case 'k':
+      if (xAng >= -80) {
         for (Obj obj : objs) {
-          obj.rotateOnX(10);
+          obj.setCenter(place);
+          obj.rotateOnX(-10);
         }
-        xAng += 10;
-      } else {
+        xAng -= 10;
         rotateAxisOnX(xUnit, -10);
         rotateAxisOnX(yUnit, -10);
         rotateAxisOnX(zUnit, -10);
       }
+      break;
+    case '1':
+      curG = 0;
+      break;
+    case '2':
+      curG = 1;
+      break;
+    case '3':
+      curG = 2;
+      break;
+    case 'q': 
+      quantize = !quantize;
+      break;
     }
-    break;
-  case 'w':
-    dir.z = -speed;
-    break;
-  case 's':
-    dir.z = speed;
-    break;
-  case 'a':
-    dir.x = speed;
-    break;
-  case 'd':
-    dir.x = -speed;
-    break;
-  case ' ':
-    if (!jump)
-      dir.y = 5;
-    jump = true;
-
-    break;
-  case 'p':
-    aniEn = !aniEn;
-    break;
-  case 't':
-    if (test) {
-      if (mouseX > width/2-50 && mouseX < width/2+50) {
-        if (mouseY > height/2-50 && mouseY < height/2+50) {
-          test = false;
-          noCursor();
-        }
-      }
-    } else {
-      test = true;
-      cursor();
-    }
-    break;
-  case '1':
-    curG = 0;
-    break;
-  case '2':
-    curG = 1;
-    break;
-  case '3':
-    curG = 2;
-    break;
+  } else if (s.state == "START" || s.state == "DEAD" || s.state == "PROG") {
+    s.changeState("GAME");
   }
 }
 
+
+
 void keyReleased() {
-  switch (key) {
-  case 'w':
-    dir.z = 0;
-    break;
-  case 's':
-    dir.z = 0;
-    break;
-  case 'a':
-    dir.x = 0;
-    break;
-  case 'd':
-    dir.x = 0;
-    break;
-  case 'r':
-    if (curG < INVENTORY.size()) {
-      INVENTORY.get(curG).reload();
+  if (s.state == "GAME") {
+    switch (key) {
+    case 'w':
+      dir.z = 0;
+      break;
+    case 's':
+      dir.z = 0;
+      break;
+    case 'a':
+      dir.x = 0;
+      break;
+    case 'd':
+      dir.x = 0;
+      break;
+    case 'r':
+      if (curG < INVENTORY.size()) {
+        INVENTORY.get(curG).reload();
+      }
+      break;
     }
-    break;
   }
 }
 
 void mouseClicked() {
-
-  if (curG < INVENTORY.size()) {
-    INVENTORY.get(curG).shoot();
+  if (s.state == "GAME") {
+    if (curG < INVENTORY.size()) {
+      INVENTORY.get(curG).shoot();
+    }
+  } else if (s.state == "START" || s.state == "DEAD" || s.state == "PROG") {
+    s.changeState("GAME");
   }
 }

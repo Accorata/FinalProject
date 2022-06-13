@@ -5,12 +5,13 @@ public class Gun extends Obj {
   private int curBUL;
   private int totBUL;
   private color bColor;
-
+  private int magNum;
   public Gun(String name, int damage, int magNum, int magCap) {
     this(name, damage, magNum, magCap, color(255, 0, 0));
   }
   public Gun(String name, int damage, int magNum, int magCap, color bClr) {
     super();
+    this.magNum = magNum;
     this.NAME = name;
     this.DMG = damage;
     this.BUL = magCap;
@@ -20,6 +21,10 @@ public class Gun extends Obj {
   }
   String getNAME() {
     return NAME;
+  }
+  void restock() {
+    this.totBUL = (BUL * magNum) - BUL;
+    this.curBUL = BUL;
   }
   void shoot() {
     if (curBUL != 0) {
